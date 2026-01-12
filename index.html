@@ -353,6 +353,7 @@ const TEMPLATES={
 };
 
 const RESET_STEPS=['Right hip flexor stretch — 60s (squeeze glute)','Right single-leg glute bridge hold — 45s','Right side-lying leg raises — 20 slow','Dead bug — 60s'];
+const PRIMER_STEPS=['Frog pumps — 60s (fast pulses, feet together, knees wide)','Banded standing abductions — 60s (small, fast, elastic reps)'];
 
 const DAYS={0:'tempo-scan',1:'lower-a',2:'tempo',3:'lower-b',4:'tempo',5:'lower-c',6:'tempo'};
 const BOOTY=['Perky','Bubbly','Juicy','Low-Key'];
@@ -462,7 +463,11 @@ function rToday(){
     ${type.startsWith('lower')?`
     <div class="reset-card" onclick="this.classList.toggle('open')">
         <div class="reset-header"><div class="reset-title">⚡ Right-Side Reset (3 min)</div><div class="reset-hint">tap to expand</div></div>
-        <div class="reset-body">${RESET_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--gold)">All exercises: right side first</em></div>
+        <div class="reset-body">${RESET_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--gold)">All exercises today: right side first</em></div>
+    </div>
+    <div class="reset-card" onclick="this.classList.toggle('open')" style="border-color:var(--teal)">
+        <div class="reset-header"><div class="reset-title" style="color:var(--teal-light)">🔥 Glute Primer (2 min)</div><div class="reset-hint">tap to expand</div></div>
+        <div class="reset-body">${PRIMER_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--cream-dim)">Pumps fascia · Wakes up glutes · Unlocks SI · Makes hip thrusts hit the shelf</em></div>
     </div>
     <div class="card" style="background:var(--bg);border-color:var(--burgundy)">
         <div style="font-size:.8rem;color:var(--burgundy);font-weight:600;margin-bottom:6px">🧠 Every Rep Cue</div>
@@ -619,6 +624,8 @@ function rInfo(){
             <div class="settings-row"><span class="settings-label">Protein Goal (g)</span><input type="number" class="settings-input" id="setProtein" value="${s.proteinGoal}" onchange="updateSettings()"></div>
             <div class="settings-row"><span class="settings-label">Water Goal (oz)</span><input type="number" class="settings-input" id="setWater" value="${s.waterGoal}" onchange="updateSettings()"></div>
         </div>
+        
+        <div class="info-section"><div class="info-title">🔥 Pre-Workout Sequence</div><div class="info-text"><strong>Before EVERY Lower day (5 min total):</strong><br><br><strong>1. Right-Side Reset (3 min)</strong><br>• Right hip flexor stretch — 60s<br>• Right single-leg glute bridge hold — 45s<br>• Right side-lying leg raises — 20 slow<br>• Dead bug — 60s<br><br><strong>2. Glute Primer (2 min)</strong><br>• Frog pumps — 60s (fast pulses)<br>• Banded standing abductions — 60s<br><br><strong>Why this specific sequence:</strong><br>• Rehydrates thoracolumbar fascia<br>• Unlocks SI glide<br>• Routes load into glutes instead of low back<br>• Makes hip thrusts hit the SHELF<br><br><strong>Do NOT add more.</strong> No more drills, stretching, or rehab. You already have the Ferrari. This is just turning the key.</div></div>
         
         <div class="info-section"><div class="info-title">🍑 3D Glute Split</div>
             <div class="info-text" style="margin-bottom:12px">Each day targets a different area to fix your specific pattern: <strong>up but not out</strong>.</div>
