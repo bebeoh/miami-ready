@@ -118,7 +118,7 @@
         
         .mini-cal{margin:0 20px 16px}
         .mini-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
-        .mini-day{aspect-ratio:1;border-radius:3px;background:var(--bg-card)}
+        .mini-day{aspect-ratio:1;border-radius:3px;background:var(--bg-card);cursor:pointer}
         .mini-day.done{background:var(--teal)}
         .mini-day.streak{background:var(--gold-dim)}
         .mini-day.current{border:2px solid var(--burgundy)}
@@ -510,7 +510,7 @@ function rToday(){
     
     <div class="miami-card"><div class="miami-label">Miami Ready</div><div class="miami-date">${MONTHS[getDate(70).getMonth()]} ${getDate(70).getDate()}, 2026</div></div>
     
-    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}"></div>`).join('')}</div></div>`;
+    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}" onclick="openModal(${i+1})" style="cursor:pointer"></div>`).join('')}</div></div>`;
 }
 function rCal(){
     const d=state.data,months=[];
@@ -745,12 +745,40 @@ function rModal(){
         // Notes
         form+=`<div class="form-section"><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" rows="2">${day.notes||''}</textarea></div></div>`;
         
+        form+=`<button class="btn-save" onclick="saveDay()">${day.done?'Update':'Complete'}</button>`;
+        
         return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date)}</div><div class="modal-sub">Day ${n} · ${tmpl.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
 }
 
 const go=v=>{state.view=v;render()};
 const openModal=n=>{state.selDay=n||state.data.today;state.modal=true;render()};
-const closeModal=()=>{state.modal=false;render()};
+const closeModal=()=>{
+    // Auto-save any entered data before closing
+    if(state.modal){
+        const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
+        const protein=parseInt(document.getElementById('protein')?.value)||0;
+        const water=parseInt(document.getElementById('water')?.value)||0;
+        const flexL=parseFloat(document.getElementById('flexL')?.value)||null;
+        const flexR=parseFloat(document.getElementById('flexR')?.value)||null;
+        const flexM=parseFloat(document.getElementById('flexM')?.value)||null;
+        const notes=document.getElementById('notes')?.value||'';
+        // Only save if something was entered
+        if(protein||water||flexL||flexR||flexM||notes){
+            d.protein=protein;d.water=water;d.flexL=flexL;d.flexR=flexR;d.flexM=flexM;d.notes=notes;
+            if(type.startsWith('lower')){
+                d.htWt=parseFloat(document.getElementById('htWt')?.value)||null;
+                d.htReps=parseInt(document.getElementById('htReps')?.value)||null;
+                d.rdlWt=parseFloat(document.getElementById('rdlWt')?.value)||null;
+                d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
+            }
+            if(type==='tempo'||type==='tempo-scan'){
+                d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null;
+            }
+            save();
+        }
+    }
+    state.modal=false;render();
+};
 const setConn=v=>{state.data.days[(state.selDay||state.data.today)-1].conn=v;render()};
 const setTempo=v=>{state.data.days[(state.selDay||state.data.today)-1].tempo=v;render()};
 const setScan=v=>{const d=state.data.days[(state.selDay||state.data.today)-1];d.scan=v;if(v==='Skip'){d.round=null;d.lift=null;d.prot=null;d.bootyType=null;d.bf=null;d.lean=null;d.waist=null;d.hips=null}render()};
