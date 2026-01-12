@@ -184,6 +184,8 @@
         .flex-item input::placeholder{color:var(--cream-dim)}
         
         .btn-save{width:100%;padding:14px;border-radius:24px;background:linear-gradient(135deg,var(--burgundy),var(--wine));border:none;color:var(--cream);font-size:.95rem;font-weight:600;cursor:pointer;margin-top:8px}
+        .quick-btn{background:var(--bg-elevated);border:1px solid var(--mocha);color:var(--cream-muted);padding:8px 12px;border-radius:8px;font-size:.75rem;cursor:pointer;font-family:var(--font)}
+        .quick-btn:active{background:var(--burgundy);border-color:var(--burgundy);color:var(--cream)}
         .btn-streak-modal{width:100%;padding:12px;border-radius:24px;background:var(--bg);border:2px solid var(--gold-dim);color:var(--gold);font-size:.85rem;cursor:pointer;margin-top:8px}
         
         .calendar-view{padding:20px}
@@ -392,12 +394,12 @@ function init(){
         for(let i=1;i<=70;i++){
             days.push({
                 num:i,date:getDate(i).toISOString().slice(0,10),phase:getPhase(i).num,type:getType(i),
-                done:false,streak:false,
+                done:false,
                 conn:null,notes:'',
                 htWt:null,htReps:null,rdlWt:null,rdlReps:null,
                 tempo:'',tempoDur:null,
                 protein:0,water:0,
-                scan:null,round:null,lift:null,prot:null,bootyType:null,
+                scan:null,round:null,lift:null,prot:null,bootyType:null,bf:null,lean:null,waist:null,hips:null,
                 flexL:null,flexR:null,flexM:null
             });
         }
@@ -408,7 +410,7 @@ function init(){
 
 const render=()=>document.getElementById('app').innerHTML=(state.view==='today'?rToday():state.view==='calendar'?rCal():state.view==='progress'?rProg():rInfo())+rNav()+rModal();
 function rToday(){
-    const d=state.data,day=d.days[d.today-1],done=d.days.filter(x=>x.done).length;
+    const d=state.data,day=d.days[d.today-1],done=d.days.filter(x=>x.done).length,s=d.settings;
     const date=getDate(d.today),type=getType(d.today),phase=getPhase(d.today),tmpl=TEMPLATES[type];
     const cycle=getCyclePhase(date,d.settings),cycleName=cycle.name.toLowerCase();
     const lastConn=[...d.days].reverse().find(x=>x.conn)?.conn;
@@ -419,8 +421,16 @@ function rToday(){
     for(let i=0;i<7;i++){const n=ws+i;if(n>=1&&n<=70)week.push({n,day:d.days[n-1],date:getDate(n)})}
     
     const prog=(done/70)*360;
-    let btn=day.done?'btn-done':day.streak?'btn-streak':'btn-primary';
-    let btnTxt=day.done?'Logged ✓':day.streak?'Streak Saved':'Log Today';
+    let btn=day.done?'btn-done':'btn-primary';
+    let btnTxt=day.done?'Logged ✓':'Log Today';
+    
+    // Calculate completion percentage
+    const hasWorkout=day.done;
+    const hasProtein=day.protein>=s.proteinGoal;
+    const hasWater=day.water>=s.waterGoal;
+    const hasFlex=day.flexL||day.flexR||day.flexM;
+    const completionCount=(hasWorkout?1:0)+(hasProtein?1:0)+(hasWater?1:0)+(hasFlex?1:0);
+    const completionPct=Math.round((completionCount/4)*100);
     
     // Daily checklist items
     const proteinPct=Math.min((day.protein/d.settings.proteinGoal)*100,100);
@@ -454,6 +464,11 @@ function rToday(){
         <div class="reset-header"><div class="reset-title">⚡ Right-Side Reset (3 min)</div><div class="reset-hint">tap to expand</div></div>
         <div class="reset-body">${RESET_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--gold)">All exercises: right side first</em></div>
     </div>
+    <div class="card" style="background:var(--bg);border-color:var(--burgundy)">
+        <div style="font-size:.8rem;color:var(--burgundy);font-weight:600;margin-bottom:6px">🧠 Every Rep Cue</div>
+        <div style="font-size:.85rem;color:var(--cream)">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong></div>
+        <div style="font-size:.7rem;color:var(--cream-dim);margin-top:6px">This teaches your nervous system: "Glutes hold me, not my spine."</div>
+    </div>
     <div class="card">
         <div class="card-header"><div class="card-title">Today's Work</div><div class="card-badge">${phase.sets} × ${phase.reps}</div></div>
         <ul class="card-list">${tmpl.exercises.map(e=>`<li>${e}</li>`).join('')}</ul>
@@ -463,22 +478,22 @@ function rToday(){
     `:''}
     
     <div class="daily-checklist">
-        <div class="checklist-title">Today's Targets</div>
+        <div class="checklist-title" style="display:flex;justify-content:space-between;align-items:center">Today's Targets <span style="color:${completionPct===100?'var(--teal-light)':completionPct>=50?'var(--gold)':'var(--cream-dim)'}">${completionPct}%</span></div>
         <div class="checklist-grid">
-            <div class="check-item ${day.protein>=d.settings.proteinGoal?'done':''}" onclick="openModal()"><div class="icon">🥩</div><div class="label">Protein</div><div class="value">${day.protein}/${d.settings.proteinGoal}g</div></div>
-            <div class="check-item ${day.water>=d.settings.waterGoal?'done':''}" onclick="openModal()"><div class="icon">💧</div><div class="label">Water</div><div class="value">${day.water}/${d.settings.waterGoal}oz</div></div>
-            <div class="check-item ${day.flexL||day.flexR||day.flexM?'done':''}" onclick="openModal()"><div class="icon">🧘</div><div class="label">Stretch</div><div class="value">${day.flexL||day.flexR||day.flexM?'✓':'—'}</div></div>
-            <div class="check-item ${day.done||day.streak?'done':''}" onclick="openModal()"><div class="icon">${tmpl.icon}</div><div class="label">Workout</div><div class="value">${day.done?'✓':day.streak?'Streak':'—'}</div></div>
+            <div class="check-item ${hasWorkout?'done':''}" onclick="openModal()"><div class="icon">${tmpl.icon}</div><div class="label">Workout</div><div class="value">${hasWorkout?'✓':'—'}</div></div>
+            <div class="check-item ${hasProtein?'done':''}" onclick="openModal()"><div class="icon">🥩</div><div class="label">Protein</div><div class="value">${day.protein||0}/${s.proteinGoal}g</div></div>
+            <div class="check-item ${hasWater?'done':''}" onclick="openModal()"><div class="icon">💧</div><div class="label">Water</div><div class="value">${day.water||0}/${s.waterGoal}oz</div></div>
+            <div class="check-item ${hasFlex?'done':''}" onclick="openModal()"><div class="icon">🧘</div><div class="label">Stretch</div><div class="value">${hasFlex?'✓':'—'}</div></div>
         </div>
     </div>
     
     <button class="${btn} btn" onclick="openModal()">${btnTxt}</button>
     
-    ${day.done||day.streak?`<div class="summary"><div class="summary-card">${summary}</div></div>`:''}
+    ${day.done?`<div class="summary"><div class="summary-card">${summary}</div></div>`:''}
     
     <div class="week-section">
         <div class="section-header"><div class="section-title">This Week</div><div class="section-sub">${fmtShort(getDate(Math.max(ws,1)))} – ${fmtShort(getDate(Math.min(ws+6,70)))}</div></div>
-        <div class="week-grid">${week.map(w=>{const t=TEMPLATES[getType(w.n)];return`<div class="week-day ${w.n===d.today?'current':''} ${w.day.done?'done':''} ${w.day.streak?'streak':''} ${w.n>d.today?'future':''}" onclick="openModal(${w.n})"><div class="d-name">${DAYS_S[w.date.getDay()]}</div><div class="d-num">${w.date.getDate()}</div><div class="d-icon">${t.icon}</div></div>`}).join('')}</div>
+        <div class="week-grid">${week.map(w=>{const t=TEMPLATES[getType(w.n)];return`<div class="week-day ${w.n===d.today?'current':''} ${w.day.done?'done':''} ${w.n>d.today?'future':''}" onclick="openModal(${w.n})"><div class="d-name">${DAYS_S[w.date.getDay()]}</div><div class="d-num">${w.date.getDate()}</div><div class="d-icon">${t.icon}</div></div>`}).join('')}</div>
     </div>
     
     <div class="stats-grid">
@@ -490,7 +505,7 @@ function rToday(){
     
     <div class="miami-card"><div class="miami-label">Miami Ready</div><div class="miami-date">${MONTHS[getDate(70).getMonth()]} ${getDate(70).getDate()}, 2026</div></div>
     
-    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${x.streak?'streak':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}"></div>`).join('')}</div></div>`;
+    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}"></div>`).join('')}</div></div>`;
 }
 function rCal(){
     const d=state.data,months=[];
@@ -507,7 +522,7 @@ function rCal(){
             const date=new Date(y,mi,day),dn=getDayNum(date);
             if(dn>=1&&dn<=70){
                 const dd=d.days[dn-1],cn=getCycleName(date,d.settings);
-                h+=`<div class="cal-day ${dd.done?'done':''} ${dd.streak?'streak':''} ${dn===d.today?'current':''} ${dn>d.today?'future':''}" onclick="openModal(${dn})">${day}<div class="dot top ${cn}"></div></div>`;
+                h+=`<div class="cal-day ${dd.done?'done':''} ${dn===d.today?'current':''} ${dn>d.today?'future':''}" onclick="openModal(${dn})">${day}<div class="dot top ${cn}"></div></div>`;
             }else h+=`<div class="cal-day outside">${day}</div>`;
         }
         h+='</div></div>';
@@ -516,7 +531,7 @@ function rCal(){
 }
 
 function rProg(){
-    const d=state.data,done=d.days.filter(x=>x.done).length,streaks=d.days.filter(x=>x.streak).length;
+    const d=state.data,done=d.days.filter(x=>x.done).length;
     const la=d.days.filter(x=>x.type==='lower-a'&&x.done).length,laT=d.days.filter(x=>x.type==='lower-a').length;
     const lb=d.days.filter(x=>x.type==='lower-b'&&x.done).length,lbT=d.days.filter(x=>x.type==='lower-b').length;
     const lc=d.days.filter(x=>x.type==='lower-c'&&x.done).length,lcT=d.days.filter(x=>x.type==='lower-c').length;
@@ -532,9 +547,11 @@ function rProg(){
     const weeks=[];for(let w=1;w<=10;w++){const wd=d.days.filter(x=>getWeek(x.num)===w&&x.round);weeks.push(wd.length?wd[wd.length-1]:{round:null,lift:null,prot:null})}
     const cw=getWeek(d.today);
     
-    const renderBooty=(name,key)=>{
+    const renderBooty=(name,key,goal)=>{
         const val=latestScan?latestScan[key]:null;
-        return`<div class="booty-row"><div class="booty-row-header"><span class="name">${name}</span><span class="val">${val||'—'}/5</span></div><div class="booty-bars">${weeks.map((w,i)=>{const v=w[key];const h=v?(v/5)*100:8;return`<div class="booty-bar ${v?'filled':''} ${i+1===cw?'current':''}" style="height:${h}%"></div>`}).join('')}</div></div>`;
+        const first=firstScan?firstScan[key]:null;
+        const change=val&&first?val-first:null;
+        return`<div class="booty-row"><div class="booty-row-header"><span class="name">${name}</span><span class="val">${val||'—'}%${change!==null?`<span style="margin-left:6px;font-size:.7rem;color:${change>=0?'var(--teal-light)':'var(--burgundy)'}">${change>=0?'+':''}${change}%</span>`:''}</span></div><div class="booty-bars">${weeks.map((w,i)=>{const v=w[key];const h=v?v:5;return`<div class="booty-bar ${v?'filled':''} ${i+1===cw?'current':''}" style="height:${h}%"></div>`}).join('')}</div></div>`;
     };
     
     // Flexibility tracking
@@ -542,7 +559,7 @@ function rProg(){
     const latestFlex=flexHist[flexHist.length-1],firstFlex=flexHist[0];
     
     // Nutrition averages
-    const nutDays=d.days.filter(x=>x.done||x.streak);
+    const nutDays=d.days.filter(x=>x.done);
     const avgProtein=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.protein,0)/nutDays.length):0;
     const avgWater=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.water,0)/nutDays.length):0;
     const proteinHits=nutDays.filter(x=>x.protein>=d.settings.proteinGoal).length;
@@ -551,7 +568,7 @@ function rProg(){
     const phase=getPhase(d.today),cycle=getCyclePhase(getDate(d.today),d.settings);
     
     return`<div class="progress-view">
-        <div class="prog-card"><div class="prog-header"><span class="prog-title">Overall</span><span class="prog-val">${done+streaks}/70</span></div><div class="prog-bar"><div class="prog-fill" style="width:${((done+streaks)/70)*100}%"></div></div>${streaks?`<div style="font-size:.7rem;color:var(--gold);margin-top:6px">${streaks} streak saves</div>`:''}</div>
+        <div class="prog-card"><div class="prog-header"><span class="prog-title">Overall</span><span class="prog-val">${done}/70</span></div><div class="prog-bar"><div class="prog-fill" style="width:${(done/70)*100}%"></div></div></div>
         
         <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Status</div><div class="badges" style="justify-content:flex-start;margin-bottom:8px"><span class="badge phase">P${phase.num} ${phase.name}</span><span class="badge ${cycle.name.toLowerCase()}">${cycle.icon} ${cycle.name}</span></div><div style="font-size:.7rem;color:var(--cream-dim)">Cycle Day ${getCycleDay(getDate(d.today),d.settings)} · Fast-twitch optimized</div></div>
         
@@ -561,7 +578,14 @@ function rProg(){
         
         <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Neural Connection</div><div class="neural-grid"><div class="neural-item"><div class="emoji">🔴</div><div class="count">${cn.red}</div><div class="label">Quads</div></div><div class="neural-item"><div class="emoji">🟡</div><div class="count">${cn.yellow}</div><div class="label">Learning</div></div><div class="neural-item"><div class="emoji">🟢</div><div class="count">${cn.green}</div><div class="label">Strong</div></div><div class="neural-item"><div class="emoji">✨</div><div class="count">${cn.sparkles}</div><div class="label">Locked</div></div></div></div>
         
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🍑 Booty Scans</div><div class="booty-chart">${renderBooty('Roundness','round')}${renderBooty('Lift','lift')}${renderBooty('Protrusion','prot')}</div><div style="text-align:center;font-size:.65rem;color:var(--cream-dim);margin-top:8px">${latestScan?`Latest: Week ${getWeek(d.days.indexOf(latestScan)+1)} · ${latestScan.bootyType||''}`:'No scans yet'}</div></div>
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🍑 Booty Scans (Zozofit %)</div><div class="booty-chart">${renderBooty('Roundness','round',45)}${renderBooty('Lift','lift',83)}${renderBooty('Protrusion','prot',40)}</div><div style="text-align:center;font-size:.65rem;color:var(--cream-dim);margin-top:8px">${latestScan?`Latest: Week ${getWeek(d.days.indexOf(latestScan)+1)} · ${latestScan.bootyType||''}`:'No scans yet'}</div></div>
+        
+        ${latestScan&&latestScan.bf?`<div class="prog-card"><div class="prog-title" style="margin-bottom:8px">📊 Body Composition</div><div class="flex-chart">
+            <div class="flex-row"><span class="name">Body Fat</span><span class="val">${latestScan.bf}%${firstScan&&firstScan.bf?`<span class="change ${latestScan.bf<firstScan.bf?'pos':'neg'}">${latestScan.bf<firstScan.bf?'↓':'↑'}${Math.abs(latestScan.bf-firstScan.bf).toFixed(1)}%</span>`:''}</span></div>
+            <div class="flex-row"><span class="name">Lean Mass</span><span class="val">${latestScan.lean||'—'} lbs${firstScan&&firstScan.lean?`<span class="change ${latestScan.lean>firstScan.lean?'pos':'neg'}">${latestScan.lean>firstScan.lean?'↑':'↓'}${Math.abs(latestScan.lean-firstScan.lean)} lbs</span>`:''}</span></div>
+            <div class="flex-row"><span class="name">Waist</span><span class="val">${latestScan.waist||'—'}"</span></div>
+            <div class="flex-row"><span class="name">Hips</span><span class="val">${latestScan.hips||'—'}"</span></div>
+        </div></div>`:''}
         
         <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🧘 Splits Progress</div><div class="flex-chart">${latestFlex?`
             <div class="flex-row"><span class="name">Front Left</span><span class="val">${latestFlex.flexL||'—'}"${firstFlex&&latestFlex.flexL&&firstFlex.flexL?`<span class="change ${latestFlex.flexL<firstFlex.flexL?'pos':'neg'}">${latestFlex.flexL<firstFlex.flexL?'↓':'↑'}${Math.abs(latestFlex.flexL-firstFlex.flexL)}"</span>`:''}</span></div>
@@ -580,7 +604,13 @@ function rProg(){
 function rInfo(){
     const s=state.data.settings;
     return`<div class="info-view">
-        <div class="info-section"><div class="info-title">⚡ Your Profile</div><div class="info-text"><strong>Fast-twitch dominant</strong> (ACTN3 sprinter gene)<br>• Responds to heavy load over volume<br>• Lower rep ranges (6-10) for main lifts<br>• Shorter, intense finishers<br>• Can progress faster when connection is there<br><br><strong>Right-side imbalance</strong> from rotated pelvis<br>• Do Right-Side Reset before every lower day<br>• All exercises: right side first</div></div>
+        <div class="info-section"><div class="info-title">⚡ Your Profile</div><div class="info-text"><strong>Fast-twitch dominant</strong> (ACTN3 sprinter gene)<br>• Heavy load > high volume<br>• 6-10 reps for main lifts<br>• Can progress faster when 🟢<br><br><strong>Right-side imbalance</strong> (rotated pelvis)<br>• Right-Side Reset before every lower day<br>• All exercises: right side first<br><br><strong>Body type:</strong> Teardrop/Pear<br>• Store weight in hips/thighs<br>• Glute medius underdeveloped (hip dips)<br>• WHR 0.76 = excellent foundation</div></div>
+        
+        <div class="info-section"><div class="info-title">🍑 Your Scan Analysis</div><div class="info-text"><strong>Current:</strong> Perky Peach<br>• Lift 83% — ELITE (already high, maintain)<br>• Roundness 32% — needs work (upper/outer glute)<br>• Protrusion 25% — needs work (backward projection)<br><br><strong>Translation:</strong> Your butt is UP but not OUT or AROUND.<br><br><strong>Why no shelf yet:</strong><br>• Glute medius/minimus underdeveloped<br>• Right side shuts off (SI issue)<br>• Pelvis twist = uneven muscle wear<br><br><strong>The fix:</strong><br>• DON'T chase more lift (you have it)<br>• DO chase side glute + upper glute + under-butt mass<br>• DON'T cut (27.9% BF is ideal for building)<br>• DO repartition food → glute tissue</div></div>
+        
+        <div class="info-section"><div class="info-title">🎯 March 21 Goals</div><div class="info-text"><strong>Roundness:</strong> 32% → 45-55%<br><strong>Protrusion:</strong> 25% → 35-45%<br><strong>Lift:</strong> 83% → maintain<br><strong>Hip dips:</strong> visible → smoothed<br><strong>SI pain:</strong> chronic → stable<br><br>You don't rebuild your butt. You <strong>fill it out sideways and backward</strong>.</div></div>
+        
+        <div class="info-section"><div class="info-title">🦴 Posture Fix</div><div class="info-text"><strong>Your posture score (87/100) is misleading.</strong><br>You are straight, but straight ≠ supported.<br><br>Your pelvis is held by: erectors, hamstrings, quads<br>Instead of: upper glutes, deep glute max, medius<br><br><strong>When glutes don't push backward, your lumbar spine does.</strong><br>That's why your right SI joint is knotted.<br><br><strong>The fix:</strong> Every rep, exhale → posterior tilt → squeeze → hold 2 sec.<br><br>This teaches: "Glutes hold me, not my spine."<br>Posture fixes itself without stretching.</div></div>
         
         <div class="info-section"><div class="info-title">⚙️ Settings</div>
             <div class="settings-row"><span class="settings-label">Cycle Start</span><input type="date" class="settings-input" id="setCycleStart" value="${s.cycleStart}" onchange="updateSettings()"></div>
@@ -591,9 +621,10 @@ function rInfo(){
         </div>
         
         <div class="info-section"><div class="info-title">🍑 3D Glute Split</div>
-            <div class="info-card"><div class="title">🍑 Lower A: Shelf + Side</div><div class="desc">Upper glute max + medius. Hip thrust, back ext, heavy abduction, lateral step-ups.</div><div class="equip">Tempo barbell · Squat pad · Finer Form bench · Blogilates bands</div></div>
-            <div class="info-card"><div class="title">🔥 Lower B: Underbutt</div><div class="desc">Lower glute max + ham tie-in. B-stance RDL, step-ups, hyperextensions, ham curls.</div><div class="equip">Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights</div></div>
-            <div class="info-card"><div class="title">✨ Lower C: Side Dips</div><div class="desc">Medius + minimus. Single-leg thrust, Cossack, abduction volume, bridge pulses.</div><div class="equip">Finer Form bench · Ankle weights · Blogilates bands</div></div>
+            <div class="info-text" style="margin-bottom:12px">Each day targets a different area to fix your specific pattern: <strong>up but not out</strong>.</div>
+            <div class="info-card"><div class="title">🍑 Lower A: Shelf + Side</div><div class="desc"><strong>Target:</strong> Upper glute max + medius<br><strong>Why:</strong> Pulls pelvis back into position. Creates the shelf.<br>Hip thrust, back ext, heavy abduction, lateral step-ups.</div><div class="equip">Tempo barbell · Squat pad · Finer Form bench · Blogilates bands</div></div>
+            <div class="info-card"><div class="title">🔥 Lower B: Underbutt</div><div class="desc"><strong>Target:</strong> Lower glute max + ham tie-in<br><strong>Why:</strong> Creates depth and hang. Fills the fold.<br>B-stance RDL, step-ups, hyperextensions, ham curls.</div><div class="equip">Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights</div></div>
+            <div class="info-card"><div class="title">✨ Lower C: Side Dips</div><div class="desc"><strong>Target:</strong> Medius + minimus<br><strong>Why:</strong> Stabilizes SI joint. Fills hip dips.<br>Single-leg thrust, Cossack, abduction volume, bridge pulses.</div><div class="equip">Finer Form bench · Ankle weights · Blogilates bands</div></div>
         </div>
         
         <div class="info-section"><div class="info-title">📅 Weekly Rule</div><div class="info-text">Every week:<br>• <strong>2 hip thrust exposures</strong><br>• <strong>2 hinge/tie-in exposures</strong><br>• <strong>Abduction every lower session</strong></div></div>
@@ -651,20 +682,14 @@ function rModal(){
     const cycle=getCyclePhase(date,state.data.settings),cycleName=cycle.name.toLowerCase();
     const lastConn=[...state.data.days].reverse().find(x=>x.conn)?.conn;
     const lastHT=[...state.data.days].reverse().find(x=>x.htWt);
+    const lastNut=[...state.data.days].reverse().find(x=>x.protein||x.water);
+    const lastTempo=[...state.data.days].reverse().find(x=>x.tempoDur);
     const s=state.data.settings;
     
     let form='';
     
-    if(day.streak&&!day.done){
-        form=`<div class="form-section"><div class="form-title">Streak Save</div><div style="font-size:.8rem;color:var(--cream-muted);margin-bottom:12px">10 min stretch to keep the chain.</div></div>
-        <div class="form-section"><div class="form-title">Nutrition</div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Protein (g)</label><input type="number" class="form-input" id="protein" value="${day.protein||''}" placeholder="${s.proteinGoal}"></div><div class="form-group"><label class="form-label">Water (oz)</label><input type="number" class="form-input" id="water" value="${day.water||''}" placeholder="${s.waterGoal}"></div></div>
-        </div>
-        <button class="btn-save" onclick="saveDay()">Update</button>
-        <button class="btn-streak-modal" onclick="undoStreak()">Undo Streak Save</button>`;
-    }else{
-        // Rule
-        form=`<div class="rule-card" style="margin:0 0 16px"><div class="rule-label">${CYCLE_MODS[cycleName]} · ${cycle.name}</div><div class="rule-text">${cycle.rule}</div></div>`;
+    // Rule
+    form=`<div class="rule-card" style="margin:0 0 16px"><div class="rule-label">${CYCLE_MODS[cycleName]} · ${cycle.name}</div><div class="rule-text">${cycle.rule}</div></div>`;
         
         // Lower days
         if(type.startsWith('lower')){
@@ -677,40 +702,43 @@ function rModal(){
         
         // Tempo
         if(type==='tempo'||type==='tempo-scan'){
-            form+=`<div class="form-section"><div class="form-title">Tempo Class</div><div class="tempo-grid">${[{k:'Challenge',d:'Monthly'},{k:'Lower',d:'Legs'},{k:'Full Body',d:'HIIT'},{k:'Upper',d:'Arms'},{k:'Cardio',d:'BW'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-btn ${day.tempo===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group" style="margin-top:10px"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="tempoDur" value="${day.tempoDur||''}" placeholder="30"></div></div>`;
+            form+=`<div class="form-section"><div class="form-title">Tempo Class</div><div class="tempo-grid">${[{k:'Challenge',d:'Monthly'},{k:'Lower',d:'Legs'},{k:'Full Body',d:'HIIT'},{k:'Upper',d:'Arms'},{k:'Cardio',d:'BW'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-btn ${day.tempo===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group" style="margin-top:10px"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="tempoDur" value="${day.tempoDur||lastTempo?.tempoDur||''}" placeholder="30"></div></div>`;
         }
         
         // Scan (Sunday)
         if(type==='tempo-scan'){
             form+=`<div class="form-section"><div class="form-title">Body Scan</div><div class="scan-grid">${['Tempo','Zozofit','Both','Skip'].map(x=>`<div class="scan-btn ${day.scan===x?'selected':''}" onclick="setScan('${x}')">${x}</div>`).join('')}</div>`;
             if(day.scan&&day.scan!=='Skip'){
-                form+=`<div style="margin-top:14px"><div class="metric-row"><div class="metric-header"><span class="name">Roundness</span><span class="val">${day.round||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.round>=v?'filled':''}" onclick="setMetric('round',${v})"></div>`).join('')}</div></div>
-                <div class="metric-row"><div class="metric-header"><span class="name">Lift</span><span class="val">${day.lift||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.lift>=v?'filled':''}" onclick="setMetric('lift',${v})"></div>`).join('')}</div></div>
-                <div class="metric-row"><div class="metric-header"><span class="name">Protrusion</span><span class="val">${day.prot||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.prot>=v?'filled':''}" onclick="setMetric('prot',${v})"></div>`).join('')}</div></div>
-                <div class="form-label" style="margin-top:10px">Type</div><div class="booty-grid">${BOOTY.map(t=>`<div class="booty-btn ${day.bootyType===t?'selected':''}" onclick="setBooty('${t}')"><div class="name">${t}</div></div>`).join('')}</div></div>`;
+                form+=`<div style="margin-top:14px">
+                <div class="form-row"><div class="form-group"><label class="form-label">Roundness %</label><input type="number" class="form-input" id="round" value="${day.round||''}" placeholder="32" min="0" max="100"></div><div class="form-group"><label class="form-label">Lift %</label><input type="number" class="form-input" id="lift" value="${day.lift||''}" placeholder="83" min="0" max="100"></div></div>
+                <div class="form-row"><div class="form-group"><label class="form-label">Protrusion %</label><input type="number" class="form-input" id="prot" value="${day.prot||''}" placeholder="25" min="0" max="100"></div><div class="form-group"><label class="form-label">Body Fat %</label><input type="number" class="form-input" id="bf" value="${day.bf||''}" placeholder="27.9" step="0.1"></div></div>
+                <div class="form-row"><div class="form-group"><label class="form-label">Lean Mass (lbs)</label><input type="number" class="form-input" id="lean" value="${day.lean||''}" placeholder="104"></div><div class="form-group"><label class="form-label">Waist (in)</label><input type="number" class="form-input" id="waist" value="${day.waist||''}" placeholder="31.1" step="0.1"></div></div>
+                <div class="form-row"><div class="form-group"><label class="form-label">Hips (in)</label><input type="number" class="form-input" id="hips" value="${day.hips||''}" placeholder="39.8" step="0.1"></div><div class="form-group"><label class="form-label">Booty Type</label><select class="form-input" id="bootyType"><option value="">—</option>${['Perky Peach','Bubble Butt','Heart Shape','Square','Round','V-Shape'].map(t=>`<option value="${t}" ${day.bootyType===t?'selected':''}>${t}</option>`).join('')}</select></div></div>
+                </div>`;
             }
             form+=`</div>`;
         }
         
         // Nutrition
         form+=`<div class="form-section"><div class="form-title">Nutrition</div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Protein (g)</label><input type="number" class="form-input" id="protein" value="${day.protein||''}" placeholder="${s.proteinGoal}"></div><div class="form-group"><label class="form-label">Water (oz)</label><input type="number" class="form-input" id="water" value="${day.water||''}" placeholder="${s.waterGoal}"></div></div>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">Protein (g)</label><div style="display:flex;gap:6px;margin-bottom:6px"><button type="button" class="quick-btn" onclick="addProtein(30)">+30</button><button type="button" class="quick-btn" onclick="addProtein(20)">+20</button><button type="button" class="quick-btn" onclick="addProtein(10)">+10</button><button type="button" class="quick-btn" onclick="setProteinVal(0)">Reset</button></div><input type="number" class="form-input" id="protein" value="${day.protein||lastNut?.protein||''}" placeholder="${s.proteinGoal}"></div>
+            <div class="form-group"><label class="form-label">Water (oz)</label><div style="display:flex;gap:6px;margin-bottom:6px"><button type="button" class="quick-btn" onclick="addWater(20)">+20</button><button type="button" class="quick-btn" onclick="addWater(10)">+10</button><button type="button" class="quick-btn" onclick="addWater(5)">+5</button><button type="button" class="quick-btn" onclick="setWaterVal(0)">Reset</button></div><input type="number" class="form-input" id="water" value="${day.water||lastNut?.water||''}" placeholder="${s.waterGoal}"></div>
         </div>`;
         
         // Flexibility
-        form+=`<div class="form-section"><div class="form-title">Splits (inches from floor)</div><div class="flex-grid">
-            <div class="flex-item"><div class="label">Front L</div><input type="number" id="flexL" value="${day.flexL||''}" placeholder="—" step="0.5"></div>
-            <div class="flex-item"><div class="label">Front R</div><input type="number" id="flexR" value="${day.flexR||''}" placeholder="—" step="0.5"></div>
-            <div class="flex-item"><div class="label">Middle</div><input type="number" id="flexM" value="${day.flexM||''}" placeholder="—" step="0.5"></div>
+        const lastFlex=[...state.data.days].reverse().find(x=>x.flexL||x.flexR||x.flexM);
+        form+=`<div class="form-section"><div class="form-title">Splits (inches from floor)</div>
+            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap"><button type="button" class="quick-btn" onclick="setAllFlex(0)">0</button><button type="button" class="quick-btn" onclick="setAllFlex(2)">2</button><button type="button" class="quick-btn" onclick="setAllFlex(4)">4</button><button type="button" class="quick-btn" onclick="setAllFlex(6)">6</button><button type="button" class="quick-btn" onclick="setAllFlex(8)">8</button><button type="button" class="quick-btn" onclick="setAllFlex(10)">10</button></div>
+            <div class="flex-grid">
+            <div class="flex-item"><div class="label">Front L</div><input type="number" id="flexL" value="${day.flexL||lastFlex?.flexL||''}" placeholder="—" step="0.5"></div>
+            <div class="flex-item"><div class="label">Front R</div><input type="number" id="flexR" value="${day.flexR||lastFlex?.flexR||''}" placeholder="—" step="0.5"></div>
+            <div class="flex-item"><div class="label">Middle</div><input type="number" id="flexM" value="${day.flexM||lastFlex?.flexM||''}" placeholder="—" step="0.5"></div>
         </div></div>`;
         
         // Notes
         form+=`<div class="form-section"><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" rows="2">${day.notes||''}</textarea></div></div>`;
         
-        form+=`<button class="btn-save" onclick="saveDay()">${day.done?'Update':'Complete'}</button>${!day.done?`<button class="btn-streak-modal" onclick="doStreak()">Streak Save (10 min)</button>`:''}`;
-    }
-    
-    return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date)}</div><div class="modal-sub">Day ${n} · ${tmpl.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
+        return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date)}</div><div class="modal-sub">Day ${n} · ${tmpl.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
 }
 
 const go=v=>{state.view=v;render()};
@@ -718,16 +746,17 @@ const openModal=n=>{state.selDay=n||state.data.today;state.modal=true;render()};
 const closeModal=()=>{state.modal=false;render()};
 const setConn=v=>{state.data.days[(state.selDay||state.data.today)-1].conn=v;render()};
 const setTempo=v=>{state.data.days[(state.selDay||state.data.today)-1].tempo=v;render()};
-const setScan=v=>{const d=state.data.days[(state.selDay||state.data.today)-1];d.scan=v;if(v==='Skip'){d.round=null;d.lift=null;d.prot=null;d.bootyType=null}render()};
-const setMetric=(k,v)=>{state.data.days[(state.selDay||state.data.today)-1][k]=v;render()};
-const setBooty=v=>{state.data.days[(state.selDay||state.data.today)-1].bootyType=v;render()};
+const setScan=v=>{const d=state.data.days[(state.selDay||state.data.today)-1];d.scan=v;if(v==='Skip'){d.round=null;d.lift=null;d.prot=null;d.bootyType=null;d.bf=null;d.lean=null;d.waist=null;d.hips=null}render()};
 
-function doStreak(){const d=state.data.days[(state.selDay||state.data.today)-1];d.streak=true;d.done=false;d.tempo='Stretch';d.tempoDur=10;d.protein=parseInt(document.getElementById('protein')?.value)||0;d.water=parseInt(document.getElementById('water')?.value)||0;save();toast('Streak saved');closeModal()}
-function undoStreak(){state.data.days[(state.selDay||state.data.today)-1].streak=false;save();render()}
+function addProtein(v){const el=document.getElementById('protein');el.value=(parseInt(el.value)||0)+v}
+function setProteinVal(v){document.getElementById('protein').value=v}
+function addWater(v){const el=document.getElementById('water');el.value=(parseInt(el.value)||0)+v}
+function setWaterVal(v){document.getElementById('water').value=v}
+function setAllFlex(v){document.getElementById('flexL').value=v;document.getElementById('flexR').value=v;document.getElementById('flexM').value=v}
 
 function saveDay(){
     const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
-    d.done=true;d.streak=false;
+    d.done=true;
     d.notes=document.getElementById('notes')?.value||'';
     d.protein=parseInt(document.getElementById('protein')?.value)||0;
     d.water=parseInt(document.getElementById('water')?.value)||0;
@@ -741,7 +770,17 @@ function saveDay(){
         d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
         if(!d.conn){const lc=[...state.data.days].reverse().find(x=>x.conn)?.conn;if(lc)d.conn=lc}
     }
-    if(type==='tempo'||type==='tempo-scan')d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null;
+    if(type==='tempo'||type==='tempo-scan'){d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null}
+    if(type==='tempo-scan'&&d.scan&&d.scan!=='Skip'){
+        d.round=parseInt(document.getElementById('round')?.value)||null;
+        d.lift=parseInt(document.getElementById('lift')?.value)||null;
+        d.prot=parseInt(document.getElementById('prot')?.value)||null;
+        d.bf=parseFloat(document.getElementById('bf')?.value)||null;
+        d.lean=parseInt(document.getElementById('lean')?.value)||null;
+        d.waist=parseFloat(document.getElementById('waist')?.value)||null;
+        d.hips=parseFloat(document.getElementById('hips')?.value)||null;
+        d.bootyType=document.getElementById('bootyType')?.value||null;
+    }
     if(save())toast('Saved');else toast('Error',1);
     closeModal();
     if(n===70&&d.done)setTimeout(()=>alert('🎉 MIAMI READY! 🍑'),300);
