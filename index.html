@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Miami Ready">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>70 Days Miami Ready</title>
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Miami Ready&quot;,&quot;short_name&quot;:&quot;Miami&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%231a1a1a&quot;,&quot;theme_color&quot;:&quot;%231a1a1a&quot;}">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: #1a1a1a; 
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { display: none; }
+        select option { background: #1a1a1a; }
+        
+        .app {
+            max-width: 430px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            padding: 60px 20px 20px;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .add-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .day-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .day-info .day {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .day-info .phase {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .week-strip {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .week-day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .week-day .name {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .week-day .name.today {
+            color: #fff;
+        }
+        
+        .week-day .num {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .week-day .num.today {
+            background: #fff;
+            color: #1a1a1a;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            color: #888;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab-btn.active {
+            background: #fff;
+            color: #1a1a1a;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        /* Habit Cards */
+        .habit-card {
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .habit-card.orange { background: #FFF3E0; }
+        .habit-card.purple { background: #F3E5F5; }
+        .habit-card.red { background: #FFEBEE; }
+        .habit-card.green { background: #E8F5E9; }
+        .habit-card.blue { background: #E3F2FD; }
+        
+        .habit-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .habit-streak {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .streak-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .streak-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .streak-dot.empty { border: 2px solid currentColor; background: transparent; }
+        .streak-dot.filled { background: currentColor; }
+        
+        .habit-card.orange .streak-dot { color: #F57C00; }
+        .habit-card.purple .streak-dot { color: #8E24AA; }
+        .habit-card.red .streak-dot { color: #E53935; }
+        .habit-card.green .streak-dot { color: #43A047; }
+        .habit-card.blue .streak-dot { color: #1E88E5; }
+        
+        .habit-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        
+        .habit-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .habit-pin {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            font-size: 1.2rem;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-card {
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        
+        .stat-card.wide {
+            grid-column: span 2;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .stat-value .unit {
+            font-size: 1rem;
+            color: #888;
+            margin-left: 4px;
+        }
+        
+        .dot-calendar {
+            display: grid;
+            grid-template-columns: repeat(21, 1fr);
+            gap: 4px;
+            margin: 16px 0;
+        }
+        
+        .cal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .cal-dot.done {
+            background: #fff;
+        }
+        
+        .connection-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 16px;
+        }
+        
+        .connection-item {
+            text-align: center;
+        }
+        
+        .connection-emoji {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        
+        .connection-count {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .connection-label {
+            font-size: 0.75rem;
+            color: #666;
+        }
+        
+        /* Calendar */
+        .calendar-week {
+            margin-bottom: 24px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .calendar-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .calendar-range {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 14px;
+            background: #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .calendar-day.done {
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+        }
+        
+        .calendar-day.current {
+            border: 2px solid #a78bfa;
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+        }
+        
+        .calendar-day.future {
+            opacity: 0.3;
+        }
+        
+        .calendar-day .num {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .calendar-day.done .num {
+            color: #fff;
+        }
+        
+        .phase-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+        
+        .phase-dot.p1 { background: #fbbf24; }
+        .phase-dot.p2 { background: #f97316; }
+        .phase-dot.p3 { background: #22c55e; }
+        
+        /* Method */
+        .method-card {
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .method-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-bottom: 16px;
+        }
+        
+        .method-callout {
+            background: rgba(167, 139, 250, 0.1);
+            border-left: 3px solid #a78bfa;
+            padding: 16px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 16px;
+        }
+        
+        .method-callout p {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        .method-text {
+            color: #999;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .method-list {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .method-list-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .method-list-item .bullet {
+            color: #a78bfa;
+        }
+        
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .phase-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .phase-badge.p1 { background: #fbbf24; }
+        .phase-badge.p2 { background: #f97316; }
+        .phase-badge.p3 { background: #22c55e; }
+        
+        .phase-info .name {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .phase-info .details {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        /* FAB */
+        .fab {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.4);
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: #1a1a1a;
+            border-top: 1px solid #333;
+            padding: 12px 40px 28px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+        }
+        
+        .nav-btn.active {
+            color: #fff;
+        }
+        
+        .nav-btn .icon {
+            font-size: 1.4rem;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: #242424;
+            width: 100%;
+            max-width: 430px;
+            max-height: 90vh;
+            border-radius: 24px 24px 0 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .modal-title {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .modal-save {
+            background: #a78bfa;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #a78bfa;
+            margin: 24px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .input-group {
+            margin-bottom: 16px;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .input-field {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .input-field:focus {
+            border-color: #a78bfa;
+        }
+        
+        textarea.input-field {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .rating-btn {
+            aspect-ratio: 1;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        
+        .rating-btn.selected {
+            border: 2px solid #a78bfa;
+            background: rgba(167, 139, 250, 0.15);
+        }
+        
+        .rating-btn .emoji {
+            font-size: 1.4rem;
+        }
+        
+        .rating-btn .label {
+            font-size: 0.65rem;
+            color: #888;
+        }
+        
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .toggle-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        .toggle-switch {
+            width: 48px;
+            height: 28px;
+            border-radius: 14px;
+            background: #333;
+            padding: 2px;
+            transition: background 0.2s;
+        }
+        
+        .toggle-switch.on {
+            background: #a78bfa;
+        }
+        
+        .toggle-knob {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+        
+        .toggle-switch.on .toggle-knob {
+            transform: translateX(20px);
+        }
+        
+        .save-btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #a78bfa, #ec4899);
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 24px 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app" id="app"></div>
+
+    <script>
+        // App State
+        let state = {
+            view: 'today',
+            modalOpen: false,
+            selectedDay: null,
+            data: null
+        };
+
+        // Initialize data
+        function initData() {
+            const saved = localStorage.getItem('miamiReadyV3');
+            if (saved) {
+                state.data = JSON.parse(saved);
+            } else {
+                const days = [];
+                for (let i = 1; i <= 70; i++) {
+                    days.push({
+                        number: i,
+                        phase: i <= 21 ? 1 : i <= 42 ? 2 : 3,
+                        completed: false,
+                        hipThrustWeight: null,
+                        hipThrustReps: '',
+                        rdlWeight: null,
+                        gluteConnection: null,
+                        slowedDown: false,
+                        locatedBefore: false,
+                        locatedDuring: false,
+                        locatedAfter: false,
+                        quadsTakeOver: false,
+                        bestCue: '',
+                        shouldersBench: false,
+                        feetFlat: false,
+                        shinVertical: false,
+                        posteriorTilt: false,
+                        fullLockout: false,
+                        tempoChallenge: '',
+                        tempoDuration: null,
+                        flexType: '',
+                        middleSplitGap: null,
+                        contractRelax: false,
+                        rightHipFocus: false,
+                        hipPain: null,
+                        proteinHit: false,
+                        caloriesGood: false,
+                        notes: ''
+                    });
+                }
+                state.data = { days, currentDay: 1 };
+                saveData();
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('miamiReadyV3', JSON.stringify(state.data));
+        }
+
+        // Helpers
+        function getWeekDays() {
+            const today = new Date();
+            const days = [];
+            for (let i = -3; i <= 3; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                days.push({
+                    name: date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase().slice(0, 2),
+                    num: date.getDate(),
+                    isToday: i === 0
+                });
+            }
+            return days;
+        }
+
+        function getStreakDots(habitKey) {
+            const dots = [];
+            const data = state.data;
+            for (let i = Math.max(0, data.currentDay - 7); i < data.currentDay; i++) {
+                const day = data.days[i];
+                let done = false;
+                switch(habitKey) {
+                    case 'hipThrust': done = !!day?.hipThrustWeight; break;
+                    case 'neural': done = !!day?.gluteConnection; break;
+                    case 'tempo': done = !!day?.tempoChallenge; break;
+                    case 'flex': done = !!day?.flexType; break;
+                    case 'protein': done = !!day?.proteinHit; break;
+                }
+                dots.push(done);
+            }
+            while (dots.length < 7) dots.unshift(false);
+            return dots;
+        }
+
+        function getStreak(habitKey) {
+            return state.data.days.filter(d => {
+                switch(habitKey) {
+                    case 'hipThrust': return d.hipThrustWeight;
+                    case 'neural': return d.gluteConnection;
+                    case 'tempo': return d.tempoChallenge;
+                    case 'flex': return d.flexType;
+                    case 'protein': return d.proteinHit;
+                }
+            }).length;
+        }
+
+        // Render Functions
+        function render() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                ${renderHeader()}
+                ${renderTabs()}
+                <div class="content">
+                    ${state.view === 'today' ? renderToday() : ''}
+                    ${state.view === 'stats' ? renderStats() : ''}
+                    ${state.view === 'calendar' ? renderCalendar() : ''}
+                    ${state.view === 'method' ? renderMethod() : ''}
+                </div>
+                <button class="fab" onclick="openModal()">+</button>
+                ${renderBottomNav()}
+                ${renderModal()}
+            `;
+        }
+
+        function renderHeader() {
+            const data = state.data;
+            const weekDays = getWeekDays();
+            return `
+                <div class="header">
+                    <div class="header-top">
+                        <h1>Habits</h1>
+                        <button class="add-btn" onclick="openModal()">+</button>
+                    </div>
+                    <div class="day-info">
+                        <span class="day">Day ${data.currentDay}</span>
+                        <span class="phase">• Phase ${data.days[data.currentDay - 1]?.phase}</span>
+                    </div>
+                    <div class="week-strip">
+                        ${weekDays.map(d => `
+                            <div class="week-day">
+                                <span class="name ${d.isToday ? 'today' : ''}">${d.name}</span>
+                                <div class="num ${d.isToday ? 'today' : ''}">${d.num}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTabs() {
+            return `
+                <div class="tabs">
+                    ${['Today', 'Stats', 'Calendar', 'Method'].map(tab => `
+                        <button class="tab-btn ${state.view === tab.toLowerCase() ? 'active' : ''}" 
+                                onclick="switchView('${tab.toLowerCase()}')">${tab}</button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderToday() {
+            const today = state.data.days[state.data.currentDay - 1];
+            const weights = { 1: '115-120', 2: '125-130', 3: '135-145' };
+            
+            const habits = [
+                { key: 'hipThrust', color: 'orange', title: 'Hip Thrusts + RDLs', subtitle: `${weights[today.phase]} lbs • Phase ${today.phase}`, done: today.hipThrustWeight },
+                { key: 'neural', color: 'purple', title: 'Neural Pathway', subtitle: 'Elisi\'s method • locate before/during/after', done: today.gluteConnection },
+                { key: 'tempo', color: 'red', title: 'Tempo Challenge', subtitle: today.tempoChallenge || 'Shape Shift or January Challenge', done: today.tempoChallenge },
+                { key: 'flex', color: 'green', title: 'Flexibility Stacking', subtitle: today.flexType || 'Split stacks + mobility', done: today.flexType },
+                { key: 'protein', color: 'blue', title: 'Protein Goal', subtitle: '120-130g daily', done: today.proteinHit }
+            ];
+
+            return habits.map(h => `
+                <div class="habit-card ${h.color}" onclick="openModal()">
+                    <div class="habit-top">
+                        <div class="habit-streak">
+                            <span>⚡</span>
+                            <span>${getStreak(h.key)}</span>
+                        </div>
+                        <div class="streak-dots">
+                            ${getStreakDots(h.key).map(done => `
+                                <div class="streak-dot ${done ? 'filled' : 'empty'}">${done ? '✓' : ''}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="habit-title">${h.title}</div>
+                    <div class="habit-subtitle">${h.subtitle}</div>
+                    ${h.done ? '<div class="habit-pin">📌</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderStats() {
+            const data = state.data;
+            const completed = data.days.filter(d => d.completed).length;
+            const weight = [...data.days].reverse().find(d => d.hipThrustWeight)?.hipThrustWeight || 115;
+            const pain = [...data.days].reverse().find(d => d.hipPain !== null)?.hipPain || 6;
+            const protein = data.days.filter(d => d.proteinHit).length;
+            const conn = { red: 0, yellow: 0, green: 0, sparkles: 0 };
+            data.days.forEach(d => { if (d.gluteConnection) conn[d.gluteConnection]++; });
+
+            return `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Hip Thrust</div>
+                        <div class="stat-value">${weight}<span class="unit">lbs</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Hip Pain</div>
+                        <div class="stat-value">${pain}<span class="unit">/10</span></div>
+                    </div>
+                    <div class="stat-card wide">
+                        <div class="stat-label">70-Day Progress</div>
+                        <div class="dot-calendar">
+                            ${data.days.slice(0, 63).map(d => `
+                                <div class="cal-dot ${d.completed ? 'done' : ''}"></div>
+                            `).join('')}
+                        </div>
+                        <div class="stat-value">${completed}<span class="unit">/ 70 days</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Volume</div>
+                        <div class="stat-value">${(weight * 30 * completed / 1000).toFixed(1)}<span class="unit">K lbs</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Protein Days</div>
+                        <div class="stat-value">${protein}<span class="unit">/${completed || 1}</span></div>
+                    </div>
+                    <div class="stat-card wide">
+                        <div class="stat-label">Neural Connection Progress</div>
+                        <div class="connection-grid">
+                            <div class="connection-item">
+                                <div class="connection-emoji">🔴</div>
+                                <div class="connection-count">${conn.red}</div>
+                                <div class="connection-label">Quad</div>
+                            </div>
+                            <div class="connection-item">
+                                <div class="connection-emoji">🟡</div>
+                                <div class="connection-count">${conn.yellow}</div>
+                                <div class="connection-label">Learning</div>
+                            </div>
+                            <div class="connection-item">
+                                <div class="connection-emoji">🟢</div>
+                                <div class="connection-count">${conn.green}</div>
+                                <div class="connection-label">Strong</div>
+                            </div>
+                            <div class="connection-item">
+                                <div class="connection-emoji">✨</div>
+                                <div class="connection-count">${conn.sparkles}</div>
+                                <div class="connection-label">Locked</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCalendar() {
+            const data = state.data;
+            const weeks = Math.ceil(70 / 7);
+            let html = '';
+            
+            for (let w = 0; w < weeks; w++) {
+                const start = w * 7 + 1;
+                const end = Math.min(start + 6, 70);
+                html += `
+                    <div class="calendar-week">
+                        <div class="calendar-header">
+                            <span class="calendar-title">Week ${w + 1}</span>
+                            <span class="calendar-range">Days ${start}-${end}</span>
+                        </div>
+                        <div class="calendar-grid">
+                            ${Array.from({ length: end - start + 1 }, (_, i) => {
+                                const day = start + i;
+                                const d = data.days[day - 1];
+                                const isCurrent = day === data.currentDay;
+                                const isFuture = day > data.currentDay;
+                                return `
+                                    <div class="calendar-day ${d.completed ? 'done' : ''} ${isCurrent ? 'current' : ''} ${isFuture ? 'future' : ''}"
+                                         onclick="openModal(${day})">
+                                        <span class="num">${day}</span>
+                                        <div class="phase-dot p${d.phase}"></div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        function renderMethod() {
+            return `
+                <div class="method-card">
+                    <div class="method-title">🧠 Elisi's Neural Pathway Method</div>
+                    <div class="method-callout">
+                        <p>"A glute shelf doesn't come from exercises. It comes from which muscle does the work."</p>
+                    </div>
+                    <p class="method-text">Most women start quad dominant. Your brain automatically sends signals to quads instead of glutes.</p>
+                    <div class="method-list">
+                        <div class="method-list-item"><span class="bullet">•</span> DITCH the weight you think you should lift</div>
+                        <div class="method-list-item"><span class="bullet">•</span> SLOW DOWN every rep (3-1-3)</div>
+                        <div class="method-list-item"><span class="bullet">•</span> LOCATE glutes before/during/after</div>
+                        <div class="method-list-item"><span class="bullet">•</span> STOP counting reps</div>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-title">📊 The 3-Phase System</div>
+                    <div class="phase-item">
+                        <div class="phase-badge p1">1</div>
+                        <div class="phase-info">
+                            <div class="name">Fix Signal</div>
+                            <div class="details">Days 1-21 • 115-120lbs</div>
+                        </div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-badge p2">2</div>
+                        <div class="phase-info">
+                            <div class="name">Reinforce</div>
+                            <div class="details">Days 22-42 • 125-130lbs</div>
+                        </div>
+                    </div>
+                    <div class="phase-item">
+                        <div class="phase-badge p3">3</div>
+                        <div class="phase-info">
+                            <div class="name">Build Shelf</div>
+                            <div class="details">Days 43-70 • 135-145lbs</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="method-card">
+                    <div class="method-title">🧘 Flexibility Stacking</div>
+                    <p class="method-text">Fix your flexibility ladder from the bottom up:</p>
+                    <div class="method-list">
+                        <div class="method-list-item"><span class="bullet" style="color:#22c55e">1.</span> Right hip restriction</div>
+                        <div class="method-list-item"><span class="bullet" style="color:#22c55e">2.</span> Short adductors</div>
+                        <div class="method-list-item"><span class="bullet" style="color:#22c55e">3.</span> Hip rotators</div>
+                        <div class="method-list-item"><span class="bullet" style="color:#22c55e">4.</span> Hip flexors</div>
+                        <div class="method-list-item"><span class="bullet" style="color:#22c55e">5.</span> Hamstrings</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBottomNav() {
+            const navs = [
+                { view: 'today', icon: '◎', label: 'Habits' },
+                { view: 'stats', icon: '⊞', label: 'Stats' },
+                { view: 'calendar', icon: '▣', label: 'Calendar' },
+                { view: 'method', icon: '☰', label: 'Method' }
+            ];
+            return `
+                <div class="bottom-nav">
+                    ${navs.map(n => `
+                        <button class="nav-btn ${state.view === n.view ? 'active' : ''}" onclick="switchView('${n.view}')">
+                            <span class="icon">${n.icon}</span>
+                            <span>${n.label}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderModal() {
+            if (!state.modalOpen) return '<div class="modal-overlay"></div>';
+            
+            const day = state.selectedDay || state.data.currentDay;
+            const d = state.data.days[day - 1];
+            
+            return `
+                <div class="modal-overlay active" onclick="closeModal()">
+                    <div class="modal" onclick="event.stopPropagation()">
+                        <div class="modal-handle"></div>
+                        <div class="modal-header">
+                            <button class="modal-close" onclick="closeModal()">×</button>
+                            <span class="modal-title">Day ${day}</span>
+                            <button class="modal-save" onclick="saveDay()">✓</button>
+                        </div>
+                        
+                        <div class="section-title">💪 Barbell Work</div>
+                        <div class="input-group">
+                            <label class="input-label">Hip Thrust Weight (lbs)</label>
+                            <input type="number" class="input-field" id="hipThrustWeight" value="${d.hipThrustWeight || ''}" placeholder="115">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Sets × Reps</label>
+                            <input type="text" class="input-field" id="hipThrustReps" value="${d.hipThrustReps || ''}" placeholder="3×10, 3×8, 3×8">
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">RDL Weight (lbs)</label>
+                            <input type="number" class="input-field" id="rdlWeight" value="${d.rdlWeight || ''}" placeholder="95">
+                        </div>
+                        
+                        <div class="section-title">🧠 Neural Pathway</div>
+                        <div class="input-group">
+                            <label class="input-label">Glute Connection</label>
+                            <div class="rating-grid">
+                                ${[
+                                    { key: 'red', emoji: '🔴', label: 'None' },
+                                    { key: 'yellow', emoji: '🟡', label: 'Partial' },
+                                    { key: 'green', emoji: '🟢', label: 'Strong' },
+                                    { key: 'sparkles', emoji: '✨', label: 'Locked' }
+                                ].map(r => `
+                                    <button class="rating-btn ${d.gluteConnection === r.key ? 'selected' : ''}" 
+                                            onclick="setRating('${r.key}')">
+                                        <span class="emoji">${r.emoji}</span>
+                                        <span class="label">${r.label}</span>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        ${renderToggle('slowedDown', 'Slowed down tempo (3-1-3)', d.slowedDown)}
+                        ${renderToggle('locatedBefore', 'Located glutes BEFORE', d.locatedBefore)}
+                        ${renderToggle('locatedDuring', 'Located glutes DURING', d.locatedDuring)}
+                        ${renderToggle('locatedAfter', 'Located glutes AFTER (2s hold)', d.locatedAfter)}
+                        ${renderToggle('quadsTakeOver', 'Quads tried to take over?', d.quadsTakeOver)}
+                        
+                        <div class="input-group">
+                            <label class="input-label">Best Cue Today</label>
+                            <input type="text" class="input-field" id="bestCue" value="${d.bestCue || ''}" placeholder="e.g., 'Use stretch to pull up'">
+                        </div>
+                        
+                        <div class="section-title">📐 Form Checklist</div>
+                        ${renderToggle('shouldersBench', 'Shoulders on bench edge', d.shouldersBench)}
+                        ${renderToggle('feetFlat', 'Feet flat, shoulder-width', d.feetFlat)}
+                        ${renderToggle('shinVertical', 'Shins vertical at top (90°)', d.shinVertical)}
+                        ${renderToggle('posteriorTilt', 'Posterior pelvic tilt', d.posteriorTilt)}
+                        ${renderToggle('fullLockout', 'Full lockout', d.fullLockout)}
+                        
+                        <div class="section-title">🎯 Tempo Challenge</div>
+                        <div class="input-group">
+                            <label class="input-label">Workout Class</label>
+                            <select class="input-field" id="tempoChallenge">
+                                <option value="">Select workout...</option>
+                                <option value="Shape Shift Deadlift" ${d.tempoChallenge === 'Shape Shift Deadlift' ? 'selected' : ''}>Shape Shift 3 - Deadlift</option>
+                                <option value="Shape Shift Single Leg" ${d.tempoChallenge === 'Shape Shift Single Leg' ? 'selected' : ''}>Shape Shift 3 - Single Leg</option>
+                                <option value="January Challenge" ${d.tempoChallenge === 'January Challenge' ? 'selected' : ''}>January Challenge</option>
+                                <option value="Custom" ${d.tempoChallenge === 'Custom' ? 'selected' : ''}>Custom/Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Duration (minutes)</label>
+                            <input type="number" class="input-field" id="tempoDuration" value="${d.tempoDuration || ''}" placeholder="20-35">
+                        </div>
+                        
+                        <div class="section-title">🧘 Flexibility</div>
+                        <div class="input-group">
+                            <label class="input-label">Flexibility Type</label>
+                            <select class="input-field" id="flexType">
+                                <option value="">Select type...</option>
+                                <option value="Middle Split (15min)" ${d.flexType === 'Middle Split (15min)' ? 'selected' : ''}>Middle Split Stack (15min)</option>
+                                <option value="Front Split (30min)" ${d.flexType === 'Front Split (30min)' ? 'selected' : ''}>Front Split Stack (30min)</option>
+                                <option value="Deep Session (60min)" ${d.flexType === 'Deep Session (60min)' ? 'selected' : ''}>Deep Session (60min)</option>
+                                <option value="Hip Mobility (15min)" ${d.flexType === 'Hip Mobility (15min)' ? 'selected' : ''}>Hip Mobility (15min)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="input-label">Middle Split Gap (inches)</label>
+                            <input type="number" class="input-field" id="middleSplitGap" value="${d.middleSplitGap || ''}" placeholder="18">
+                        </div>
+                        ${renderToggle('contractRelax', 'Used contract-relax (PIR)', d.contractRelax)}
+                        ${renderToggle('rightHipFocus', 'Right hip focus', d.rightHipFocus)}
+                        
+                        <div class="section-title">💧 Recovery</div>
+                        <div class="input-group">
+                            <label class="input-label">Hip Pain Level (0-10)</label>
+                            <input type="number" class="input-field" id="hipPain" min="0" max="10" value="${d.hipPain !== null ? d.hipPain : ''}" placeholder="6">
+                        </div>
+                        ${renderToggle('proteinHit', 'Hit protein (120-130g)', d.proteinHit)}
+                        ${renderToggle('caloriesGood', 'Calories on target', d.caloriesGood)}
+                        
+                        <div class="section-title">📝 Notes</div>
+                        <textarea class="input-field" id="notes" placeholder="What worked? Energy levels? Breakthroughs?">${d.notes || ''}</textarea>
+                        
+                        <button class="save-btn" onclick="saveDay()">Complete Day ✓</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderToggle(id, label, checked) {
+            return `
+                <div class="toggle-item" onclick="toggleField('${id}')">
+                    <span class="toggle-label">${label}</span>
+                    <div class="toggle-switch ${checked ? 'on' : ''}" data-field="${id}">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Actions
+        function switchView(view) {
+            state.view = view;
+            render();
+        }
+
+        function openModal(dayNum) {
+            state.selectedDay = dayNum || state.data.currentDay;
+            state.modalOpen = true;
+            render();
+        }
+
+        function closeModal() {
+            state.modalOpen = false;
+            render();
+        }
+
+        function setRating(rating) {
+            const day = state.selectedDay || state.data.currentDay;
+            state.data.days[day - 1].gluteConnection = rating;
+            render();
+        }
+
+        function toggleField(field) {
+            const day = state.selectedDay || state.data.currentDay;
+            state.data.days[day - 1][field] = !state.data.days[day - 1][field];
+            render();
+        }
+
+        function saveDay() {
+            const day = state.selectedDay || state.data.currentDay;
+            const d = state.data.days[day - 1];
+            
+            d.completed = true;
+            d.hipThrustWeight = parseFloat(document.getElementById('hipThrustWeight').value) || null;
+            d.hipThrustReps = document.getElementById('hipThrustReps').value;
+            d.rdlWeight = parseFloat(document.getElementById('rdlWeight').value) || null;
+            d.bestCue = document.getElementById('bestCue').value;
+            d.tempoChallenge = document.getElementById('tempoChallenge').value;
+            d.tempoDuration = parseFloat(document.getElementById('tempoDuration').value) || null;
+            d.flexType = document.getElementById('flexType').value;
+            d.middleSplitGap = parseFloat(document.getElementById('middleSplitGap').value) || null;
+            d.hipPain = parseFloat(document.getElementById('hipPain').value) ?? null;
+            d.notes = document.getElementById('notes').value;
+            
+            if (day === state.data.currentDay) {
+                state.data.currentDay = Math.min(day + 1, 70);
+            }
+            
+            saveData();
+            closeModal();
+            
+            if (day === 70) {
+                alert('🎉 MIAMI READY! You completed all 70 days! 🍑✨');
+            }
+        }
+
+        // Initialize
+        initData();
+        render();
+    </script>
+</body>
+</html>
