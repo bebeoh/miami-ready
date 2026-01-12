@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#0f0f0f">
     <title>70 Days Miami Ready</title>
     <style>
-        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;background:#0f0f0f;color:#fff;min-height:100vh}::-webkit-scrollbar{display:none}.app{max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}.header{padding:50px 24px 20px;text-align:center}.date-display{font-size:.9rem;color:#888;margin-bottom:12px;font-weight:500}.day-ring{width:120px;height:120px;border-radius:50%;border:4px solid #333;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1))}.day-ring::before{content:'';position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;border-radius:50%;border:4px solid transparent;border-top-color:#a78bfa;transform:rotate(var(--progress-rotation,0deg))}.day-num{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.day-label{font-size:.75rem;color:#888;text-transform:uppercase}.phase-badges{display:flex;gap:8px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.phase-badge{font-size:.7rem;padding:4px 10px;border-radius:10px;display:inline-block}.phase-badge.p1{background:rgba(251,191,36,.2);color:#fbbf24}.phase-badge.p2{background:rgba(249,115,22,.2);color:#f97316}.phase-badge.p3{background:rgba(168,85,247,.2);color:#a855f7}.phase-badge.p4{background:rgba(34,197,94,.2);color:#22c55e}.cycle-badge{font-size:.7rem;padding:4px 10px;border-radius:10px}.cycle-badge.menstrual{background:rgba(239,68,68,.2);color:#ef4444}.cycle-badge.follicular{background:rgba(59,130,246,.2);color:#3b82f6}.cycle-badge.ovulatory{background:rgba(234,179,8,.2);color:#eab308}.cycle-badge.luteal{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:16px;font-size:.85rem;font-weight:600;margin-bottom:6px}.day-type-badge.lower-a{background:rgba(249,115,22,.2);color:#f97316}.day-type-badge.lower-b{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge.lower-c{background:rgba(236,72,153,.2);color:#ec4899}.day-type-badge.tempo{background:rgba(34,197,94,.2);color:#22c55e}.day-type-badge.tempo-scan{background:rgba(236,72,153,.2);color:#ec4899}.cycle-tip{background:#1a1a1a;border-radius:12px;padding:12px 16px;margin:0 24px 16px;border-left:3px solid}.cycle-tip.menstrual{border-color:#ef4444}.cycle-tip.follicular{border-color:#3b82f6}.cycle-tip.ovulatory{border-color:#eab308}.cycle-tip.luteal{border-color:#a855f7}.cycle-tip-title{font-size:.75rem;font-weight:600;margin-bottom:4px}.cycle-tip.menstrual .cycle-tip-title{color:#ef4444}.cycle-tip.follicular .cycle-tip-title{color:#3b82f6}.cycle-tip.ovulatory .cycle-tip-title{color:#eab308}.cycle-tip.luteal .cycle-tip-title{color:#a855f7}.cycle-tip-text{font-size:.75rem;color:#888;line-height:1.4}.workout-preview{background:#1a1a1a;border-radius:12px;padding:12px 16px;margin:0 24px 16px;text-align:left}.workout-preview-title{font-size:.7rem;color:#666;text-transform:uppercase;margin-bottom:8px}.workout-preview-list{font-size:.8rem;color:#999;line-height:1.6}.workout-preview-list strong{color:#fff}.log-btn{display:block;width:calc(100% - 48px);margin:16px 24px;padding:16px;border-radius:18px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(167,139,250,.3)}.log-btn.done{background:#1a1a1a;border:2px solid #22c55e;color:#22c55e;box-shadow:none}.log-btn.missed{background:#1a1a1a;border:2px solid #666;color:#666;box-shadow:none}.summary{padding:0 24px;margin-bottom:16px}.summary-card{background:#1a1a1a;border-radius:16px;padding:14px 18px}.summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #2a2a2a}.summary-row:last-child{border-bottom:none}.summary-label{color:#888;font-size:.8rem}.summary-value{font-weight:600;font-size:.9rem}.week-schedule{padding:0 24px;margin-bottom:16px}.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.week-title{font-size:.75rem;color:#666;text-transform:uppercase}.week-dates{font-size:.75rem;color:#888}.week-days{display:flex;gap:5px}.week-day{flex:1;background:#1a1a1a;border-radius:10px;padding:8px 2px;text-align:center;cursor:pointer}.week-day.current{border:2px solid #a78bfa;background:rgba(167,139,250,.1)}.week-day.done{background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(236,72,153,.3))}.week-day.missed{background:#1a1a1a;opacity:.5}.week-day.future{opacity:.4}.week-day .name{color:#666;font-size:.65rem;font-weight:600}.week-day .date{color:#888;font-size:.7rem;margin:2px 0}.week-day .type{font-size:1rem}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 24px;margin-bottom:16px}.stat{background:#1a1a1a;border-radius:12px;padding:12px 6px;text-align:center}.stat-value{font-size:1.3rem;font-weight:700}.stat-label{font-size:.6rem;color:#666;text-transform:uppercase}.end-date{text-align:center;padding:16px;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1));border-radius:16px;margin:0 24px 16px}.end-date .label{font-size:.75rem;color:#888;margin-bottom:4px}.end-date .date{font-size:1rem;font-weight:700;color:#ec4899}.mini-cal{padding:0 24px;margin-bottom:16px}.mini-cal-header{margin-bottom:8px}.mini-cal-title{font-size:.75rem;color:#666;text-transform:uppercase}.mini-cal-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}.mini-day{aspect-ratio:1;border-radius:3px;background:#1a1a1a}.mini-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899)}.mini-day.missed{background:#333}.mini-day.current{border:2px solid #a78bfa}.mini-day.future{opacity:.3}.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#0f0f0f;border-top:1px solid #222;padding:10px 20px 26px;display:flex;justify-content:space-around}.nav-btn{background:none;border:none;color:#666;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.55rem;padding:8px;border-radius:10px}.nav-btn.active{color:#fff;background:rgba(167,139,250,.15)}.nav-btn .icon{font-size:1rem}.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:none;align-items:flex-end;justify-content:center}.modal-overlay.active{display:flex}.modal{background:#1a1a1a;width:100%;max-width:430px;max-height:85vh;border-radius:24px 24px 0 0;padding:16px 20px 36px;overflow-y:auto}.modal-handle{width:36px;height:4px;background:#444;border-radius:2px;margin:0 auto 12px}.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}.modal-title{font-size:1.1rem;font-weight:700}.modal-subtitle{font-size:.8rem;color:#888;margin-top:2px}.modal-close{background:#2a2a2a;border:none;color:#888;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer}.section-header{font-size:.8rem;font-weight:600;color:#a78bfa;margin:16px 0 10px}.section-header:first-child{margin-top:0}.form-row{display:flex;gap:10px;margin-bottom:10px}.form-group{flex:1}.form-label{display:block;font-size:.7rem;color:#666;margin-bottom:5px;text-transform:uppercase}.form-input{width:100%;background:#0f0f0f;border:1px solid #333;border-radius:10px;padding:11px 12px;color:#fff;font-size:.95rem;outline:none}.form-input:focus{border-color:#a78bfa}.form-input::placeholder{color:#444}.connection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.conn-btn{aspect-ratio:1;border:2px solid #333;background:#0f0f0f;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.conn-btn.selected{border-color:#a78bfa;background:rgba(167,139,250,.15)}.conn-btn .emoji{font-size:1.3rem}.conn-btn .label{font-size:.55rem;color:#666}.quick-toggles{display:flex;gap:8px;margin-bottom:10px}.quick-toggle{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}.quick-toggle.on{border-color:#22c55e;background:rgba(34,197,94,.1)}.quick-toggle .icon{font-size:1.1rem}.quick-toggle .text{font-size:.65rem;color:#888}.quick-toggle.on .text{color:#22c55e}.tempo-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.tempo-opt{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center}.tempo-opt.selected{border-color:#22c55e;background:rgba(34,197,94,.1)}.tempo-opt .name{font-size:.8rem;font-weight:600}.tempo-opt .desc{font-size:.65rem;color:#666;margin-top:2px}.metric-slider{margin-bottom:12px}.metric-label{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px}.metric-label .name{color:#888}.metric-label .value{color:#ec4899;font-weight:600}.metric-dots{display:flex;gap:6px}.metric-dot{flex:1;height:8px;border-radius:4px;background:#333;cursor:pointer;transition:background .2s}.metric-dot.filled{background:linear-gradient(90deg,#a78bfa,#ec4899)}.metric-dot:hover{background:#555}.booty-type-select{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}.booty-type-btn{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center}.booty-type-btn.selected{border-color:#ec4899;background:rgba(236,72,153,.1)}.booty-type-btn .name{font-size:.6rem;font-weight:600;color:#888}.booty-type-btn.selected .name{color:#ec4899}.scan-toggle{display:flex;gap:8px;margin-bottom:12px}.scan-opt{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center;font-size:.75rem;color:#888}.scan-opt.selected{border-color:#ec4899;background:rgba(236,72,153,.1);color:#ec4899}.save-btn{width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:6px}.miss-btn{width:100%;padding:12px;border-radius:12px;background:none;border:1px solid #444;color:#666;font-size:.8rem;cursor:pointer;margin-top:8px}.calendar-view{padding:20px}.cal-month{margin-bottom:24px}.cal-month-header{margin-bottom:12px}.cal-month-title{font-size:1.1rem;font-weight:700}.cal-month-year{font-size:.8rem;color:#666;margin-left:8px}.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}.cal-weekday{text-align:center;font-size:.65rem;color:#666;font-weight:600}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-day{aspect-ratio:1;border-radius:8px;background:#1a1a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;font-weight:600;color:#666;position:relative}.cal-day.empty{background:transparent;cursor:default}.cal-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899);color:#fff}.cal-day.missed{background:#333;color:#666}.cal-day.current{border:2px solid #a78bfa}.cal-day.future{opacity:.3}.cal-day.outside{opacity:.15;cursor:default}.cal-day .type-dot{position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%}.cal-day .type-dot.lower-a{background:#f97316}.cal-day .type-dot.lower-b{background:#a855f7}.cal-day .type-dot.lower-c{background:#ec4899}.cal-day .type-dot.tempo{background:#22c55e}.cal-day .type-dot.tempo-scan{background:#ec4899}.cal-day .cycle-dot{position:absolute;top:3px;width:4px;height:4px;border-radius:50%}.cal-day .cycle-dot.menstrual{background:#ef4444}.cal-day .cycle-dot.follicular{background:#3b82f6}.cal-day .cycle-dot.ovulatory{background:#eab308}.cal-day .cycle-dot.luteal{background:#a855f7}.progress-view{padding:20px}.progress-card{background:#1a1a1a;border-radius:14px;padding:14px;margin-bottom:10px}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.progress-title{font-size:.8rem;color:#888}.progress-value{font-size:1.2rem;font-weight:700}.progress-bar{height:6px;background:#2a2a2a;border-radius:3px;overflow:hidden}.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#a78bfa,#ec4899)}.neural-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.neural-item{text-align:center}.neural-emoji{font-size:1.1rem}.neural-count{font-size:.95rem;font-weight:700}.neural-label{font-size:.6rem;color:#666}.booty-section{margin-top:10px}.booty-goal{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-size:.85rem}.booty-goal .from{color:#888}.booty-goal .arrow{color:#666}.booty-goal .to{color:#ec4899;font-weight:600}.booty-metric{margin-bottom:10px}.booty-metric-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.booty-metric-name{font-size:.75rem;color:#888}.booty-metric-current{font-size:.75rem;color:#ec4899;font-weight:600}.booty-weeks{display:flex;gap:3px;align-items:flex-end;height:40px}.booty-week{flex:1;background:#2a2a2a;border-radius:2px;min-height:4px;transition:height .3s}.booty-week.filled{background:linear-gradient(180deg,#ec4899,#a78bfa)}.booty-week.current{border:1px solid #ec4899}.info-view{padding:20px}.info-section{background:#1a1a1a;border-radius:16px;padding:16px;margin-bottom:12px}.info-title{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}.info-text{font-size:.8rem;color:#999;line-height:1.5}.info-text strong{color:#fff}.info-subtitle{font-size:.8rem;color:#a78bfa;font-weight:600;margin:12px 0 6px}.info-list{margin:8px 0;padding-left:16px}.info-list li{font-size:.8rem;color:#999;margin-bottom:4px;line-height:1.4}.phase-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.phase-card.p1{border-color:#fbbf24}.phase-card.p2{border-color:#f97316}.phase-card.p3{border-color:#a855f7}.phase-card.p4{border-color:#22c55e}.phase-card .phase-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.phase-card.p1 .phase-name{color:#fbbf24}.phase-card.p2 .phase-name{color:#f97316}.phase-card.p3 .phase-name{color:#a855f7}.phase-card.p4 .phase-name{color:#22c55e}.phase-card .phase-dates{font-size:.7rem;color:#666;margin-bottom:6px}.phase-card .phase-desc{font-size:.75rem;color:#999;line-height:1.4}.cycle-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.cycle-card.menstrual{border-color:#ef4444}.cycle-card.follicular{border-color:#3b82f6}.cycle-card.ovulatory{border-color:#eab308}.cycle-card.luteal{border-color:#a855f7}.cycle-card .cycle-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.cycle-card.menstrual .cycle-name{color:#ef4444}.cycle-card.follicular .cycle-name{color:#3b82f6}.cycle-card.ovulatory .cycle-name{color:#eab308}.cycle-card.luteal .cycle-name{color:#a855f7}.cycle-card .cycle-days{font-size:.7rem;color:#666;margin-bottom:6px}.cycle-card .cycle-desc{font-size:.75rem;color:#999;line-height:1.4}.workout-block{background:#0f0f0f;border-radius:10px;padding:10px 12px;margin:6px 0}.workout-block-title{font-size:.75rem;font-weight:600;color:#888;margin-bottom:6px}.workout-block-list{font-size:.75rem;color:#666;line-height:1.5}.connection-key{display:flex;align-items:center;gap:8px;padding:6px 0}.connection-key .emoji{font-size:1rem}.connection-key .label{font-size:.8rem;color:#888}.data-section{margin-top:20px;padding-top:20px;border-top:1px solid #333}.data-buttons{display:flex;gap:8px;margin-top:12px}.data-btn{flex:1;padding:12px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#888;font-size:.75rem;cursor:pointer}.data-btn:hover{border-color:#a78bfa;color:#fff}.toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:12px 24px;border-radius:12px;font-size:.85rem;font-weight:600;z-index:2000;display:none}.toast.error{background:#ef4444}.toast.show{display:block;animation:fadeInOut 2s ease}@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}90%{opacity:1}100%{opacity:0}}
+        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;background:#0f0f0f;color:#fff;min-height:100vh}::-webkit-scrollbar{display:none}.app{max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}.header{padding:50px 24px 20px;text-align:center}.date-display{font-size:.9rem;color:#888;margin-bottom:12px;font-weight:500}.day-ring{width:120px;height:120px;border-radius:50%;border:4px solid #333;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1))}.day-ring::before{content:'';position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;border-radius:50%;border:4px solid transparent;border-top-color:#a78bfa;transform:rotate(var(--progress-rotation,0deg))}.day-num{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.day-label{font-size:.75rem;color:#888;text-transform:uppercase}.phase-badges{display:flex;gap:8px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.phase-badge{font-size:.7rem;padding:4px 10px;border-radius:10px;display:inline-block}.phase-badge.p1{background:rgba(251,191,36,.2);color:#fbbf24}.phase-badge.p2{background:rgba(249,115,22,.2);color:#f97316}.phase-badge.p3{background:rgba(168,85,247,.2);color:#a855f7}.phase-badge.p4{background:rgba(34,197,94,.2);color:#22c55e}.cycle-badge{font-size:.7rem;padding:4px 10px;border-radius:10px}.cycle-badge.menstrual{background:rgba(239,68,68,.2);color:#ef4444}.cycle-badge.follicular{background:rgba(59,130,246,.2);color:#3b82f6}.cycle-badge.ovulatory{background:rgba(234,179,8,.2);color:#eab308}.cycle-badge.luteal{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:16px;font-size:.85rem;font-weight:600;margin-bottom:6px}.day-type-badge.lower-a{background:rgba(249,115,22,.2);color:#f97316}.day-type-badge.lower-b{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge.lower-c{background:rgba(236,72,153,.2);color:#ec4899}.day-type-badge.tempo{background:rgba(34,197,94,.2);color:#22c55e}.day-type-badge.tempo-scan{background:rgba(236,72,153,.2);color:#ec4899}.today-rule{background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(236,72,153,.15));border-radius:12px;padding:12px 16px;margin:0 24px 12px;text-align:center}.today-rule-label{font-size:.65rem;color:#888;text-transform:uppercase;margin-bottom:4px}.today-rule-text{font-size:.85rem;font-weight:600}.workout-preview{background:#1a1a1a;border-radius:12px;padding:12px 16px;margin:0 24px 16px;text-align:left}.workout-preview-title{font-size:.7rem;color:#666;text-transform:uppercase;margin-bottom:8px}.workout-preview-list{font-size:.8rem;color:#999;line-height:1.6}.workout-preview-list strong{color:#fff}.log-btn{display:block;width:calc(100% - 48px);margin:16px 24px;padding:16px;border-radius:18px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(167,139,250,.3)}.log-btn.done{background:#1a1a1a;border:2px solid #22c55e;color:#22c55e;box-shadow:none}.log-btn.streak{background:#1a1a1a;border:2px solid #3b82f6;color:#3b82f6;box-shadow:none}.summary{padding:0 24px;margin-bottom:16px}.summary-card{background:#1a1a1a;border-radius:16px;padding:14px 18px}.summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #2a2a2a}.summary-row:last-child{border-bottom:none}.summary-label{color:#888;font-size:.8rem}.summary-value{font-weight:600;font-size:.9rem}.week-schedule{padding:0 24px;margin-bottom:16px}.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.week-title{font-size:.75rem;color:#666;text-transform:uppercase}.week-dates{font-size:.75rem;color:#888}.week-days{display:flex;gap:5px}.week-day{flex:1;background:#1a1a1a;border-radius:10px;padding:8px 2px;text-align:center;cursor:pointer}.week-day.current{border:2px solid #a78bfa;background:rgba(167,139,250,.1)}.week-day.done{background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(236,72,153,.3))}.week-day.streak{background:rgba(59,130,246,.2)}.week-day.future{opacity:.4}.week-day .name{color:#666;font-size:.65rem;font-weight:600}.week-day .date{color:#888;font-size:.7rem;margin:2px 0}.week-day .type{font-size:1rem}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 24px;margin-bottom:16px}.stat{background:#1a1a1a;border-radius:12px;padding:12px 6px;text-align:center}.stat-value{font-size:1.3rem;font-weight:700}.stat-label{font-size:.6rem;color:#666;text-transform:uppercase}.end-date{text-align:center;padding:16px;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1));border-radius:16px;margin:0 24px 16px}.end-date .label{font-size:.75rem;color:#888;margin-bottom:4px}.end-date .date{font-size:1rem;font-weight:700;color:#ec4899}.mini-cal{padding:0 24px;margin-bottom:16px}.mini-cal-header{margin-bottom:8px}.mini-cal-title{font-size:.75rem;color:#666;text-transform:uppercase}.mini-cal-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}.mini-day{aspect-ratio:1;border-radius:3px;background:#1a1a1a}.mini-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899)}.mini-day.streak{background:#3b82f6}.mini-day.current{border:2px solid #a78bfa}.mini-day.future{opacity:.3}.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#0f0f0f;border-top:1px solid #222;padding:10px 20px 26px;display:flex;justify-content:space-around}.nav-btn{background:none;border:none;color:#666;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.55rem;padding:8px;border-radius:10px}.nav-btn.active{color:#fff;background:rgba(167,139,250,.15)}.nav-btn .icon{font-size:1rem}.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:none;align-items:flex-end;justify-content:center}.modal-overlay.active{display:flex}.modal{background:#1a1a1a;width:100%;max-width:430px;max-height:85vh;border-radius:24px 24px 0 0;padding:16px 20px 36px;overflow-y:auto}.modal-handle{width:36px;height:4px;background:#444;border-radius:2px;margin:0 auto 12px}.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}.modal-title{font-size:1.1rem;font-weight:700}.modal-subtitle{font-size:.8rem;color:#888;margin-top:2px}.modal-close{background:#2a2a2a;border:none;color:#888;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer}.section-header{font-size:.8rem;font-weight:600;color:#a78bfa;margin:16px 0 10px}.section-header:first-child{margin-top:0}.form-row{display:flex;gap:10px;margin-bottom:10px}.form-group{flex:1}.form-label{display:block;font-size:.7rem;color:#666;margin-bottom:5px;text-transform:uppercase}.form-input{width:100%;background:#0f0f0f;border:1px solid #333;border-radius:10px;padding:11px 12px;color:#fff;font-size:.95rem;outline:none}.form-input:focus{border-color:#a78bfa}.form-input::placeholder{color:#444}.connection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.conn-btn{aspect-ratio:1;border:2px solid #333;background:#0f0f0f;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.conn-btn.selected{border-color:#a78bfa;background:rgba(167,139,250,.15)}.conn-btn .emoji{font-size:1.3rem}.conn-btn .label{font-size:.55rem;color:#666}.quick-toggles{display:flex;gap:8px;margin-bottom:10px}.quick-toggle{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}.quick-toggle.on{border-color:#22c55e;background:rgba(34,197,94,.1)}.quick-toggle .icon{font-size:1.1rem}.quick-toggle .text{font-size:.65rem;color:#888}.quick-toggle.on .text{color:#22c55e}.tempo-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.tempo-opt{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}.tempo-opt.selected{border-color:#22c55e;background:rgba(34,197,94,.1)}.tempo-opt .name{font-size:.75rem;font-weight:600}.tempo-opt .desc{font-size:.6rem;color:#666;margin-top:2px}.metric-slider{margin-bottom:12px}.metric-label{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px}.metric-label .name{color:#888}.metric-label .value{color:#ec4899;font-weight:600}.metric-dots{display:flex;gap:6px}.metric-dot{flex:1;height:8px;border-radius:4px;background:#333;cursor:pointer;transition:background .2s}.metric-dot.filled{background:linear-gradient(90deg,#a78bfa,#ec4899)}.metric-dot:hover{background:#555}.booty-type-select{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}.booty-type-btn{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center}.booty-type-btn.selected{border-color:#ec4899;background:rgba(236,72,153,.1)}.booty-type-btn .name{font-size:.6rem;font-weight:600;color:#888}.booty-type-btn.selected .name{color:#ec4899}.scan-toggle{display:flex;gap:8px;margin-bottom:12px}.scan-opt{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center;font-size:.75rem;color:#888}.scan-opt.selected{border-color:#ec4899;background:rgba(236,72,153,.1);color:#ec4899}.save-btn{width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:6px}.streak-btn{width:100%;padding:12px;border-radius:12px;background:none;border:2px solid #3b82f6;color:#3b82f6;font-size:.8rem;font-weight:600;cursor:pointer;margin-top:8px}.calendar-view{padding:20px}.cal-month{margin-bottom:24px}.cal-month-header{margin-bottom:12px}.cal-month-title{font-size:1.1rem;font-weight:700}.cal-month-year{font-size:.8rem;color:#666;margin-left:8px}.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}.cal-weekday{text-align:center;font-size:.65rem;color:#666;font-weight:600}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-day{aspect-ratio:1;border-radius:8px;background:#1a1a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;font-weight:600;color:#666;position:relative}.cal-day.empty{background:transparent;cursor:default}.cal-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899);color:#fff}.cal-day.streak{background:#3b82f6;color:#fff}.cal-day.current{border:2px solid #a78bfa}.cal-day.future{opacity:.3}.cal-day.outside{opacity:.15;cursor:default}.cal-day .type-dot{position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%}.cal-day .type-dot.lower-a{background:#f97316}.cal-day .type-dot.lower-b{background:#a855f7}.cal-day .type-dot.lower-c{background:#ec4899}.cal-day .type-dot.tempo{background:#22c55e}.cal-day .type-dot.tempo-scan{background:#ec4899}.cal-day .cycle-dot{position:absolute;top:3px;width:4px;height:4px;border-radius:50%}.cal-day .cycle-dot.menstrual{background:#ef4444}.cal-day .cycle-dot.follicular{background:#3b82f6}.cal-day .cycle-dot.ovulatory{background:#eab308}.cal-day .cycle-dot.luteal{background:#a855f7}.progress-view{padding:20px}.progress-card{background:#1a1a1a;border-radius:14px;padding:14px;margin-bottom:10px}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.progress-title{font-size:.8rem;color:#888}.progress-value{font-size:1.2rem;font-weight:700}.progress-bar{height:6px;background:#2a2a2a;border-radius:3px;overflow:hidden}.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#a78bfa,#ec4899)}.neural-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.neural-item{text-align:center}.neural-emoji{font-size:1.1rem}.neural-count{font-size:.95rem;font-weight:700}.neural-label{font-size:.6rem;color:#666}.booty-section{margin-top:10px}.booty-goal{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-size:.85rem}.booty-goal .from{color:#888}.booty-goal .arrow{color:#666}.booty-goal .to{color:#ec4899;font-weight:600}.booty-metric{margin-bottom:10px}.booty-metric-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.booty-metric-name{font-size:.75rem;color:#888}.booty-metric-current{font-size:.75rem;color:#ec4899;font-weight:600}.booty-weeks{display:flex;gap:3px;align-items:flex-end;height:40px}.booty-week{flex:1;background:#2a2a2a;border-radius:2px;min-height:4px;transition:height .3s}.booty-week.filled{background:linear-gradient(180deg,#ec4899,#a78bfa)}.booty-week.current{border:1px solid #ec4899}.info-view{padding:20px}.info-section{background:#1a1a1a;border-radius:16px;padding:16px;margin-bottom:12px}.info-title{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}.info-text{font-size:.8rem;color:#999;line-height:1.5}.info-text strong{color:#fff}.info-subtitle{font-size:.8rem;color:#a78bfa;font-weight:600;margin:12px 0 6px}.info-list{margin:8px 0;padding-left:16px}.info-list li{font-size:.8rem;color:#999;margin-bottom:4px;line-height:1.4}.phase-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.phase-card.p1{border-color:#fbbf24}.phase-card.p2{border-color:#f97316}.phase-card.p3{border-color:#a855f7}.phase-card.p4{border-color:#22c55e}.phase-card .phase-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.phase-card.p1 .phase-name{color:#fbbf24}.phase-card.p2 .phase-name{color:#f97316}.phase-card.p3 .phase-name{color:#a855f7}.phase-card.p4 .phase-name{color:#22c55e}.phase-card .phase-dates{font-size:.7rem;color:#666;margin-bottom:6px}.phase-card .phase-desc{font-size:.75rem;color:#999;line-height:1.4}.cycle-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.cycle-card.menstrual{border-color:#ef4444}.cycle-card.follicular{border-color:#3b82f6}.cycle-card.ovulatory{border-color:#eab308}.cycle-card.luteal{border-color:#a855f7}.cycle-card .cycle-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.cycle-card.menstrual .cycle-name{color:#ef4444}.cycle-card.follicular .cycle-name{color:#3b82f6}.cycle-card.ovulatory .cycle-name{color:#eab308}.cycle-card.luteal .cycle-name{color:#a855f7}.cycle-card .cycle-desc{font-size:.75rem;color:#999;line-height:1.4}.connection-key{display:flex;align-items:center;gap:8px;padding:6px 0}.connection-key .emoji{font-size:1rem}.connection-key .label{font-size:.8rem;color:#888}.data-section{margin-top:20px;padding-top:20px;border-top:1px solid #333}.data-buttons{display:flex;gap:8px;margin-top:12px}.data-btn{flex:1;padding:12px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#888;font-size:.75rem;cursor:pointer}.data-btn:hover{border-color:#a78bfa;color:#fff}.settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #2a2a2a}.settings-row:last-child{border-bottom:none}.settings-label{font-size:.8rem;color:#999}.settings-input{background:#0f0f0f;border:1px solid #333;border-radius:8px;padding:8px 12px;color:#fff;font-size:.85rem;width:120px;text-align:right}.toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:12px 24px;border-radius:12px;font-size:.85rem;font-weight:600;z-index:2000;display:none}.toast.error{background:#ef4444}.toast.show{display:block;animation:fadeInOut 2s ease}@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}90%{opacity:1}100%{opacity:0}}
     </style>
 </head>
 <body>
@@ -17,62 +17,81 @@
     <div class="toast" id="toast"></div>
     <input type="file" id="importFile" accept=".json" style="display:none">
     <script>
-const START_DATE=new Date(2026,0,11),CYCLE_START=new Date(2026,0,12),CYCLE_LENGTH=28,STORAGE_KEY='miamiV11',BACKUP_KEYS=['miamiV11_bk1','miamiV11_bk2','miamiV11_bk3'];
+const START_DATE=new Date(2026,0,11),STORAGE_KEY='miamiV12',BACKUP_KEYS=['miamiV12_bk1','miamiV12_bk2','miamiV12_bk3'];
 
-// Training phases (fixed dates)
+// Default settings (user can adjust)
+const DEFAULT_SETTINGS={cycleStart:'2026-01-12',cycleLength:28,menstrualDays:5};
+
+// Training phases (fixed structure, focus can be tweaked per run)
 const PHASES=[
-    {num:1,name:'Fix the Signal',days:[1,14],focus:'Neural dominance, light/bodyweight, feel glutes before/during/after'},
-    {num:2,name:'Build Tissue',days:[15,37],focus:'Add load, heavy growth, increase only when glutes dominate'},
-    {num:3,name:'Sculpt Shelf',days:[38,56],focus:'Longer sets, slower eccentrics, 1¼ reps, more abduction'},
-    {num:4,name:'Polish & Peak',days:[57,70],focus:'Reduce load, pumps, holds, high-rep finishers'}
+    {num:1,name:'Fix the Signal',days:[1,14],load:'bodyweight',tempo:'slow',focus:'neural connection'},
+    {num:2,name:'Build Tissue',days:[15,37],load:'add weight',tempo:'controlled',focus:'progressive overload'},
+    {num:3,name:'Sculpt Shelf',days:[38,56],load:'moderate',tempo:'1¼ reps, slow eccentric',focus:'time under tension'},
+    {num:4,name:'Polish & Peak',days:[57,70],load:'light',tempo:'holds, pumps',focus:'peak & refine'}
 ];
 
-// Cycle phases (rolling)
+// Cycle phases with rules
 const CYCLE_PHASES=[
-    {name:'Menstrual',days:[1,5],icon:'🩸',color:'#ef4444',tip:'Light neural work. No heavy lifting. Banded glutes, frog pumps, walking, stretching.',action:'Rewire glutes while inflammation is low'},
-    {name:'Follicular',days:[6,13],icon:'🌱',color:'#3b82f6',tip:'Add weight. Learn new patterns. Brain & muscles primed for dominance.',action:'Begin barbell hip thrusts, RDLs, loaded step-ups'},
-    {name:'Ovulatory',days:[14,17],icon:'⚡',color:'#eab308',tip:'PRs happen here. Push weight, add volume. Peak strength.',action:'Push hip thrust weight, single-leg work, max effort'},
-    {name:'Luteal',days:[18,28],icon:'🌙',color:'#a855f7',tip:'Shape phase. More abduction, pumps, time under tension. Less max load.',action:'Shelf becomes round. Sculpt, don\'t strain.'}
+    {name:'Menstrual',daysStart:1,daysEnd:5,icon:'🩸',color:'#ef4444',rule:'No PR. Keep connection 🟢+. Lighter load, higher reps.'},
+    {name:'Follicular',daysStart:6,daysEnd:13,icon:'🌱',color:'#3b82f6',rule:'Add load if 🟢/✨. Progressive overload window.'},
+    {name:'Ovulatory',daysStart:14,daysEnd:17,icon:'⚡',color:'#eab308',rule:'PR window. Push top sets. Max strength.'},
+    {name:'Luteal',daysStart:18,daysEnd:28,icon:'🌙',color:'#a855f7',rule:'Shape window. More abduction, pumps. No grinding.'}
 ];
 
-const DAY_TYPES={
-    0:{type:'tempo-scan',name:'Tempo + Scan',icon:'🍑'},
-    1:{type:'lower-a',name:'Lower A: Shelf',icon:'🏋️'},
-    2:{type:'tempo',name:'Tempo',icon:'🧘'},
-    3:{type:'lower-b',name:'Lower B: Tie-in',icon:'💪'},
-    4:{type:'tempo',name:'Tempo',icon:'🧘'},
-    5:{type:'lower-c',name:'Lower C: Upper',icon:'🔥'},
-    6:{type:'tempo',name:'Tempo',icon:'🧘'}
+// TEMPLATES - the core exercise patterns
+const TEMPLATES={
+    'lower-a':{name:'Lower A: Shelf',icon:'🏋️',exercises:['Hip Thrust (main)','Abduction (main)','Lunge pattern','Finisher: frog pumps']},
+    'lower-b':{name:'Lower B: Tie-in',icon:'💪',exercises:['Hinge: RDL/B-stance','Step-up/lunge','Back extension','Abduction finisher']},
+    'lower-c':{name:'Lower C: Upper',icon:'🔥',exercises:['Single-leg thrust','Kickback pattern','Curtsy/lateral','Abduction burnout']},
+    'tempo':{name:'Tempo',icon:'🧘',exercises:['Tempo class','Active recovery']},
+    'tempo-scan':{name:'Tempo + Scan',icon:'🍑',exercises:['Tempo class','Body scan']}
 };
 
-// Workouts adjusted by cycle phase
-const WORKOUTS={
-    1:{'lower-a':{title:'Day A - Activation',ex:['Banded glute bridges – 4 long sets','Frog pumps – 3 burnout','Banded seated abduction – 4 sets','Walking lunges (glute-biased) – 3 sets']},'lower-b':{title:'Day B - Control',ex:['Bodyweight hip thrusts (slow)','Side-lying hip raises','Donkey kicks (ankle weights)','Reverse step-backs']},'lower-c':{title:'Day C - Recovery',ex:['Long walk','Hip flexor + piriformis stretch','Toe spacers','Massage glutes']},'tempo':{title:'Tempo Stretch',ex:['Decompress hips','Restore pelvic position','Light movement']},'tempo-scan':{title:'Tempo + Body Scan',ex:['Yoga or stretch class','Deep hip openers','Body scan (Tempo/Zozofit)']}},
-    2:{'lower-a':{title:'Shelf Anchor',ex:['Barbell hip thrusts (slow + pause)','Frog pumps (banded)','Standing band abductions','Reverse lunges']},'lower-b':{title:'Tie-in & Lift',ex:['B-stance RDL','Step-ups','Hyperextensions','Side-lying abductions']},'lower-c':{title:'Upper-Glute',ex:['Single-leg hip thrusts','Band diagonal kickbacks','Curtsy lunges','High-rep abductions']},'tempo':{title:'Tempo Recovery',ex:['Stretch/yoga','Hip mobility','Core work']},'tempo-scan':{title:'Tempo + Body Scan',ex:['Yoga or stretch class','Deep hip openers','Body scan']}},
-    3:{'lower-a':{title:'Shelf Anchor+',ex:['Barbell hip thrusts (1¼ reps)','Frog pumps (long sets)','Standing abductions','Reverse lunges (slow)']},'lower-b':{title:'Tie-in Sculpt',ex:['B-stance RDL (pause)','Step-ups (slow)','Hyperextensions','Side-lying abductions (high rep)']},'lower-c':{title:'Upper-Glute Vol',ex:['Single-leg hip thrusts','Band kickbacks','Curtsy lunges','Abduction burnout']},'tempo':{title:'Tempo Mobility',ex:['Deep stretch','Hip opening','Fascia work']},'tempo-scan':{title:'Tempo + Body Scan',ex:['Deep stretch class','Hip openers','Body scan']}},
-    4:{'lower-a':{title:'Shelf Polish',ex:['Hip thrust holds (lighter)','High-rep frog pumps','Abductions every set','Light lunges']},'lower-b':{title:'Tie-in Finish',ex:['Light RDLs','Step-ups (pump)','Hyperextensions','Abduction finisher']},'lower-c':{title:'Upper-Glute Peak',ex:['Single-leg holds','Kickback burnout','Walking lunges','Final abduction set']},'tempo':{title:'Tempo Flow',ex:['Light yoga','Mobility','Posing practice']},'tempo-scan':{title:'Tempo + Body Scan',ex:['Light yoga','Mobility','Final scan']}}
+// PHASE MODIFIERS - how to execute based on phase
+const PHASE_MODS={
+    1:{mod:'Bodyweight/light only. Super slow. Focus on feeling glutes before, during, after.',sets:'3-4',reps:'Hold until failure',rest:'As needed'},
+    2:{mod:'Add weight when 🟢. Controlled tempo. Build the connection under load.',sets:'3-4',reps:'8-12',rest:'90s'},
+    3:{mod:'1¼ reps. Slow eccentrics. Pause at stretch. More abduction volume.',sets:'4',reps:'10-15',rest:'60-90s'},
+    4:{mod:'Lighter load. Holds at top. High rep finishers. Peak pump.',sets:'3-4',reps:'12-20',rest:'45-60s'}
 };
 
-// Cycle-adjusted modifications
+// CYCLE MODIFIERS - adjustments based on cycle
 const CYCLE_MODS={
-    menstrual:{lower:'Go lighter. Focus on connection over load. Stop if fatigued.',tempo:'Extra stretching. Hip openers. Gentle.',intensity:'🔻 Reduce'},
-    follicular:{lower:'Add weight if connection is solid. Push new patterns.',tempo:'Normal intensity. Build capacity.',intensity:'📈 Build'},
-    ovulatory:{lower:'PR window. Push hard. Max effort if glutes dominate.',tempo:'Can go harder. Peak energy.',intensity:'🔥 Peak'},
-    luteal:{lower:'Shape focus. More reps, less max weight. Pumps.',tempo:'Recovery focus. Don\'t overtrain.',intensity:'🎯 Shape'}
+    menstrual:{intensity:'🔻 Reduce',mod:'Go lighter. Connection over load. Stop if fatigued.'},
+    follicular:{intensity:'📈 Build',mod:'Add weight if connection solid. Push new patterns.'},
+    ovulatory:{intensity:'🔥 Peak',mod:'PR window. Push top sets. Max effort if 🟢+.'},
+    luteal:{intensity:'🎯 Shape',mod:'More reps, less max weight. Pumps and abduction.'}
 };
 
-const getWorkout=(phase,type)=>WORKOUTS[phase][type]||WORKOUTS[phase]['tempo'];
-
+const DAY_TYPES={0:'tempo-scan',1:'lower-a',2:'tempo',3:'lower-b',4:'tempo',5:'lower-c',6:'tempo'};
 const BOOTY_TYPES=['Perky','Bubbly','Juicy','Low-Key'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],DAYS_S=['S','M','T','W','T','F','S'];
 
 let state={view:'today',modalOpen:false,selectedDay:null,data:null};
 
-// Cycle calculation
-function getCycleDay(date){const d=new Date(date);d.setHours(0,0,0,0);const cs=new Date(CYCLE_START);cs.setHours(0,0,0,0);const diff=Math.floor((d-cs)/86400000);const cycleDay=((diff%CYCLE_LENGTH)+CYCLE_LENGTH)%CYCLE_LENGTH+1;return cycleDay}
-function getCyclePhase(date){const cd=getCycleDay(date);return CYCLE_PHASES.find(p=>cd>=p.days[0]&&cd<=p.days[1])||CYCLE_PHASES[0]}
-function getCyclePhaseName(date){return getCyclePhase(date).name.toLowerCase()}
+// Cycle calculation using settings
+function getCycleDay(date,settings){
+    const d=new Date(date);d.setHours(0,0,0,0);
+    const cs=new Date(settings.cycleStart);cs.setHours(0,0,0,0);
+    const diff=Math.floor((d-cs)/86400000);
+    const cycleDay=((diff%settings.cycleLength)+settings.cycleLength)%settings.cycleLength+1;
+    return cycleDay;
+}
+function getCyclePhase(date,settings){
+    const cd=getCycleDay(date,settings);
+    // Adjust phase boundaries based on menstrualDays
+    const phases=[
+        {name:'Menstrual',start:1,end:settings.menstrualDays},
+        {name:'Follicular',start:settings.menstrualDays+1,end:Math.floor(settings.cycleLength/2)-1},
+        {name:'Ovulatory',start:Math.floor(settings.cycleLength/2),end:Math.floor(settings.cycleLength/2)+3},
+        {name:'Luteal',start:Math.floor(settings.cycleLength/2)+4,end:settings.cycleLength}
+    ];
+    const phase=phases.find(p=>cd>=p.start&&cd<=p.end)||phases[0];
+    const fullPhase=CYCLE_PHASES.find(cp=>cp.name===phase.name);
+    return fullPhase;
+}
+function getCyclePhaseName(date,settings){return getCyclePhase(date,settings).name.toLowerCase()}
 
 // Storage
 function rotateBackups(){try{const b2=localStorage.getItem(BACKUP_KEYS[1]);const b1=localStorage.getItem(BACKUP_KEYS[0]);const cur=localStorage.getItem(STORAGE_KEY);if(b2)localStorage.setItem(BACKUP_KEYS[2],b2);if(b1)localStorage.setItem(BACKUP_KEYS[1],b1);if(cur)localStorage.setItem(BACKUP_KEYS[0],cur)}catch(e){}}
@@ -92,37 +111,76 @@ const getType=n=>DAY_TYPES[getDate(n).getDay()];
 const getPhase=n=>PHASES.find(p=>n>=p.days[0]&&n<=p.days[1])||PHASES[0];
 const getToday=()=>{const t=new Date();t.setHours(0,0,0,0);const s=new Date(START_DATE);s.setHours(0,0,0,0);return t<s?1:Math.min(Math.max(Math.floor((t-s)/86400000)+1,1),70)};
 const getWeekNum=n=>Math.ceil(n/7);
+const getTemplate=type=>TEMPLATES[type]||TEMPLATES['tempo'];
 
-function init(){const loaded=loadWithRecovery();if(loaded&&loaded.days&&loaded.days.length===70){state.data=loaded;state.data.currentDay=getToday()}else{const days=[];for(let i=1;i<=70;i++){const date=getDate(i);const type=getType(i);const phase=getPhase(i);days.push({number:i,dateISO:date.toISOString().slice(0,10),phase:phase.num,dayType:type.type,completed:false,missed:false,connection:null,notes:'',proteinHit:false,hipPain:null,tempoClass:'',tempoDuration:null,scanDone:false,scanType:null,roundness:null,lift:null,protrusion:null,bootyType:null,bodyFat:null})}state.data={days,currentDay:getToday(),version:3};save()}}
+function init(){
+    const loaded=loadWithRecovery();
+    if(loaded&&loaded.days&&loaded.days.length===70){
+        state.data=loaded;
+        // Ensure settings exist
+        if(!state.data.settings)state.data.settings={...DEFAULT_SETTINGS};
+        state.data.currentDay=getToday();
+    }else{
+        const days=[];
+        for(let i=1;i<=70;i++){
+            const date=getDate(i);
+            const type=getType(i);
+            const phase=getPhase(i);
+            days.push({
+                number:i,dateISO:date.toISOString().slice(0,10),phase:phase.num,dayType:type,
+                completed:false,streakSave:false,
+                connection:null,notes:'',proteinHit:false,hipPain:null,
+                // Top sets (lower days only)
+                htWeight:null,htReps:null,rdlWeight:null,rdlReps:null,
+                // Tempo
+                tempoClass:'',tempoDuration:null,
+                // Scan
+                scanDone:false,scanType:null,roundness:null,lift:null,protrusion:null,bootyType:null,bodyFat:null
+            });
+        }
+        state.data={days,currentDay:getToday(),settings:{...DEFAULT_SETTINGS},version:4};
+        save();
+    }
+}
 
 const render=()=>document.getElementById('app').innerHTML=(state.view==='today'?renderToday():state.view==='calendar'?renderCal():state.view==='progress'?renderProg():renderInfo())+renderNav()+renderModal();
 function renderToday(){
-    const d=state.data,today=d.days[d.currentDay-1],done=d.days.filter(x=>x.completed).length;
+    const d=state.data,today=d.days[d.currentDay-1],done=d.days.filter(x=>x.completed).length,streaks=d.days.filter(x=>x.streakSave).length;
     const prog=(done/70)*360,date=getDate(d.currentDay),end=getDate(70);
-    const type=getType(d.currentDay),phase=getPhase(d.currentDay);
-    const cyclePhase=getCyclePhase(date),cycleName=cyclePhase.name.toLowerCase();
-    const cycleMod=CYCLE_MODS[cycleName];
-    const workout=getWorkout(phase.num,type.type);
+    const type=getType(d.currentDay),phase=getPhase(d.currentDay),template=getTemplate(type);
+    const cyclePhase=getCyclePhase(date,d.settings),cycleName=cyclePhase.name.toLowerCase();
+    const cycleMod=CYCLE_MODS[cycleName],phaseMod=PHASE_MODS[phase.num];
     const lastConn=[...d.days].reverse().find(x=>x.connection)?.connection;
+    const lastHT=[...d.days].reverse().find(x=>x.htWeight)?.htWeight;
     const emoji={red:'🔴',yellow:'🟡',green:'🟢',sparkles:'✨'};
     const ws=d.currentDay-date.getDay(),week=[];
     for(let i=0;i<7;i++){const n=ws+i;if(n>=1&&n<=70)week.push({num:n,day:d.days[n-1],type:getType(n),date:getDate(n)})}
     
-    let btnClass=today.completed?'done':today.missed?'missed':'';
-    let btnText=today.completed?'✓ Logged':today.missed?'Rest Day':'Log Today →';
+    let btnClass=today.completed?'done':today.streakSave?'streak':'';
+    let btnText=today.completed?'✓ Logged':today.streakSave?'✓ Streak Saved':'Log Today →';
+    
+    // Build workout description from template + modifiers
+    let workoutDesc=template.exercises.map(e=>'• '+e).join('<br>');
+    workoutDesc+=`<br><br><strong>Phase ${phase.num}:</strong> ${phaseMod.mod}`;
+    
+    // Today's rule from cycle
+    const todayRule=cyclePhase.rule;
     
     let sum='';
     if(today.completed){
-        sum=`<div class="summary-row"><span class="summary-label">Connection</span><span class="summary-value">${emoji[today.connection]||'—'}</span></div>`;
-        if(type.type==='tempo')sum+=`<div class="summary-row"><span class="summary-label">Class</span><span class="summary-value">${today.tempoClass||'—'}</span></div><div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${today.tempoDuration||'—'} min</span></div>`;
-        if(type.type==='rest'&&today.scanDone)sum+=`<div class="summary-row"><span class="summary-label">Scan</span><span class="summary-value">${today.scanType||'—'}</span></div><div class="summary-row"><span class="summary-label">Booty</span><span class="summary-value">${today.bootyType||'—'}</span></div>`;
-        sum+=`<div class="summary-row"><span class="summary-label">Pain</span><span class="summary-value">${today.hipPain??'—'}/10</span></div><div class="summary-row"><span class="summary-label">Protein</span><span class="summary-value">${today.proteinHit?'✓':'—'}</span></div>`;
-    }else if(today.missed){
-        sum=`<div class="summary-row"><span class="summary-label">Status</span><span class="summary-value">Rest / Missed</span></div>${today.notes?`<div class="summary-row"><span class="summary-label">Note</span><span class="summary-value">${today.notes}</span></div>`:''}`
+        if(type.startsWith('lower')){
+            sum=`<div class="summary-row"><span class="summary-label">Connection</span><span class="summary-value">${emoji[today.connection]||'—'}</span></div>`;
+            if(today.htWeight)sum+=`<div class="summary-row"><span class="summary-label">Hip Thrust</span><span class="summary-value">${today.htWeight}lb × ${today.htReps||'—'}</span></div>`;
+            if(today.rdlWeight)sum+=`<div class="summary-row"><span class="summary-label">RDL</span><span class="summary-value">${today.rdlWeight}lb × ${today.rdlReps||'—'}</span></div>`;
+        }else{
+            if(today.tempoClass)sum+=`<div class="summary-row"><span class="summary-label">Class</span><span class="summary-value">${today.tempoClass}</span></div>`;
+            if(today.tempoDuration)sum+=`<div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${today.tempoDuration} min</span></div>`;
+        }
+        if(type==='tempo-scan'&&today.scanDone)sum+=`<div class="summary-row"><span class="summary-label">Booty</span><span class="summary-value">${today.bootyType||'—'}</span></div>`;
+        sum+=`<div class="summary-row"><span class="summary-label">Protein</span><span class="summary-value">${today.proteinHit?'✓':'—'}</span></div>`;
+    }else if(today.streakSave){
+        sum=`<div class="summary-row"><span class="summary-label">Status</span><span class="summary-value">Streak Save (10 min)</span></div>${today.notes?`<div class="summary-row"><span class="summary-label">Note</span><span class="summary-value">${today.notes}</span></div>`:''}`
     }
-    
-    // Cycle tip based on day type
-    const tipText=type.type.startsWith('lower')?cycleMod.lower:cycleMod.tempo;
     
     return`<div class="header">
         <div class="date-display">${fmt(date,'full')}</div>
@@ -131,30 +189,30 @@ function renderToday(){
             <span class="phase-badge p${phase.num}">P${phase.num}: ${phase.name}</span>
             <span class="cycle-badge ${cycleName}">${cyclePhase.icon} ${cyclePhase.name}</span>
         </div>
-        <div class="day-type-badge ${type.type}">${type.icon} ${type.name}</div>
+        <div class="day-type-badge ${type}">${template.icon} ${template.name}</div>
     </div>
-    <div class="cycle-tip ${cycleName}">
-        <div class="cycle-tip-title">${cycleMod.intensity} ${cyclePhase.name} Phase</div>
-        <div class="cycle-tip-text">${tipText}</div>
+    <div class="today-rule">
+        <div class="today-rule-label">Today's Rule (${cyclePhase.name})</div>
+        <div class="today-rule-text">${todayRule}</div>
     </div>
     <div class="workout-preview">
-        <div class="workout-preview-title">${workout.title}</div>
-        <div class="workout-preview-list">${workout.ex.map(e=>'• '+e).join('<br>')}</div>
+        <div class="workout-preview-title">${template.name} • ${phaseMod.sets} sets × ${phaseMod.reps}</div>
+        <div class="workout-preview-list">${workoutDesc}</div>
     </div>
     <button class="log-btn ${btnClass}" onclick="openModal()">${btnText}</button>
-    ${today.completed||today.missed?`<div class="summary"><div class="summary-card">${sum}</div></div>`:''}
+    ${today.completed||today.streakSave?`<div class="summary"><div class="summary-card">${sum}</div></div>`:''}
     <div class="week-schedule">
         <div class="week-header"><div class="week-title">This Week</div><div class="week-dates">${fmt(getDate(Math.max(ws,1)),'medium')} - ${fmt(getDate(Math.min(ws+6,70)),'medium')}</div></div>
-        <div class="week-days">${week.map(w=>`<div class="week-day ${w.num===d.currentDay?'current':''} ${w.day.completed?'done':''} ${w.day.missed?'missed':''} ${w.num>d.currentDay?'future':''}" onclick="openModal(${w.num})"><div class="name">${DAYS_S[w.date.getDay()]}</div><div class="date">${w.date.getDate()}</div><div class="type">${w.type.icon}</div></div>`).join('')}</div>
+        <div class="week-days">${week.map(w=>{const wt=getTemplate(w.type);return`<div class="week-day ${w.num===d.currentDay?'current':''} ${w.day.completed?'done':''} ${w.day.streakSave?'streak':''} ${w.num>d.currentDay?'future':''}" onclick="openModal(${w.num})"><div class="name">${DAYS_S[w.date.getDay()]}</div><div class="date">${w.date.getDate()}</div><div class="type">${wt.icon}</div></div>`}).join('')}</div>
     </div>
     <div class="stats">
         <div class="stat"><div class="stat-value">${done}</div><div class="stat-label">Done</div></div>
         <div class="stat"><div class="stat-value">${emoji[lastConn]||'—'}</div><div class="stat-label">Neural</div></div>
-        <div class="stat"><div class="stat-value">P${phase.num}</div><div class="stat-label">Phase</div></div>
+        <div class="stat"><div class="stat-value">${lastHT||'—'}</div><div class="stat-label">HT lbs</div></div>
         <div class="stat"><div class="stat-value">${70-d.currentDay+1}</div><div class="stat-label">Left</div></div>
     </div>
     <div class="end-date"><div class="label">Miami Ready</div><div class="date">${fmt(end,'full')}</div></div>
-    <div class="mini-cal"><div class="mini-cal-header"><div class="mini-cal-title">70 Days</div></div><div class="mini-cal-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.completed?'done':''} ${x.missed?'missed':''} ${i+1===d.currentDay?'current':''} ${i+1>d.currentDay?'future':''}"></div>`).join('')}</div></div>`;
+    <div class="mini-cal"><div class="mini-cal-header"><div class="mini-cal-title">70 Days</div></div><div class="mini-cal-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.completed?'done':''} ${x.streakSave?'streak':''} ${i+1===d.currentDay?'current':''} ${i+1>d.currentDay?'future':''}"></div>`).join('')}</div></div>`;
 }
 
 function renderCal(){
@@ -170,8 +228,8 @@ function renderCal(){
         for(let day=1;day<=days;day++){
             const date=new Date(y,mi,day),dn=getDayNum(date);
             if(dn>=1&&dn<=70){
-                const dd=d.days[dn-1],type=getType(dn),cycleName=getCyclePhaseName(date);
-                h+=`<div class="cal-day ${dd.completed?'done':''} ${dd.missed?'missed':''} ${dn===d.currentDay?'current':''} ${dn>d.currentDay?'future':''}" onclick="openModal(${dn})">${day}<div class="type-dot ${type.type}"></div><div class="cycle-dot ${cycleName}"></div></div>`;
+                const dd=d.days[dn-1],type=getType(dn),cycleName=getCyclePhaseName(date,d.settings);
+                h+=`<div class="cal-day ${dd.completed?'done':''} ${dd.streakSave?'streak':''} ${dn===d.currentDay?'current':''} ${dn>d.currentDay?'future':''}" onclick="openModal(${dn})">${day}<div class="type-dot ${type}"></div><div class="cycle-dot ${cycleName}"></div></div>`;
             }else h+=`<div class="cal-day outside">${day}</div>`;
         }
         h+='</div></div>';
@@ -179,13 +237,18 @@ function renderCal(){
     return h+'</div>';
 }
 function renderProg(){
-    const d=state.data,done=d.days.filter(x=>x.completed).length,missed=d.days.filter(x=>x.missed).length;
+    const d=state.data,done=d.days.filter(x=>x.completed).length,streaks=d.days.filter(x=>x.streakSave).length;
     const lowerA=d.days.filter(x=>x.dayType==='lower-a'&&x.completed).length,lowerAT=d.days.filter(x=>x.dayType==='lower-a').length;
     const lowerB=d.days.filter(x=>x.dayType==='lower-b'&&x.completed).length,lowerBT=d.days.filter(x=>x.dayType==='lower-b').length;
     const lowerC=d.days.filter(x=>x.dayType==='lower-c'&&x.completed).length,lowerCT=d.days.filter(x=>x.dayType==='lower-c').length;
-    const tempo=d.days.filter(x=>x.dayType==='tempo'&&x.completed).length,tempoT=d.days.filter(x=>x.dayType==='tempo').length;
-    const pn=[...d.days].reverse().find(x=>x.hipPain!==null)?.hipPain||0;
-    const pr=d.days.filter(x=>x.proteinHit).length;
+    const tempo=d.days.filter(x=>(x.dayType==='tempo'||x.dayType==='tempo-scan')&&x.completed).length;
+    const tempoT=d.days.filter(x=>x.dayType==='tempo'||x.dayType==='tempo-scan').length;
+    
+    // Top set progression
+    const htHistory=d.days.filter(x=>x.htWeight).map(x=>({day:x.number,wt:x.htWeight,reps:x.htReps}));
+    const maxHT=htHistory.length?Math.max(...htHistory.map(x=>x.wt)):0;
+    const lastHT=htHistory.length?htHistory[htHistory.length-1]:null;
+    
     const cn={red:0,yellow:0,green:0,sparkles:0};d.days.forEach(x=>{if(x.connection)cn[x.connection]++});
     
     const scans=d.days.filter(x=>x.scanDone&&x.roundness),weeklyScans=[];
@@ -203,116 +266,127 @@ function renderProg(){
     
     const phase=getPhase(d.currentDay);
     const todayDate=getDate(d.currentDay);
-    const cyclePhase=getCyclePhase(todayDate);
+    const cyclePhase=getCyclePhase(todayDate,d.settings);
     
     return`<div class="progress-view">
-        <div class="progress-card"><div class="progress-header"><span class="progress-title">Overall</span><span class="progress-value">${done}/70${missed>0?` <span style="color:#666;font-size:.8rem">(${missed} rest)</span>`:''}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${(done/70)*100}%"></div></div></div>
+        <div class="progress-card"><div class="progress-header"><span class="progress-title">Overall</span><span class="progress-value">${done+streaks}/70${streaks>0?` <span style="color:#3b82f6;font-size:.8rem">(${streaks} streak)</span>`:''}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${((done+streaks)/70)*100}%"></div></div></div>
         <div class="progress-card">
             <div class="progress-header"><span class="progress-title">Current Status</span></div>
             <div style="display:flex;gap:8px;margin-top:8px">
                 <span class="phase-badge p${phase.num}" style="margin:0">P${phase.num}: ${phase.name}</span>
                 <span class="cycle-badge ${cyclePhase.name.toLowerCase()}" style="margin:0">${cyclePhase.icon} ${cyclePhase.name}</span>
             </div>
-            <div style="font-size:.7rem;color:#666;margin-top:8px">Cycle Day ${getCycleDay(todayDate)} of ${CYCLE_LENGTH}</div>
+            <div style="font-size:.7rem;color:#666;margin-top:8px">Cycle Day ${getCycleDay(todayDate,d.settings)} of ${d.settings.cycleLength}</div>
         </div>
-        <div class="progress-card"><div class="progress-header"><span class="progress-title">Hip Pain</span><span class="progress-value">${pn}/10</span></div><div class="progress-bar"><div class="progress-fill" style="width:${(1-pn/10)*100}%;background:linear-gradient(90deg,#22c55e,#10b981)"></div></div></div>
+        <div class="progress-card"><div class="progress-header"><span class="progress-title">Hip Thrust Top Set</span><span class="progress-value">${lastHT?lastHT.wt+'lb':'—'}</span></div><div style="font-size:.7rem;color:#666;margin-top:4px">${maxHT?'Max: '+maxHT+'lb':'No lifts logged yet'}${htHistory.length>1?' • '+htHistory.length+' sessions':''}</div></div>
         <div class="progress-card"><div class="progress-title" style="margin-bottom:10px">Workouts by Type</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center"><div><div style="font-size:1rem">🏋️</div><div style="font-weight:700;font-size:.9rem">${lowerA}/${lowerAT}</div><div style="font-size:.55rem;color:#666">Shelf</div></div><div><div style="font-size:1rem">💪</div><div style="font-weight:700;font-size:.9rem">${lowerB}/${lowerBT}</div><div style="font-size:.55rem;color:#666">Tie-in</div></div><div><div style="font-size:1rem">🔥</div><div style="font-weight:700;font-size:.9rem">${lowerC}/${lowerCT}</div><div style="font-size:.55rem;color:#666">Upper</div></div><div><div style="font-size:1rem">🧘</div><div style="font-weight:700;font-size:.9rem">${tempo}/${tempoT}</div><div style="font-size:.55rem;color:#666">Tempo</div></div></div></div>
         <div class="progress-card"><div class="progress-title" style="margin-bottom:8px">Neural Connection</div><div class="neural-grid"><div class="neural-item"><div class="neural-emoji">🔴</div><div class="neural-count">${cn.red}</div><div class="neural-label">Quad</div></div><div class="neural-item"><div class="neural-emoji">🟡</div><div class="neural-count">${cn.yellow}</div><div class="neural-label">Learning</div></div><div class="neural-item"><div class="neural-emoji">🟢</div><div class="neural-count">${cn.green}</div><div class="neural-label">Strong</div></div><div class="neural-item"><div class="neural-emoji">✨</div><div class="neural-count">${cn.sparkles}</div><div class="neural-label">Locked</div></div></div></div>
         <div class="progress-card"><div class="progress-title" style="margin-bottom:6px">🍑 Booty Progress</div><div class="booty-goal"><span class="from">Perky</span><span class="arrow">→</span><span class="to">Bubbly</span></div><div class="booty-section">${renderBootyMetric('Roundness','r')}${renderBootyMetric('Lift','l')}${renderBootyMetric('Protrusion','p')}</div><div style="text-align:center;margin-top:8px;font-size:.65rem;color:#666">${scanSummary}</div></div>
-        <div class="progress-card"><div class="progress-header"><span class="progress-title">Protein</span><span class="progress-value">${pr}/${done||1}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${done?(pr/done)*100:0}%"></div></div></div>
     </div>`;
 }
 function renderInfo(){
+    const s=state.data.settings;
     return`<div class="info-view">
-        <div class="info-section"><div class="info-title">🎯 The Goal</div><div class="info-text">Build the <strong>"glute shelf"</strong> by March 21. Go from <strong>Perky → Bubbly</strong>. This is Elisi Wolf + Bret Contreras + <strong>cycle syncing</strong>, fused into one system.</div></div>
+        <div class="info-section"><div class="info-title">🎯 The System</div><div class="info-text">A <strong>repeatable 70-day protocol</strong> combining Elisi Wolf's neural method + Bret Contreras + cycle syncing. Run it once for the shelf, run it again for maintenance or a new focus.</div></div>
         
-        <div class="info-section"><div class="info-title">🩸 Cycle Syncing</div>
-            <div class="info-text">Your hormones control strength, recovery, and growth. We ride them instead of fighting them.</div>
-            <div class="cycle-card menstrual"><div class="cycle-name">🩸 Menstrual (Days 1-5)</div><div class="cycle-days">~Jan 12-17, Feb 9-14, Mar 9-14</div><div class="cycle-desc"><strong>Hormones:</strong> All low, cortisol sensitive<br><strong>Do:</strong> Neural activation, banded work, walking, stretching<br><strong>Don't:</strong> Heavy lifting (causes damage, not growth)</div></div>
-            <div class="cycle-card follicular"><div class="cycle-name">🌱 Follicular (Days 6-13)</div><div class="cycle-days">~Jan 18-28, Feb 15-25</div><div class="cycle-desc"><strong>Hormones:</strong> Estrogen rising, insulin sensitive<br><strong>Do:</strong> Add weight, learn new patterns, barbell work<br><strong>Why:</strong> Brain & muscles primed to lock in dominance</div></div>
-            <div class="cycle-card ovulatory"><div class="cycle-name">⚡ Ovulatory (Days 14-17)</div><div class="cycle-days">~Jan 29-Feb 2, Feb 26-Mar 2</div><div class="cycle-desc"><strong>Hormones:</strong> Estrogen peaks, testosterone spikes<br><strong>Do:</strong> PRs, push weight, max effort, volume<br><strong>Why:</strong> Glutes respond like male-level anabolic tissue</div></div>
-            <div class="cycle-card luteal"><div class="cycle-name">🌙 Luteal (Days 18-28)</div><div class="cycle-days">~Feb 3-17, Mar 3-8</div><div class="cycle-desc"><strong>Hormones:</strong> Progesterone rises, recovery down<br><strong>Do:</strong> Shape work, pumps, abductions, time under tension<br><strong>Why:</strong> Shelf becomes round, not flat</div></div>
+        <div class="info-section"><div class="info-title">⚙️ Cycle Settings</div>
+            <div class="settings-row"><span class="settings-label">Cycle Start Date</span><input type="date" class="settings-input" id="setCycleStart" value="${s.cycleStart}" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Cycle Length (days)</span><input type="number" class="settings-input" id="setCycleLength" value="${s.cycleLength}" min="21" max="35" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Menstrual Days</span><input type="number" class="settings-input" id="setMenstrualDays" value="${s.menstrualDays}" min="3" max="7" onchange="updateSettings()"></div>
+        </div>
+        
+        <div class="info-section"><div class="info-title">🩸 Cycle Phases</div>
+            <div class="info-text">Your hormones control strength, recovery, and growth. We ride them.</div>
+            <div class="cycle-card menstrual"><div class="cycle-name">🩸 Menstrual</div><div class="cycle-desc"><strong>Rule:</strong> No PR. Keep connection 🟢+. Lighter load, higher reps.<br>Neural activation, banded work, stretching.</div></div>
+            <div class="cycle-card follicular"><div class="cycle-name">🌱 Follicular</div><div class="cycle-desc"><strong>Rule:</strong> Add load if 🟢/✨. Progressive overload window.<br>Add weight, learn patterns, barbell work.</div></div>
+            <div class="cycle-card ovulatory"><div class="cycle-name">⚡ Ovulatory</div><div class="cycle-desc"><strong>Rule:</strong> PR window. Push top sets. Max strength.<br>This is where shelf mass is laid down.</div></div>
+            <div class="cycle-card luteal"><div class="cycle-name">🌙 Luteal</div><div class="cycle-desc"><strong>Rule:</strong> Shape window. More abduction, pumps. No grinding.<br>Shelf becomes round, not flat.</div></div>
         </div>
         
         <div class="info-section"><div class="info-title">📅 Training Phases</div>
-            <div class="phase-card p1"><div class="phase-name">Phase 1: Fix the Signal</div><div class="phase-dates">Days 1-14 • ${fmt(getDate(1),'medium')} - ${fmt(getDate(14),'medium')}</div><div class="phase-desc">${PHASES[0].focus}</div></div>
-            <div class="phase-card p2"><div class="phase-name">Phase 2: Build Tissue</div><div class="phase-dates">Days 15-37 • ${fmt(getDate(15),'medium')} - ${fmt(getDate(37),'medium')}</div><div class="phase-desc">${PHASES[1].focus}</div></div>
-            <div class="phase-card p3"><div class="phase-name">Phase 3: Sculpt Shelf</div><div class="phase-dates">Days 38-56 • ${fmt(getDate(38),'medium')} - ${fmt(getDate(56),'medium')}</div><div class="phase-desc">${PHASES[2].focus}</div></div>
-            <div class="phase-card p4"><div class="phase-name">Phase 4: Polish & Peak</div><div class="phase-dates">Days 57-70 • ${fmt(getDate(57),'medium')} - ${fmt(getDate(70),'medium')}</div><div class="phase-desc">${PHASES[3].focus}</div></div>
+            <div class="phase-card p1"><div class="phase-name">Phase 1: Fix the Signal</div><div class="phase-dates">Days 1-14 • ${fmt(getDate(1),'medium')} - ${fmt(getDate(14),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[0].load}<br><strong>Tempo:</strong> ${PHASES[0].tempo}<br><strong>Focus:</strong> ${PHASES[0].focus}</div></div>
+            <div class="phase-card p2"><div class="phase-name">Phase 2: Build Tissue</div><div class="phase-dates">Days 15-37 • ${fmt(getDate(15),'medium')} - ${fmt(getDate(37),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[1].load}<br><strong>Tempo:</strong> ${PHASES[1].tempo}<br><strong>Focus:</strong> ${PHASES[1].focus}</div></div>
+            <div class="phase-card p3"><div class="phase-name">Phase 3: Sculpt Shelf</div><div class="phase-dates">Days 38-56 • ${fmt(getDate(38),'medium')} - ${fmt(getDate(56),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[2].load}<br><strong>Tempo:</strong> ${PHASES[2].tempo}<br><strong>Focus:</strong> ${PHASES[2].focus}</div></div>
+            <div class="phase-card p4"><div class="phase-name">Phase 4: Polish & Peak</div><div class="phase-dates">Days 57-70 • ${fmt(getDate(57),'medium')} - ${fmt(getDate(70),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[3].load}<br><strong>Tempo:</strong> ${PHASES[3].tempo}<br><strong>Focus:</strong> ${PHASES[3].focus}</div></div>
         </div>
         
-        <div class="info-section"><div class="info-title">🗓 Weekly Rhythm</div>
-            <div class="info-text"><strong>Mon:</strong> Lower A (Shelf) 🏋️<br><strong>Tue:</strong> Tempo 🧘<br><strong>Wed:</strong> Lower B (Tie-in) 💪<br><strong>Thu:</strong> Tempo 🧘<br><strong>Fri:</strong> Lower C (Upper) 🔥<br><strong>Sat:</strong> Tempo 🧘<br><strong>Sun:</strong> Tempo + Scan 🍑</div>
+        <div class="info-section"><div class="info-title">🗓 Weekly Templates</div>
+            <div class="info-text"><strong>Mon:</strong> Lower A (Shelf) - Hip thrust, abduction, lunge, finisher<br><strong>Tue:</strong> Tempo<br><strong>Wed:</strong> Lower B (Tie-in) - Hinge, step-up, back ext, abduction<br><strong>Thu:</strong> Tempo<br><strong>Fri:</strong> Lower C (Upper) - Single-leg, kickback, curtsy, burnout<br><strong>Sat:</strong> Tempo<br><strong>Sun:</strong> Tempo + Scan</div>
             <div class="info-subtitle">365 Streak</div>
-            <div class="info-text">No days off. Tempo on "rest" days keeps your streak alive while letting glutes recover.</div>
+            <div class="info-text">Use "Streak Save" for 10-min stretch on tough days. Keeps the chain alive.</div>
         </div>
         
-        <div class="info-section"><div class="info-title">🧠 Neural Connection</div><div class="info-text">Rate every workout. This is THE metric.</div>
-            <div style="margin-top:10px"><div class="connection-key"><span class="emoji">🔴</span><span class="label"><strong>None</strong> — Quads/hams doing the work. Weight too heavy.</span></div><div class="connection-key"><span class="emoji">🟡</span><span class="label"><strong>Partial</strong> — Some glutes. Stay or reduce.</span></div><div class="connection-key"><span class="emoji">🟢</span><span class="label"><strong>Strong</strong> — Clear glute burn. Stay.</span></div><div class="connection-key"><span class="emoji">✨</span><span class="label"><strong>Locked</strong> — Automatic. Progress weight.</span></div></div>
-            <div class="info-subtitle">The Rule</div><div class="info-text">🔴/🟡 = too heavy → reduce<br>🟢 = stay<br>✨ = progress (but only in follicular/ovulatory)</div>
+        <div class="info-section"><div class="info-title">🧠 Neural Connection</div>
+            <div style="margin-top:10px"><div class="connection-key"><span class="emoji">🔴</span><span class="label"><strong>None</strong> — Quads doing the work. Too heavy.</span></div><div class="connection-key"><span class="emoji">🟡</span><span class="label"><strong>Partial</strong> — Some glutes. Stay or reduce.</span></div><div class="connection-key"><span class="emoji">🟢</span><span class="label"><strong>Strong</strong> — Clear glute burn. Can progress in follicular/ovulatory.</span></div><div class="connection-key"><span class="emoji">✨</span><span class="label"><strong>Locked</strong> — Automatic. Progress weight.</span></div></div>
         </div>
         
-        <div class="info-section"><div class="info-title">🍑 Booty Types</div>
-            <div class="info-text"><strong>Perky</strong> — Lifted, lean (start)<br><strong>Bubbly</strong> — Curved, shelf (goal)<br><strong>Juicy</strong> — Plump, lower emphasis<br><strong>Low-Key</strong> — Casual, symmetrical</div>
-        </div>
-        
-        <div class="info-section data-section"><div class="info-title">💾 Your Data</div><div class="info-text">Export to save. Import to restore.</div><div class="data-buttons"><button class="data-btn" onclick="exportData()">📤 Export</button><button class="data-btn" onclick="importData()">📥 Import</button></div></div>
+        <div class="info-section data-section"><div class="info-title">💾 Data</div><div class="data-buttons"><button class="data-btn" onclick="exportData()">📤 Export</button><button class="data-btn" onclick="importData()">📥 Import</button></div></div>
     </div>`;
+}
+
+function updateSettings(){
+    state.data.settings.cycleStart=document.getElementById('setCycleStart').value;
+    state.data.settings.cycleLength=parseInt(document.getElementById('setCycleLength').value)||28;
+    state.data.settings.menstrualDays=parseInt(document.getElementById('setMenstrualDays').value)||5;
+    save();
+    showToast('Settings saved');
 }
 
 function renderNav(){return`<div class="bottom-nav"><button class="nav-btn ${state.view==='today'?'active':''}" onclick="switchView('today')"><span class="icon">◉</span><span>Today</span></button><button class="nav-btn ${state.view==='calendar'?'active':''}" onclick="switchView('calendar')"><span class="icon">▦</span><span>Calendar</span></button><button class="nav-btn ${state.view==='progress'?'active':''}" onclick="switchView('progress')"><span class="icon">◔</span><span>Progress</span></button><button class="nav-btn ${state.view==='info'?'active':''}" onclick="switchView('info')"><span class="icon">📖</span><span>Method</span></button></div>`}
 function renderModal(){
     if(!state.modalOpen)return'<div class="modal-overlay"></div>';
     const n=state.selectedDay||state.data.currentDay,day=state.data.days[n-1],date=getDate(n);
-    const type=getType(n),phase=getPhase(n),workout=getWorkout(phase.num,type.type);
-    const cyclePhase=getCyclePhase(date),cycleName=cyclePhase.name.toLowerCase();
+    const type=getType(n),phase=getPhase(n),template=getTemplate(type),phaseMod=PHASE_MODS[phase.num];
+    const cyclePhase=getCyclePhase(date,state.data.settings),cycleName=cyclePhase.name.toLowerCase();
     const cycleMod=CYCLE_MODS[cycleName];
     const lastConn=[...state.data.days].reverse().find(x=>x.connection)?.connection;
+    const lastHT=[...state.data.days].reverse().find(x=>x.htWeight);
     const isSunday=date.getDay()===0;
     
     let form='';
     
-    if(day.missed){
-        form=`<div class="section-header">Rest Day</div><div class="info-text" style="margin-bottom:12px">Marked as rest/missed.</div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:60px">${day.notes||''}</textarea></div><button class="save-btn" onclick="saveDay()">Update</button><button class="miss-btn" onclick="unmarkMissed()">↩ Undo</button>`;
+    if(day.streakSave&&!day.completed){
+        form=`<div class="section-header">Streak Save Day</div><div class="info-text" style="margin-bottom:12px">10 min stretch to keep the chain alive.</div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:60px">${day.notes||''}</textarea></div><button class="save-btn" onclick="saveDay()">Update</button><button class="streak-btn" onclick="undoStreakSave()">↩ Undo Streak Save</button>`;
     }else{
-        // Cycle tip
-        const tipText=type.type.startsWith('lower')?cycleMod.lower:cycleMod.tempo;
-        form=`<div class="cycle-tip ${cycleName}" style="margin:0 0 16px"><div class="cycle-tip-title">${cycleMod.intensity} ${cyclePhase.name}</div><div class="cycle-tip-text">${tipText}</div></div>`;
+        // Today's rule
+        form=`<div class="today-rule ${cycleName}" style="margin:0 0 16px"><div class="today-rule-label">${cycleMod.intensity} ${cyclePhase.name}</div><div class="today-rule-text">${cycleMod.mod}</div></div>`;
         
         // Workout preview
-        form+=`<div class="workout-preview" style="margin:0 0 16px;background:#0f0f0f"><div class="workout-preview-title">${workout.title}</div><div class="workout-preview-list">${workout.ex.map(e=>'• '+e).join('<br>')}</div></div>`;
+        form+=`<div class="workout-preview" style="margin:0 0 16px;background:#0f0f0f"><div class="workout-preview-title">${template.name}</div><div class="workout-preview-list">${template.exercises.map(e=>'• '+e).join('<br>')}<br><br><em style="color:#666">${phaseMod.sets} sets × ${phaseMod.reps}</em></div></div>`;
         
-        // Neural connection (for lower days only - tempo is recovery)
-        if(type.type.startsWith('lower')){
+        // Lower day specific: top sets + connection
+        if(type.startsWith('lower')){
+            form+=`<div class="section-header">🏋️ Top Sets</div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Hip Thrust (lbs)</label><input type="number" class="form-input" id="htWeight" value="${day.htWeight||lastHT?.htWeight||''}" placeholder="${phase.num===1?'bodyweight':'weight'}"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="htReps" value="${day.htReps||lastHT?.htReps||''}" placeholder="reps"></div></div>
+            <div class="form-row"><div class="form-group"><label class="form-label">RDL (lbs, optional)</label><input type="number" class="form-input" id="rdlWeight" value="${day.rdlWeight||''}" placeholder="weight"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="rdlReps" value="${day.rdlReps||''}" placeholder="reps"></div></div>`;
+            
             form+=`<div class="section-header">🧠 Connection</div><div class="connection-grid">${[{k:'red',e:'🔴',l:'None'},{k:'yellow',e:'🟡',l:'Partial'},{k:'green',e:'🟢',l:'Strong'},{k:'sparkles',e:'✨',l:'Locked'}].map(c=>`<button class="conn-btn ${(day.connection||(day.completed?null:lastConn))===c.k?'selected':''}" onclick="setConn('${c.k}')"><span class="emoji">${c.e}</span><span class="label">${c.l}</span></button>`).join('')}</div>`;
         }
         
-        // Tempo specific (including tempo-scan)
-        if(type.type==='tempo'||type.type==='tempo-scan'){
-            form+=`<div class="section-header">🧘 Tempo Class</div><div class="tempo-options">${[{k:'Challenge',d:'Monthly challenge'},{k:'Lower Build',d:'Leg day'},{k:'Full Body',d:'HIIT/Build'},{k:'Upper Build',d:'Shoulders/arms'},{k:'Cardio',d:'Bodyweight cardio'},{k:'Stretch',d:'Yoga/recovery'}].map(t=>`<div class="tempo-opt ${day.tempoClass===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="dur" value="${day.tempoDuration||''}" placeholder="30"></div>`;
+        // Tempo specific
+        if(type==='tempo'||type==='tempo-scan'){
+            form+=`<div class="section-header">🧘 Tempo Class</div><div class="tempo-options">${[{k:'Challenge',d:'Monthly'},{k:'Lower Build',d:'Legs'},{k:'Full Body',d:'HIIT/Build'},{k:'Upper Build',d:'Arms'},{k:'Cardio',d:'BW cardio'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-opt ${day.tempoClass===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="dur" value="${day.tempoDuration||''}" placeholder="30"></div>`;
         }
         
-        // Rest day / Sunday scan
-        if(type.type==='tempo-scan'||isSunday){
+        // Sunday scan
+        if(type==='tempo-scan'){
             form+=`<div class="section-header">🍑 Body Scan</div><div class="scan-toggle"><div class="scan-opt ${day.scanType==='Tempo'?'selected':''}" onclick="setScan('Tempo')">Tempo</div><div class="scan-opt ${day.scanType==='Zozofit'?'selected':''}" onclick="setScan('Zozofit')">Zozofit</div><div class="scan-opt ${day.scanType==='Both'?'selected':''}" onclick="setScan('Both')">Both</div><div class="scan-opt ${day.scanType==='Skip'?'selected':''}" onclick="setScan('Skip')">Skip</div></div>`;
             if(day.scanType&&day.scanType!=='Skip'){
                 form+=`<div class="metric-slider"><div class="metric-label"><span class="name">Roundness</span><span class="value">${day.roundness||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.roundness>=v?'filled':''}" onclick="setMetric('roundness',${v})"></div>`).join('')}</div></div>
                 <div class="metric-slider"><div class="metric-label"><span class="name">Lift</span><span class="value">${day.lift||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.lift>=v?'filled':''}" onclick="setMetric('lift',${v})"></div>`).join('')}</div></div>
                 <div class="metric-slider"><div class="metric-label"><span class="name">Protrusion</span><span class="value">${day.protrusion||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.protrusion>=v?'filled':''}" onclick="setMetric('protrusion',${v})"></div>`).join('')}</div></div>
-                <div class="form-label">Booty Type</div><div class="booty-type-select">${BOOTY_TYPES.map(t=>`<div class="booty-type-btn ${day.bootyType===t?'selected':''}" onclick="setBootyType('${t}')"><div class="name">${t}</div></div>`).join('')}</div>
-                <div class="form-group"><label class="form-label">Body Fat % (optional)</label><input type="number" class="form-input" id="bf" value="${day.bodyFat||''}" placeholder="From scan" step="0.1"></div>`;
+                <div class="form-label">Booty Type</div><div class="booty-type-select">${BOOTY_TYPES.map(t=>`<div class="booty-type-btn ${day.bootyType===t?'selected':''}" onclick="setBootyType('${t}')"><div class="name">${t}</div></div>`).join('')}</div>`;
             }
         }
         
         // Daily tracking
-        form+=`<div class="section-header">📊 Daily</div><div class="form-group"><label class="form-label">Hip Pain (0-10)</label><input type="number" class="form-input" id="pain" value="${day.hipPain??''}" placeholder="0 = none" min="0" max="10"></div><div class="quick-toggles"><div class="quick-toggle ${day.proteinHit?'on':''}" onclick="toggle('proteinHit')"><div class="icon">🥩</div><div class="text">Protein 120g+</div></div></div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:50px">${day.notes||''}</textarea></div>`;
+        form+=`<div class="section-header">📊 Daily</div><div class="quick-toggles"><div class="quick-toggle ${day.proteinHit?'on':''}" onclick="toggle('proteinHit')"><div class="icon">🥩</div><div class="text">Protein 120g+</div></div></div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:50px">${day.notes||''}</textarea></div>`;
         
-        form+=`<button class="save-btn" onclick="saveDay()">${day.completed?'Update':'Complete'} ✓</button>${!day.completed?`<button class="miss-btn" onclick="markMissed()">Rest / Missed</button>`:''}`;
+        form+=`<button class="save-btn" onclick="saveDay()">${day.completed?'Update':'Complete'} ✓</button>${!day.completed?`<button class="streak-btn" onclick="streakSave()">💪 Streak Save (10 min stretch)</button>`:''}`;
     }
     
-    return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date,'medium')} • Day ${n}</div><div class="modal-subtitle"><span class="phase-badge p${phase.num}" style="margin:0;padding:2px 8px">P${phase.num}</span> <span class="cycle-badge ${cycleName}" style="margin:0;padding:2px 8px">${cyclePhase.icon}</span> ${type.icon} ${type.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
+    return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date,'medium')} • Day ${n}</div><div class="modal-subtitle"><span class="phase-badge p${phase.num}" style="margin:0;padding:2px 8px">P${phase.num}</span> <span class="cycle-badge ${cycleName}" style="margin:0;padding:2px 8px">${cyclePhase.icon}</span> ${template.icon} ${template.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
 }
-
 const switchView=v=>{state.view=v;render()};
 const openModal=n=>{state.selectedDay=n||state.data.currentDay;state.modalOpen=true;render()};
 const closeModal=()=>{state.modalOpen=false;render()};
@@ -323,18 +397,40 @@ const setMetric=(m,v)=>{state.data.days[(state.selectedDay||state.data.currentDa
 const setBootyType=v=>{state.data.days[(state.selectedDay||state.data.currentDay)-1].bootyType=v;render()};
 const toggle=f=>{state.data.days[(state.selectedDay||state.data.currentDay)-1][f]=!state.data.days[(state.selectedDay||state.data.currentDay)-1][f];render()};
 
-function markMissed(){const n=state.selectedDay||state.data.currentDay;const d=state.data.days[n-1];d.missed=true;d.completed=false;d.notes=document.getElementById('notes')?.value||'';save();showToast('Marked as rest');closeModal()}
-function unmarkMissed(){state.data.days[(state.selectedDay||state.data.currentDay)-1].missed=false;save();render()}
+function streakSave(){
+    const n=state.selectedDay||state.data.currentDay;
+    const d=state.data.days[n-1];
+    d.streakSave=true;d.completed=false;
+    d.tempoClass='Stretch';d.tempoDuration=10;
+    d.notes=document.getElementById('notes')?.value||'Streak save day';
+    save();showToast('Streak saved! 💪');closeModal();
+}
+function undoStreakSave(){
+    state.data.days[(state.selectedDay||state.data.currentDay)-1].streakSave=false;
+    save();render();
+}
 
 function saveDay(){
     const n=state.selectedDay||state.data.currentDay;
-    const d=state.data.days[n-1],type=getType(n),date=getDate(n);
-    d.completed=true;d.missed=false;
-    d.hipPain=parseFloat(document.getElementById('pain')?.value)||null;
+    const d=state.data.days[n-1],type=getType(n);
+    d.completed=true;d.streakSave=false;
     d.notes=document.getElementById('notes')?.value||'';
-    if(type.type==='tempo'||type.type==='tempo-scan')d.tempoDuration=parseFloat(document.getElementById('dur')?.value)||null;
-    if((type.type==='tempo-scan'||date.getDay()===0)&&d.scanType&&d.scanType!=='Skip'){d.bodyFat=parseFloat(document.getElementById('bf')?.value)||null}
-    if(!d.connection&&type.type.startsWith('lower')){const lastConn=[...state.data.days].reverse().find(x=>x.connection)?.connection;if(lastConn)d.connection=lastConn}
+    
+    // Lower day: save top sets
+    if(type.startsWith('lower')){
+        d.htWeight=parseFloat(document.getElementById('htWeight')?.value)||null;
+        d.htReps=parseInt(document.getElementById('htReps')?.value)||null;
+        d.rdlWeight=parseFloat(document.getElementById('rdlWeight')?.value)||null;
+        d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
+        // Default connection from last if not set
+        if(!d.connection){const lastConn=[...state.data.days].reverse().find(x=>x.connection)?.connection;if(lastConn)d.connection=lastConn}
+    }
+    
+    // Tempo: save class and duration
+    if(type==='tempo'||type==='tempo-scan'){
+        d.tempoDuration=parseFloat(document.getElementById('dur')?.value)||null;
+    }
+    
     if(save()){showToast('Saved!')}else{showToast('Save failed',true)}
     closeModal();
     if(n===70&&d.completed)setTimeout(()=>alert('🎉 MIAMI READY! 🍑✨'),300);
