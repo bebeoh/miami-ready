@@ -6,10 +6,283 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Miami Ready">
-    <meta name="theme-color" content="#0f0f0f">
-    <title>70 Days Miami Ready</title>
+    <meta name="theme-color" content="#1a1512">
+    <title>Miami Ready</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;background:#0f0f0f;color:#fff;min-height:100vh}::-webkit-scrollbar{display:none}.app{max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}.header{padding:50px 24px 20px;text-align:center}.date-display{font-size:.9rem;color:#888;margin-bottom:12px;font-weight:500}.day-ring{width:120px;height:120px;border-radius:50%;border:4px solid #333;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1))}.day-ring::before{content:'';position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;border-radius:50%;border:4px solid transparent;border-top-color:#a78bfa;transform:rotate(var(--progress-rotation,0deg))}.day-num{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.day-label{font-size:.75rem;color:#888;text-transform:uppercase}.phase-badges{display:flex;gap:8px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}.phase-badge{font-size:.7rem;padding:4px 10px;border-radius:10px;display:inline-block}.phase-badge.p1{background:rgba(251,191,36,.2);color:#fbbf24}.phase-badge.p2{background:rgba(249,115,22,.2);color:#f97316}.phase-badge.p3{background:rgba(168,85,247,.2);color:#a855f7}.phase-badge.p4{background:rgba(34,197,94,.2);color:#22c55e}.cycle-badge{font-size:.7rem;padding:4px 10px;border-radius:10px}.cycle-badge.menstrual{background:rgba(239,68,68,.2);color:#ef4444}.cycle-badge.follicular{background:rgba(59,130,246,.2);color:#3b82f6}.cycle-badge.ovulatory{background:rgba(234,179,8,.2);color:#eab308}.cycle-badge.luteal{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:16px;font-size:.85rem;font-weight:600;margin-bottom:6px}.day-type-badge.lower-a{background:rgba(249,115,22,.2);color:#f97316}.day-type-badge.lower-b{background:rgba(168,85,247,.2);color:#a855f7}.day-type-badge.lower-c{background:rgba(236,72,153,.2);color:#ec4899}.day-type-badge.tempo{background:rgba(34,197,94,.2);color:#22c55e}.day-type-badge.tempo-scan{background:rgba(236,72,153,.2);color:#ec4899}.today-rule{background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(236,72,153,.15));border-radius:12px;padding:12px 16px;margin:0 24px 12px;text-align:center}.today-rule-label{font-size:.65rem;color:#888;text-transform:uppercase;margin-bottom:4px}.today-rule-text{font-size:.85rem;font-weight:600}.workout-preview{background:#1a1a1a;border-radius:12px;padding:12px 16px;margin:0 24px 16px;text-align:left}.workout-preview-title{font-size:.7rem;color:#666;text-transform:uppercase;margin-bottom:8px}.workout-preview-list{font-size:.8rem;color:#999;line-height:1.6}.workout-preview-list strong{color:#fff}.log-btn{display:block;width:calc(100% - 48px);margin:16px 24px;padding:16px;border-radius:18px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(167,139,250,.3)}.log-btn.done{background:#1a1a1a;border:2px solid #22c55e;color:#22c55e;box-shadow:none}.log-btn.streak{background:#1a1a1a;border:2px solid #3b82f6;color:#3b82f6;box-shadow:none}.summary{padding:0 24px;margin-bottom:16px}.summary-card{background:#1a1a1a;border-radius:16px;padding:14px 18px}.summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #2a2a2a}.summary-row:last-child{border-bottom:none}.summary-label{color:#888;font-size:.8rem}.summary-value{font-weight:600;font-size:.9rem}.week-schedule{padding:0 24px;margin-bottom:16px}.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.week-title{font-size:.75rem;color:#666;text-transform:uppercase}.week-dates{font-size:.75rem;color:#888}.week-days{display:flex;gap:5px}.week-day{flex:1;background:#1a1a1a;border-radius:10px;padding:8px 2px;text-align:center;cursor:pointer}.week-day.current{border:2px solid #a78bfa;background:rgba(167,139,250,.1)}.week-day.done{background:linear-gradient(135deg,rgba(167,139,250,.3),rgba(236,72,153,.3))}.week-day.streak{background:rgba(59,130,246,.2)}.week-day.future{opacity:.4}.week-day .name{color:#666;font-size:.65rem;font-weight:600}.week-day .date{color:#888;font-size:.7rem;margin:2px 0}.week-day .type{font-size:1rem}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 24px;margin-bottom:16px}.stat{background:#1a1a1a;border-radius:12px;padding:12px 6px;text-align:center}.stat-value{font-size:1.3rem;font-weight:700}.stat-label{font-size:.6rem;color:#666;text-transform:uppercase}.end-date{text-align:center;padding:16px;background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(236,72,153,.1));border-radius:16px;margin:0 24px 16px}.end-date .label{font-size:.75rem;color:#888;margin-bottom:4px}.end-date .date{font-size:1rem;font-weight:700;color:#ec4899}.mini-cal{padding:0 24px;margin-bottom:16px}.mini-cal-header{margin-bottom:8px}.mini-cal-title{font-size:.75rem;color:#666;text-transform:uppercase}.mini-cal-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}.mini-day{aspect-ratio:1;border-radius:3px;background:#1a1a1a}.mini-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899)}.mini-day.streak{background:#3b82f6}.mini-day.current{border:2px solid #a78bfa}.mini-day.future{opacity:.3}.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#0f0f0f;border-top:1px solid #222;padding:10px 20px 26px;display:flex;justify-content:space-around}.nav-btn{background:none;border:none;color:#666;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.55rem;padding:8px;border-radius:10px}.nav-btn.active{color:#fff;background:rgba(167,139,250,.15)}.nav-btn .icon{font-size:1rem}.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:1000;display:none;align-items:flex-end;justify-content:center}.modal-overlay.active{display:flex}.modal{background:#1a1a1a;width:100%;max-width:430px;max-height:85vh;border-radius:24px 24px 0 0;padding:16px 20px 36px;overflow-y:auto}.modal-handle{width:36px;height:4px;background:#444;border-radius:2px;margin:0 auto 12px}.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}.modal-title{font-size:1.1rem;font-weight:700}.modal-subtitle{font-size:.8rem;color:#888;margin-top:2px}.modal-close{background:#2a2a2a;border:none;color:#888;width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer}.section-header{font-size:.8rem;font-weight:600;color:#a78bfa;margin:16px 0 10px}.section-header:first-child{margin-top:0}.form-row{display:flex;gap:10px;margin-bottom:10px}.form-group{flex:1}.form-label{display:block;font-size:.7rem;color:#666;margin-bottom:5px;text-transform:uppercase}.form-input{width:100%;background:#0f0f0f;border:1px solid #333;border-radius:10px;padding:11px 12px;color:#fff;font-size:.95rem;outline:none}.form-input:focus{border-color:#a78bfa}.form-input::placeholder{color:#444}.connection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.conn-btn{aspect-ratio:1;border:2px solid #333;background:#0f0f0f;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.conn-btn.selected{border-color:#a78bfa;background:rgba(167,139,250,.15)}.conn-btn .emoji{font-size:1.3rem}.conn-btn .label{font-size:.55rem;color:#666}.quick-toggles{display:flex;gap:8px;margin-bottom:10px}.quick-toggle{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}.quick-toggle.on{border-color:#22c55e;background:rgba(34,197,94,.1)}.quick-toggle .icon{font-size:1.1rem}.quick-toggle .text{font-size:.65rem;color:#888}.quick-toggle.on .text{color:#22c55e}.tempo-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.tempo-opt{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}.tempo-opt.selected{border-color:#22c55e;background:rgba(34,197,94,.1)}.tempo-opt .name{font-size:.75rem;font-weight:600}.tempo-opt .desc{font-size:.6rem;color:#666;margin-top:2px}.metric-slider{margin-bottom:12px}.metric-label{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px}.metric-label .name{color:#888}.metric-label .value{color:#ec4899;font-weight:600}.metric-dots{display:flex;gap:6px}.metric-dot{flex:1;height:8px;border-radius:4px;background:#333;cursor:pointer;transition:background .2s}.metric-dot.filled{background:linear-gradient(90deg,#a78bfa,#ec4899)}.metric-dot:hover{background:#555}.booty-type-select{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}.booty-type-btn{background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center}.booty-type-btn.selected{border-color:#ec4899;background:rgba(236,72,153,.1)}.booty-type-btn .name{font-size:.6rem;font-weight:600;color:#888}.booty-type-btn.selected .name{color:#ec4899}.scan-toggle{display:flex;gap:8px;margin-bottom:12px}.scan-opt{flex:1;background:#0f0f0f;border:2px solid #333;border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center;font-size:.75rem;color:#888}.scan-opt.selected{border-color:#ec4899;background:rgba(236,72,153,.1);color:#ec4899}.save-btn{width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,#a78bfa,#ec4899);border:none;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:6px}.streak-btn{width:100%;padding:12px;border-radius:12px;background:none;border:2px solid #3b82f6;color:#3b82f6;font-size:.8rem;font-weight:600;cursor:pointer;margin-top:8px}.calendar-view{padding:20px}.cal-month{margin-bottom:24px}.cal-month-header{margin-bottom:12px}.cal-month-title{font-size:1.1rem;font-weight:700}.cal-month-year{font-size:.8rem;color:#666;margin-left:8px}.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}.cal-weekday{text-align:center;font-size:.65rem;color:#666;font-weight:600}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-day{aspect-ratio:1;border-radius:8px;background:#1a1a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;font-weight:600;color:#666;position:relative}.cal-day.empty{background:transparent;cursor:default}.cal-day.done{background:linear-gradient(135deg,#a78bfa,#ec4899);color:#fff}.cal-day.streak{background:#3b82f6;color:#fff}.cal-day.current{border:2px solid #a78bfa}.cal-day.future{opacity:.3}.cal-day.outside{opacity:.15;cursor:default}.cal-day .type-dot{position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%}.cal-day .type-dot.lower-a{background:#f97316}.cal-day .type-dot.lower-b{background:#a855f7}.cal-day .type-dot.lower-c{background:#ec4899}.cal-day .type-dot.tempo{background:#22c55e}.cal-day .type-dot.tempo-scan{background:#ec4899}.cal-day .cycle-dot{position:absolute;top:3px;width:4px;height:4px;border-radius:50%}.cal-day .cycle-dot.menstrual{background:#ef4444}.cal-day .cycle-dot.follicular{background:#3b82f6}.cal-day .cycle-dot.ovulatory{background:#eab308}.cal-day .cycle-dot.luteal{background:#a855f7}.progress-view{padding:20px}.progress-card{background:#1a1a1a;border-radius:14px;padding:14px;margin-bottom:10px}.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.progress-title{font-size:.8rem;color:#888}.progress-value{font-size:1.2rem;font-weight:700}.progress-bar{height:6px;background:#2a2a2a;border-radius:3px;overflow:hidden}.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#a78bfa,#ec4899)}.neural-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.neural-item{text-align:center}.neural-emoji{font-size:1.1rem}.neural-count{font-size:.95rem;font-weight:700}.neural-label{font-size:.6rem;color:#666}.booty-section{margin-top:10px}.booty-goal{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;font-size:.85rem}.booty-goal .from{color:#888}.booty-goal .arrow{color:#666}.booty-goal .to{color:#ec4899;font-weight:600}.booty-metric{margin-bottom:10px}.booty-metric-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.booty-metric-name{font-size:.75rem;color:#888}.booty-metric-current{font-size:.75rem;color:#ec4899;font-weight:600}.booty-weeks{display:flex;gap:3px;align-items:flex-end;height:40px}.booty-week{flex:1;background:#2a2a2a;border-radius:2px;min-height:4px;transition:height .3s}.booty-week.filled{background:linear-gradient(180deg,#ec4899,#a78bfa)}.booty-week.current{border:1px solid #ec4899}.info-view{padding:20px}.info-section{background:#1a1a1a;border-radius:16px;padding:16px;margin-bottom:12px}.info-title{font-size:1rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}.info-text{font-size:.8rem;color:#999;line-height:1.5}.info-text strong{color:#fff}.info-subtitle{font-size:.8rem;color:#a78bfa;font-weight:600;margin:12px 0 6px}.info-list{margin:8px 0;padding-left:16px}.info-list li{font-size:.8rem;color:#999;margin-bottom:4px;line-height:1.4}.phase-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.phase-card.p1{border-color:#fbbf24}.phase-card.p2{border-color:#f97316}.phase-card.p3{border-color:#a855f7}.phase-card.p4{border-color:#22c55e}.phase-card .phase-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.phase-card.p1 .phase-name{color:#fbbf24}.phase-card.p2 .phase-name{color:#f97316}.phase-card.p3 .phase-name{color:#a855f7}.phase-card.p4 .phase-name{color:#22c55e}.phase-card .phase-dates{font-size:.7rem;color:#666;margin-bottom:6px}.phase-card .phase-desc{font-size:.75rem;color:#999;line-height:1.4}.cycle-card{background:#0f0f0f;border-radius:12px;padding:12px;margin:8px 0;border-left:3px solid}.cycle-card.menstrual{border-color:#ef4444}.cycle-card.follicular{border-color:#3b82f6}.cycle-card.ovulatory{border-color:#eab308}.cycle-card.luteal{border-color:#a855f7}.cycle-card .cycle-name{font-size:.85rem;font-weight:700;margin-bottom:4px}.cycle-card.menstrual .cycle-name{color:#ef4444}.cycle-card.follicular .cycle-name{color:#3b82f6}.cycle-card.ovulatory .cycle-name{color:#eab308}.cycle-card.luteal .cycle-name{color:#a855f7}.cycle-card .cycle-desc{font-size:.75rem;color:#999;line-height:1.4}.connection-key{display:flex;align-items:center;gap:8px;padding:6px 0}.connection-key .emoji{font-size:1rem}.connection-key .label{font-size:.8rem;color:#888}.data-section{margin-top:20px;padding-top:20px;border-top:1px solid #333}.data-buttons{display:flex;gap:8px;margin-top:12px}.data-btn{flex:1;padding:12px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#888;font-size:.75rem;cursor:pointer}.data-btn:hover{border-color:#a78bfa;color:#fff}.settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #2a2a2a}.settings-row:last-child{border-bottom:none}.settings-label{font-size:.8rem;color:#999}.settings-input{background:#0f0f0f;border:1px solid #333;border-radius:8px;padding:8px 12px;color:#fff;font-size:.85rem;width:120px;text-align:right}.toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:12px 24px;border-radius:12px;font-size:.85rem;font-weight:600;z-index:2000;display:none}.toast.error{background:#ef4444}.toast.show{display:block;animation:fadeInOut 2s ease}@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}90%{opacity:1}100%{opacity:0}}
+        :root{--bg:#1a1512;--bg-card:#241e1a;--bg-elevated:#2d2520;--cream:#f5e6d3;--cream-muted:#c9b8a8;--cream-dim:#8a7d70;--burgundy:#8b3a4c;--burgundy-glow:rgba(139,58,76,.3);--teal:#2d4a47;--teal-light:#3d5a56;--gold:#c9a86c;--gold-dim:#9a7f52;--wine:#722f37;--mocha:#3d2b24;--font:'DM Sans',-apple-system,sans-serif}
+        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+        body{font-family:var(--font);background:var(--bg);color:var(--cream);min-height:100vh;font-size:14px}
+        ::-webkit-scrollbar{display:none}
+        .app{max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}
+        
+        .header{padding:50px 24px 20px;text-align:center}
+        .header-eyebrow{font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+        .day-ring{width:130px;height:130px;border-radius:50%;margin:0 auto 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:var(--bg-card);border:1px solid var(--mocha)}
+        .day-ring::before{content:'';position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:var(--burgundy);transform:rotate(var(--progress,0deg))}
+        .day-num{font-size:3rem;font-weight:700;color:var(--cream)}
+        .day-sub{font-size:.65rem;color:var(--cream-dim);text-transform:uppercase;letter-spacing:.1em}
+        
+        .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+        .badge{font-size:.65rem;padding:5px 10px;border-radius:20px;font-weight:500;border:1px solid}
+        .badge.phase{background:var(--bg-elevated);color:var(--gold);border-color:var(--gold-dim)}
+        .badge.menstrual{background:rgba(139,58,76,.15);color:#d4a89a;border-color:rgba(139,58,76,.3)}
+        .badge.follicular{background:rgba(45,74,71,.2);color:#7ab3ad;border-color:rgba(45,74,71,.4)}
+        .badge.ovulatory{background:rgba(201,168,108,.15);color:var(--gold);border-color:rgba(201,168,108,.3)}
+        .badge.luteal{background:rgba(114,47,55,.15);color:#c9868f;border-color:rgba(114,47,55,.3)}
+        
+        .day-type{text-align:center;margin-bottom:16px}
+        .day-type-icon{font-size:1.8rem;margin-bottom:4px}
+        .day-type-name{font-size:1.2rem;font-weight:600}
+        .day-type-target{font-size:.75rem;color:var(--cream-dim)}
+        
+        .rule-card{background:linear-gradient(135deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--mocha);border-radius:16px;padding:14px 18px;margin:0 20px 14px;text-align:center}
+        .rule-label{font-size:.6rem;color:var(--cream-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+        .rule-text{font-size:.85rem;color:var(--cream);line-height:1.4}
+        
+        .card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:16px;padding:16px 18px;margin:0 20px 12px}
+        .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+        .card-title{font-size:.9rem;font-weight:600;color:var(--cream)}
+        .card-badge{font-size:.65rem;color:var(--gold);background:var(--bg-elevated);padding:4px 10px;border-radius:10px}
+        .card-list{list-style:none}
+        .card-list li{font-size:.8rem;color:var(--cream-muted);padding:6px 0;border-bottom:1px solid rgba(61,43,36,.4);display:flex;align-items:flex-start;gap:10px}
+        .card-list li:last-child{border-bottom:none}
+        .card-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--burgundy);margin-top:6px;flex-shrink:0}
+        .card-note{font-size:.75rem;color:var(--cream-dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--mocha)}
+        .card-note.gold{color:var(--gold)}
+        
+        .reset-card{background:var(--bg);border:1px solid var(--gold-dim);border-radius:16px;padding:14px 18px;margin:0 20px 12px;cursor:pointer}
+        .reset-header{display:flex;justify-content:space-between;align-items:center}
+        .reset-title{font-size:.85rem;color:var(--gold);font-weight:500}
+        .reset-hint{font-size:.65rem;color:var(--cream-dim)}
+        .reset-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--mocha);font-size:.75rem;color:var(--cream-muted);line-height:1.7}
+        .reset-card.open .reset-body{display:block}
+        
+        .btn{display:block;width:calc(100% - 40px);margin:16px 20px;padding:16px;border-radius:30px;border:none;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .15s}
+        .btn:active{transform:scale(.98)}
+        .btn-primary{background:linear-gradient(135deg,var(--burgundy),var(--wine));color:var(--cream);box-shadow:0 6px 24px var(--burgundy-glow)}
+        .btn-done{background:var(--bg-card);border:2px solid var(--teal);color:var(--teal-light)}
+        .btn-streak{background:var(--bg-card);border:2px solid var(--gold-dim);color:var(--gold)}
+        .btn-secondary{background:var(--bg);border:2px solid var(--mocha);color:var(--cream-dim);font-size:.85rem;padding:14px}
+        
+        .summary{margin:0 20px 16px}
+        .summary-card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:16px;padding:14px 18px}
+        .summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(61,43,36,.4)}
+        .summary-row:last-child{border-bottom:none}
+        .summary-label{color:var(--cream-dim);font-size:.8rem}
+        .summary-value{font-weight:600;font-size:.85rem}
+        
+        .daily-checklist{margin:0 20px 16px}
+        .checklist-title{font-size:.75rem;color:var(--cream-dim);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+        .checklist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+        .check-item{background:var(--bg-card);border:1px solid var(--mocha);border-radius:12px;padding:12px 6px;text-align:center;cursor:pointer;transition:all .15s}
+        .check-item.done{background:rgba(45,74,71,.25);border-color:var(--teal)}
+        .check-item .icon{font-size:1.3rem;margin-bottom:4px}
+        .check-item .label{font-size:.6rem;color:var(--cream-dim)}
+        .check-item.done .label{color:var(--teal-light)}
+        .check-item .value{font-size:.7rem;color:var(--cream);font-weight:600;margin-top:2px}
+        
+        .protein-tracker,.water-tracker{margin:0 20px 12px}
+        .tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+        .tracker-title{font-size:.8rem;color:var(--cream-muted)}
+        .tracker-value{font-size:.85rem;font-weight:600;color:var(--cream)}
+        .tracker-bar{display:flex;gap:3px}
+        .tracker-seg{flex:1;height:8px;border-radius:4px;background:var(--mocha);cursor:pointer;transition:background .15s}
+        .tracker-seg.filled{background:linear-gradient(90deg,var(--burgundy),var(--wine))}
+        .tracker-seg.filled.teal{background:var(--teal)}
+        
+        .week-section{margin:0 20px 16px}
+        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+        .section-title{font-size:.8rem;color:var(--cream-dim)}
+        .section-sub{font-size:.7rem;color:var(--cream-dim)}
+        .week-grid{display:flex;gap:5px}
+        .week-day{flex:1;background:var(--bg-card);border:1px solid var(--mocha);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer}
+        .week-day.current{border-color:var(--burgundy);background:rgba(139,58,76,.1)}
+        .week-day.done{background:rgba(45,74,71,.25);border-color:var(--teal)}
+        .week-day.streak{background:rgba(201,168,108,.15);border-color:var(--gold-dim)}
+        .week-day.future{opacity:.35}
+        .week-day .d-name{font-size:.55rem;color:var(--cream-dim);font-weight:600}
+        .week-day .d-num{font-size:.75rem;color:var(--cream-muted);margin:3px 0}
+        .week-day .d-icon{font-size:1rem}
+        
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 20px 16px}
+        .stat{background:var(--bg-card);border:1px solid var(--mocha);border-radius:12px;padding:12px 6px;text-align:center}
+        .stat-val{font-size:1.3rem;font-weight:700}
+        .stat-label{font-size:.55rem;color:var(--cream-dim);text-transform:uppercase;margin-top:2px}
+        
+        .miami-card{background:linear-gradient(135deg,var(--burgundy),var(--wine));border-radius:18px;padding:18px;margin:0 20px 16px;text-align:center}
+        .miami-label{font-size:.65rem;color:rgba(245,230,211,.6);text-transform:uppercase;letter-spacing:.15em}
+        .miami-date{font-size:1.2rem;font-weight:600;color:var(--cream);margin-top:4px}
+        
+        .mini-cal{margin:0 20px 16px}
+        .mini-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
+        .mini-day{aspect-ratio:1;border-radius:3px;background:var(--bg-card)}
+        .mini-day.done{background:var(--teal)}
+        .mini-day.streak{background:var(--gold-dim)}
+        .mini-day.current{border:2px solid var(--burgundy)}
+        .mini-day.future{opacity:.2}
+        
+        .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);border-top:1px solid var(--mocha);padding:10px 20px 26px;display:flex;justify-content:space-around}
+        .nav-btn{background:none;border:none;color:var(--cream-dim);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.55rem;padding:8px 12px;border-radius:10px}
+        .nav-btn.active{color:var(--cream);background:var(--bg-elevated)}
+        .nav-btn .icon{font-size:1.1rem}
+        
+        .modal-overlay{position:fixed;inset:0;background:rgba(26,21,18,.95);z-index:1000;display:none;align-items:flex-end;justify-content:center}
+        .modal-overlay.active{display:flex}
+        .modal{background:var(--bg-card);width:100%;max-width:430px;max-height:85vh;border-radius:20px 20px 0 0;padding:16px 20px 36px;overflow-y:auto}
+        .modal-handle{width:36px;height:4px;background:var(--mocha);border-radius:2px;margin:0 auto 14px}
+        .modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+        .modal-title{font-size:1.15rem;font-weight:600}
+        .modal-sub{font-size:.8rem;color:var(--cream-dim);margin-top:2px}
+        .modal-close{background:var(--bg-elevated);border:none;color:var(--cream-dim);width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+        
+        .form-section{margin-bottom:18px}
+        .form-title{font-size:.8rem;color:var(--gold);margin-bottom:10px;font-weight:600}
+        .form-row{display:flex;gap:10px;margin-bottom:10px}
+        .form-group{flex:1}
+        .form-label{display:block;font-size:.65rem;color:var(--cream-dim);margin-bottom:5px;text-transform:uppercase;letter-spacing:.03em}
+        .form-input{width:100%;background:var(--bg);border:1px solid var(--mocha);border-radius:10px;padding:12px 14px;color:var(--cream);font-size:.9rem;font-family:var(--font)}
+        .form-input:focus{outline:none;border-color:var(--burgundy)}
+        
+        .conn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+        .conn-btn{aspect-ratio:1;border:2px solid var(--mocha);background:var(--bg);border-radius:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+        .conn-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15)}
+        .conn-btn .emoji{font-size:1.4rem}
+        .conn-btn .label{font-size:.55rem;color:var(--cream-dim)}
+        
+        .tempo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+        .tempo-btn{background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}
+        .tempo-btn.selected{border-color:var(--teal);background:rgba(45,74,71,.2)}
+        .tempo-btn .name{font-size:.75rem;font-weight:600}
+        .tempo-btn .desc{font-size:.55rem;color:var(--cream-dim)}
+        
+        .scan-grid{display:flex;gap:6px}
+        .scan-btn{flex:1;background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:10px;cursor:pointer;text-align:center;font-size:.75rem;color:var(--cream-dim)}
+        .scan-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15);color:var(--cream)}
+        
+        .metric-row{margin-bottom:14px}
+        .metric-header{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px}
+        .metric-header .name{color:var(--cream-dim)}
+        .metric-header .val{color:var(--burgundy);font-weight:600}
+        .metric-dots{display:flex;gap:6px}
+        .metric-dot{flex:1;height:10px;border-radius:5px;background:var(--mocha);cursor:pointer}
+        .metric-dot.filled{background:linear-gradient(90deg,var(--burgundy),var(--wine))}
+        
+        .booty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+        .booty-btn{background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center}
+        .booty-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15)}
+        .booty-btn .name{font-size:.65rem;color:var(--cream-dim)}
+        .booty-btn.selected .name{color:var(--cream)}
+        
+        .flex-section{margin-bottom:14px}
+        .flex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .flex-item{background:var(--bg);border:1px solid var(--mocha);border-radius:10px;padding:10px;text-align:center}
+        .flex-item .label{font-size:.6rem;color:var(--cream-dim);margin-bottom:4px}
+        .flex-item input{width:100%;background:transparent;border:none;color:var(--cream);font-size:1rem;font-weight:600;text-align:center;font-family:var(--font)}
+        .flex-item input::placeholder{color:var(--cream-dim)}
+        
+        .btn-save{width:100%;padding:14px;border-radius:24px;background:linear-gradient(135deg,var(--burgundy),var(--wine));border:none;color:var(--cream);font-size:.95rem;font-weight:600;cursor:pointer;margin-top:8px}
+        .btn-streak-modal{width:100%;padding:12px;border-radius:24px;background:var(--bg);border:2px solid var(--gold-dim);color:var(--gold);font-size:.85rem;cursor:pointer;margin-top:8px}
+        
+        .calendar-view{padding:20px}
+        .cal-month{margin-bottom:24px}
+        .cal-month-title{font-size:1.1rem;font-weight:600;margin-bottom:14px}
+        .cal-month-title span{color:var(--cream-dim);font-weight:400;margin-left:6px}
+        .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
+        .cal-weekday{text-align:center;font-size:.6rem;color:var(--cream-dim);font-weight:600;padding:6px}
+        .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+        .cal-day{aspect-ratio:1;border-radius:8px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;color:var(--cream-dim);position:relative}
+        .cal-day.empty{background:transparent;cursor:default}
+        .cal-day.done{background:var(--teal);color:var(--cream)}
+        .cal-day.streak{background:var(--gold-dim);color:var(--bg)}
+        .cal-day.current{border:2px solid var(--burgundy)}
+        .cal-day.future{opacity:.25}
+        .cal-day.outside{opacity:.1;cursor:default}
+        .cal-day .dot{position:absolute;width:4px;height:4px;border-radius:50%}
+        .cal-day .dot.top{top:3px}
+        .cal-day .dot.bottom{bottom:3px}
+        .cal-day .dot.menstrual{background:#d4a89a}
+        .cal-day .dot.follicular{background:#7ab3ad}
+        .cal-day .dot.ovulatory{background:var(--gold)}
+        .cal-day .dot.luteal{background:#c9868f}
+        
+        .progress-view{padding:20px}
+        .prog-card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:14px;padding:16px;margin-bottom:10px}
+        .prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+        .prog-title{font-size:.8rem;color:var(--cream-dim)}
+        .prog-val{font-size:1.2rem;font-weight:700}
+        .prog-bar{height:6px;background:var(--mocha);border-radius:3px;overflow:hidden}
+        .prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--burgundy),var(--wine))}
+        
+        .neural-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+        .neural-item{text-align:center}
+        .neural-item .emoji{font-size:1.2rem}
+        .neural-item .count{font-size:1rem;font-weight:700;margin-top:2px}
+        .neural-item .label{font-size:.55rem;color:var(--cream-dim)}
+        
+        .split-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+        .split-item{text-align:center}
+        .split-item .icon{font-size:1.3rem}
+        .split-item .val{font-size:1rem;font-weight:700;margin-top:2px}
+        .split-item .label{font-size:.55rem;color:var(--cream-dim)}
+        
+        .booty-chart{margin-top:12px}
+        .booty-row{margin-bottom:12px}
+        .booty-row-header{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:4px}
+        .booty-row-header .name{color:var(--cream-dim)}
+        .booty-row-header .val{color:var(--burgundy);font-weight:600}
+        .booty-bars{display:flex;gap:3px;height:32px;align-items:flex-end}
+        .booty-bar{flex:1;background:var(--mocha);border-radius:2px;min-height:4px}
+        .booty-bar.filled{background:linear-gradient(180deg,var(--burgundy),var(--wine))}
+        .booty-bar.current{border:1px solid var(--gold)}
+        
+        .flex-chart{margin-top:12px}
+        .flex-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--mocha)}
+        .flex-row:last-child{border-bottom:none}
+        .flex-row .name{font-size:.8rem;color:var(--cream-muted)}
+        .flex-row .val{font-size:.9rem;font-weight:600}
+        .flex-row .change{font-size:.7rem;margin-left:6px}
+        .flex-row .change.pos{color:var(--teal-light)}
+        .flex-row .change.neg{color:var(--burgundy)}
+        
+        .info-view{padding:20px}
+        .info-section{background:var(--bg-card);border:1px solid var(--mocha);border-radius:14px;padding:16px;margin-bottom:10px}
+        .info-title{font-size:1rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+        .info-text{font-size:.8rem;color:var(--cream-muted);line-height:1.6}
+        .info-text strong{color:var(--cream)}
+        
+        .settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--mocha)}
+        .settings-row:last-child{border-bottom:none}
+        .settings-label{font-size:.8rem;color:var(--cream-muted)}
+        .settings-input{background:var(--bg);border:1px solid var(--mocha);border-radius:8px;padding:8px 12px;color:var(--cream);font-size:.85rem;width:120px;text-align:right;font-family:var(--font)}
+        
+        .info-card{background:var(--bg);border-radius:12px;padding:14px;margin:8px 0;border-left:3px solid var(--gold)}
+        .info-card .title{font-size:.85rem;font-weight:600;color:var(--cream);margin-bottom:6px}
+        .info-card .desc{font-size:.75rem;color:var(--cream-muted);line-height:1.5}
+        .info-card .equip{font-size:.7rem;color:var(--gold);margin-top:6px}
+        
+        .cycle-card{background:var(--bg);border-radius:12px;padding:14px;margin:8px 0;border-left:3px solid}
+        .cycle-card.menstrual{border-color:#d4a89a}
+        .cycle-card.follicular{border-color:#7ab3ad}
+        .cycle-card.ovulatory{border-color:var(--gold)}
+        .cycle-card.luteal{border-color:#c9868f}
+        .cycle-card .title{font-size:.85rem;font-weight:600;margin-bottom:4px}
+        .cycle-card.menstrual .title{color:#d4a89a}
+        .cycle-card.follicular .title{color:#7ab3ad}
+        .cycle-card.ovulatory .title{color:var(--gold)}
+        .cycle-card.luteal .title{color:#c9868f}
+        .cycle-card .desc{font-size:.75rem;color:var(--cream-muted);line-height:1.5}
+        
+        .data-btns{display:flex;gap:8px;margin-top:12px}
+        .data-btn{flex:1;padding:12px;border-radius:12px;border:1px solid var(--mocha);background:var(--bg);color:var(--cream-dim);font-size:.8rem;cursor:pointer}
+        .data-btn:hover{border-color:var(--gold-dim);color:var(--cream)}
+        
+        .toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--cream);padding:12px 24px;border-radius:24px;font-size:.85rem;font-weight:500;z-index:2000;display:none}
+        .toast.error{background:var(--burgundy)}
+        .toast.show{display:block;animation:toast 2.5s ease}
+        @keyframes toast{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}85%{opacity:1}100%{opacity:0}}
     </style>
 </head>
 <body>
@@ -17,423 +290,461 @@
     <div class="toast" id="toast"></div>
     <input type="file" id="importFile" accept=".json" style="display:none">
     <script>
-const START_DATE=new Date(2026,0,11),STORAGE_KEY='miamiV12',BACKUP_KEYS=['miamiV12_bk1','miamiV12_bk2','miamiV12_bk3'];
+const START=new Date(2026,0,11),STORAGE='miamiV14',BACKUPS=['miamiV14_bk1','miamiV14_bk2','miamiV14_bk3'];
+const DEFAULTS={cycleStart:'2026-01-12',cycleLength:28,menstrualDays:5,proteinGoal:130,waterGoal:100};
 
-// Default settings (user can adjust)
-const DEFAULT_SETTINGS={cycleStart:'2026-01-12',cycleLength:28,menstrualDays:5};
-
-// Training phases (fixed structure, focus can be tweaked per run)
+// Training phases - adjusted for fast-twitch
 const PHASES=[
-    {num:1,name:'Fix the Signal',days:[1,14],load:'bodyweight',tempo:'slow',focus:'neural connection'},
-    {num:2,name:'Build Tissue',days:[15,37],load:'add weight',tempo:'controlled',focus:'progressive overload'},
-    {num:3,name:'Sculpt Shelf',days:[38,56],load:'moderate',tempo:'1¼ reps, slow eccentric',focus:'time under tension'},
-    {num:4,name:'Polish & Peak',days:[57,70],load:'light',tempo:'holds, pumps',focus:'peak & refine'}
+    {num:1,name:'Fix Signal',days:[1,14],reps:'Hold to fail',sets:'3-4',note:'Bodyweight. Slow. Connection before load.'},
+    {num:2,name:'Build',days:[15,37],reps:'6-10',sets:'4',note:'Heavy. Add weight when 🟢. Your fast-twitch responds to load.'},
+    {num:3,name:'Sculpt',days:[38,56],reps:'8-12',sets:'4',note:'Moderate load. 1¼ reps. Slow eccentric.'},
+    {num:4,name:'Peak',days:[57,70],reps:'10-15',sets:'3-4',note:'Pump focus. Holds. Finishers.'}
 ];
 
-// Cycle phases with rules
-const CYCLE_PHASES=[
-    {name:'Menstrual',daysStart:1,daysEnd:5,icon:'🩸',color:'#ef4444',rule:'No PR. Keep connection 🟢+. Lighter load, higher reps.'},
-    {name:'Follicular',daysStart:6,daysEnd:13,icon:'🌱',color:'#3b82f6',rule:'Add load if 🟢/✨. Progressive overload window.'},
-    {name:'Ovulatory',daysStart:14,daysEnd:17,icon:'⚡',color:'#eab308',rule:'PR window. Push top sets. Max strength.'},
-    {name:'Luteal',daysStart:18,daysEnd:28,icon:'🌙',color:'#a855f7',rule:'Shape window. More abduction, pumps. No grinding.'}
+// Cycle phases
+const CYCLE=[
+    {name:'Menstrual',start:1,icon:'🩸',rule:'No PR. Connection focus. Light.'},
+    {name:'Follicular',start:6,icon:'🌱',rule:'Add load if 🟢. Growth window.'},
+    {name:'Ovulatory',start:14,icon:'⚡',rule:'PR window. Push hard.'},
+    {name:'Luteal',start:18,icon:'🌙',rule:'Shape. More abduction. No grinding.'}
 ];
 
-// TEMPLATES - the core exercise patterns
+const CYCLE_MODS={menstrual:'Reduce',follicular:'Build',ovulatory:'Peak',luteal:'Shape'};
+
+// 3D Templates - YOUR equipment
 const TEMPLATES={
-    'lower-a':{name:'Lower A: Shelf',icon:'🏋️',exercises:['Hip Thrust (main)','Abduction (main)','Lunge pattern','Finisher: frog pumps']},
-    'lower-b':{name:'Lower B: Tie-in',icon:'💪',exercises:['Hinge: RDL/B-stance','Step-up/lunge','Back extension','Abduction finisher']},
-    'lower-c':{name:'Lower C: Upper',icon:'🔥',exercises:['Single-leg thrust','Kickback pattern','Curtsy/lateral','Abduction burnout']},
-    'tempo':{name:'Tempo',icon:'🧘',exercises:['Tempo class','Active recovery']},
-    'tempo-scan':{name:'Tempo + Scan',icon:'🍑',exercises:['Tempo class','Body scan']}
+    'lower-a':{
+        name:'Shelf + Side',target:'Upper glute + medius',icon:'🍑',
+        exercises:[
+            'Hip thrust with Tempo barbell + squat pad — 4×6-10, pause top',
+            'Finer Form bench back ext OR glute bridge iso — 3×hold',
+            'Blogilates heavy band seated abduction — 4×15',
+            'Lateral step-ups on bench — 3×10/side'
+        ],
+        finisher:'Frog pumps 2×20 + band abduction burnout 1 min',
+        equipment:'Tempo barbell · Squat pad · Finer Form bench · Blogilates bands'
+    },
+    'lower-b':{
+        name:'Underbutt',target:'Lower glute + ham tie-in',icon:'🔥',
+        exercises:[
+            'B-stance RDL with Tempo barbell — 4×8/side',
+            'Step-ups on Finer Form bench (high) — 3×10/side',
+            'Hyperextensions on Finer Form roman chair — 3×12',
+            'Yoga ball ham curls — 3×12'
+        ],
+        finisher:'Kickbacks with ankle weights 2×15/side + 90s glute stretch',
+        equipment:'Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights'
+    },
+    'lower-c':{
+        name:'Side Dips',target:'Medius + minimus',icon:'✨',
+        exercises:[
+            'Single-leg hip thrust on bench — 3×8/side',
+            'Cossack squats (bodyweight) — 3×10/side',
+            'Side-lying leg raises with ankle weight — 3×15/side',
+            'Blogilates band walks — 3×20 steps'
+        ],
+        finisher:'Standing abduction hold 45s/side + bridge pulses 2 min',
+        equipment:'Finer Form bench · Ankle weights · Blogilates bands (all levels)'
+    },
+    'tempo':{name:'Tempo',target:'Recovery',icon:'🧘',exercises:['Tempo Studio class'],finisher:'',equipment:'Tempo Studio'},
+    'tempo-scan':{name:'Tempo + Scan',target:'Recovery + Measure',icon:'📊',exercises:['Tempo Studio class','Body scan'],finisher:'',equipment:'Tempo Studio · Zozofit'}
 };
 
-// PHASE MODIFIERS - how to execute based on phase
-const PHASE_MODS={
-    1:{mod:'Bodyweight/light only. Super slow. Focus on feeling glutes before, during, after.',sets:'3-4',reps:'Hold until failure',rest:'As needed'},
-    2:{mod:'Add weight when 🟢. Controlled tempo. Build the connection under load.',sets:'3-4',reps:'8-12',rest:'90s'},
-    3:{mod:'1¼ reps. Slow eccentrics. Pause at stretch. More abduction volume.',sets:'4',reps:'10-15',rest:'60-90s'},
-    4:{mod:'Lighter load. Holds at top. High rep finishers. Peak pump.',sets:'3-4',reps:'12-20',rest:'45-60s'}
-};
+const RESET_STEPS=['Right hip flexor stretch — 60s (squeeze glute)','Right single-leg glute bridge hold — 45s','Right side-lying leg raises — 20 slow','Dead bug — 60s'];
 
-// CYCLE MODIFIERS - adjustments based on cycle
-const CYCLE_MODS={
-    menstrual:{intensity:'🔻 Reduce',mod:'Go lighter. Connection over load. Stop if fatigued.'},
-    follicular:{intensity:'📈 Build',mod:'Add weight if connection solid. Push new patterns.'},
-    ovulatory:{intensity:'🔥 Peak',mod:'PR window. Push top sets. Max effort if 🟢+.'},
-    luteal:{intensity:'🎯 Shape',mod:'More reps, less max weight. Pumps and abduction.'}
-};
+const DAYS={0:'tempo-scan',1:'lower-a',2:'tempo',3:'lower-b',4:'tempo',5:'lower-c',6:'tempo'};
+const BOOTY=['Perky','Bubbly','Juicy','Low-Key'];
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DAYS_S=['S','M','T','W','T','F','S'];
 
-const DAY_TYPES={0:'tempo-scan',1:'lower-a',2:'tempo',3:'lower-b',4:'tempo',5:'lower-c',6:'tempo'};
-const BOOTY_TYPES=['Perky','Bubbly','Juicy','Low-Key'];
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],DAYS_S=['S','M','T','W','T','F','S'];
+let state={view:'today',modal:false,selDay:null,data:null};
 
-let state={view:'today',modalOpen:false,selectedDay:null,data:null};
+function getCycleDay(date,s){const d=new Date(date);d.setHours(0,0,0,0);const cs=new Date(s.cycleStart);cs.setHours(0,0,0,0);const diff=Math.floor((d-cs)/864e5);return((diff%s.cycleLength)+s.cycleLength)%s.cycleLength+1}
+function getCyclePhase(date,s){const cd=getCycleDay(date,s);const md=s.menstrualDays,cl=s.cycleLength;if(cd<=md)return CYCLE[0];if(cd<=Math.floor(cl/2)-1)return CYCLE[1];if(cd<=Math.floor(cl/2)+3)return CYCLE[2];return CYCLE[3]}
+function getCycleName(date,s){return getCyclePhase(date,s).name.toLowerCase()}
 
-// Cycle calculation using settings
-function getCycleDay(date,settings){
-    const d=new Date(date);d.setHours(0,0,0,0);
-    const cs=new Date(settings.cycleStart);cs.setHours(0,0,0,0);
-    const diff=Math.floor((d-cs)/86400000);
-    const cycleDay=((diff%settings.cycleLength)+settings.cycleLength)%settings.cycleLength+1;
-    return cycleDay;
-}
-function getCyclePhase(date,settings){
-    const cd=getCycleDay(date,settings);
-    // Adjust phase boundaries based on menstrualDays
-    const phases=[
-        {name:'Menstrual',start:1,end:settings.menstrualDays},
-        {name:'Follicular',start:settings.menstrualDays+1,end:Math.floor(settings.cycleLength/2)-1},
-        {name:'Ovulatory',start:Math.floor(settings.cycleLength/2),end:Math.floor(settings.cycleLength/2)+3},
-        {name:'Luteal',start:Math.floor(settings.cycleLength/2)+4,end:settings.cycleLength}
-    ];
-    const phase=phases.find(p=>cd>=p.start&&cd<=p.end)||phases[0];
-    const fullPhase=CYCLE_PHASES.find(cp=>cp.name===phase.name);
-    return fullPhase;
-}
-function getCyclePhaseName(date,settings){return getCyclePhase(date,settings).name.toLowerCase()}
+function rotate(){try{const b2=localStorage.getItem(BACKUPS[1]),b1=localStorage.getItem(BACKUPS[0]),cur=localStorage.getItem(STORAGE);if(b2)localStorage.setItem(BACKUPS[2],b2);if(b1)localStorage.setItem(BACKUPS[1],b1);if(cur)localStorage.setItem(BACKUPS[0],cur)}catch(e){}}
+function save(){try{rotate();localStorage.setItem(STORAGE,JSON.stringify(state.data));return true}catch(e){return false}}
+function load(){let d=null;try{const r=localStorage.getItem(STORAGE);if(r)d=JSON.parse(r)}catch(e){}if(!d||!d.days){for(const k of BACKUPS){try{const r=localStorage.getItem(k);if(r){d=JSON.parse(r);if(d&&d.days){toast('Restored');break}}}catch(e){}}}return d}
+function toast(m,err){const t=document.getElementById('toast');t.textContent=m;t.className='toast show'+(err?' error':'');setTimeout(()=>t.className='toast',2500)}
+function exp(){const b=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`miami-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(u);toast('Exported')}
+function imp(){document.getElementById('importFile').click()}
+document.getElementById('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!d.days)throw 0;state.data=d;state.data.today=getToday();save();render();toast('Imported')}catch(e){toast('Invalid',1)}};r.readAsText(f);e.target.value=''});
 
-// Storage
-function rotateBackups(){try{const b2=localStorage.getItem(BACKUP_KEYS[1]);const b1=localStorage.getItem(BACKUP_KEYS[0]);const cur=localStorage.getItem(STORAGE_KEY);if(b2)localStorage.setItem(BACKUP_KEYS[2],b2);if(b1)localStorage.setItem(BACKUP_KEYS[1],b1);if(cur)localStorage.setItem(BACKUP_KEYS[0],cur)}catch(e){}}
-function save(){try{rotateBackups();localStorage.setItem(STORAGE_KEY,JSON.stringify(state.data));return true}catch(e){return false}}
-function loadWithRecovery(){let data=null;try{const raw=localStorage.getItem(STORAGE_KEY);if(raw)data=JSON.parse(raw)}catch(e){}if(!data||!data.days){for(const key of BACKUP_KEYS){try{const raw=localStorage.getItem(key);if(raw){data=JSON.parse(raw);if(data&&data.days){showToast('Restored from backup');break}}}catch(e){}}}return data}
-function showToast(msg,isError=false){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(isError?' error':'');setTimeout(()=>t.className='toast',2000)}
-function exportData(){const blob=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`miami-ready-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);showToast('Exported!')}
-function importData(){document.getElementById('importFile').click()}
-function handleImport(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){try{const data=JSON.parse(ev.target.result);if(!data.days||data.days.length!==70)throw new Error();state.data=data;state.data.currentDay=getToday();save();render();showToast('Imported!')}catch(err){showToast('Invalid file',true)}};reader.readAsText(file);e.target.value=''}
-document.getElementById('importFile').addEventListener('change',handleImport);
-
-// Helpers
-const getDate=n=>{const d=new Date(START_DATE);d.setDate(d.getDate()+n-1);return d};
-const getDayNum=d=>Math.floor((d-START_DATE)/86400000)+1;
-const fmt=(d,f)=>f==='full'?`${DAYS[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`:f==='medium'?`${MONTHS[d.getMonth()]} ${d.getDate()}`:`${d.getMonth()+1}/${d.getDate()}`;
-const getType=n=>DAY_TYPES[getDate(n).getDay()];
+const getDate=n=>{const d=new Date(START);d.setDate(d.getDate()+n-1);return d};
+const getDayNum=d=>Math.floor((d-START)/864e5)+1;
+const fmt=d=>`${DAYS_FULL[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
+const fmtShort=d=>`${MONTHS[d.getMonth()]} ${d.getDate()}`;
+const getType=n=>DAYS[getDate(n).getDay()];
 const getPhase=n=>PHASES.find(p=>n>=p.days[0]&&n<=p.days[1])||PHASES[0];
-const getToday=()=>{const t=new Date();t.setHours(0,0,0,0);const s=new Date(START_DATE);s.setHours(0,0,0,0);return t<s?1:Math.min(Math.max(Math.floor((t-s)/86400000)+1,1),70)};
-const getWeekNum=n=>Math.ceil(n/7);
-const getTemplate=type=>TEMPLATES[type]||TEMPLATES['tempo'];
+const getToday=()=>{const t=new Date();t.setHours(0,0,0,0);const s=new Date(START);s.setHours(0,0,0,0);return t<s?1:Math.min(Math.max(Math.floor((t-s)/864e5)+1,1),70)};
+const getWeek=n=>Math.ceil(n/7);
 
 function init(){
-    const loaded=loadWithRecovery();
-    if(loaded&&loaded.days&&loaded.days.length===70){
-        state.data=loaded;
-        // Ensure settings exist
-        if(!state.data.settings)state.data.settings={...DEFAULT_SETTINGS};
-        state.data.currentDay=getToday();
+    const ld=load();
+    if(ld&&ld.days&&ld.days.length===70){
+        state.data=ld;
+        if(!state.data.settings)state.data.settings={...DEFAULTS};
+        state.data.today=getToday();
     }else{
         const days=[];
         for(let i=1;i<=70;i++){
-            const date=getDate(i);
-            const type=getType(i);
-            const phase=getPhase(i);
             days.push({
-                number:i,dateISO:date.toISOString().slice(0,10),phase:phase.num,dayType:type,
-                completed:false,streakSave:false,
-                connection:null,notes:'',proteinHit:false,hipPain:null,
-                // Top sets (lower days only)
-                htWeight:null,htReps:null,rdlWeight:null,rdlReps:null,
-                // Tempo
-                tempoClass:'',tempoDuration:null,
-                // Scan
-                scanDone:false,scanType:null,roundness:null,lift:null,protrusion:null,bootyType:null,bodyFat:null
+                num:i,date:getDate(i).toISOString().slice(0,10),phase:getPhase(i).num,type:getType(i),
+                done:false,streak:false,
+                conn:null,notes:'',
+                htWt:null,htReps:null,rdlWt:null,rdlReps:null,
+                tempo:'',tempoDur:null,
+                protein:0,water:0,
+                scan:null,round:null,lift:null,prot:null,bootyType:null,
+                flexL:null,flexR:null,flexM:null
             });
         }
-        state.data={days,currentDay:getToday(),settings:{...DEFAULT_SETTINGS},version:4};
+        state.data={days,today:getToday(),settings:{...DEFAULTS},v:6};
         save();
     }
 }
 
-const render=()=>document.getElementById('app').innerHTML=(state.view==='today'?renderToday():state.view==='calendar'?renderCal():state.view==='progress'?renderProg():renderInfo())+renderNav()+renderModal();
-function renderToday(){
-    const d=state.data,today=d.days[d.currentDay-1],done=d.days.filter(x=>x.completed).length,streaks=d.days.filter(x=>x.streakSave).length;
-    const prog=(done/70)*360,date=getDate(d.currentDay),end=getDate(70);
-    const type=getType(d.currentDay),phase=getPhase(d.currentDay),template=getTemplate(type);
-    const cyclePhase=getCyclePhase(date,d.settings),cycleName=cyclePhase.name.toLowerCase();
-    const cycleMod=CYCLE_MODS[cycleName],phaseMod=PHASE_MODS[phase.num];
-    const lastConn=[...d.days].reverse().find(x=>x.connection)?.connection;
-    const lastHT=[...d.days].reverse().find(x=>x.htWeight)?.htWeight;
+const render=()=>document.getElementById('app').innerHTML=(state.view==='today'?rToday():state.view==='calendar'?rCal():state.view==='progress'?rProg():rInfo())+rNav()+rModal();
+function rToday(){
+    const d=state.data,day=d.days[d.today-1],done=d.days.filter(x=>x.done).length;
+    const date=getDate(d.today),type=getType(d.today),phase=getPhase(d.today),tmpl=TEMPLATES[type];
+    const cycle=getCyclePhase(date,d.settings),cycleName=cycle.name.toLowerCase();
+    const lastConn=[...d.days].reverse().find(x=>x.conn)?.conn;
+    const lastHT=[...d.days].reverse().find(x=>x.htWt)?.htWt;
     const emoji={red:'🔴',yellow:'🟡',green:'🟢',sparkles:'✨'};
-    const ws=d.currentDay-date.getDay(),week=[];
-    for(let i=0;i<7;i++){const n=ws+i;if(n>=1&&n<=70)week.push({num:n,day:d.days[n-1],type:getType(n),date:getDate(n)})}
     
-    let btnClass=today.completed?'done':today.streakSave?'streak':'';
-    let btnText=today.completed?'✓ Logged':today.streakSave?'✓ Streak Saved':'Log Today →';
+    const ws=d.today-date.getDay(),week=[];
+    for(let i=0;i<7;i++){const n=ws+i;if(n>=1&&n<=70)week.push({n,day:d.days[n-1],date:getDate(n)})}
     
-    // Build workout description from template + modifiers
-    let workoutDesc=template.exercises.map(e=>'• '+e).join('<br>');
-    workoutDesc+=`<br><br><strong>Phase ${phase.num}:</strong> ${phaseMod.mod}`;
+    const prog=(done/70)*360;
+    let btn=day.done?'btn-done':day.streak?'btn-streak':'btn-primary';
+    let btnTxt=day.done?'Logged ✓':day.streak?'Streak Saved':'Log Today';
     
-    // Today's rule from cycle
-    const todayRule=cyclePhase.rule;
+    // Daily checklist items
+    const proteinPct=Math.min((day.protein/d.settings.proteinGoal)*100,100);
+    const waterPct=Math.min((day.water/d.settings.waterGoal)*100,100);
     
-    let sum='';
-    if(today.completed){
+    let summary='';
+    if(day.done){
         if(type.startsWith('lower')){
-            sum=`<div class="summary-row"><span class="summary-label">Connection</span><span class="summary-value">${emoji[today.connection]||'—'}</span></div>`;
-            if(today.htWeight)sum+=`<div class="summary-row"><span class="summary-label">Hip Thrust</span><span class="summary-value">${today.htWeight}lb × ${today.htReps||'—'}</span></div>`;
-            if(today.rdlWeight)sum+=`<div class="summary-row"><span class="summary-label">RDL</span><span class="summary-value">${today.rdlWeight}lb × ${today.rdlReps||'—'}</span></div>`;
-        }else{
-            if(today.tempoClass)sum+=`<div class="summary-row"><span class="summary-label">Class</span><span class="summary-value">${today.tempoClass}</span></div>`;
-            if(today.tempoDuration)sum+=`<div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">${today.tempoDuration} min</span></div>`;
+            summary=`<div class="summary-row"><span class="summary-label">Connection</span><span class="summary-value">${emoji[day.conn]||'—'}</span></div>`;
+            if(day.htWt)summary+=`<div class="summary-row"><span class="summary-label">Hip Thrust</span><span class="summary-value">${day.htWt}lb × ${day.htReps||'?'}</span></div>`;
+        }else if(day.tempo){
+            summary=`<div class="summary-row"><span class="summary-label">Class</span><span class="summary-value">${day.tempo}</span></div>`;
         }
-        if(type==='tempo-scan'&&today.scanDone)sum+=`<div class="summary-row"><span class="summary-label">Booty</span><span class="summary-value">${today.bootyType||'—'}</span></div>`;
-        sum+=`<div class="summary-row"><span class="summary-label">Protein</span><span class="summary-value">${today.proteinHit?'✓':'—'}</span></div>`;
-    }else if(today.streakSave){
-        sum=`<div class="summary-row"><span class="summary-label">Status</span><span class="summary-value">Streak Save (10 min)</span></div>${today.notes?`<div class="summary-row"><span class="summary-label">Note</span><span class="summary-value">${today.notes}</span></div>`:''}`
+        summary+=`<div class="summary-row"><span class="summary-label">Protein</span><span class="summary-value">${day.protein}g / ${d.settings.proteinGoal}g</span></div>`;
+        summary+=`<div class="summary-row"><span class="summary-label">Water</span><span class="summary-value">${day.water}oz / ${d.settings.waterGoal}oz</span></div>`;
     }
     
     return`<div class="header">
-        <div class="date-display">${fmt(date,'full')}</div>
-        <div class="day-ring" style="--progress-rotation:${prog}deg"><div class="day-num">${d.currentDay}</div><div class="day-label">of 70</div></div>
-        <div class="phase-badges">
-            <span class="phase-badge p${phase.num}">P${phase.num}: ${phase.name}</span>
-            <span class="cycle-badge ${cycleName}">${cyclePhase.icon} ${cyclePhase.name}</span>
+        <div class="header-eyebrow">Day ${d.today} of 70</div>
+        <div class="day-ring" style="--progress:${prog}deg"><div class="day-num">${d.today}</div><div class="day-sub">${fmt(date)}</div></div>
+        <div class="badges">
+            <span class="badge phase">P${phase.num} ${phase.name}</span>
+            <span class="badge ${cycleName}">${cycle.icon} ${cycle.name}</span>
         </div>
-        <div class="day-type-badge ${type}">${template.icon} ${template.name}</div>
     </div>
-    <div class="today-rule">
-        <div class="today-rule-label">Today's Rule (${cyclePhase.name})</div>
-        <div class="today-rule-text">${todayRule}</div>
+    <div class="day-type"><div class="day-type-icon">${tmpl.icon}</div><div class="day-type-name">${tmpl.name}</div><div class="day-type-target">${tmpl.target}</div></div>
+    <div class="rule-card"><div class="rule-label">${cycle.name} Rule</div><div class="rule-text">${cycle.rule}</div></div>
+    
+    ${type.startsWith('lower')?`
+    <div class="reset-card" onclick="this.classList.toggle('open')">
+        <div class="reset-header"><div class="reset-title">⚡ Right-Side Reset (3 min)</div><div class="reset-hint">tap to expand</div></div>
+        <div class="reset-body">${RESET_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--gold)">All exercises: right side first</em></div>
     </div>
-    <div class="workout-preview">
-        <div class="workout-preview-title">${template.name} • ${phaseMod.sets} sets × ${phaseMod.reps}</div>
-        <div class="workout-preview-list">${workoutDesc}</div>
+    <div class="card">
+        <div class="card-header"><div class="card-title">Today's Work</div><div class="card-badge">${phase.sets} × ${phase.reps}</div></div>
+        <ul class="card-list">${tmpl.exercises.map(e=>`<li>${e}</li>`).join('')}</ul>
+        <div class="card-note">${tmpl.finisher}</div>
+        <div class="card-note gold">${tmpl.equipment}</div>
     </div>
-    <button class="log-btn ${btnClass}" onclick="openModal()">${btnText}</button>
-    ${today.completed||today.streakSave?`<div class="summary"><div class="summary-card">${sum}</div></div>`:''}
-    <div class="week-schedule">
-        <div class="week-header"><div class="week-title">This Week</div><div class="week-dates">${fmt(getDate(Math.max(ws,1)),'medium')} - ${fmt(getDate(Math.min(ws+6,70)),'medium')}</div></div>
-        <div class="week-days">${week.map(w=>{const wt=getTemplate(w.type);return`<div class="week-day ${w.num===d.currentDay?'current':''} ${w.day.completed?'done':''} ${w.day.streakSave?'streak':''} ${w.num>d.currentDay?'future':''}" onclick="openModal(${w.num})"><div class="name">${DAYS_S[w.date.getDay()]}</div><div class="date">${w.date.getDate()}</div><div class="type">${wt.icon}</div></div>`}).join('')}</div>
+    `:''}
+    
+    <div class="daily-checklist">
+        <div class="checklist-title">Today's Targets</div>
+        <div class="checklist-grid">
+            <div class="check-item ${day.protein>=d.settings.proteinGoal?'done':''}" onclick="openModal()"><div class="icon">🥩</div><div class="label">Protein</div><div class="value">${day.protein}/${d.settings.proteinGoal}g</div></div>
+            <div class="check-item ${day.water>=d.settings.waterGoal?'done':''}" onclick="openModal()"><div class="icon">💧</div><div class="label">Water</div><div class="value">${day.water}/${d.settings.waterGoal}oz</div></div>
+            <div class="check-item ${day.flexL||day.flexR||day.flexM?'done':''}" onclick="openModal()"><div class="icon">🧘</div><div class="label">Stretch</div><div class="value">${day.flexL||day.flexR||day.flexM?'✓':'—'}</div></div>
+            <div class="check-item ${day.done||day.streak?'done':''}" onclick="openModal()"><div class="icon">${tmpl.icon}</div><div class="label">Workout</div><div class="value">${day.done?'✓':day.streak?'Streak':'—'}</div></div>
+        </div>
     </div>
-    <div class="stats">
-        <div class="stat"><div class="stat-value">${done}</div><div class="stat-label">Done</div></div>
-        <div class="stat"><div class="stat-value">${emoji[lastConn]||'—'}</div><div class="stat-label">Neural</div></div>
-        <div class="stat"><div class="stat-value">${lastHT||'—'}</div><div class="stat-label">HT lbs</div></div>
-        <div class="stat"><div class="stat-value">${70-d.currentDay+1}</div><div class="stat-label">Left</div></div>
+    
+    <button class="${btn} btn" onclick="openModal()">${btnTxt}</button>
+    
+    ${day.done||day.streak?`<div class="summary"><div class="summary-card">${summary}</div></div>`:''}
+    
+    <div class="week-section">
+        <div class="section-header"><div class="section-title">This Week</div><div class="section-sub">${fmtShort(getDate(Math.max(ws,1)))} – ${fmtShort(getDate(Math.min(ws+6,70)))}</div></div>
+        <div class="week-grid">${week.map(w=>{const t=TEMPLATES[getType(w.n)];return`<div class="week-day ${w.n===d.today?'current':''} ${w.day.done?'done':''} ${w.day.streak?'streak':''} ${w.n>d.today?'future':''}" onclick="openModal(${w.n})"><div class="d-name">${DAYS_S[w.date.getDay()]}</div><div class="d-num">${w.date.getDate()}</div><div class="d-icon">${t.icon}</div></div>`}).join('')}</div>
     </div>
-    <div class="end-date"><div class="label">Miami Ready</div><div class="date">${fmt(end,'full')}</div></div>
-    <div class="mini-cal"><div class="mini-cal-header"><div class="mini-cal-title">70 Days</div></div><div class="mini-cal-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.completed?'done':''} ${x.streakSave?'streak':''} ${i+1===d.currentDay?'current':''} ${i+1>d.currentDay?'future':''}"></div>`).join('')}</div></div>`;
+    
+    <div class="stats-grid">
+        <div class="stat"><div class="stat-val">${done}</div><div class="stat-label">Done</div></div>
+        <div class="stat"><div class="stat-val">${emoji[lastConn]||'—'}</div><div class="stat-label">Neural</div></div>
+        <div class="stat"><div class="stat-val">${lastHT||'—'}</div><div class="stat-label">HT lbs</div></div>
+        <div class="stat"><div class="stat-val">${70-d.today+1}</div><div class="stat-label">Left</div></div>
+    </div>
+    
+    <div class="miami-card"><div class="miami-label">Miami Ready</div><div class="miami-date">${MONTHS[getDate(70).getMonth()]} ${getDate(70).getDate()}, 2026</div></div>
+    
+    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${x.streak?'streak':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}"></div>`).join('')}</div></div>`;
 }
-
-function renderCal(){
+function rCal(){
     const d=state.data,months=[];
-    let cur=new Date(START_DATE.getFullYear(),START_DATE.getMonth(),1);
+    let cur=new Date(START.getFullYear(),START.getMonth(),1);
     const last=new Date(getDate(70).getFullYear(),getDate(70).getMonth(),1);
     while(cur<=last){months.push(new Date(cur));cur.setMonth(cur.getMonth()+1)}
+    
     let h='<div class="calendar-view">';
     for(const m of months){
         const y=m.getFullYear(),mi=m.getMonth(),first=new Date(y,mi,1).getDay(),days=new Date(y,mi+1,0).getDate();
-        h+=`<div class="cal-month"><div class="cal-month-header"><span class="cal-month-title">${MONTHS[mi]}</span><span class="cal-month-year">${y}</span></div><div class="cal-weekdays">${DAYS_S.map(x=>`<div class="cal-weekday">${x}</div>`).join('')}</div><div class="cal-grid">`;
+        h+=`<div class="cal-month"><div class="cal-month-title">${MONTHS[mi]} <span>${y}</span></div><div class="cal-weekdays">${DAYS_S.map(x=>`<div class="cal-weekday">${x}</div>`).join('')}</div><div class="cal-grid">`;
         for(let i=0;i<first;i++)h+='<div class="cal-day empty"></div>';
         for(let day=1;day<=days;day++){
             const date=new Date(y,mi,day),dn=getDayNum(date);
             if(dn>=1&&dn<=70){
-                const dd=d.days[dn-1],type=getType(dn),cycleName=getCyclePhaseName(date,d.settings);
-                h+=`<div class="cal-day ${dd.completed?'done':''} ${dd.streakSave?'streak':''} ${dn===d.currentDay?'current':''} ${dn>d.currentDay?'future':''}" onclick="openModal(${dn})">${day}<div class="type-dot ${type}"></div><div class="cycle-dot ${cycleName}"></div></div>`;
+                const dd=d.days[dn-1],cn=getCycleName(date,d.settings);
+                h+=`<div class="cal-day ${dd.done?'done':''} ${dd.streak?'streak':''} ${dn===d.today?'current':''} ${dn>d.today?'future':''}" onclick="openModal(${dn})">${day}<div class="dot top ${cn}"></div></div>`;
             }else h+=`<div class="cal-day outside">${day}</div>`;
         }
         h+='</div></div>';
     }
     return h+'</div>';
 }
-function renderProg(){
-    const d=state.data,done=d.days.filter(x=>x.completed).length,streaks=d.days.filter(x=>x.streakSave).length;
-    const lowerA=d.days.filter(x=>x.dayType==='lower-a'&&x.completed).length,lowerAT=d.days.filter(x=>x.dayType==='lower-a').length;
-    const lowerB=d.days.filter(x=>x.dayType==='lower-b'&&x.completed).length,lowerBT=d.days.filter(x=>x.dayType==='lower-b').length;
-    const lowerC=d.days.filter(x=>x.dayType==='lower-c'&&x.completed).length,lowerCT=d.days.filter(x=>x.dayType==='lower-c').length;
-    const tempo=d.days.filter(x=>(x.dayType==='tempo'||x.dayType==='tempo-scan')&&x.completed).length;
-    const tempoT=d.days.filter(x=>x.dayType==='tempo'||x.dayType==='tempo-scan').length;
+
+function rProg(){
+    const d=state.data,done=d.days.filter(x=>x.done).length,streaks=d.days.filter(x=>x.streak).length;
+    const la=d.days.filter(x=>x.type==='lower-a'&&x.done).length,laT=d.days.filter(x=>x.type==='lower-a').length;
+    const lb=d.days.filter(x=>x.type==='lower-b'&&x.done).length,lbT=d.days.filter(x=>x.type==='lower-b').length;
+    const lc=d.days.filter(x=>x.type==='lower-c'&&x.done).length,lcT=d.days.filter(x=>x.type==='lower-c').length;
     
-    // Top set progression
-    const htHistory=d.days.filter(x=>x.htWeight).map(x=>({day:x.number,wt:x.htWeight,reps:x.htReps}));
-    const maxHT=htHistory.length?Math.max(...htHistory.map(x=>x.wt)):0;
-    const lastHT=htHistory.length?htHistory[htHistory.length-1]:null;
+    const htHist=d.days.filter(x=>x.htWt).map(x=>({d:x.num,w:x.htWt,r:x.htReps}));
+    const maxHT=htHist.length?Math.max(...htHist.map(x=>x.w)):0;
+    const lastHT=htHist[htHist.length-1];
     
-    const cn={red:0,yellow:0,green:0,sparkles:0};d.days.forEach(x=>{if(x.connection)cn[x.connection]++});
+    const cn={red:0,yellow:0,green:0,sparkles:0};d.days.forEach(x=>{if(x.conn)cn[x.conn]++});
     
-    const scans=d.days.filter(x=>x.scanDone&&x.roundness),weeklyScans=[];
-    for(let w=1;w<=10;w++){const weekDays=d.days.filter(x=>getWeekNum(x.number)===w&&x.scanDone&&x.roundness);if(weekDays.length>0){const last=weekDays[weekDays.length-1];weeklyScans.push({week:w,r:last.roundness,l:last.lift,p:last.protrusion,type:last.bootyType})}else weeklyScans.push({week:w,r:null,l:null,p:null,type:null})}
-    const currentWeek=getWeekNum(d.currentDay),latestScan=scans[scans.length-1],firstScan=scans[0];
+    const scans=d.days.filter(x=>x.scan&&x.round);
+    const latestScan=scans[scans.length-1],firstScan=scans[0];
+    const weeks=[];for(let w=1;w<=10;w++){const wd=d.days.filter(x=>getWeek(x.num)===w&&x.round);weeks.push(wd.length?wd[wd.length-1]:{round:null,lift:null,prot:null})}
+    const cw=getWeek(d.today);
     
-    const renderBootyMetric=(name,key)=>{
-        let h=`<div class="booty-metric"><div class="booty-metric-header"><span class="booty-metric-name">${name}</span><span class="booty-metric-current">${latestScan?latestScan[key]+'/5':'—'}</span></div><div class="booty-weeks">`;
-        for(let w=1;w<=10;w++){const ws=weeklyScans.find(x=>x.week===w);const val=ws&&ws[key]?ws[key]:0;const height=val?(val/5)*100:10;h+=`<div class="booty-week ${val?'filled':''} ${w===currentWeek?'current':''}" style="height:${height}%"></div>`}
-        return h+'</div></div>';
+    const renderBooty=(name,key)=>{
+        const val=latestScan?latestScan[key]:null;
+        return`<div class="booty-row"><div class="booty-row-header"><span class="name">${name}</span><span class="val">${val||'—'}/5</span></div><div class="booty-bars">${weeks.map((w,i)=>{const v=w[key];const h=v?(v/5)*100:8;return`<div class="booty-bar ${v?'filled':''} ${i+1===cw?'current':''}" style="height:${h}%"></div>`}).join('')}</div></div>`;
     };
     
-    let scanSummary=latestScan?`Last: Week ${getWeekNum(d.days.indexOf(latestScan)+1)} • ${latestScan.type||'—'}`:'No scans yet';
-    if(firstScan&&latestScan&&firstScan!==latestScan){const rD=latestScan.r-firstScan.r,lD=latestScan.l-firstScan.l,pD=latestScan.p-firstScan.p;scanSummary+=` | Δ R${rD>=0?'+':''}${rD} L${lD>=0?'+':''}${lD} P${pD>=0?'+':''}${pD}`}
+    // Flexibility tracking
+    const flexHist=d.days.filter(x=>x.flexL||x.flexR||x.flexM);
+    const latestFlex=flexHist[flexHist.length-1],firstFlex=flexHist[0];
     
-    const phase=getPhase(d.currentDay);
-    const todayDate=getDate(d.currentDay);
-    const cyclePhase=getCyclePhase(todayDate,d.settings);
+    // Nutrition averages
+    const nutDays=d.days.filter(x=>x.done||x.streak);
+    const avgProtein=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.protein,0)/nutDays.length):0;
+    const avgWater=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.water,0)/nutDays.length):0;
+    const proteinHits=nutDays.filter(x=>x.protein>=d.settings.proteinGoal).length;
+    const waterHits=nutDays.filter(x=>x.water>=d.settings.waterGoal).length;
+    
+    const phase=getPhase(d.today),cycle=getCyclePhase(getDate(d.today),d.settings);
     
     return`<div class="progress-view">
-        <div class="progress-card"><div class="progress-header"><span class="progress-title">Overall</span><span class="progress-value">${done+streaks}/70${streaks>0?` <span style="color:#3b82f6;font-size:.8rem">(${streaks} streak)</span>`:''}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${((done+streaks)/70)*100}%"></div></div></div>
-        <div class="progress-card">
-            <div class="progress-header"><span class="progress-title">Current Status</span></div>
-            <div style="display:flex;gap:8px;margin-top:8px">
-                <span class="phase-badge p${phase.num}" style="margin:0">P${phase.num}: ${phase.name}</span>
-                <span class="cycle-badge ${cyclePhase.name.toLowerCase()}" style="margin:0">${cyclePhase.icon} ${cyclePhase.name}</span>
-            </div>
-            <div style="font-size:.7rem;color:#666;margin-top:8px">Cycle Day ${getCycleDay(todayDate,d.settings)} of ${d.settings.cycleLength}</div>
-        </div>
-        <div class="progress-card"><div class="progress-header"><span class="progress-title">Hip Thrust Top Set</span><span class="progress-value">${lastHT?lastHT.wt+'lb':'—'}</span></div><div style="font-size:.7rem;color:#666;margin-top:4px">${maxHT?'Max: '+maxHT+'lb':'No lifts logged yet'}${htHistory.length>1?' • '+htHistory.length+' sessions':''}</div></div>
-        <div class="progress-card"><div class="progress-title" style="margin-bottom:10px">Workouts by Type</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center"><div><div style="font-size:1rem">🏋️</div><div style="font-weight:700;font-size:.9rem">${lowerA}/${lowerAT}</div><div style="font-size:.55rem;color:#666">Shelf</div></div><div><div style="font-size:1rem">💪</div><div style="font-weight:700;font-size:.9rem">${lowerB}/${lowerBT}</div><div style="font-size:.55rem;color:#666">Tie-in</div></div><div><div style="font-size:1rem">🔥</div><div style="font-weight:700;font-size:.9rem">${lowerC}/${lowerCT}</div><div style="font-size:.55rem;color:#666">Upper</div></div><div><div style="font-size:1rem">🧘</div><div style="font-weight:700;font-size:.9rem">${tempo}/${tempoT}</div><div style="font-size:.55rem;color:#666">Tempo</div></div></div></div>
-        <div class="progress-card"><div class="progress-title" style="margin-bottom:8px">Neural Connection</div><div class="neural-grid"><div class="neural-item"><div class="neural-emoji">🔴</div><div class="neural-count">${cn.red}</div><div class="neural-label">Quad</div></div><div class="neural-item"><div class="neural-emoji">🟡</div><div class="neural-count">${cn.yellow}</div><div class="neural-label">Learning</div></div><div class="neural-item"><div class="neural-emoji">🟢</div><div class="neural-count">${cn.green}</div><div class="neural-label">Strong</div></div><div class="neural-item"><div class="neural-emoji">✨</div><div class="neural-count">${cn.sparkles}</div><div class="neural-label">Locked</div></div></div></div>
-        <div class="progress-card"><div class="progress-title" style="margin-bottom:6px">🍑 Booty Progress</div><div class="booty-goal"><span class="from">Perky</span><span class="arrow">→</span><span class="to">Bubbly</span></div><div class="booty-section">${renderBootyMetric('Roundness','r')}${renderBootyMetric('Lift','l')}${renderBootyMetric('Protrusion','p')}</div><div style="text-align:center;margin-top:8px;font-size:.65rem;color:#666">${scanSummary}</div></div>
+        <div class="prog-card"><div class="prog-header"><span class="prog-title">Overall</span><span class="prog-val">${done+streaks}/70</span></div><div class="prog-bar"><div class="prog-fill" style="width:${((done+streaks)/70)*100}%"></div></div>${streaks?`<div style="font-size:.7rem;color:var(--gold);margin-top:6px">${streaks} streak saves</div>`:''}</div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Status</div><div class="badges" style="justify-content:flex-start;margin-bottom:8px"><span class="badge phase">P${phase.num} ${phase.name}</span><span class="badge ${cycle.name.toLowerCase()}">${cycle.icon} ${cycle.name}</span></div><div style="font-size:.7rem;color:var(--cream-dim)">Cycle Day ${getCycleDay(getDate(d.today),d.settings)} · Fast-twitch optimized</div></div>
+        
+        <div class="prog-card"><div class="prog-header"><span class="prog-title">Hip Thrust PR</span><span class="prog-val">${maxHT||'—'}lb</span></div><div style="font-size:.7rem;color:var(--cream-dim);margin-top:4px">${lastHT?`Last: ${lastHT.w}lb × ${lastHT.r}`:''} ${htHist.length?`· ${htHist.length} sessions`:''}</div></div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:10px">3D Glute Split</div><div class="split-grid"><div class="split-item"><div class="icon">🍑</div><div class="val">${la}/${laT}</div><div class="label">Shelf</div></div><div class="split-item"><div class="icon">🔥</div><div class="val">${lb}/${lbT}</div><div class="label">Underbutt</div></div><div class="split-item"><div class="icon">✨</div><div class="val">${lc}/${lcT}</div><div class="label">Side Dips</div></div></div></div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Neural Connection</div><div class="neural-grid"><div class="neural-item"><div class="emoji">🔴</div><div class="count">${cn.red}</div><div class="label">Quads</div></div><div class="neural-item"><div class="emoji">🟡</div><div class="count">${cn.yellow}</div><div class="label">Learning</div></div><div class="neural-item"><div class="emoji">🟢</div><div class="count">${cn.green}</div><div class="label">Strong</div></div><div class="neural-item"><div class="emoji">✨</div><div class="count">${cn.sparkles}</div><div class="label">Locked</div></div></div></div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🍑 Booty Scans</div><div class="booty-chart">${renderBooty('Roundness','round')}${renderBooty('Lift','lift')}${renderBooty('Protrusion','prot')}</div><div style="text-align:center;font-size:.65rem;color:var(--cream-dim);margin-top:8px">${latestScan?`Latest: Week ${getWeek(d.days.indexOf(latestScan)+1)} · ${latestScan.bootyType||''}`:'No scans yet'}</div></div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🧘 Splits Progress</div><div class="flex-chart">${latestFlex?`
+            <div class="flex-row"><span class="name">Front Left</span><span class="val">${latestFlex.flexL||'—'}"${firstFlex&&latestFlex.flexL&&firstFlex.flexL?`<span class="change ${latestFlex.flexL<firstFlex.flexL?'pos':'neg'}">${latestFlex.flexL<firstFlex.flexL?'↓':'↑'}${Math.abs(latestFlex.flexL-firstFlex.flexL)}"</span>`:''}</span></div>
+            <div class="flex-row"><span class="name">Front Right</span><span class="val">${latestFlex.flexR||'—'}"${firstFlex&&latestFlex.flexR&&firstFlex.flexR?`<span class="change ${latestFlex.flexR<firstFlex.flexR?'pos':'neg'}">${latestFlex.flexR<firstFlex.flexR?'↓':'↑'}${Math.abs(latestFlex.flexR-firstFlex.flexR)}"</span>`:''}</span></div>
+            <div class="flex-row"><span class="name">Middle</span><span class="val">${latestFlex.flexM||'—'}"${firstFlex&&latestFlex.flexM&&firstFlex.flexM?`<span class="change ${latestFlex.flexM<firstFlex.flexM?'pos':'neg'}">${latestFlex.flexM<firstFlex.flexM?'↓':'↑'}${Math.abs(latestFlex.flexM-firstFlex.flexM)}"</span>`:''}</span></div>
+        `:`<div style="text-align:center;color:var(--cream-dim);font-size:.8rem;padding:12px">Log your first stretch session</div>`}</div></div>
+        
+        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🥩 Nutrition</div><div class="flex-chart">
+            <div class="flex-row"><span class="name">Avg Protein</span><span class="val">${avgProtein}g <span style="color:var(--cream-dim);font-weight:400">/ ${d.settings.proteinGoal}g</span></span></div>
+            <div class="flex-row"><span class="name">Protein Hits</span><span class="val">${proteinHits}/${nutDays.length} days</span></div>
+            <div class="flex-row"><span class="name">Avg Water</span><span class="val">${avgWater}oz <span style="color:var(--cream-dim);font-weight:400">/ ${d.settings.waterGoal}oz</span></span></div>
+            <div class="flex-row"><span class="name">Water Hits</span><span class="val">${waterHits}/${nutDays.length} days</span></div>
+        </div></div>
     </div>`;
 }
-function renderInfo(){
+function rInfo(){
     const s=state.data.settings;
     return`<div class="info-view">
-        <div class="info-section"><div class="info-title">🎯 The System</div><div class="info-text">A <strong>repeatable 70-day protocol</strong> combining Elisi Wolf's neural method + Bret Contreras + cycle syncing. Run it once for the shelf, run it again for maintenance or a new focus.</div></div>
+        <div class="info-section"><div class="info-title">⚡ Your Profile</div><div class="info-text"><strong>Fast-twitch dominant</strong> (ACTN3 sprinter gene)<br>• Responds to heavy load over volume<br>• Lower rep ranges (6-10) for main lifts<br>• Shorter, intense finishers<br>• Can progress faster when connection is there<br><br><strong>Right-side imbalance</strong> from rotated pelvis<br>• Do Right-Side Reset before every lower day<br>• All exercises: right side first</div></div>
         
-        <div class="info-section"><div class="info-title">⚙️ Cycle Settings</div>
-            <div class="settings-row"><span class="settings-label">Cycle Start Date</span><input type="date" class="settings-input" id="setCycleStart" value="${s.cycleStart}" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Cycle Length (days)</span><input type="number" class="settings-input" id="setCycleLength" value="${s.cycleLength}" min="21" max="35" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Menstrual Days</span><input type="number" class="settings-input" id="setMenstrualDays" value="${s.menstrualDays}" min="3" max="7" onchange="updateSettings()"></div>
+        <div class="info-section"><div class="info-title">⚙️ Settings</div>
+            <div class="settings-row"><span class="settings-label">Cycle Start</span><input type="date" class="settings-input" id="setCycleStart" value="${s.cycleStart}" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Cycle Length</span><input type="number" class="settings-input" id="setCycleLen" value="${s.cycleLength}" min="21" max="35" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Menstrual Days</span><input type="number" class="settings-input" id="setMensDays" value="${s.menstrualDays}" min="3" max="7" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Protein Goal (g)</span><input type="number" class="settings-input" id="setProtein" value="${s.proteinGoal}" onchange="updateSettings()"></div>
+            <div class="settings-row"><span class="settings-label">Water Goal (oz)</span><input type="number" class="settings-input" id="setWater" value="${s.waterGoal}" onchange="updateSettings()"></div>
         </div>
         
-        <div class="info-section"><div class="info-title">🩸 Cycle Phases</div>
-            <div class="info-text">Your hormones control strength, recovery, and growth. We ride them.</div>
-            <div class="cycle-card menstrual"><div class="cycle-name">🩸 Menstrual</div><div class="cycle-desc"><strong>Rule:</strong> No PR. Keep connection 🟢+. Lighter load, higher reps.<br>Neural activation, banded work, stretching.</div></div>
-            <div class="cycle-card follicular"><div class="cycle-name">🌱 Follicular</div><div class="cycle-desc"><strong>Rule:</strong> Add load if 🟢/✨. Progressive overload window.<br>Add weight, learn patterns, barbell work.</div></div>
-            <div class="cycle-card ovulatory"><div class="cycle-name">⚡ Ovulatory</div><div class="cycle-desc"><strong>Rule:</strong> PR window. Push top sets. Max strength.<br>This is where shelf mass is laid down.</div></div>
-            <div class="cycle-card luteal"><div class="cycle-name">🌙 Luteal</div><div class="cycle-desc"><strong>Rule:</strong> Shape window. More abduction, pumps. No grinding.<br>Shelf becomes round, not flat.</div></div>
+        <div class="info-section"><div class="info-title">🍑 3D Glute Split</div>
+            <div class="info-card"><div class="title">🍑 Lower A: Shelf + Side</div><div class="desc">Upper glute max + medius. Hip thrust, back ext, heavy abduction, lateral step-ups.</div><div class="equip">Tempo barbell · Squat pad · Finer Form bench · Blogilates bands</div></div>
+            <div class="info-card"><div class="title">🔥 Lower B: Underbutt</div><div class="desc">Lower glute max + ham tie-in. B-stance RDL, step-ups, hyperextensions, ham curls.</div><div class="equip">Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights</div></div>
+            <div class="info-card"><div class="title">✨ Lower C: Side Dips</div><div class="desc">Medius + minimus. Single-leg thrust, Cossack, abduction volume, bridge pulses.</div><div class="equip">Finer Form bench · Ankle weights · Blogilates bands</div></div>
         </div>
         
-        <div class="info-section"><div class="info-title">📅 Training Phases</div>
-            <div class="phase-card p1"><div class="phase-name">Phase 1: Fix the Signal</div><div class="phase-dates">Days 1-14 • ${fmt(getDate(1),'medium')} - ${fmt(getDate(14),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[0].load}<br><strong>Tempo:</strong> ${PHASES[0].tempo}<br><strong>Focus:</strong> ${PHASES[0].focus}</div></div>
-            <div class="phase-card p2"><div class="phase-name">Phase 2: Build Tissue</div><div class="phase-dates">Days 15-37 • ${fmt(getDate(15),'medium')} - ${fmt(getDate(37),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[1].load}<br><strong>Tempo:</strong> ${PHASES[1].tempo}<br><strong>Focus:</strong> ${PHASES[1].focus}</div></div>
-            <div class="phase-card p3"><div class="phase-name">Phase 3: Sculpt Shelf</div><div class="phase-dates">Days 38-56 • ${fmt(getDate(38),'medium')} - ${fmt(getDate(56),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[2].load}<br><strong>Tempo:</strong> ${PHASES[2].tempo}<br><strong>Focus:</strong> ${PHASES[2].focus}</div></div>
-            <div class="phase-card p4"><div class="phase-name">Phase 4: Polish & Peak</div><div class="phase-dates">Days 57-70 • ${fmt(getDate(57),'medium')} - ${fmt(getDate(70),'medium')}</div><div class="phase-desc"><strong>Load:</strong> ${PHASES[3].load}<br><strong>Tempo:</strong> ${PHASES[3].tempo}<br><strong>Focus:</strong> ${PHASES[3].focus}</div></div>
+        <div class="info-section"><div class="info-title">📅 Weekly Rule</div><div class="info-text">Every week:<br>• <strong>2 hip thrust exposures</strong><br>• <strong>2 hinge/tie-in exposures</strong><br>• <strong>Abduction every lower session</strong></div></div>
+        
+        <div class="info-section"><div class="info-title">🩸 Cycle Sync</div>
+            <div class="cycle-card menstrual"><div class="title">🩸 Menstrual</div><div class="desc">Light. Connection focus. No PR.</div></div>
+            <div class="cycle-card follicular"><div class="title">🌱 Follicular</div><div class="desc">Add load if 🟢. Growth window.</div></div>
+            <div class="cycle-card ovulatory"><div class="title">⚡ Ovulatory</div><div class="desc">PR window. Push hard. Your best days.</div></div>
+            <div class="cycle-card luteal"><div class="title">🌙 Luteal</div><div class="desc">Shape. More abduction. No grinding.</div></div>
         </div>
         
-        <div class="info-section"><div class="info-title">🗓 Weekly Templates</div>
-            <div class="info-text"><strong>Mon:</strong> Lower A (Shelf) - Hip thrust, abduction, lunge, finisher<br><strong>Tue:</strong> Tempo<br><strong>Wed:</strong> Lower B (Tie-in) - Hinge, step-up, back ext, abduction<br><strong>Thu:</strong> Tempo<br><strong>Fri:</strong> Lower C (Upper) - Single-leg, kickback, curtsy, burnout<br><strong>Sat:</strong> Tempo<br><strong>Sun:</strong> Tempo + Scan</div>
-            <div class="info-subtitle">365 Streak</div>
-            <div class="info-text">Use "Streak Save" for 10-min stretch on tough days. Keeps the chain alive.</div>
+        <div class="info-section"><div class="info-title">Training Phases</div>
+            ${PHASES.map(p=>`<div class="info-card"><div class="title">P${p.num}: ${p.name}</div><div class="desc">Days ${p.days[0]}-${p.days[1]} · ${p.sets} × ${p.reps}<br>${p.note}</div></div>`).join('')}
         </div>
         
-        <div class="info-section"><div class="info-title">🧠 Neural Connection</div>
-            <div style="margin-top:10px"><div class="connection-key"><span class="emoji">🔴</span><span class="label"><strong>None</strong> — Quads doing the work. Too heavy.</span></div><div class="connection-key"><span class="emoji">🟡</span><span class="label"><strong>Partial</strong> — Some glutes. Stay or reduce.</span></div><div class="connection-key"><span class="emoji">🟢</span><span class="label"><strong>Strong</strong> — Clear glute burn. Can progress in follicular/ovulatory.</span></div><div class="connection-key"><span class="emoji">✨</span><span class="label"><strong>Locked</strong> — Automatic. Progress weight.</span></div></div>
-        </div>
+        <div class="info-section"><div class="info-title">🧠 Connection Key</div><div class="info-text">
+            <strong>🔴 None</strong> — Quads doing work. Too heavy.<br>
+            <strong>🟡 Partial</strong> — Some glutes. Stay or reduce.<br>
+            <strong>🟢 Strong</strong> — Clear burn. Progress in follicular/ovulatory.<br>
+            <strong>✨ Locked</strong> — Automatic. Add weight.
+        </div></div>
         
-        <div class="info-section data-section"><div class="info-title">💾 Data</div><div class="data-buttons"><button class="data-btn" onclick="exportData()">📤 Export</button><button class="data-btn" onclick="importData()">📥 Import</button></div></div>
+        <div class="info-section"><div class="info-title">🧘 Flexibility Goals</div><div class="info-text">
+            Track inches from floor for each split:<br>
+            • <strong>Front Left</strong> — Left leg forward<br>
+            • <strong>Front Right</strong> — Right leg forward<br>
+            • <strong>Middle</strong> — Straddle split<br><br>
+            Use your <strong>Rigel Leg Stretcher</strong> 3-5x/week. Lower number = more flexible.
+        </div></div>
+        
+        <div class="info-section"><div class="info-title">🥩 Nutrition</div><div class="info-text">
+            <strong>Protein: ${s.proteinGoal}g daily</strong> — Muscle can't grow without it.<br>
+            <strong>Water: ${s.waterGoal}oz daily</strong> — Hydration for recovery + performance.
+        </div></div>
+        
+        <div class="info-section"><div class="info-title">💾 Data</div><div class="data-btns"><button class="data-btn" onclick="exp()">Export</button><button class="data-btn" onclick="imp()">Import</button></div></div>
     </div>`;
 }
 
 function updateSettings(){
-    state.data.settings.cycleStart=document.getElementById('setCycleStart').value;
-    state.data.settings.cycleLength=parseInt(document.getElementById('setCycleLength').value)||28;
-    state.data.settings.menstrualDays=parseInt(document.getElementById('setMenstrualDays').value)||5;
-    save();
-    showToast('Settings saved');
+    const s=state.data.settings;
+    s.cycleStart=document.getElementById('setCycleStart').value;
+    s.cycleLength=parseInt(document.getElementById('setCycleLen').value)||28;
+    s.menstrualDays=parseInt(document.getElementById('setMensDays').value)||5;
+    s.proteinGoal=parseInt(document.getElementById('setProtein').value)||130;
+    s.waterGoal=parseInt(document.getElementById('setWater').value)||100;
+    save();toast('Saved');
 }
 
-function renderNav(){return`<div class="bottom-nav"><button class="nav-btn ${state.view==='today'?'active':''}" onclick="switchView('today')"><span class="icon">◉</span><span>Today</span></button><button class="nav-btn ${state.view==='calendar'?'active':''}" onclick="switchView('calendar')"><span class="icon">▦</span><span>Calendar</span></button><button class="nav-btn ${state.view==='progress'?'active':''}" onclick="switchView('progress')"><span class="icon">◔</span><span>Progress</span></button><button class="nav-btn ${state.view==='info'?'active':''}" onclick="switchView('info')"><span class="icon">📖</span><span>Method</span></button></div>`}
-function renderModal(){
-    if(!state.modalOpen)return'<div class="modal-overlay"></div>';
-    const n=state.selectedDay||state.data.currentDay,day=state.data.days[n-1],date=getDate(n);
-    const type=getType(n),phase=getPhase(n),template=getTemplate(type),phaseMod=PHASE_MODS[phase.num];
-    const cyclePhase=getCyclePhase(date,state.data.settings),cycleName=cyclePhase.name.toLowerCase();
-    const cycleMod=CYCLE_MODS[cycleName];
-    const lastConn=[...state.data.days].reverse().find(x=>x.connection)?.connection;
-    const lastHT=[...state.data.days].reverse().find(x=>x.htWeight);
-    const isSunday=date.getDay()===0;
+function rNav(){return`<div class="bottom-nav"><button class="nav-btn ${state.view==='today'?'active':''}" onclick="go('today')"><span class="icon">◉</span>Today</button><button class="nav-btn ${state.view==='calendar'?'active':''}" onclick="go('calendar')"><span class="icon">▦</span>Calendar</button><button class="nav-btn ${state.view==='progress'?'active':''}" onclick="go('progress')"><span class="icon">◔</span>Progress</button><button class="nav-btn ${state.view==='info'?'active':''}" onclick="go('info')"><span class="icon">☰</span>Method</button></div>`}
+function rModal(){
+    if(!state.modal)return'<div class="modal-overlay"></div>';
+    const n=state.selDay||state.data.today,day=state.data.days[n-1],date=getDate(n);
+    const type=getType(n),phase=getPhase(n),tmpl=TEMPLATES[type];
+    const cycle=getCyclePhase(date,state.data.settings),cycleName=cycle.name.toLowerCase();
+    const lastConn=[...state.data.days].reverse().find(x=>x.conn)?.conn;
+    const lastHT=[...state.data.days].reverse().find(x=>x.htWt);
+    const s=state.data.settings;
     
     let form='';
     
-    if(day.streakSave&&!day.completed){
-        form=`<div class="section-header">Streak Save Day</div><div class="info-text" style="margin-bottom:12px">10 min stretch to keep the chain alive.</div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:60px">${day.notes||''}</textarea></div><button class="save-btn" onclick="saveDay()">Update</button><button class="streak-btn" onclick="undoStreakSave()">↩ Undo Streak Save</button>`;
+    if(day.streak&&!day.done){
+        form=`<div class="form-section"><div class="form-title">Streak Save</div><div style="font-size:.8rem;color:var(--cream-muted);margin-bottom:12px">10 min stretch to keep the chain.</div></div>
+        <div class="form-section"><div class="form-title">Nutrition</div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Protein (g)</label><input type="number" class="form-input" id="protein" value="${day.protein||''}" placeholder="${s.proteinGoal}"></div><div class="form-group"><label class="form-label">Water (oz)</label><input type="number" class="form-input" id="water" value="${day.water||''}" placeholder="${s.waterGoal}"></div></div>
+        </div>
+        <button class="btn-save" onclick="saveDay()">Update</button>
+        <button class="btn-streak-modal" onclick="undoStreak()">Undo Streak Save</button>`;
     }else{
-        // Today's rule
-        form=`<div class="today-rule ${cycleName}" style="margin:0 0 16px"><div class="today-rule-label">${cycleMod.intensity} ${cyclePhase.name}</div><div class="today-rule-text">${cycleMod.mod}</div></div>`;
+        // Rule
+        form=`<div class="rule-card" style="margin:0 0 16px"><div class="rule-label">${CYCLE_MODS[cycleName]} · ${cycle.name}</div><div class="rule-text">${cycle.rule}</div></div>`;
         
-        // Workout preview
-        form+=`<div class="workout-preview" style="margin:0 0 16px;background:#0f0f0f"><div class="workout-preview-title">${template.name}</div><div class="workout-preview-list">${template.exercises.map(e=>'• '+e).join('<br>')}<br><br><em style="color:#666">${phaseMod.sets} sets × ${phaseMod.reps}</em></div></div>`;
-        
-        // Lower day specific: top sets + connection
+        // Lower days
         if(type.startsWith('lower')){
-            form+=`<div class="section-header">🏋️ Top Sets</div>
-            <div class="form-row"><div class="form-group"><label class="form-label">Hip Thrust (lbs)</label><input type="number" class="form-input" id="htWeight" value="${day.htWeight||lastHT?.htWeight||''}" placeholder="${phase.num===1?'bodyweight':'weight'}"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="htReps" value="${day.htReps||lastHT?.htReps||''}" placeholder="reps"></div></div>
-            <div class="form-row"><div class="form-group"><label class="form-label">RDL (lbs, optional)</label><input type="number" class="form-input" id="rdlWeight" value="${day.rdlWeight||''}" placeholder="weight"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="rdlReps" value="${day.rdlReps||''}" placeholder="reps"></div></div>`;
-            
-            form+=`<div class="section-header">🧠 Connection</div><div class="connection-grid">${[{k:'red',e:'🔴',l:'None'},{k:'yellow',e:'🟡',l:'Partial'},{k:'green',e:'🟢',l:'Strong'},{k:'sparkles',e:'✨',l:'Locked'}].map(c=>`<button class="conn-btn ${(day.connection||(day.completed?null:lastConn))===c.k?'selected':''}" onclick="setConn('${c.k}')"><span class="emoji">${c.e}</span><span class="label">${c.l}</span></button>`).join('')}</div>`;
+            form+=`<div class="form-section"><div class="form-title">Top Sets (heavy, 6-10 reps)</div>
+                <div class="form-row"><div class="form-group"><label class="form-label">Hip Thrust (lbs)</label><input type="number" class="form-input" id="htWt" value="${day.htWt||lastHT?.htWt||''}" placeholder="weight"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="htReps" value="${day.htReps||lastHT?.htReps||''}" placeholder="6-10"></div></div>
+                <div class="form-row"><div class="form-group"><label class="form-label">RDL (lbs)</label><input type="number" class="form-input" id="rdlWt" value="${day.rdlWt||''}" placeholder="optional"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="rdlReps" value="${day.rdlReps||''}" placeholder="6-10"></div></div>
+            </div>`;
+            form+=`<div class="form-section"><div class="form-title">Connection</div><div class="conn-grid">${[{k:'red',e:'🔴',l:'None'},{k:'yellow',e:'🟡',l:'Partial'},{k:'green',e:'🟢',l:'Strong'},{k:'sparkles',e:'✨',l:'Locked'}].map(c=>`<button class="conn-btn ${(day.conn||(day.done?null:lastConn))===c.k?'selected':''}" onclick="setConn('${c.k}')"><span class="emoji">${c.e}</span><span class="label">${c.l}</span></button>`).join('')}</div></div>`;
         }
         
-        // Tempo specific
+        // Tempo
         if(type==='tempo'||type==='tempo-scan'){
-            form+=`<div class="section-header">🧘 Tempo Class</div><div class="tempo-options">${[{k:'Challenge',d:'Monthly'},{k:'Lower Build',d:'Legs'},{k:'Full Body',d:'HIIT/Build'},{k:'Upper Build',d:'Arms'},{k:'Cardio',d:'BW cardio'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-opt ${day.tempoClass===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="dur" value="${day.tempoDuration||''}" placeholder="30"></div>`;
+            form+=`<div class="form-section"><div class="form-title">Tempo Class</div><div class="tempo-grid">${[{k:'Challenge',d:'Monthly'},{k:'Lower',d:'Legs'},{k:'Full Body',d:'HIIT'},{k:'Upper',d:'Arms'},{k:'Cardio',d:'BW'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-btn ${day.tempo===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group" style="margin-top:10px"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="tempoDur" value="${day.tempoDur||''}" placeholder="30"></div></div>`;
         }
         
-        // Sunday scan
+        // Scan (Sunday)
         if(type==='tempo-scan'){
-            form+=`<div class="section-header">🍑 Body Scan</div><div class="scan-toggle"><div class="scan-opt ${day.scanType==='Tempo'?'selected':''}" onclick="setScan('Tempo')">Tempo</div><div class="scan-opt ${day.scanType==='Zozofit'?'selected':''}" onclick="setScan('Zozofit')">Zozofit</div><div class="scan-opt ${day.scanType==='Both'?'selected':''}" onclick="setScan('Both')">Both</div><div class="scan-opt ${day.scanType==='Skip'?'selected':''}" onclick="setScan('Skip')">Skip</div></div>`;
-            if(day.scanType&&day.scanType!=='Skip'){
-                form+=`<div class="metric-slider"><div class="metric-label"><span class="name">Roundness</span><span class="value">${day.roundness||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.roundness>=v?'filled':''}" onclick="setMetric('roundness',${v})"></div>`).join('')}</div></div>
-                <div class="metric-slider"><div class="metric-label"><span class="name">Lift</span><span class="value">${day.lift||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.lift>=v?'filled':''}" onclick="setMetric('lift',${v})"></div>`).join('')}</div></div>
-                <div class="metric-slider"><div class="metric-label"><span class="name">Protrusion</span><span class="value">${day.protrusion||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.protrusion>=v?'filled':''}" onclick="setMetric('protrusion',${v})"></div>`).join('')}</div></div>
-                <div class="form-label">Booty Type</div><div class="booty-type-select">${BOOTY_TYPES.map(t=>`<div class="booty-type-btn ${day.bootyType===t?'selected':''}" onclick="setBootyType('${t}')"><div class="name">${t}</div></div>`).join('')}</div>`;
+            form+=`<div class="form-section"><div class="form-title">Body Scan</div><div class="scan-grid">${['Tempo','Zozofit','Both','Skip'].map(x=>`<div class="scan-btn ${day.scan===x?'selected':''}" onclick="setScan('${x}')">${x}</div>`).join('')}</div>`;
+            if(day.scan&&day.scan!=='Skip'){
+                form+=`<div style="margin-top:14px"><div class="metric-row"><div class="metric-header"><span class="name">Roundness</span><span class="val">${day.round||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.round>=v?'filled':''}" onclick="setMetric('round',${v})"></div>`).join('')}</div></div>
+                <div class="metric-row"><div class="metric-header"><span class="name">Lift</span><span class="val">${day.lift||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.lift>=v?'filled':''}" onclick="setMetric('lift',${v})"></div>`).join('')}</div></div>
+                <div class="metric-row"><div class="metric-header"><span class="name">Protrusion</span><span class="val">${day.prot||'—'}/5</span></div><div class="metric-dots">${[1,2,3,4,5].map(v=>`<div class="metric-dot ${day.prot>=v?'filled':''}" onclick="setMetric('prot',${v})"></div>`).join('')}</div></div>
+                <div class="form-label" style="margin-top:10px">Type</div><div class="booty-grid">${BOOTY.map(t=>`<div class="booty-btn ${day.bootyType===t?'selected':''}" onclick="setBooty('${t}')"><div class="name">${t}</div></div>`).join('')}</div></div>`;
             }
+            form+=`</div>`;
         }
         
-        // Daily tracking
-        form+=`<div class="section-header">📊 Daily</div><div class="quick-toggles"><div class="quick-toggle ${day.proteinHit?'on':''}" onclick="toggle('proteinHit')"><div class="icon">🥩</div><div class="text">Protein 120g+</div></div></div><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" style="min-height:50px">${day.notes||''}</textarea></div>`;
+        // Nutrition
+        form+=`<div class="form-section"><div class="form-title">Nutrition</div>
+            <div class="form-row"><div class="form-group"><label class="form-label">Protein (g)</label><input type="number" class="form-input" id="protein" value="${day.protein||''}" placeholder="${s.proteinGoal}"></div><div class="form-group"><label class="form-label">Water (oz)</label><input type="number" class="form-input" id="water" value="${day.water||''}" placeholder="${s.waterGoal}"></div></div>
+        </div>`;
         
-        form+=`<button class="save-btn" onclick="saveDay()">${day.completed?'Update':'Complete'} ✓</button>${!day.completed?`<button class="streak-btn" onclick="streakSave()">💪 Streak Save (10 min stretch)</button>`:''}`;
+        // Flexibility
+        form+=`<div class="form-section"><div class="form-title">Splits (inches from floor)</div><div class="flex-grid">
+            <div class="flex-item"><div class="label">Front L</div><input type="number" id="flexL" value="${day.flexL||''}" placeholder="—" step="0.5"></div>
+            <div class="flex-item"><div class="label">Front R</div><input type="number" id="flexR" value="${day.flexR||''}" placeholder="—" step="0.5"></div>
+            <div class="flex-item"><div class="label">Middle</div><input type="number" id="flexM" value="${day.flexM||''}" placeholder="—" step="0.5"></div>
+        </div></div>`;
+        
+        // Notes
+        form+=`<div class="form-section"><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" rows="2">${day.notes||''}</textarea></div></div>`;
+        
+        form+=`<button class="btn-save" onclick="saveDay()">${day.done?'Update':'Complete'}</button>${!day.done?`<button class="btn-streak-modal" onclick="doStreak()">Streak Save (10 min)</button>`:''}`;
     }
     
-    return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date,'medium')} • Day ${n}</div><div class="modal-subtitle"><span class="phase-badge p${phase.num}" style="margin:0;padding:2px 8px">P${phase.num}</span> <span class="cycle-badge ${cycleName}" style="margin:0;padding:2px 8px">${cyclePhase.icon}</span> ${template.icon} ${template.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
+    return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date)}</div><div class="modal-sub">Day ${n} · ${tmpl.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
 }
-const switchView=v=>{state.view=v;render()};
-const openModal=n=>{state.selectedDay=n||state.data.currentDay;state.modalOpen=true;render()};
-const closeModal=()=>{state.modalOpen=false;render()};
-const setConn=v=>{state.data.days[(state.selectedDay||state.data.currentDay)-1].connection=v;render()};
-const setTempo=v=>{state.data.days[(state.selectedDay||state.data.currentDay)-1].tempoClass=v;render()};
-const setScan=v=>{const d=state.data.days[(state.selectedDay||state.data.currentDay)-1];d.scanType=v;d.scanDone=v!=='Skip';if(v==='Skip'){d.roundness=null;d.lift=null;d.protrusion=null;d.bootyType=null}render()};
-const setMetric=(m,v)=>{state.data.days[(state.selectedDay||state.data.currentDay)-1][m]=v;render()};
-const setBootyType=v=>{state.data.days[(state.selectedDay||state.data.currentDay)-1].bootyType=v;render()};
-const toggle=f=>{state.data.days[(state.selectedDay||state.data.currentDay)-1][f]=!state.data.days[(state.selectedDay||state.data.currentDay)-1][f];render()};
 
-function streakSave(){
-    const n=state.selectedDay||state.data.currentDay;
-    const d=state.data.days[n-1];
-    d.streakSave=true;d.completed=false;
-    d.tempoClass='Stretch';d.tempoDuration=10;
-    d.notes=document.getElementById('notes')?.value||'Streak save day';
-    save();showToast('Streak saved! 💪');closeModal();
-}
-function undoStreakSave(){
-    state.data.days[(state.selectedDay||state.data.currentDay)-1].streakSave=false;
-    save();render();
-}
+const go=v=>{state.view=v;render()};
+const openModal=n=>{state.selDay=n||state.data.today;state.modal=true;render()};
+const closeModal=()=>{state.modal=false;render()};
+const setConn=v=>{state.data.days[(state.selDay||state.data.today)-1].conn=v;render()};
+const setTempo=v=>{state.data.days[(state.selDay||state.data.today)-1].tempo=v;render()};
+const setScan=v=>{const d=state.data.days[(state.selDay||state.data.today)-1];d.scan=v;if(v==='Skip'){d.round=null;d.lift=null;d.prot=null;d.bootyType=null}render()};
+const setMetric=(k,v)=>{state.data.days[(state.selDay||state.data.today)-1][k]=v;render()};
+const setBooty=v=>{state.data.days[(state.selDay||state.data.today)-1].bootyType=v;render()};
+
+function doStreak(){const d=state.data.days[(state.selDay||state.data.today)-1];d.streak=true;d.done=false;d.tempo='Stretch';d.tempoDur=10;d.protein=parseInt(document.getElementById('protein')?.value)||0;d.water=parseInt(document.getElementById('water')?.value)||0;save();toast('Streak saved');closeModal()}
+function undoStreak(){state.data.days[(state.selDay||state.data.today)-1].streak=false;save();render()}
 
 function saveDay(){
-    const n=state.selectedDay||state.data.currentDay;
-    const d=state.data.days[n-1],type=getType(n);
-    d.completed=true;d.streakSave=false;
+    const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
+    d.done=true;d.streak=false;
     d.notes=document.getElementById('notes')?.value||'';
-    
-    // Lower day: save top sets
+    d.protein=parseInt(document.getElementById('protein')?.value)||0;
+    d.water=parseInt(document.getElementById('water')?.value)||0;
+    d.flexL=parseFloat(document.getElementById('flexL')?.value)||null;
+    d.flexR=parseFloat(document.getElementById('flexR')?.value)||null;
+    d.flexM=parseFloat(document.getElementById('flexM')?.value)||null;
     if(type.startsWith('lower')){
-        d.htWeight=parseFloat(document.getElementById('htWeight')?.value)||null;
+        d.htWt=parseFloat(document.getElementById('htWt')?.value)||null;
         d.htReps=parseInt(document.getElementById('htReps')?.value)||null;
-        d.rdlWeight=parseFloat(document.getElementById('rdlWeight')?.value)||null;
+        d.rdlWt=parseFloat(document.getElementById('rdlWt')?.value)||null;
         d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
-        // Default connection from last if not set
-        if(!d.connection){const lastConn=[...state.data.days].reverse().find(x=>x.connection)?.connection;if(lastConn)d.connection=lastConn}
+        if(!d.conn){const lc=[...state.data.days].reverse().find(x=>x.conn)?.conn;if(lc)d.conn=lc}
     }
-    
-    // Tempo: save class and duration
-    if(type==='tempo'||type==='tempo-scan'){
-        d.tempoDuration=parseFloat(document.getElementById('dur')?.value)||null;
-    }
-    
-    if(save()){showToast('Saved!')}else{showToast('Save failed',true)}
+    if(type==='tempo'||type==='tempo-scan')d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null;
+    if(save())toast('Saved');else toast('Error',1);
     closeModal();
-    if(n===70&&d.completed)setTimeout(()=>alert('🎉 MIAMI READY! 🍑✨'),300);
+    if(n===70&&d.done)setTimeout(()=>alert('🎉 MIAMI READY! 🍑'),300);
 }
 
 init();render();
