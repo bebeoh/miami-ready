@@ -3,858 +3,1155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Miami Ready — 70-Day Glute Transformation</title>
+    <meta name="description" content="Track your 70-day glute transformation. Connection before load.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Miami Ready">
-    <meta name="theme-color" content="#1a1512">
-    <title>Miami Ready</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root{--bg:#1a1512;--bg-card:#241e1a;--bg-elevated:#2d2520;--cream:#f5e6d3;--cream-muted:#c9b8a8;--cream-dim:#8a7d70;--burgundy:#8b3a4c;--burgundy-glow:rgba(139,58,76,.3);--teal:#2d4a47;--teal-light:#3d5a56;--gold:#c9a86c;--gold-dim:#9a7f52;--wine:#722f37;--mocha:#3d2b24;--font:'DM Sans',-apple-system,sans-serif}
-        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-        body{font-family:var(--font);background:var(--bg);color:var(--cream);min-height:100vh;font-size:14px}
-        ::-webkit-scrollbar{display:none}
-        .app{max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:100px}
+        :root {
+            --cream: #FAF6F1;
+            --cream-dark: #F0EBE3;
+            --mocha: #8B7355;
+            --burgundy: #722F37;
+            --wine: #4A1C24;
+            --teal: #2D4A47;
+            --teal-light: #4A7C77;
+            --slate: #64748b;
+            --slate-dark: #334155;
+            --white: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'DM Sans', system-ui, sans-serif; 
+            background: linear-gradient(to bottom, var(--cream), var(--white));
+            min-height: 100vh;
+            color: var(--slate-dark);
+            -webkit-font-smoothing: antialiased;
+        }
         
-        .header{padding:50px 24px 20px;text-align:center}
-        .header-eyebrow{font-size:.7rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-        .day-ring{width:130px;height:130px;border-radius:50%;margin:0 auto 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:var(--bg-card);border:1px solid var(--mocha)}
-        .day-ring::before{content:'';position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:var(--burgundy);transform:rotate(var(--progress,0deg))}
-        .day-num{font-size:3rem;font-weight:700;color:var(--cream)}
-        .day-sub{font-size:.65rem;color:var(--cream-dim);text-transform:uppercase;letter-spacing:.1em}
+        /* Header */
+        .header {
+            background: var(--burgundy);
+            color: white;
+            padding: 24px 16px;
+        }
+        .header-inner { max-width: 800px; margin: 0 auto; }
+        .header-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .header-brand span { font-size: 1.5rem; }
+        .header-brand small { opacity: 0.8; font-size: 0.75rem; letter-spacing: 0.5px; }
+        .header h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
+        .header p { font-size: 0.875rem; opacity: 0.8; }
+        .header-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
         
-        .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
-        .badge{font-size:.65rem;padding:5px 10px;border-radius:20px;font-weight:500;border:1px solid}
-        .badge.phase{background:var(--bg-elevated);color:var(--gold);border-color:var(--gold-dim)}
-        .badge.menstrual{background:rgba(139,58,76,.15);color:#d4a89a;border-color:rgba(139,58,76,.3)}
-        .badge.follicular{background:rgba(45,74,71,.2);color:#7ab3ad;border-color:rgba(45,74,71,.4)}
-        .badge.ovulatory{background:rgba(201,168,108,.15);color:var(--gold);border-color:rgba(201,168,108,.3)}
-        .badge.luteal{background:rgba(114,47,55,.15);color:#c9868f;border-color:rgba(114,47,55,.3)}
+        /* Badges */
+        .badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 500;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .badge-good { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #059669; }
+        .badge-warn { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #d97706; }
+        .badge-neutral { background: var(--cream-dark); border-color: #e2e8f0; color: var(--slate); }
+        .badge-burgundy { background: rgba(114,47,55,0.1); border-color: rgba(114,47,55,0.3); color: var(--burgundy); }
+        .badge-teal { background: rgba(45,74,71,0.1); border-color: rgba(45,74,71,0.3); color: var(--teal); }
         
-        .day-type{text-align:center;margin-bottom:16px}
-        .day-type-icon{font-size:1.8rem;margin-bottom:4px}
-        .day-type-name{font-size:1.2rem;font-weight:600}
-        .day-type-target{font-size:.75rem;color:var(--cream-dim)}
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .card-title { font-weight: 600; font-size: 0.875rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         
-        .rule-card{background:linear-gradient(135deg,var(--bg-card),var(--bg-elevated));border:1px solid var(--mocha);border-radius:16px;padding:14px 18px;margin:0 20px 14px;text-align:center}
-        .rule-label{font-size:.6rem;color:var(--cream-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
-        .rule-text{font-size:.85rem;color:var(--cream);line-height:1.4}
+        /* Quick Stats Card */
+        .quick-stats { margin: -16px 16px 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 8px; }
+        .stat-item {
+            padding: 8px; border-radius: 12px; text-align: center;
+            background: var(--cream);
+            transition: all 0.2s;
+        }
+        .stat-item.done { background: rgba(45,74,71,0.1); }
+        .stat-item .icon { font-size: 1.25rem; }
+        .stat-item .label { font-size: 0.65rem; color: var(--slate); margin-top: 2px; }
         
-        .card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:16px;padding:16px 18px;margin:0 20px 12px}
-        .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-        .card-title{font-size:.9rem;font-weight:600;color:var(--cream)}
-        .card-badge{font-size:.65rem;color:var(--gold);background:var(--bg-elevated);padding:4px 10px;border-radius:10px}
-        .card-list{list-style:none}
-        .card-list li{font-size:.8rem;color:var(--cream-muted);padding:6px 0;border-bottom:1px solid rgba(61,43,36,.4);display:flex;align-items:flex-start;gap:10px}
-        .card-list li:last-child{border-bottom:none}
-        .card-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--burgundy);margin-top:6px;flex-shrink:0}
-        .card-note{font-size:.75rem;color:var(--cream-dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--mocha)}
-        .card-note.gold{color:var(--gold)}
+        /* Progress Ring */
+        .progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .progress-text .pct { font-size: 1.75rem; font-weight: 700; }
+        .progress-text .label { font-size: 0.75rem; color: var(--slate); }
+        .progress-ring { position: relative; width: 56px; height: 56px; }
+        .progress-ring svg { transform: rotate(-90deg); }
+        .progress-ring .bg { fill: none; stroke: #e2e8f0; stroke-width: 6; }
+        .progress-ring .fg { fill: none; stroke: var(--burgundy); stroke-width: 6; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
+        .progress-ring .text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; }
         
-        .reset-card{background:var(--bg);border:1px solid var(--gold-dim);border-radius:16px;padding:14px 18px;margin:0 20px 12px;cursor:pointer}
-        .reset-header{display:flex;justify-content:space-between;align-items:center}
-        .reset-title{font-size:.85rem;color:var(--gold);font-weight:500}
-        .reset-hint{font-size:.65rem;color:var(--cream-dim)}
-        .reset-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--mocha);font-size:.75rem;color:var(--cream-muted);line-height:1.7}
-        .reset-card.open .reset-body{display:block}
+        /* Tabs */
+        .tabs { 
+            display: flex; gap: 4px; padding: 4px;
+            background: #f1f5f9; border-radius: 12px;
+            margin: 0 16px 16px; max-width: 800px;
+        }
+        @media (min-width: 832px) { .tabs { margin-left: auto; margin-right: auto; } }
+        .tab {
+            flex: 1; padding: 10px 8px; border: none; background: none;
+            font-size: 0.8rem; font-weight: 500; color: var(--slate);
+            border-radius: 8px; cursor: pointer; transition: all 0.2s;
+            font-family: inherit;
+        }
+        .tab.active { background: var(--white); color: var(--slate-dark); box-shadow: var(--shadow); }
         
-        .btn{display:block;width:calc(100% - 40px);margin:16px 20px;padding:16px;border-radius:30px;border:none;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .15s}
-        .btn:active{transform:scale(.98)}
-        .btn-primary{background:linear-gradient(135deg,var(--burgundy),var(--wine));color:var(--cream);box-shadow:0 6px 24px var(--burgundy-glow)}
-        .btn-done{background:var(--bg-card);border:2px solid var(--teal);color:var(--teal-light)}
-        .btn-streak{background:var(--bg-card);border:2px solid var(--gold-dim);color:var(--gold)}
-        .btn-secondary{background:var(--bg);border:2px solid var(--mocha);color:var(--cream-dim);font-size:.85rem;padding:14px}
+        /* Content */
+        .content { padding: 0 16px 100px; max-width: 800px; margin: 0 auto; }
+        .view { display: none; }
+        .view.active { display: block; }
         
-        .summary{margin:0 20px 16px}
-        .summary-card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:16px;padding:14px 18px}
-        .summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(61,43,36,.4)}
-        .summary-row:last-child{border-bottom:none}
-        .summary-label{color:var(--cream-dim);font-size:.8rem}
-        .summary-value{font-weight:600;font-size:.85rem}
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 20px; border-radius: 12px; border: none;
+            font-size: 0.875rem; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: all 0.2s; width: 100%;
+        }
+        .btn-primary { background: var(--burgundy); color: white; }
+        .btn-primary:hover { background: var(--wine); }
+        .btn-secondary { background: #f1f5f9; color: var(--slate-dark); }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-teal { background: var(--teal); color: white; }
         
-        .daily-checklist{margin:0 20px 16px}
-        .checklist-title{font-size:.75rem;color:var(--cream-dim);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
-        .checklist-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-        .check-item{background:var(--bg-card);border:1px solid var(--mocha);border-radius:12px;padding:12px 6px;text-align:center;cursor:pointer;transition:all .15s}
-        .check-item.done{background:rgba(45,74,71,.25);border-color:var(--teal)}
-        .check-item .icon{font-size:1.3rem;margin-bottom:4px}
-        .check-item .label{font-size:.6rem;color:var(--cream-dim)}
-        .check-item.done .label{color:var(--teal-light)}
-        .check-item .value{font-size:.7rem;color:var(--cream);font-weight:600;margin-top:2px}
+        .quick-btn {
+            padding: 6px 12px; border-radius: 8px; border: none;
+            background: #f1f5f9; color: var(--slate-dark);
+            font-size: 0.75rem; font-weight: 500; cursor: pointer;
+            font-family: inherit; transition: all 0.2s;
+        }
+        .quick-btn:hover { background: #e2e8f0; }
+        .quick-btn:active { background: var(--burgundy); color: white; }
         
-        .protein-tracker,.water-tracker{margin:0 20px 12px}
-        .tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-        .tracker-title{font-size:.8rem;color:var(--cream-muted)}
-        .tracker-value{font-size:.85rem;font-weight:600;color:var(--cream)}
-        .tracker-bar{display:flex;gap:3px}
-        .tracker-seg{flex:1;height:8px;border-radius:4px;background:var(--mocha);cursor:pointer;transition:background .15s}
-        .tracker-seg.filled{background:linear-gradient(90deg,var(--burgundy),var(--wine))}
-        .tracker-seg.filled.teal{background:var(--teal)}
+        /* Info Cards */
+        .info-card {
+            padding: 12px; border-radius: 12px; margin-bottom: 8px;
+        }
+        .info-card.amber { background: #fffbeb; border: 1px solid #fcd34d; }
+        .info-card.teal { background: rgba(45,74,71,0.08); border: 1px solid rgba(45,74,71,0.2); }
+        .info-card.burgundy { background: rgba(114,47,55,0.08); border: 1px solid rgba(114,47,55,0.2); }
+        .info-card .title { font-weight: 600; font-size: 0.875rem; margin-bottom: 4px; }
+        .info-card .text { font-size: 0.8rem; color: var(--slate-dark); }
         
-        .week-section{margin:0 20px 16px}
-        .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-        .section-title{font-size:.8rem;color:var(--cream-dim)}
-        .section-sub{font-size:.7rem;color:var(--cream-dim)}
-        .week-grid{display:flex;gap:5px}
-        .week-day{flex:1;background:var(--bg-card);border:1px solid var(--mocha);border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer}
-        .week-day.current{border-color:var(--burgundy);background:rgba(139,58,76,.1)}
-        .week-day.done{background:rgba(45,74,71,.25);border-color:var(--teal)}
-        .week-day.streak{background:rgba(201,168,108,.15);border-color:var(--gold-dim)}
-        .week-day.future{opacity:.35}
-        .week-day .d-name{font-size:.55rem;color:var(--cream-dim);font-weight:600}
-        .week-day .d-num{font-size:.75rem;color:var(--cream-muted);margin:3px 0}
-        .week-day .d-icon{font-size:1rem}
+        /* Exercise List */
+        .exercise-list { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .exercise-item { 
+            padding: 10px 12px; font-size: 0.8rem; 
+            border-bottom: 1px solid #f1f5f9;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-item .name { font-weight: 500; }
+        .exercise-item .sets { color: var(--slate); font-size: 0.75rem; }
         
-        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 20px 16px}
-        .stat{background:var(--bg-card);border:1px solid var(--mocha);border-radius:12px;padding:12px 6px;text-align:center}
-        .stat-val{font-size:1.3rem;font-weight:700}
-        .stat-label{font-size:.55rem;color:var(--cream-dim);text-transform:uppercase;margin-top:2px}
+        /* Timeline */
+        .timeline { max-height: 400px; overflow-y: auto; }
+        .timeline-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 12px; border-radius: 12px; margin-bottom: 4px;
+            background: var(--white); border: 1px solid #e2e8f0;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .timeline-item:hover { border-color: #cbd5e1; }
+        .timeline-item.selected { background: var(--burgundy); color: white; border-color: var(--burgundy); }
+        .timeline-item.selected .sub { color: rgba(255,255,255,0.7); }
+        .timeline-item .main { font-weight: 600; font-size: 0.875rem; }
+        .timeline-item .sub { font-size: 0.75rem; color: var(--slate); margin-left: 8px; }
+        .timeline-item .right { display: flex; align-items: center; gap: 6px; }
+        .timeline-item .check { color: #10b981; }
+        .timeline-item.selected .check { color: #6ee7b7; }
         
-        .miami-card{background:linear-gradient(135deg,var(--burgundy),var(--wine));border-radius:18px;padding:18px;margin:0 20px 16px;text-align:center}
-        .miami-label{font-size:.65rem;color:rgba(245,230,211,.6);text-transform:uppercase;letter-spacing:.15em}
-        .miami-date{font-size:1.2rem;font-weight:600;color:var(--cream);margin-top:4px}
+        /* Form Elements */
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 0.75rem; color: var(--slate); margin-bottom: 6px; font-weight: 500; }
+        .form-input {
+            width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0;
+            border-radius: 10px; font-size: 0.875rem; font-family: inherit;
+            transition: all 0.2s;
+        }
+        .form-input:focus { outline: none; border-color: var(--burgundy); box-shadow: 0 0 0 3px rgba(114,47,55,0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
         
-        .mini-cal{margin:0 20px 16px}
-        .mini-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px}
-        .mini-day{aspect-ratio:1;border-radius:3px;background:var(--bg-card);cursor:pointer}
-        .mini-day.done{background:var(--teal)}
-        .mini-day.streak{background:var(--gold-dim)}
-        .mini-day.current{border:2px solid var(--burgundy)}
-        .mini-day.future{opacity:.2}
+        /* Checkbox */
+        .checkbox-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px; border-radius: 12px; cursor: pointer;
+            background: var(--white); border: 1px solid #e2e8f0;
+            transition: all 0.2s; margin-bottom: 8px;
+        }
+        .checkbox-item.checked { background: rgba(45,74,71,0.08); border-color: var(--teal); }
+        .checkbox-box {
+            width: 24px; height: 24px; border-radius: 6px;
+            border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; color: white; transition: all 0.2s; flex-shrink: 0;
+        }
+        .checkbox-item.checked .checkbox-box { background: var(--teal); border-color: var(--teal); }
+        .checkbox-label { font-size: 0.875rem; }
         
-        .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:var(--bg);border-top:1px solid var(--mocha);padding:10px 20px 26px;display:flex;justify-content:space-around}
-        .nav-btn{background:none;border:none;color:var(--cream-dim);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.55rem;padding:8px 12px;border-radius:10px}
-        .nav-btn.active{color:var(--cream);background:var(--bg-elevated)}
-        .nav-btn .icon{font-size:1.1rem}
+        /* Connection Grid */
+        .conn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .conn-btn {
+            padding: 10px 4px; border-radius: 12px; border: 1px solid #e2e8f0;
+            background: var(--white); cursor: pointer; text-align: center;
+            transition: all 0.2s; font-family: inherit;
+        }
+        .conn-btn:hover { border-color: #cbd5e1; }
+        .conn-btn.selected { border-color: var(--burgundy); background: rgba(114,47,55,0.08); }
+        .conn-btn .emoji { font-size: 1.5rem; display: block; }
+        .conn-btn .label { font-size: 0.65rem; color: var(--slate); margin-top: 2px; }
         
-        .modal-overlay{position:fixed;inset:0;background:rgba(26,21,18,.95);z-index:1000;display:none;align-items:flex-end;justify-content:center}
-        .modal-overlay.active{display:flex}
-        .modal{background:var(--bg-card);width:100%;max-width:430px;max-height:85vh;border-radius:20px 20px 0 0;padding:16px 20px 36px;overflow-y:auto}
-        .modal-handle{width:36px;height:4px;background:var(--mocha);border-radius:2px;margin:0 auto 14px}
-        .modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
-        .modal-title{font-size:1.15rem;font-weight:600}
-        .modal-sub{font-size:.8rem;color:var(--cream-dim);margin-top:2px}
-        .modal-close{background:var(--bg-elevated);border:none;color:var(--cream-dim);width:32px;height:32px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+        /* Tempo Grid */
+        .tempo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .tempo-btn {
+            padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0;
+            background: var(--white); cursor: pointer; text-align: center;
+            font-size: 0.8rem; font-weight: 500; transition: all 0.2s;
+            font-family: inherit;
+        }
+        .tempo-btn.selected { border-color: var(--burgundy); background: rgba(114,47,55,0.08); }
         
-        .form-section{margin-bottom:18px}
-        .form-title{font-size:.8rem;color:var(--gold);margin-bottom:10px;font-weight:600}
-        .form-row{display:flex;gap:10px;margin-bottom:10px}
-        .form-group{flex:1}
-        .form-label{display:block;font-size:.65rem;color:var(--cream-dim);margin-bottom:5px;text-transform:uppercase;letter-spacing:.03em}
-        .form-input{width:100%;background:var(--bg);border:1px solid var(--mocha);border-radius:10px;padding:12px 14px;color:var(--cream);font-size:.9rem;font-family:var(--font)}
-        .form-input:focus{outline:none;border-color:var(--burgundy)}
+        /* Modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            display: none; align-items: flex-end; justify-content: center;
+            z-index: 1000; padding: 0;
+        }
+        .modal-overlay.active { display: flex; }
+        @media (min-width: 640px) {
+            .modal-overlay { align-items: center; padding: 20px; }
+            .modal { border-radius: 20px !important; max-height: 85vh; }
+        }
+        .modal {
+            background: var(--white); border-radius: 20px 20px 0 0;
+            width: 100%; max-width: 500px; max-height: 90vh;
+            overflow-y: auto; position: relative;
+        }
+        .modal-header {
+            position: sticky; top: 0; background: var(--white);
+            padding: 16px; border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 10;
+        }
+        .modal-header h2 { font-size: 1rem; font-weight: 700; }
+        .modal-header p { font-size: 0.8rem; color: var(--slate); }
+        .modal-close {
+            width: 32px; height: 32px; border-radius: 8px; border: none;
+            background: #f1f5f9; cursor: pointer; font-size: 1.25rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-body { padding: 16px; }
+        .modal-footer {
+            position: sticky; bottom: 0; background: var(--white);
+            padding: 16px; border-top: 1px solid #e2e8f0;
+        }
         
-        .conn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-        .conn-btn{aspect-ratio:1;border:2px solid var(--mocha);background:var(--bg);border-radius:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-        .conn-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15)}
-        .conn-btn .emoji{font-size:1.4rem}
-        .conn-btn .label{font-size:.55rem;color:var(--cream-dim)}
+        /* Section divider */
+        .section-title { font-size: 0.8rem; font-weight: 600; margin: 20px 0 12px; color: var(--slate-dark); }
         
-        .tempo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-        .tempo-btn{background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:10px 6px;cursor:pointer;text-align:center}
-        .tempo-btn.selected{border-color:var(--teal);background:rgba(45,74,71,.2)}
-        .tempo-btn .name{font-size:.75rem;font-weight:600}
-        .tempo-btn .desc{font-size:.55rem;color:var(--cream-dim)}
+        /* Chart placeholder */
+        .chart-container { height: 200px; background: #f8fafc; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--slate); font-size: 0.875rem; margin-bottom: 16px; }
         
-        .scan-grid{display:flex;gap:6px}
-        .scan-btn{flex:1;background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:10px;cursor:pointer;text-align:center;font-size:.75rem;color:var(--cream-dim)}
-        .scan-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15);color:var(--cream)}
+        /* Metric cards */
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+        .metric-card { padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; }
+        .metric-card .label { font-size: 0.7rem; color: var(--slate); }
+        .metric-card .value { font-size: 1.5rem; font-weight: 700; margin: 4px 0; }
+        .metric-card .sub { font-size: 0.7rem; color: var(--slate); }
+        .metric-card .bar { height: 6px; background: #e2e8f0; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .metric-card .bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+        .metric-card .bar-fill.burgundy { background: var(--burgundy); }
+        .metric-card .bar-fill.teal { background: var(--teal); }
+        .metric-card .bar-fill.green { background: #10b981; }
         
-        .metric-row{margin-bottom:14px}
-        .metric-header{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:6px}
-        .metric-header .name{color:var(--cream-dim)}
-        .metric-header .val{color:var(--burgundy);font-weight:600}
-        .metric-dots{display:flex;gap:6px}
-        .metric-dot{flex:1;height:10px;border-radius:5px;background:var(--mocha);cursor:pointer}
-        .metric-dot.filled{background:linear-gradient(90deg,var(--burgundy),var(--wine))}
+        /* Method sections */
+        .method-section { margin-bottom: 24px; }
+        .method-section h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .method-section p { font-size: 0.85rem; color: var(--slate-dark); line-height: 1.5; margin-bottom: 8px; }
+        .method-section ul { font-size: 0.85rem; color: var(--slate-dark); line-height: 1.6; padding-left: 20px; }
         
-        .booty-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-        .booty-btn{background:var(--bg);border:2px solid var(--mocha);border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center}
-        .booty-btn.selected{border-color:var(--burgundy);background:rgba(139,58,76,.15)}
-        .booty-btn .name{font-size:.65rem;color:var(--cream-dim)}
-        .booty-btn.selected .name{color:var(--cream)}
+        /* Neural grid */
+        .neural-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .neural-item { text-align: center; padding: 12px 8px; background: #f8fafc; border-radius: 12px; }
+        .neural-item .emoji { font-size: 1.5rem; }
+        .neural-item .count { font-size: 1.25rem; font-weight: 700; margin: 4px 0; }
+        .neural-item .label { font-size: 0.65rem; color: var(--slate); }
         
-        .flex-section{margin-bottom:14px}
-        .flex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-        .flex-item{background:var(--bg);border:1px solid var(--mocha);border-radius:10px;padding:10px;text-align:center}
-        .flex-item .label{font-size:.6rem;color:var(--cream-dim);margin-bottom:4px}
-        .flex-item input{width:100%;background:transparent;border:none;color:var(--cream);font-size:1rem;font-weight:600;text-align:center;font-family:var(--font)}
-        .flex-item input::placeholder{color:var(--cream-dim)}
+        /* Scan list */
+        .scan-list { max-height: 200px; overflow-y: auto; }
+        .scan-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px;
+            margin-bottom: 6px; font-size: 0.8rem;
+        }
+        .scan-item button { background: none; border: none; cursor: pointer; color: var(--slate); }
+        .scan-item button:hover { color: #ef4444; }
         
-        .btn-save{width:100%;padding:14px;border-radius:24px;background:linear-gradient(135deg,var(--burgundy),var(--wine));border:none;color:var(--cream);font-size:.95rem;font-weight:600;cursor:pointer;margin-top:8px}
-        .quick-btn{background:var(--bg-elevated);border:1px solid var(--mocha);color:var(--cream-muted);padding:8px 12px;border-radius:8px;font-size:.75rem;cursor:pointer;font-family:var(--font)}
-        .quick-btn:active{background:var(--burgundy);border-color:var(--burgundy);color:var(--cream)}
-        .check-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg);border:1px solid var(--mocha);border-radius:10px;cursor:pointer}
-        .check-row.checked{background:rgba(45,74,71,.2);border-color:var(--teal)}
-        .check-box{width:24px;height:24px;border:2px solid var(--mocha);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--teal-light);flex-shrink:0}
-        .check-row.checked .check-box{background:var(--teal);border-color:var(--teal)}
-        .check-text{font-size:.85rem;color:var(--cream-muted)}
-        .check-row.checked .check-text{color:var(--cream)}
-        .period-btn{background:var(--bg-card);border:1px solid rgba(212,168,154,.3);color:#d4a89a;padding:10px 20px;border-radius:20px;font-size:.75rem;cursor:pointer;font-family:var(--font)}
-        .period-btn:active{background:rgba(212,168,154,.15)}
-        .btn-streak-modal{width:100%;padding:12px;border-radius:24px;background:var(--bg);border:2px solid var(--gold-dim);color:var(--gold);font-size:.85rem;cursor:pointer;margin-top:8px}
-        
-        .calendar-view{padding:20px}
-        .cal-month{margin-bottom:24px}
-        .cal-month-title{font-size:1.1rem;font-weight:600;margin-bottom:14px}
-        .cal-month-title span{color:var(--cream-dim);font-weight:400;margin-left:6px}
-        .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
-        .cal-weekday{text-align:center;font-size:.6rem;color:var(--cream-dim);font-weight:600;padding:6px}
-        .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-        .cal-day{aspect-ratio:1;border-radius:8px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.8rem;color:var(--cream-dim);position:relative}
-        .cal-day.empty{background:transparent;cursor:default}
-        .cal-day.done{background:var(--teal);color:var(--cream)}
-        .cal-day.streak{background:var(--gold-dim);color:var(--bg)}
-        .cal-day.current{border:2px solid var(--burgundy)}
-        .cal-day.future{opacity:.25}
-        .cal-day.outside{opacity:.1;cursor:default}
-        .cal-day .dot{position:absolute;width:4px;height:4px;border-radius:50%}
-        .cal-day .dot.top{top:3px}
-        .cal-day .dot.bottom{bottom:3px}
-        .cal-day .dot.menstrual{background:#d4a89a}
-        .cal-day .dot.follicular{background:#7ab3ad}
-        .cal-day .dot.ovulatory{background:var(--gold)}
-        .cal-day .dot.luteal{background:#c9868f}
-        
-        .progress-view{padding:20px}
-        .prog-card{background:var(--bg-card);border:1px solid var(--mocha);border-radius:14px;padding:16px;margin-bottom:10px}
-        .prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-        .prog-title{font-size:.8rem;color:var(--cream-dim)}
-        .prog-val{font-size:1.2rem;font-weight:700}
-        .prog-bar{height:6px;background:var(--mocha);border-radius:3px;overflow:hidden}
-        .prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--burgundy),var(--wine))}
-        
-        .neural-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-        .neural-item{text-align:center}
-        .neural-item .emoji{font-size:1.2rem}
-        .neural-item .count{font-size:1rem;font-weight:700;margin-top:2px}
-        .neural-item .label{font-size:.55rem;color:var(--cream-dim)}
-        
-        .split-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-        .split-item{text-align:center}
-        .split-item .icon{font-size:1.3rem}
-        .split-item .val{font-size:1rem;font-weight:700;margin-top:2px}
-        .split-item .label{font-size:.55rem;color:var(--cream-dim)}
-        
-        .booty-chart{margin-top:12px}
-        .booty-row{margin-bottom:12px}
-        .booty-row-header{display:flex;justify-content:space-between;font-size:.75rem;margin-bottom:4px}
-        .booty-row-header .name{color:var(--cream-dim)}
-        .booty-row-header .val{color:var(--burgundy);font-weight:600}
-        .booty-bars{display:flex;gap:3px;height:32px;align-items:flex-end}
-        .booty-bar{flex:1;background:var(--mocha);border-radius:2px;min-height:4px}
-        .booty-bar.filled{background:linear-gradient(180deg,var(--burgundy),var(--wine))}
-        .booty-bar.current{border:1px solid var(--gold)}
-        
-        .flex-chart{margin-top:12px}
-        .flex-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--mocha)}
-        .flex-row:last-child{border-bottom:none}
-        .flex-row .name{font-size:.8rem;color:var(--cream-muted)}
-        .flex-row .val{font-size:.9rem;font-weight:600}
-        .flex-row .change{font-size:.7rem;margin-left:6px}
-        .flex-row .change.pos{color:var(--teal-light)}
-        .flex-row .change.neg{color:var(--burgundy)}
-        
-        .info-view{padding:20px}
-        .info-section{background:var(--bg-card);border:1px solid var(--mocha);border-radius:14px;padding:16px;margin-bottom:10px}
-        .info-title{font-size:1rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-        .info-text{font-size:.8rem;color:var(--cream-muted);line-height:1.6}
-        .info-text strong{color:var(--cream)}
-        
-        .settings-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--mocha)}
-        .settings-row:last-child{border-bottom:none}
-        .settings-label{font-size:.8rem;color:var(--cream-muted)}
-        .settings-input{background:var(--bg);border:1px solid var(--mocha);border-radius:8px;padding:8px 12px;color:var(--cream);font-size:.85rem;width:120px;text-align:right;font-family:var(--font)}
-        
-        .info-card{background:var(--bg);border-radius:12px;padding:14px;margin:8px 0;border-left:3px solid var(--gold)}
-        .info-card .title{font-size:.85rem;font-weight:600;color:var(--cream);margin-bottom:6px}
-        .info-card .desc{font-size:.75rem;color:var(--cream-muted);line-height:1.5}
-        .info-card .equip{font-size:.7rem;color:var(--gold);margin-top:6px}
-        
-        .cycle-card{background:var(--bg);border-radius:12px;padding:14px;margin:8px 0;border-left:3px solid}
-        .cycle-card.menstrual{border-color:#d4a89a}
-        .cycle-card.follicular{border-color:#7ab3ad}
-        .cycle-card.ovulatory{border-color:var(--gold)}
-        .cycle-card.luteal{border-color:#c9868f}
-        .cycle-card .title{font-size:.85rem;font-weight:600;margin-bottom:4px}
-        .cycle-card.menstrual .title{color:#d4a89a}
-        .cycle-card.follicular .title{color:#7ab3ad}
-        .cycle-card.ovulatory .title{color:var(--gold)}
-        .cycle-card.luteal .title{color:#c9868f}
-        .cycle-card .desc{font-size:.75rem;color:var(--cream-muted);line-height:1.5}
-        
-        .data-btns{display:flex;gap:8px;margin-top:12px}
-        .data-btn{flex:1;padding:12px;border-radius:12px;border:1px solid var(--mocha);background:var(--bg);color:var(--cream-dim);font-size:.8rem;cursor:pointer}
-        .data-btn:hover{border-color:var(--gold-dim);color:var(--cream)}
-        
-        .toast{position:fixed;top:50px;left:50%;transform:translateX(-50%);background:var(--teal);color:var(--cream);padding:12px 24px;border-radius:24px;font-size:.85rem;font-weight:500;z-index:2000;display:none}
-        .toast.error{background:var(--burgundy)}
-        .toast.show{display:block;animation:toast 2.5s ease}
-        @keyframes toast{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}85%{opacity:1}100%{opacity:0}}
+        /* Footer */
+        .footer { text-align: center; padding: 32px 16px; font-size: 0.75rem; color: var(--slate); }
     </style>
 </head>
 <body>
-    <div class="app" id="app"></div>
-    <div class="toast" id="toast"></div>
-    <input type="file" id="importFile" accept=".json" style="display:none">
+    <div id="app"></div>
+    
     <script>
-const START=new Date(2026,0,11),STORAGE='miamiV14',BACKUPS=['miamiV14_bk1','miamiV14_bk2','miamiV14_bk3'];
-const DEFAULTS={cycleStart:'2026-01-13',cycleLength:28,menstrualDays:5,proteinGoal:130,waterGoal:100};
+// ============ CONSTANTS ============
+const STORAGE_KEY = 'miami-ready-v3';
+const START = new Date('2026-01-11T00:00:00');
+const END = new Date('2026-03-21T23:59:59');
 
-// Training phases - adjusted for fast-twitch
-const PHASES=[
-    {num:1,name:'Fix Signal',days:[1,21],reps:'Hold to fail',sets:'3-4',note:'Bodyweight. Slow. Connection before load.'},
-    {num:2,name:'Build',days:[22,42],reps:'6-10',sets:'4',note:'Heavy. Add weight when 😊. Your fast-twitch responds to load.'},
-    {num:3,name:'Sculpt',days:[43,58],reps:'8-12',sets:'4',note:'Moderate load. 1¼ reps. Slow eccentric.'},
-    {num:4,name:'Peak',days:[59,70],reps:'10-15',sets:'3-4',note:'Pump focus. Holds. Finishers.'}
+const WEEKLY = [
+    { dow: 6, type: 'tempo', label: 'Tempo', focus: 'Any Tempo Studio class', icon: '🧘' },
+    { dow: 0, type: 'tempo-scan', label: 'Tempo + Scan', focus: 'Tempo class + Zozofit body scan', icon: '📊' },
+    { dow: 1, type: 'lower-a', label: 'Lower A', focus: 'Shelf + Side — Upper glute max + medius', icon: '🍑' },
+    { dow: 2, type: 'tempo', label: 'Tempo', focus: 'Upper body or cardio', icon: '💪' },
+    { dow: 3, type: 'lower-b', label: 'Lower B', focus: 'Underbutt — Lower glute max + ham tie-in', icon: '🔥' },
+    { dow: 4, type: 'tempo', label: 'Tempo', focus: 'Upper body or recovery', icon: '🧘' },
+    { dow: 5, type: 'lower-c', label: 'Lower C', focus: 'Side Dips — Medius + minimus', icon: '✨' },
 ];
 
-// Cycle phases
-const CYCLE=[
-    {name:'Menstrual',start:1,icon:'🩸',rule:'No PR. Connection focus. Light.'},
-    {name:'Follicular',start:6,icon:'🌱',rule:'Add load if 🟢. Growth window.'},
-    {name:'Ovulatory',start:14,icon:'⚡',rule:'PR window. Push hard.'},
-    {name:'Luteal',start:18,icon:'🌙',rule:'Shape. More abduction. No grinding.'}
+const TEMPLATES = {
+    'lower-a': {
+        tag: 'Shelf + Side', target: 'Upper glute max + medius',
+        why: 'Pulls pelvis back into position. Creates the shelf.',
+        exercises: [
+            { name: 'Barbell Hip Thrust', sets: '4×6-10', note: 'Heavy' },
+            { name: 'Barbell RDL', sets: '3×8-10' },
+            { name: 'Back Extensions (glute bias)', sets: '3×12-15', note: 'Pad LOW' },
+            { name: 'Banded Lateral Step-Ups', sets: '3×10/side' },
+            { name: 'Heavy Banded Abduction', sets: '3×15-20' },
+        ],
+    },
+    'lower-b': {
+        tag: 'Underbutt', target: 'Lower glute max + ham tie-in',
+        why: 'Creates depth and hang. Fills the fold.',
+        exercises: [
+            { name: 'B-Stance Hip Thrust', sets: '4×8-10/side', note: 'Heavy' },
+            { name: 'B-Stance RDL', sets: '3×10/side' },
+            { name: 'Elevated Step-Ups', sets: '3×10/side', note: 'Lean forward' },
+            { name: 'Hyperextensions (glute bias)', sets: '3×12-15', note: 'Pad LOW' },
+            { name: 'Yoga Ball Hamstring Curls', sets: '3×12-15' },
+        ],
+    },
+    'lower-c': {
+        tag: 'Side Dips', target: 'Medius + minimus',
+        why: 'Stabilizes SI joint. Fills hip dips.',
+        exercises: [
+            { name: 'Single-Leg Hip Thrust', sets: '3×10/side' },
+            { name: 'Cossack Squats', sets: '3×8/side' },
+            { name: 'Curtsy Lunges', sets: '3×10/side' },
+            { name: 'Side-Lying Leg Raises', sets: '3×15/side', note: 'Ankle weights' },
+            { name: 'Banded Glute Bridge Pulses', sets: '3×20' },
+        ],
+    },
+};
+
+const RESET = ['Right hip flexor stretch — 60s', 'Right single-leg glute bridge hold — 45s', 'Right side-lying leg raises — 20 slow', 'Dead bug — 60s'];
+const PRIMER = ['Frog pumps — 60s (fast pulses)', 'Banded standing abductions — 60s'];
+
+const CONNECTION = [
+    { v: 'red', emoji: '😐', label: 'Not yet', hint: 'Quads doing the work. Go lighter.' },
+    { v: 'yellow', emoji: '🤔', label: 'Getting there', hint: 'Some glutes. Hold or reduce.' },
+    { v: 'green', emoji: '😊', label: 'Feeling it', hint: 'Add weight if follicular/ovulatory.' },
+    { v: 'sparkles', emoji: '🔥', label: 'Locked in', hint: 'Progress confidently.' },
 ];
 
-const CYCLE_MODS={menstrual:'Reduce',follicular:'Build',ovulatory:'Peak',luteal:'Shape'};
+const CYCLES = [
+    { v: 'menstrual', icon: '🌸', label: 'Menstrual', note: 'Go lighter if needed.' },
+    { v: 'follicular', icon: '🌱', label: 'Follicular', note: 'Energy rising. Push intensity.' },
+    { v: 'ovulatory', icon: '☀️', label: 'Ovulatory', note: 'Peak power. Hit PRs.' },
+    { v: 'luteal', icon: '🍂', label: 'Luteal', note: 'Maintain, don\'t push.' },
+];
 
-// 3D Templates - YOUR equipment
-const TEMPLATES={
-    'lower-a':{
-        name:'Shelf + Side',target:'Upper glute + medius',icon:'🍑',
-        exercises:[
-            'Hip thrust with Tempo barbell + squat pad — 4×6-10, pause top',
-            'Finer Form bench back ext OR glute bridge iso — 3×hold',
-            'Blogilates heavy band seated abduction — 4×15',
-            'Lateral step-ups on bench — 3×10/side'
-        ],
-        finisher:'Frog pumps 2×20 + band abduction burnout 1 min',
-        equipment:'Tempo barbell · Squat pad · Finer Form bench · Blogilates bands'
-    },
-    'lower-b':{
-        name:'Underbutt',target:'Lower glute + ham tie-in',icon:'🔥',
-        exercises:[
-            'B-stance RDL with Tempo barbell — 4×8/side',
-            'Step-ups on Finer Form bench (high) — 3×10/side',
-            'Hyperextensions on Finer Form roman chair — 3×12',
-            'Yoga ball ham curls — 3×12'
-        ],
-        finisher:'Kickbacks with ankle weights 2×15/side + 90s glute stretch',
-        equipment:'Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights'
-    },
-    'lower-c':{
-        name:'Side Dips',target:'Medius + minimus',icon:'✨',
-        exercises:[
-            'Single-leg hip thrust on bench — 3×8/side',
-            'Cossack squats (bodyweight) — 3×10/side',
-            'Side-lying leg raises with ankle weight — 3×15/side',
-            'Blogilates band walks — 3×20 steps'
-        ],
-        finisher:'Standing abduction hold 45s/side + bridge pulses 2 min',
-        equipment:'Finer Form bench · Ankle weights · Blogilates bands (all levels)'
-    },
-    'tempo':{name:'Tempo',target:'Recovery',icon:'🧘',exercises:['Tempo Studio class'],finisher:'',equipment:'Tempo Studio'},
-    'tempo-scan':{name:'Tempo + Scan',target:'Recovery + Measure',icon:'📊',exercises:['Tempo Studio class','Body scan'],finisher:'',equipment:'Tempo Studio · Zozofit'}
+const PHASES = [
+    { name: 'CONNECT', weeks: '1-3', desc: 'Light load, perfect form.', expect: '😐→🤔' },
+    { name: 'BUILD', weeks: '4-7', desc: 'Heavy when 😊. Fast-twitch responds to load.', expect: '🤔→😊' },
+    { name: 'PEAK', weeks: '8-10', desc: 'Intensity peak. Push limits.', expect: '😊→🔥' },
+];
+
+const DEFAULT = {
+    settings: { proteinGoal: 130, waterGoal: 100, cycle: 'follicular' },
+    baseline: { roundness: 32, lift: 83, protrusion: 25 },
+    days: {},
+    scans: [],
 };
 
-const RESET_STEPS=['Right hip flexor stretch — 60s (squeeze glute)','Right single-leg glute bridge hold — 45s','Right side-lying leg raises — 20 slow','Dead bug — 60s'];
-const PRIMER_STEPS=['Frog pumps — 60s (fast pulses, feet together, knees wide)','Banded standing abductions — 60s (small, fast, elastic reps)'];
+// ============ HELPERS ============
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+const isoDate = d => { const x = new Date(d); x.setHours(0,0,0,0); return x.toISOString().slice(0,10); };
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const dayDiff = (a, b) => Math.round((new Date(b).setHours(0,0,0,0) - new Date(a).setHours(0,0,0,0)) / 86400000);
+const fmtShort = d => new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(new Date(d));
+const fmtLong = d => new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'long', day: 'numeric' }).format(new Date(d));
+const getType = d => WEEKLY.find(w => w.dow === new Date(d).getDay()) || WEEKLY[0];
+const getPhase = dayNum => dayNum <= 21 ? PHASES[0] : dayNum <= 49 ? PHASES[1] : PHASES[2];
+const connMeta = v => CONNECTION.find(c => c.v === v) || CONNECTION[0];
+const cycleMeta = v => CYCLES.find(c => c.v === v) || CYCLES[1];
 
-const DAYS={0:'tempo-scan',1:'lower-a',2:'tempo',3:'lower-b',4:'tempo',5:'lower-c',6:'tempo'};
-const BOOTY=['Perky','Bubbly','Juicy','Low-Key'];
-const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DAYS_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const DAYS_S=['S','M','T','W','T','F','S'];
+// ============ STATE ============
+let state = { ...DEFAULT };
+let view = 'today';
+let selectedIso = isoDate(new Date());
+let modalOpen = false;
 
-let state={view:'today',modal:false,selDay:null,data:null};
-
-function getCycleDay(date,s){const d=new Date(date);d.setHours(0,0,0,0);const cs=new Date(s.cycleStart);cs.setHours(0,0,0,0);const diff=Math.floor((d-cs)/864e5);return((diff%s.cycleLength)+s.cycleLength)%s.cycleLength+1}
-function getCyclePhase(date,s){const cd=getCycleDay(date,s);const md=s.menstrualDays,cl=s.cycleLength;if(cd<=md)return CYCLE[0];if(cd<=Math.floor(cl/2)-1)return CYCLE[1];if(cd<=Math.floor(cl/2)+3)return CYCLE[2];return CYCLE[3]}
-function getCycleName(date,s){return getCyclePhase(date,s).name.toLowerCase()}
-
-function rotate(){try{const b2=localStorage.getItem(BACKUPS[1]),b1=localStorage.getItem(BACKUPS[0]),cur=localStorage.getItem(STORAGE);if(b2)localStorage.setItem(BACKUPS[2],b2);if(b1)localStorage.setItem(BACKUPS[1],b1);if(cur)localStorage.setItem(BACKUPS[0],cur)}catch(e){}}
-function save(){try{rotate();localStorage.setItem(STORAGE,JSON.stringify(state.data));return true}catch(e){return false}}
-function load(){let d=null;try{const r=localStorage.getItem(STORAGE);if(r)d=JSON.parse(r)}catch(e){}if(!d||!d.days){for(const k of BACKUPS){try{const r=localStorage.getItem(k);if(r){d=JSON.parse(r);if(d&&d.days){toast('Restored');break}}}catch(e){}}}return d}
-function toast(m,err){const t=document.getElementById('toast');t.textContent=m;t.className='toast show'+(err?' error':'');setTimeout(()=>t.className='toast',2500)}
-function exp(){const b=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=`miami-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(u);toast('Exported')}
-function imp(){document.getElementById('importFile').click()}
-document.getElementById('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(!d.days)throw 0;state.data=d;state.data.today=getToday();save();render();toast('Imported')}catch(e){toast('Invalid',1)}};r.readAsText(f);e.target.value=''});
-
-const getDate=n=>{const d=new Date(START);d.setDate(d.getDate()+n-1);return d};
-const getDayNum=d=>Math.floor((d-START)/864e5)+1;
-const fmt=d=>`${DAYS_FULL[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
-const fmtShort=d=>`${MONTHS[d.getMonth()]} ${d.getDate()}`;
-const getType=n=>DAYS[getDate(n).getDay()];
-const getPhase=n=>PHASES.find(p=>n>=p.days[0]&&n<=p.days[1])||PHASES[0];
-const getToday=()=>{const t=new Date();t.setHours(0,0,0,0);const s=new Date(START);s.setHours(0,0,0,0);return t<s?1:Math.min(Math.max(Math.floor((t-s)/864e5)+1,1),70)};
-const getWeek=n=>Math.ceil(n/7);
-
-function init(){
-    const ld=load();
-    if(ld&&ld.days&&ld.days.length===70){
-        state.data=ld;
-        if(!state.data.settings)state.data.settings={...DEFAULTS};
-        state.data.today=getToday();
-    }else{
-        const days=[];
-        for(let i=1;i<=70;i++){
-            days.push({
-                num:i,date:getDate(i).toISOString().slice(0,10),phase:getPhase(i).num,type:getType(i),
-                done:false,reset:false,primer:false,
-                conn:null,notes:'',
-                htWt:null,htReps:null,rdlWt:null,rdlReps:null,
-                tempo:'',tempoDur:null,
-                protein:0,water:0,
-                scan:null,round:null,lift:null,prot:null,bootyType:null,bf:null,lean:null,waist:null,hips:null,
-                flexL:null,flexR:null,flexM:null
-            });
-        }
-        state.data={days,today:getToday(),settings:{...DEFAULTS},v:6};
-        save();
-    }
+function load() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) state = { ...DEFAULT, ...JSON.parse(raw) };
+    } catch {}
 }
 
-const render=()=>document.getElementById('app').innerHTML=(state.view==='today'?rToday():state.view==='calendar'?rCal():state.view==='progress'?rProg():rInfo())+rNav()+rModal();
-function rToday(){
-    const d=state.data,day=d.days[d.today-1],done=d.days.filter(x=>x.done).length,s=d.settings;
-    const date=getDate(d.today),type=getType(d.today),phase=getPhase(d.today),tmpl=TEMPLATES[type];
-    const cycle=getCyclePhase(date,d.settings),cycleName=cycle.name.toLowerCase();
-    const lastConn=[...d.days].reverse().find(x=>x.conn)?.conn;
-    const lastHT=[...d.days].reverse().find(x=>x.htWt)?.htWt;
-    const emoji={red:'😐',yellow:'🤔',green:'😊',sparkles:'🔥'};
-    
-    const ws=d.today-date.getDay(),week=[];
-    for(let i=0;i<7;i++){const n=ws+i;if(n>=1&&n<=70)week.push({n,day:d.days[n-1],date:getDate(n)})}
-    
-    const prog=(done/70)*360;
-    let btn=day.done?'btn-done':'btn-primary';
-    let btnTxt=day.done?'Logged ✓':'Log Today';
-    
-    // Calculate completion percentage
-    const isLower=type.startsWith('lower');
-    const hasWorkout=day.done;
-    const hasProtein=day.protein>=s.proteinGoal;
-    const hasWater=day.water>=s.waterGoal;
-    const hasFlex=day.flexL||day.flexR||day.flexM;
-    const hasReset=day.reset;
-    const hasPrimer=day.primer;
-    // Lower days: 6 items (reset, primer, workout, protein, water, flex)
-    // Tempo days: 4 items (workout, protein, water, flex)
-    const totalItems=isLower?6:4;
-    const completionCount=(hasWorkout?1:0)+(hasProtein?1:0)+(hasWater?1:0)+(hasFlex?1:0)+(isLower&&hasReset?1:0)+(isLower&&hasPrimer?1:0);
-    const completionPct=Math.round((completionCount/totalItems)*100);
-    
-    // Daily checklist items
-    const proteinPct=Math.min((day.protein/d.settings.proteinGoal)*100,100);
-    const waterPct=Math.min((day.water/d.settings.waterGoal)*100,100);
-    
-    let summary='';
-    if(day.done){
-        if(type.startsWith('lower')){
-            summary=`<div class="summary-row"><span class="summary-label">Connection</span><span class="summary-value">${emoji[day.conn]||'—'}</span></div>`;
-            if(day.htWt)summary+=`<div class="summary-row"><span class="summary-label">Hip Thrust</span><span class="summary-value">${day.htWt}lb × ${day.htReps||'?'}</span></div>`;
-        }else if(day.tempo){
-            summary=`<div class="summary-row"><span class="summary-label">Class</span><span class="summary-value">${day.tempo}</span></div>`;
-        }
-        summary+=`<div class="summary-row"><span class="summary-label">Protein</span><span class="summary-value">${day.protein}g / ${d.settings.proteinGoal}g</span></div>`;
-        summary+=`<div class="summary-row"><span class="summary-label">Water</span><span class="summary-value">${day.water}oz / ${d.settings.waterGoal}oz</span></div>`;
-    }
-    
-    return`<div class="header">
-        <div class="header-eyebrow">Day ${d.today} of 70</div>
-        <div class="day-ring" style="--progress:${prog}deg"><div class="day-num">${d.today}</div><div class="day-sub">${fmt(date)}</div></div>
-        <div class="badges">
-            <span class="badge phase">P${phase.num} ${phase.name}</span>
-            <span class="badge ${cycleName}">${cycle.icon} ${cycle.name}</span>
-        </div>
-    </div>
-    <div class="day-type"><div class="day-type-icon">${tmpl.icon}</div><div class="day-type-name">${tmpl.name}</div><div class="day-type-target">${tmpl.target}</div></div>
-    <div class="rule-card"><div class="rule-label">${cycle.name} Rule</div><div class="rule-text">${cycle.rule}</div></div>
-    
-    <div style="text-align:center;margin:0 20px 14px"><button class="period-btn" onclick="periodStarted()">🩸 Period Started Today</button></div>
-    
-    ${type.startsWith('lower')?`
-    <div class="reset-card" onclick="this.classList.toggle('open')">
-        <div class="reset-header"><div class="reset-title">⚡ Right-Side Reset (3 min)</div><div class="reset-hint">tap to expand</div></div>
-        <div class="reset-body">${RESET_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--gold)">All exercises today: right side first</em></div>
-    </div>
-    <div class="reset-card" onclick="this.classList.toggle('open')" style="border-color:var(--teal)">
-        <div class="reset-header"><div class="reset-title" style="color:var(--teal-light)">🔥 Glute Primer (2 min)</div><div class="reset-hint">tap to expand</div></div>
-        <div class="reset-body">${PRIMER_STEPS.map((s,i)=>`${i+1}. ${s}`).join('<br>')}<br><br><em style="color:var(--cream-dim)">Pumps fascia · Wakes up glutes · Unlocks SI · Makes hip thrusts hit the shelf</em></div>
-    </div>
-    <div class="card" style="background:var(--bg);border-color:var(--burgundy)">
-        <div style="font-size:.8rem;color:var(--burgundy);font-weight:600;margin-bottom:6px">🧠 Every Rep Cue</div>
-        <div style="font-size:.85rem;color:var(--cream)">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong></div>
-        <div style="font-size:.7rem;color:var(--cream-dim);margin-top:6px">This teaches your nervous system: "Glutes hold me, not my spine."</div>
-    </div>
-    <div class="card">
-        <div class="card-header"><div class="card-title">Today's Work</div><div class="card-badge">${phase.sets} × ${phase.reps}</div></div>
-        <ul class="card-list">${tmpl.exercises.map(e=>`<li>${e}</li>`).join('')}</ul>
-        <div class="card-note">${tmpl.finisher}</div>
-        <div class="card-note gold">${tmpl.equipment}</div>
-    </div>
-    `:''}
-    
-    <div class="daily-checklist">
-        <div class="checklist-title" style="display:flex;justify-content:space-between;align-items:center">Today's Targets <span style="color:${completionPct===100?'var(--teal-light)':completionPct>=50?'var(--gold)':'var(--cream-dim)'}">${completionPct}%</span></div>
-        <div class="checklist-grid" style="${isLower?'grid-template-columns:repeat(3,1fr)':''}">
-            ${isLower?`<div class="check-item ${hasReset?'done':''}" onclick="openModal()"><div class="icon">⚡</div><div class="label">Reset</div><div class="value">${hasReset?'✓':'—'}</div></div>
-            <div class="check-item ${hasPrimer?'done':''}" onclick="openModal()"><div class="icon">🔥</div><div class="label">Primer</div><div class="value">${hasPrimer?'✓':'—'}</div></div>`:''}
-            <div class="check-item ${hasWorkout?'done':''}" onclick="openModal()"><div class="icon">${tmpl.icon}</div><div class="label">Workout</div><div class="value">${hasWorkout?'✓':'—'}</div></div>
-            <div class="check-item ${hasProtein?'done':''}" onclick="openModal()"><div class="icon">🥩</div><div class="label">Protein</div><div class="value">${day.protein||0}/${s.proteinGoal}g</div></div>
-            <div class="check-item ${hasWater?'done':''}" onclick="openModal()"><div class="icon">💧</div><div class="label">Water</div><div class="value">${day.water||0}/${s.waterGoal}oz</div></div>
-            <div class="check-item ${hasFlex?'done':''}" onclick="openModal()"><div class="icon">🧘</div><div class="label">Stretch</div><div class="value">${hasFlex?'✓':'—'}</div></div>
-        </div>
-    </div>
-    
-    <button class="${btn} btn" onclick="openModal()">${btnTxt}</button>
-    
-    ${day.done?`<div class="summary"><div class="summary-card">${summary}</div></div>`:''}
-    
-    <div class="week-section">
-        <div class="section-header"><div class="section-title">This Week</div><div class="section-sub">${fmtShort(getDate(Math.max(ws,1)))} – ${fmtShort(getDate(Math.min(ws+6,70)))}</div></div>
-        <div class="week-grid">${week.map(w=>{const t=TEMPLATES[getType(w.n)];return`<div class="week-day ${w.n===d.today?'current':''} ${w.day.done?'done':''} ${w.n>d.today?'future':''}" onclick="openModal(${w.n})"><div class="d-name">${DAYS_S[w.date.getDay()]}</div><div class="d-num">${w.date.getDate()}</div><div class="d-icon">${t.icon}</div></div>`}).join('')}</div>
-    </div>
-    
-    <div class="stats-grid">
-        <div class="stat"><div class="stat-val">${done}</div><div class="stat-label">Done</div></div>
-        <div class="stat"><div class="stat-val">${emoji[lastConn]||'—'}</div><div class="stat-label">Neural</div></div>
-        <div class="stat"><div class="stat-val">${lastHT||'—'}</div><div class="stat-label">HT lbs</div></div>
-        <div class="stat"><div class="stat-val">${70-d.today+1}</div><div class="stat-label">Left</div></div>
-    </div>
-    
-    <div class="miami-card"><div class="miami-label">Miami Ready</div><div class="miami-date">${MONTHS[getDate(70).getMonth()]} ${getDate(70).getDate()}, 2026</div></div>
-    
-    <div class="mini-cal"><div class="section-header"><div class="section-title">70 Days</div></div><div class="mini-grid">${d.days.map((x,i)=>`<div class="mini-day ${x.done?'done':''} ${i+1===d.today?'current':''} ${i+1>d.today?'future':''}" onclick="openModal(${i+1})" style="cursor:pointer"></div>`).join('')}</div></div>`;
-}
-function rCal(){
-    const d=state.data,months=[];
-    let cur=new Date(START.getFullYear(),START.getMonth(),1);
-    const last=new Date(getDate(70).getFullYear(),getDate(70).getMonth(),1);
-    while(cur<=last){months.push(new Date(cur));cur.setMonth(cur.getMonth()+1)}
-    
-    let h='<div class="calendar-view">';
-    for(const m of months){
-        const y=m.getFullYear(),mi=m.getMonth(),first=new Date(y,mi,1).getDay(),days=new Date(y,mi+1,0).getDate();
-        h+=`<div class="cal-month"><div class="cal-month-title">${MONTHS[mi]} <span>${y}</span></div><div class="cal-weekdays">${DAYS_S.map(x=>`<div class="cal-weekday">${x}</div>`).join('')}</div><div class="cal-grid">`;
-        for(let i=0;i<first;i++)h+='<div class="cal-day empty"></div>';
-        for(let day=1;day<=days;day++){
-            const date=new Date(y,mi,day),dn=getDayNum(date);
-            if(dn>=1&&dn<=70){
-                const dd=d.days[dn-1],cn=getCycleName(date,d.settings);
-                h+=`<div class="cal-day ${dd.done?'done':''} ${dn===d.today?'current':''} ${dn>d.today?'future':''}" onclick="openModal(${dn})">${day}<div class="dot top ${cn}"></div></div>`;
-            }else h+=`<div class="cal-day outside">${day}</div>`;
-        }
-        h+='</div></div>';
-    }
-    return h+'</div>';
+function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
 }
 
-function rProg(){
-    const d=state.data,done=d.days.filter(x=>x.done).length;
-    const la=d.days.filter(x=>x.type==='lower-a'&&x.done).length,laT=d.days.filter(x=>x.type==='lower-a').length;
-    const lb=d.days.filter(x=>x.type==='lower-b'&&x.done).length,lbT=d.days.filter(x=>x.type==='lower-b').length;
-    const lc=d.days.filter(x=>x.type==='lower-c'&&x.done).length,lcT=d.days.filter(x=>x.type==='lower-c').length;
-    
-    const htHist=d.days.filter(x=>x.htWt).map(x=>({d:x.num,w:x.htWt,r:x.htReps}));
-    const maxHT=htHist.length?Math.max(...htHist.map(x=>x.w)):0;
-    const lastHT=htHist[htHist.length-1];
-    
-    const cn={red:0,yellow:0,green:0,sparkles:0};d.days.forEach(x=>{if(x.conn)cn[x.conn]++});
-    
-    const scans=d.days.filter(x=>x.scan&&x.round);
-    const latestScan=scans[scans.length-1],firstScan=scans[0];
-    const weeks=[];for(let w=1;w<=10;w++){const wd=d.days.filter(x=>getWeek(x.num)===w&&x.round);weeks.push(wd.length?wd[wd.length-1]:{round:null,lift:null,prot:null})}
-    const cw=getWeek(d.today);
-    
-    const renderBooty=(name,key,goal)=>{
-        const val=latestScan?latestScan[key]:null;
-        const first=firstScan?firstScan[key]:null;
-        const change=val&&first?val-first:null;
-        return`<div class="booty-row"><div class="booty-row-header"><span class="name">${name}</span><span class="val">${val||'—'}%${change!==null?`<span style="margin-left:6px;font-size:.7rem;color:${change>=0?'var(--teal-light)':'var(--burgundy)'}">${change>=0?'+':''}${change}%</span>`:''}</span></div><div class="booty-bars">${weeks.map((w,i)=>{const v=w[key];const h=v?v:5;return`<div class="booty-bar ${v?'filled':''} ${i+1===cw?'current':''}" style="height:${h}%"></div>`}).join('')}</div></div>`;
-    };
-    
-    // Flexibility tracking
-    const flexHist=d.days.filter(x=>x.flexL||x.flexR||x.flexM);
-    const latestFlex=flexHist[flexHist.length-1],firstFlex=flexHist[0];
-    
-    // Nutrition averages
-    const nutDays=d.days.filter(x=>x.done);
-    const avgProtein=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.protein,0)/nutDays.length):0;
-    const avgWater=nutDays.length?Math.round(nutDays.reduce((a,x)=>a+x.water,0)/nutDays.length):0;
-    const proteinHits=nutDays.filter(x=>x.protein>=d.settings.proteinGoal).length;
-    const waterHits=nutDays.filter(x=>x.water>=d.settings.waterGoal).length;
-    
-    const phase=getPhase(d.today),cycle=getCyclePhase(getDate(d.today),d.settings);
-    
-    return`<div class="progress-view">
-        <div class="prog-card"><div class="prog-header"><span class="prog-title">Overall</span><span class="prog-val">${done}/70</span></div><div class="prog-bar"><div class="prog-fill" style="width:${(done/70)*100}%"></div></div></div>
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Status</div><div class="badges" style="justify-content:flex-start;margin-bottom:8px"><span class="badge phase">P${phase.num} ${phase.name}</span><span class="badge ${cycle.name.toLowerCase()}">${cycle.icon} ${cycle.name}</span></div><div style="font-size:.7rem;color:var(--cream-dim)">Cycle Day ${getCycleDay(getDate(d.today),d.settings)} · Fast-twitch optimized</div></div>
-        
-        <div class="prog-card"><div class="prog-header"><span class="prog-title">Hip Thrust PR</span><span class="prog-val">${maxHT||'—'}lb</span></div><div style="font-size:.7rem;color:var(--cream-dim);margin-top:4px">${lastHT?`Last: ${lastHT.w}lb × ${lastHT.r}`:''} ${htHist.length?`· ${htHist.length} sessions`:''}</div></div>
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:10px">3D Glute Split</div><div class="split-grid"><div class="split-item"><div class="icon">🍑</div><div class="val">${la}/${laT}</div><div class="label">Shelf</div></div><div class="split-item"><div class="icon">🔥</div><div class="val">${lb}/${lbT}</div><div class="label">Underbutt</div></div><div class="split-item"><div class="icon">✨</div><div class="val">${lc}/${lcT}</div><div class="label">Side Dips</div></div></div></div>
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">Neural Connection</div><div class="neural-grid"><div class="neural-item"><div class="emoji">😐</div><div class="count">${cn.red}</div><div class="label">Not yet</div></div><div class="neural-item"><div class="emoji">🤔</div><div class="count">${cn.yellow}</div><div class="label">Getting there</div></div><div class="neural-item"><div class="emoji">😊</div><div class="count">${cn.green}</div><div class="label">Feeling it</div></div><div class="neural-item"><div class="emoji">🔥</div><div class="count">${cn.sparkles}</div><div class="label">Locked in</div></div></div></div>
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🍑 Booty Scans (Zozofit %)</div><div class="booty-chart">${renderBooty('Roundness','round',45)}${renderBooty('Lift','lift',83)}${renderBooty('Protrusion','prot',40)}</div><div style="text-align:center;font-size:.65rem;color:var(--cream-dim);margin-top:8px">${latestScan?`Latest: Week ${getWeek(d.days.indexOf(latestScan)+1)} · ${latestScan.bootyType||''}`:'No scans yet'}</div></div>
-        
-        ${latestScan&&latestScan.bf?`<div class="prog-card"><div class="prog-title" style="margin-bottom:8px">📊 Body Composition</div><div class="flex-chart">
-            <div class="flex-row"><span class="name">Body Fat</span><span class="val">${latestScan.bf}%${firstScan&&firstScan.bf?`<span class="change ${latestScan.bf<firstScan.bf?'pos':'neg'}">${latestScan.bf<firstScan.bf?'↓':'↑'}${Math.abs(latestScan.bf-firstScan.bf).toFixed(1)}%</span>`:''}</span></div>
-            <div class="flex-row"><span class="name">Lean Mass</span><span class="val">${latestScan.lean||'—'} lbs${firstScan&&firstScan.lean?`<span class="change ${latestScan.lean>firstScan.lean?'pos':'neg'}">${latestScan.lean>firstScan.lean?'↑':'↓'}${Math.abs(latestScan.lean-firstScan.lean)} lbs</span>`:''}</span></div>
-            <div class="flex-row"><span class="name">Waist</span><span class="val">${latestScan.waist||'—'}"</span></div>
-            <div class="flex-row"><span class="name">Hips</span><span class="val">${latestScan.hips||'—'}"</span></div>
-        </div></div>`:''}
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🧘 Splits Progress</div><div class="flex-chart">${latestFlex?`
-            <div class="flex-row"><span class="name">Front Left</span><span class="val">${latestFlex.flexL||'—'}"${firstFlex&&latestFlex.flexL&&firstFlex.flexL?`<span class="change ${latestFlex.flexL<firstFlex.flexL?'pos':'neg'}">${latestFlex.flexL<firstFlex.flexL?'↓':'↑'}${Math.abs(latestFlex.flexL-firstFlex.flexL)}"</span>`:''}</span></div>
-            <div class="flex-row"><span class="name">Front Right</span><span class="val">${latestFlex.flexR||'—'}"${firstFlex&&latestFlex.flexR&&firstFlex.flexR?`<span class="change ${latestFlex.flexR<firstFlex.flexR?'pos':'neg'}">${latestFlex.flexR<firstFlex.flexR?'↓':'↑'}${Math.abs(latestFlex.flexR-firstFlex.flexR)}"</span>`:''}</span></div>
-            <div class="flex-row"><span class="name">Middle</span><span class="val">${latestFlex.flexM||'—'}"${firstFlex&&latestFlex.flexM&&firstFlex.flexM?`<span class="change ${latestFlex.flexM<firstFlex.flexM?'pos':'neg'}">${latestFlex.flexM<firstFlex.flexM?'↓':'↑'}${Math.abs(latestFlex.flexM-firstFlex.flexM)}"</span>`:''}</span></div>
-        `:`<div style="text-align:center;color:var(--cream-dim);font-size:.8rem;padding:12px">Log your first stretch session</div>`}</div></div>
-        
-        <div class="prog-card"><div class="prog-title" style="margin-bottom:8px">🥩 Nutrition</div><div class="flex-chart">
-            <div class="flex-row"><span class="name">Avg Protein</span><span class="val">${avgProtein}g <span style="color:var(--cream-dim);font-weight:400">/ ${d.settings.proteinGoal}g</span></span></div>
-            <div class="flex-row"><span class="name">Protein Hits</span><span class="val">${proteinHits}/${nutDays.length} days</span></div>
-            <div class="flex-row"><span class="name">Avg Water</span><span class="val">${avgWater}oz <span style="color:var(--cream-dim);font-weight:400">/ ${d.settings.waterGoal}oz</span></span></div>
-            <div class="flex-row"><span class="name">Water Hits</span><span class="val">${waterHits}/${nutDays.length} days</span></div>
-        </div></div>
-    </div>`;
-}
-function rInfo(){
-    const s=state.data.settings;
-    return`<div class="info-view">
-        <div class="info-section"><div class="info-title">⚡ Your Profile</div><div class="info-text"><strong>Fast-twitch dominant</strong> (ACTN3 sprinter gene)<br>• Heavy load > high volume<br>• 6-10 reps for main lifts<br>• Can progress faster when 🟢<br><br><strong>Right-side imbalance</strong> (rotated pelvis)<br>• Right-Side Reset before every lower day<br>• All exercises: right side first<br><br><strong>Body type:</strong> Teardrop/Pear<br>• Store weight in hips/thighs<br>• Glute medius underdeveloped (hip dips)<br>• WHR 0.76 = excellent foundation</div></div>
-        
-        <div class="info-section"><div class="info-title">🍑 Your Scan Analysis</div><div class="info-text"><strong>Current:</strong> Perky Peach<br>• Lift 83% — ELITE (already high, maintain)<br>• Roundness 32% — needs work (upper/outer glute)<br>• Protrusion 25% — needs work (backward projection)<br><br><strong>Translation:</strong> Your butt is UP but not OUT or AROUND.<br><br><strong>Why no shelf yet:</strong><br>• Glute medius/minimus underdeveloped<br>• Right side shuts off (SI issue)<br>• Pelvis twist = uneven muscle wear<br><br><strong>The fix:</strong><br>• DON'T chase more lift (you have it)<br>• DO chase side glute + upper glute + under-butt mass<br>• DON'T cut (27.9% BF is ideal for building)<br>• DO repartition food → glute tissue</div></div>
-        
-        <div class="info-section"><div class="info-title">🎯 March 21 Goals</div><div class="info-text"><strong>Roundness:</strong> 32% → 45-55%<br><strong>Protrusion:</strong> 25% → 35-45%<br><strong>Lift:</strong> 83% → maintain<br><strong>Hip dips:</strong> visible → smoothed<br><strong>SI pain:</strong> chronic → stable<br><br>You don't rebuild your butt. You <strong>fill it out sideways and backward</strong>.</div></div>
-        
-        <div class="info-section"><div class="info-title">🦴 Posture Fix</div><div class="info-text"><strong>Your posture score (87/100) is misleading.</strong><br>You are straight, but straight ≠ supported.<br><br>Your pelvis is held by: erectors, hamstrings, quads<br>Instead of: upper glutes, deep glute max, medius<br><br><strong>When glutes don't push backward, your lumbar spine does.</strong><br>That's why your right SI joint is knotted.<br><br><strong>The fix:</strong> Every rep, exhale → posterior tilt → squeeze → hold 2 sec.<br><br>This teaches: "Glutes hold me, not my spine."<br>Posture fixes itself without stretching.</div></div>
-        
-        <div class="info-section"><div class="info-title">⚙️ Settings</div>
-            <div class="settings-row"><span class="settings-label">Cycle Start</span><input type="date" class="settings-input" id="setCycleStart" value="${s.cycleStart}" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Cycle Length</span><input type="number" class="settings-input" id="setCycleLen" value="${s.cycleLength}" min="21" max="35" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Menstrual Days</span><input type="number" class="settings-input" id="setMensDays" value="${s.menstrualDays}" min="3" max="7" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Protein Goal (g)</span><input type="number" class="settings-input" id="setProtein" value="${s.proteinGoal}" onchange="updateSettings()"></div>
-            <div class="settings-row"><span class="settings-label">Water Goal (oz)</span><input type="number" class="settings-input" id="setWater" value="${s.waterGoal}" onchange="updateSettings()"></div>
-        </div>
-        
-        <div class="info-section"><div class="info-title">🔥 Pre-Workout Sequence</div><div class="info-text"><strong>Before EVERY Lower day (5 min total):</strong><br><br><strong>1. Right-Side Reset (3 min)</strong><br>• Right hip flexor stretch — 60s<br>• Right single-leg glute bridge hold — 45s<br>• Right side-lying leg raises — 20 slow<br>• Dead bug — 60s<br><br><strong>2. Glute Primer (2 min)</strong><br>• Frog pumps — 60s (fast pulses)<br>• Banded standing abductions — 60s<br><br><strong>Why this specific sequence:</strong><br>• Rehydrates thoracolumbar fascia<br>• Unlocks SI glide<br>• Routes load into glutes instead of low back<br>• Makes hip thrusts hit the SHELF<br><br><strong>Do NOT add more.</strong> No more drills, stretching, or rehab. You already have the Ferrari. This is just turning the key.</div></div>
-        
-        <div class="info-section"><div class="info-title">🍑 3D Glute Split</div>
-            <div class="info-text" style="margin-bottom:12px">Each day targets a different area to fix your specific pattern: <strong>up but not out</strong>.</div>
-            <div class="info-card"><div class="title">🍑 Lower A: Shelf + Side</div><div class="desc"><strong>Target:</strong> Upper glute max + medius<br><strong>Why:</strong> Pulls pelvis back into position. Creates the shelf.<br>Hip thrust, back ext, heavy abduction, lateral step-ups.</div><div class="equip">Tempo barbell · Squat pad · Finer Form bench · Blogilates bands</div></div>
-            <div class="info-card"><div class="title">🔥 Lower B: Underbutt</div><div class="desc"><strong>Target:</strong> Lower glute max + ham tie-in<br><strong>Why:</strong> Creates depth and hang. Fills the fold.<br>B-stance RDL, step-ups, hyperextensions, ham curls.</div><div class="equip">Tempo barbell · Finer Form FID bench · Yoga ball · Ankle weights</div></div>
-            <div class="info-card"><div class="title">✨ Lower C: Side Dips</div><div class="desc"><strong>Target:</strong> Medius + minimus<br><strong>Why:</strong> Stabilizes SI joint. Fills hip dips.<br>Single-leg thrust, Cossack, abduction volume, bridge pulses.</div><div class="equip">Finer Form bench · Ankle weights · Blogilates bands</div></div>
-        </div>
-        
-        <div class="info-section"><div class="info-title">📅 Weekly Rule</div><div class="info-text">Every week:<br>• <strong>2 hip thrust exposures</strong><br>• <strong>2 hinge/tie-in exposures</strong><br>• <strong>Abduction every lower session</strong></div></div>
-        
-        <div class="info-section"><div class="info-title">🩸 Cycle Sync</div>
-            <div class="cycle-card menstrual"><div class="title">🩸 Menstrual</div><div class="desc">Light. Connection focus. No PR.</div></div>
-            <div class="cycle-card follicular"><div class="title">🌱 Follicular</div><div class="desc">Add load if 🟢. Growth window.</div></div>
-            <div class="cycle-card ovulatory"><div class="title">⚡ Ovulatory</div><div class="desc">PR window. Push hard. Your best days.</div></div>
-            <div class="cycle-card luteal"><div class="title">🌙 Luteal</div><div class="desc">Shape. More abduction. No grinding.</div></div>
-        </div>
-        
-        <div class="info-section"><div class="info-title">Training Phases</div>
-            ${PHASES.map(p=>`<div class="info-card"><div class="title">P${p.num}: ${p.name}</div><div class="desc">Days ${p.days[0]}-${p.days[1]} · ${p.sets} × ${p.reps}<br>${p.note}</div></div>`).join('')}
-        </div>
-        
-        <div class="info-section"><div class="info-title">🧠 Connection Key</div><div class="info-text">
-            <strong>😐 Not yet</strong> — Quads doing the work. Go lighter.<br>
-            <strong>🤔 Getting there</strong> — Some glutes. Stay here or reduce.<br>
-            <strong>😊 Feeling it</strong> — Clear burn. Add weight in follicular/ovulatory.<br>
-            <strong>🔥 Locked in</strong> — Automatic. Progress confidently.
-        </div></div>
-        
-        <div class="info-section"><div class="info-title">🧘 Flexibility Goals</div><div class="info-text">
-            Track inches from floor for each split:<br>
-            • <strong>Front Left</strong> — Left leg forward<br>
-            • <strong>Front Right</strong> — Right leg forward<br>
-            • <strong>Middle</strong> — Straddle split<br><br>
-            Use your <strong>Rigel Leg Stretcher</strong> 3-5x/week. Lower number = more flexible.
-        </div></div>
-        
-        <div class="info-section"><div class="info-title">🥩 Nutrition</div><div class="info-text">
-            <strong>Protein: ${s.proteinGoal}g daily</strong> — Muscle can't grow without it.<br>
-            <strong>Water: ${s.waterGoal}oz daily</strong> — Hydration for recovery + performance.
-        </div></div>
-        
-        <div class="info-section"><div class="info-title">💾 Data</div><div class="data-btns"><button class="data-btn" onclick="exp()">Export</button><button class="data-btn" onclick="imp()">Import</button></div></div>
-    </div>`;
-}
-
-function updateSettings(){
-    const s=state.data.settings;
-    s.cycleStart=document.getElementById('setCycleStart').value;
-    s.cycleLength=parseInt(document.getElementById('setCycleLen').value)||28;
-    s.menstrualDays=parseInt(document.getElementById('setMensDays').value)||5;
-    s.proteinGoal=parseInt(document.getElementById('setProtein').value)||130;
-    s.waterGoal=parseInt(document.getElementById('setWater').value)||100;
-    save();toast('Saved');
-}
-
-function rNav(){return`<div class="bottom-nav"><button class="nav-btn ${state.view==='today'?'active':''}" onclick="go('today')"><span class="icon">◉</span>Today</button><button class="nav-btn ${state.view==='calendar'?'active':''}" onclick="go('calendar')"><span class="icon">▦</span>Calendar</button><button class="nav-btn ${state.view==='progress'?'active':''}" onclick="go('progress')"><span class="icon">◔</span>Progress</button><button class="nav-btn ${state.view==='info'?'active':''}" onclick="go('info')"><span class="icon">☰</span>Method</button></div>`}
-function rModal(){
-    if(!state.modal)return'<div class="modal-overlay"></div>';
-    const n=state.selDay||state.data.today,day=state.data.days[n-1],date=getDate(n);
-    const type=getType(n),phase=getPhase(n),tmpl=TEMPLATES[type];
-    const cycle=getCyclePhase(date,state.data.settings),cycleName=cycle.name.toLowerCase();
-    const lastConn=[...state.data.days].reverse().find(x=>x.conn)?.conn;
-    const lastHT=[...state.data.days].reverse().find(x=>x.htWt);
-    const lastNut=[...state.data.days].reverse().find(x=>x.protein||x.water);
-    const lastTempo=[...state.data.days].reverse().find(x=>x.tempoDur);
-    const s=state.data.settings;
-    
-    let form='';
-    
-    // Rule
-    form=`<div class="rule-card" style="margin:0 0 16px"><div class="rule-label">${CYCLE_MODS[cycleName]} · ${cycle.name}</div><div class="rule-text">${cycle.rule}</div></div>`;
-        
-        // Lower days
-        if(type.startsWith('lower')){
-            form+=`<div class="form-section"><div class="form-title">Pre-Workout (5 min)</div>
-                <div style="display:flex;flex-direction:column;gap:8px">
-                    <label class="check-row ${day.reset?'checked':''}" onclick="toggleCheck('reset')"><span class="check-box">${day.reset?'✓':''}</span><span class="check-text">⚡ Right-Side Reset (3 min)</span></label>
-                    <label class="check-row ${day.primer?'checked':''}" onclick="toggleCheck('primer')"><span class="check-box">${day.primer?'✓':''}</span><span class="check-text">🔥 Glute Primer (2 min)</span></label>
-                </div>
-            </div>`;
-            form+=`<div class="form-section"><div class="form-title">Top Sets (heavy, 6-10 reps)</div>
-                <div class="form-row"><div class="form-group"><label class="form-label">Hip Thrust (lbs)</label><input type="number" class="form-input" id="htWt" value="${day.htWt||lastHT?.htWt||''}" placeholder="weight"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="htReps" value="${day.htReps||lastHT?.htReps||''}" placeholder="6-10"></div></div>
-                <div class="form-row"><div class="form-group"><label class="form-label">RDL (lbs)</label><input type="number" class="form-input" id="rdlWt" value="${day.rdlWt||''}" placeholder="optional"></div><div class="form-group"><label class="form-label">Reps</label><input type="number" class="form-input" id="rdlReps" value="${day.rdlReps||''}" placeholder="6-10"></div></div>
-            </div>`;
-            form+=`<div class="form-section"><div class="form-title">Connection</div><div class="conn-grid">${[{k:'red',e:'😐',l:'Not yet'},{k:'yellow',e:'🤔',l:'Getting there'},{k:'green',e:'😊',l:'Feeling it'},{k:'sparkles',e:'🔥',l:'Locked in'}].map(c=>`<button class="conn-btn ${(day.conn||(day.done?null:lastConn))===c.k?'selected':''}" onclick="setConn('${c.k}')"><span class="emoji">${c.e}</span><span class="label">${c.l}</span></button>`).join('')}</div></div>`;
-        }
-        
-        // Tempo
-        if(type==='tempo'||type==='tempo-scan'){
-            form+=`<div class="form-section"><div class="form-title">Tempo Class</div><div class="tempo-grid">${[{k:'Challenge',d:'Monthly'},{k:'Lower',d:'Legs'},{k:'Full Body',d:'HIIT'},{k:'Upper',d:'Arms'},{k:'Cardio',d:'BW'},{k:'Stretch',d:'Yoga'}].map(t=>`<div class="tempo-btn ${day.tempo===t.k?'selected':''}" onclick="setTempo('${t.k}')"><div class="name">${t.k}</div><div class="desc">${t.d}</div></div>`).join('')}</div><div class="form-group" style="margin-top:10px"><label class="form-label">Duration (min)</label><input type="number" class="form-input" id="tempoDur" value="${day.tempoDur||lastTempo?.tempoDur||''}" placeholder="30"></div></div>`;
-        }
-        
-        // Scan (Sunday)
-        if(type==='tempo-scan'){
-            form+=`<div class="form-section"><div class="form-title">Body Scan</div><div class="scan-grid">${['Tempo','Zozofit','Both','Skip'].map(x=>`<div class="scan-btn ${day.scan===x?'selected':''}" onclick="setScan('${x}')">${x}</div>`).join('')}</div>`;
-            if(day.scan&&day.scan!=='Skip'){
-                form+=`<div style="margin-top:14px">
-                <div class="form-row"><div class="form-group"><label class="form-label">Roundness %</label><input type="number" class="form-input" id="round" value="${day.round||''}" placeholder="32" min="0" max="100"></div><div class="form-group"><label class="form-label">Lift %</label><input type="number" class="form-input" id="lift" value="${day.lift||''}" placeholder="83" min="0" max="100"></div></div>
-                <div class="form-row"><div class="form-group"><label class="form-label">Protrusion %</label><input type="number" class="form-input" id="prot" value="${day.prot||''}" placeholder="25" min="0" max="100"></div><div class="form-group"><label class="form-label">Body Fat %</label><input type="number" class="form-input" id="bf" value="${day.bf||''}" placeholder="27.9" step="0.1"></div></div>
-                <div class="form-row"><div class="form-group"><label class="form-label">Lean Mass (lbs)</label><input type="number" class="form-input" id="lean" value="${day.lean||''}" placeholder="104"></div><div class="form-group"><label class="form-label">Waist (in)</label><input type="number" class="form-input" id="waist" value="${day.waist||''}" placeholder="31.1" step="0.1"></div></div>
-                <div class="form-row"><div class="form-group"><label class="form-label">Hips (in)</label><input type="number" class="form-input" id="hips" value="${day.hips||''}" placeholder="39.8" step="0.1"></div><div class="form-group"><label class="form-label">Booty Type</label><select class="form-input" id="bootyType"><option value="">—</option>${['Perky Peach','Bubble Butt','Heart Shape','Square','Round','V-Shape'].map(t=>`<option value="${t}" ${day.bootyType===t?'selected':''}>${t}</option>`).join('')}</select></div></div>
-                </div>`;
-            }
-            form+=`</div>`;
-        }
-        
-        // Nutrition
-        form+=`<div class="form-section"><div class="form-title">Nutrition</div>
-            <div class="form-group" style="margin-bottom:10px"><label class="form-label">Protein (g)</label><div style="display:flex;gap:6px;margin-bottom:6px"><button type="button" class="quick-btn" onclick="addProtein(30)">+30</button><button type="button" class="quick-btn" onclick="addProtein(20)">+20</button><button type="button" class="quick-btn" onclick="addProtein(10)">+10</button><button type="button" class="quick-btn" onclick="setProteinVal(0)">Reset</button></div><input type="number" class="form-input" id="protein" value="${day.protein||lastNut?.protein||''}" placeholder="${s.proteinGoal}"></div>
-            <div class="form-group"><label class="form-label">Water (oz)</label><div style="display:flex;gap:6px;margin-bottom:6px"><button type="button" class="quick-btn" onclick="addWater(20)">+20</button><button type="button" class="quick-btn" onclick="addWater(10)">+10</button><button type="button" class="quick-btn" onclick="addWater(5)">+5</button><button type="button" class="quick-btn" onclick="setWaterVal(0)">Reset</button></div><input type="number" class="form-input" id="water" value="${day.water||lastNut?.water||''}" placeholder="${s.waterGoal}"></div>
-        </div>`;
-        
-        // Flexibility
-        const lastFlex=[...state.data.days].reverse().find(x=>x.flexL||x.flexR||x.flexM);
-        form+=`<div class="form-section"><div class="form-title">Splits (inches from floor)</div>
-            <div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap"><button type="button" class="quick-btn" onclick="setAllFlex(0)">0</button><button type="button" class="quick-btn" onclick="setAllFlex(2)">2</button><button type="button" class="quick-btn" onclick="setAllFlex(4)">4</button><button type="button" class="quick-btn" onclick="setAllFlex(6)">6</button><button type="button" class="quick-btn" onclick="setAllFlex(8)">8</button><button type="button" class="quick-btn" onclick="setAllFlex(10)">10</button></div>
-            <div class="flex-grid">
-            <div class="flex-item"><div class="label">Front L</div><input type="number" id="flexL" value="${day.flexL||lastFlex?.flexL||''}" placeholder="—" step="0.5"></div>
-            <div class="flex-item"><div class="label">Front R</div><input type="number" id="flexR" value="${day.flexR||lastFlex?.flexR||''}" placeholder="—" step="0.5"></div>
-            <div class="flex-item"><div class="label">Middle</div><input type="number" id="flexM" value="${day.flexM||lastFlex?.flexM||''}" placeholder="—" step="0.5"></div>
-        </div></div>`;
-        
-        // Notes
-        form+=`<div class="form-section"><div class="form-group"><label class="form-label">Notes</label><textarea class="form-input" id="notes" rows="2">${day.notes||''}</textarea></div></div>`;
-        
-        form+=`<button class="btn-save" onclick="saveDay()">${day.done?'Update':'Complete'}</button>`;
-        
-        return`<div class="modal-overlay active" onclick="closeModal()"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-header"><div><div class="modal-title">${fmt(date)}</div><div class="modal-sub">Day ${n} · ${tmpl.name}</div></div><button class="modal-close" onclick="closeModal()">×</button></div>${form}</div></div>`;
-}
-
-const go=v=>{state.view=v;render()};
-const openModal=n=>{state.selDay=n||state.data.today;state.modal=true;render()};
-const closeModal=()=>{
-    // Auto-save any entered data before closing
-    if(state.modal){
-        const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
-        const protein=parseInt(document.getElementById('protein')?.value)||0;
-        const water=parseInt(document.getElementById('water')?.value)||0;
-        const flexL=parseFloat(document.getElementById('flexL')?.value)||null;
-        const flexR=parseFloat(document.getElementById('flexR')?.value)||null;
-        const flexM=parseFloat(document.getElementById('flexM')?.value)||null;
-        const notes=document.getElementById('notes')?.value||'';
-        // Only save if something was entered
-        if(protein||water||flexL||flexR||flexM||notes){
-            d.protein=protein;d.water=water;d.flexL=flexL;d.flexR=flexR;d.flexM=flexM;d.notes=notes;
-            if(type.startsWith('lower')){
-                d.htWt=parseFloat(document.getElementById('htWt')?.value)||null;
-                d.htReps=parseInt(document.getElementById('htReps')?.value)||null;
-                d.rdlWt=parseFloat(document.getElementById('rdlWt')?.value)||null;
-                d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
-            }
-            if(type==='tempo'||type==='tempo-scan'){
-                d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null;
-            }
-            save();
-        }
-    }
-    state.modal=false;render();
-};
-const setConn=v=>{state.data.days[(state.selDay||state.data.today)-1].conn=v;render()};
-const setTempo=v=>{state.data.days[(state.selDay||state.data.today)-1].tempo=v;render()};
-const toggleCheck=k=>{const d=state.data.days[(state.selDay||state.data.today)-1];d[k]=!d[k];render()};
-const setScan=v=>{const d=state.data.days[(state.selDay||state.data.today)-1];d.scan=v;if(v==='Skip'){d.round=null;d.lift=null;d.prot=null;d.bootyType=null;d.bf=null;d.lean=null;d.waist=null;d.hips=null}render()};
-
-function addProtein(v){const el=document.getElementById('protein');el.value=(parseInt(el.value)||0)+v}
-function setProteinVal(v){document.getElementById('protein').value=v}
-function addWater(v){const el=document.getElementById('water');el.value=(parseInt(el.value)||0)+v}
-function setWaterVal(v){document.getElementById('water').value=v}
-function setAllFlex(v){document.getElementById('flexL').value=v;document.getElementById('flexR').value=v;document.getElementById('flexM').value=v}
-
-function periodStarted(){
-    const today=new Date();
-    state.data.settings.cycleStart=today.toISOString().slice(0,10);
+function updateDay(iso, patch) {
+    state.days[iso] = { ...state.days[iso], ...patch };
     save();
-    toast('Cycle updated');
     render();
 }
 
-function saveDay(){
-    const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
-    d.done=true;
-    d.notes=document.getElementById('notes')?.value||'';
-    d.protein=parseInt(document.getElementById('protein')?.value)||0;
-    d.water=parseInt(document.getElementById('water')?.value)||0;
-    d.flexL=parseFloat(document.getElementById('flexL')?.value)||null;
-    d.flexR=parseFloat(document.getElementById('flexR')?.value)||null;
-    d.flexM=parseFloat(document.getElementById('flexM')?.value)||null;
-    if(type.startsWith('lower')){
-        d.htWt=parseFloat(document.getElementById('htWt')?.value)||null;
-        d.htReps=parseInt(document.getElementById('htReps')?.value)||null;
-        d.rdlWt=parseFloat(document.getElementById('rdlWt')?.value)||null;
-        d.rdlReps=parseInt(document.getElementById('rdlReps')?.value)||null;
-        if(!d.conn){const lc=[...state.data.days].reverse().find(x=>x.conn)?.conn;if(lc)d.conn=lc}
+// ============ COMPUTED ============
+function getAllDays() {
+    const days = [];
+    for (let i = 0; i < 70; i++) {
+        const d = addDays(START, i);
+        days.push({ date: d, iso: isoDate(d), dayNum: i + 1 });
     }
-    if(type==='tempo'||type==='tempo-scan'){d.tempoDur=parseInt(document.getElementById('tempoDur')?.value)||null}
-    if(type==='tempo-scan'&&d.scan&&d.scan!=='Skip'){
-        d.round=parseInt(document.getElementById('round')?.value)||null;
-        d.lift=parseInt(document.getElementById('lift')?.value)||null;
-        d.prot=parseInt(document.getElementById('prot')?.value)||null;
-        d.bf=parseFloat(document.getElementById('bf')?.value)||null;
-        d.lean=parseInt(document.getElementById('lean')?.value)||null;
-        d.waist=parseFloat(document.getElementById('waist')?.value)||null;
-        d.hips=parseFloat(document.getElementById('hips')?.value)||null;
-        d.bootyType=document.getElementById('bootyType')?.value||null;
-    }
-    if(save())toast('Saved');else toast('Error',1);
-    closeModal();
-    if(n===70&&d.done)setTimeout(()=>alert('🎉 MIAMI READY! 🍑'),300);
+    return days;
 }
 
-init();render();
+function getCompletion(iso) {
+    const d = state.days[iso] || {};
+    const type = getType(iso);
+    const isLower = type.type.startsWith('lower-');
+    const items = {
+        workout: !!d.done,
+        protein: (d.protein || 0) >= state.settings.proteinGoal,
+        water: (d.water || 0) >= state.settings.waterGoal,
+        flex: !!(d.flexL || d.flexR || d.flexM),
+    };
+    if (isLower) {
+        items.reset = !!d.reset;
+        items.primer = !!d.primer;
+    }
+    const total = Object.keys(items).length;
+    const done = Object.values(items).filter(Boolean).length;
+    return { pct: Math.round((done / total) * 100), items, isLower };
+}
+
+function getConnCounts() {
+    const counts = { red: 0, yellow: 0, green: 0, sparkles: 0 };
+    Object.entries(state.days).forEach(([iso, d]) => {
+        if (d.conn && getType(iso).type.startsWith('lower-')) counts[d.conn]++;
+    });
+    return counts;
+}
+
+function getLastValues() {
+    const sorted = Object.entries(state.days).sort((a, b) => b[0].localeCompare(a[0]));
+    return {
+        protein: sorted.find(([k, v]) => v.protein)?.[1]?.protein || '',
+        water: sorted.find(([k, v]) => v.water)?.[1]?.water || '',
+        flexL: sorted.find(([k, v]) => v.flexL)?.[1]?.flexL || '',
+        flexR: sorted.find(([k, v]) => v.flexR)?.[1]?.flexR || '',
+        flexM: sorted.find(([k, v]) => v.flexM)?.[1]?.flexM || '',
+        htWt: sorted.find(([k, v]) => v.htWt)?.[1]?.htWt || '',
+        htReps: sorted.find(([k, v]) => v.htReps)?.[1]?.htReps || '',
+    };
+}
+
+// ============ RENDER ============
+function render() {
+    const today = isoDate(new Date());
+    const currentDayNum = clamp(dayDiff(START, today) + 1, 1, 70);
+    const todayType = getType(today);
+    const todayData = state.days[today] || {};
+    const todayComp = getCompletion(today);
+    const cycle = cycleMeta(state.settings.cycle);
+    const phase = getPhase(currentDayNum);
+    const completedDays = Object.values(state.days).filter(d => d.done).length;
+    const connCounts = getConnCounts();
+    const progPct = Math.round((currentDayNum / 70) * 100);
+    const circumference = 2 * Math.PI * 22;
+    
+    const app = document.getElementById('app');
+    app.innerHTML = `
+        <!-- Header -->
+        <div class="header">
+            <div class="header-inner">
+                <div class="header-brand"><span>🍑</span><small>MIAMI READY</small></div>
+                <h1>70-Day Glute Transformation</h1>
+                <p>Jan 11 → Mar 21, 2026 • Day ${currentDayNum}/70</p>
+                <div class="header-badges">
+                    <span class="badge">${cycle.icon} ${cycle.label}</span>
+                    <span class="badge">✨ ${phase.name}</span>
+                    <span class="badge">✓ ${completedDays} logged</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="card">
+                <div class="progress-row">
+                    <div class="progress-text">
+                        <div class="pct" style="color: ${todayComp.pct === 100 ? '#059669' : todayComp.pct >= 50 ? '#d97706' : '#64748b'}">${todayComp.pct}%</div>
+                        <div class="label">Today's Progress</div>
+                    </div>
+                    <div class="progress-ring">
+                        <svg width="56" height="56" viewBox="0 0 56 56">
+                            <circle class="bg" cx="28" cy="28" r="22" />
+                            <circle class="fg" cx="28" cy="28" r="22" stroke-dasharray="${(progPct / 100) * circumference} ${circumference}" />
+                        </svg>
+                        <div class="text"><span>${progPct}%</span><span style="font-size:0.6rem;color:#64748b">Program</span></div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    ${todayComp.isLower ? `
+                        <div class="stat-item ${todayComp.items.reset ? 'done' : ''}"><div class="icon">${todayComp.items.reset ? '✓' : '⚡'}</div><div class="label">Reset</div></div>
+                        <div class="stat-item ${todayComp.items.primer ? 'done' : ''}"><div class="icon">${todayComp.items.primer ? '✓' : '🔥'}</div><div class="label">Primer</div></div>
+                    ` : ''}
+                    <div class="stat-item ${todayComp.items.workout ? 'done' : ''}"><div class="icon">${todayComp.items.workout ? '✓' : todayType.icon}</div><div class="label">Workout</div></div>
+                    <div class="stat-item ${todayComp.items.protein ? 'done' : ''}"><div class="icon">${todayComp.items.protein ? '✓' : '🥩'}</div><div class="label">Protein</div></div>
+                    <div class="stat-item ${todayComp.items.water ? 'done' : ''}"><div class="icon">${todayComp.items.water ? '✓' : '💧'}</div><div class="label">Water</div></div>
+                    <div class="stat-item ${todayComp.items.flex ? 'done' : ''}"><div class="icon">${todayComp.items.flex ? '✓' : '🧘'}</div><div class="label">Stretch</div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab ${view === 'today' ? 'active' : ''}" onclick="setView('today')">Today</button>
+            <button class="tab ${view === 'calendar' ? 'active' : ''}" onclick="setView('calendar')">Calendar</button>
+            <button class="tab ${view === 'progress' ? 'active' : ''}" onclick="setView('progress')">Progress</button>
+            <button class="tab ${view === 'method' ? 'active' : ''}" onclick="setView('method')">Method</button>
+            <button class="tab ${view === 'settings' ? 'active' : ''}" onclick="setView('settings')">Settings</button>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            ${renderView()}
+        </div>
+        
+        <!-- Modal -->
+        ${renderModal()}
+        
+        <div class="footer">🍑 Miami Ready • March 21, 2026 • Data saves to localStorage</div>
+    `;
+}
+
+function renderView() {
+    if (view === 'today') return renderToday();
+    if (view === 'calendar') return renderCalendar();
+    if (view === 'progress') return renderProgress();
+    if (view === 'method') return renderMethod();
+    if (view === 'settings') return renderSettings();
+    return '';
+}
+
+function renderToday() {
+    const today = isoDate(new Date());
+    const type = getType(today);
+    const data = state.days[today] || {};
+    const isLower = type.type.startsWith('lower-');
+    const template = TEMPLATES[type.type];
+    const connCounts = getConnCounts();
+    
+    return `
+        <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
+                <div>
+                    <div style="font-size:1.1rem;font-weight:700">${fmtLong(today)}</div>
+                    <div style="font-size:0.8rem;color:var(--slate)">Day ${clamp(dayDiff(START, today) + 1, 1, 70)} • ${type.label}</div>
+                </div>
+                <span class="badge ${data.done ? 'badge-good' : 'badge-warn'}">${data.done ? '✓ Done' : 'Not logged'}</span>
+            </div>
+            <p style="font-size:0.85rem;color:var(--slate);margin-bottom:16px">${type.focus}</p>
+            
+            ${isLower ? `
+                <div class="info-card amber">
+                    <div class="title">⚡ Right-Side Reset (3 min)</div>
+                    <div class="text">${RESET.map(s => '• ' + s).join('<br>')}</div>
+                </div>
+                <div class="info-card teal">
+                    <div class="title">🔥 Glute Primer (2 min)</div>
+                    <div class="text">${PRIMER.map(s => '• ' + s).join('<br>')}</div>
+                </div>
+                <div class="info-card burgundy">
+                    <div class="title" style="color:var(--burgundy)">🧠 Every Rep Cue</div>
+                    <div class="text">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong></div>
+                </div>
+                
+                <div style="margin-top:12px">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                        <span style="font-weight:600;font-size:0.875rem">Today's Work</span>
+                        <span class="badge badge-burgundy">${template.tag}</span>
+                    </div>
+                    <div class="exercise-list">
+                        ${template.exercises.map(ex => `
+                            <div class="exercise-item">
+                                <span class="name">${ex.name}</span>
+                                <span class="sets">${ex.sets}${ex.note ? ' • ' + ex.note : ''}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <button class="btn btn-primary" style="margin-top:16px" onclick="openModal('${today}')">${data.done ? 'Edit Log' : 'Log Today'} →</button>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">🧠 Neural Connection</div>
+            <div class="neural-grid">
+                ${CONNECTION.map(c => `
+                    <div class="neural-item">
+                        <div class="emoji">${c.emoji}</div>
+                        <div class="count">${connCounts[c.v]}</div>
+                        <div class="label">${c.label}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderCalendar() {
+    const allDays = getAllDays();
+    const selType = getType(selectedIso);
+    const selData = state.days[selectedIso] || {};
+    const selComp = getCompletion(selectedIso);
+    const selDayNum = clamp(dayDiff(START, selectedIso) + 1, 1, 70);
+    const selPhase = getPhase(selDayNum);
+    const isLower = selType.type.startsWith('lower-');
+    const template = TEMPLATES[selType.type];
+    
+    return `
+        <div style="display:grid;gap:16px;grid-template-columns:1fr;${window.innerWidth >= 768 ? 'grid-template-columns:280px 1fr' : ''}">
+            <div class="card" style="margin-bottom:0">
+                <div class="card-title">📅 70-Day Timeline</div>
+                <div class="timeline">
+                    ${allDays.map(({ iso, dayNum }) => {
+                        const type = getType(iso);
+                        const log = state.days[iso];
+                        const comp = getCompletion(iso);
+                        const conn = log?.conn ? connMeta(log.conn) : null;
+                        return `
+                            <div class="timeline-item ${iso === selectedIso ? 'selected' : ''}" onclick="selectDay('${iso}')">
+                                <div>
+                                    <span class="main">${fmtShort(iso)}</span>
+                                    <span class="sub">${type.label}</span>
+                                </div>
+                                <div class="right">
+                                    ${conn ? `<span>${conn.emoji}</span>` : ''}
+                                    ${log?.done ? '<span class="check">✓</span>' : ''}
+                                    ${!log?.done && comp.pct > 0 ? `<span style="font-size:0.7rem;opacity:0.6">${comp.pct}%</span>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+            
+            <div class="card" style="margin-bottom:0">
+                <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
+                    <div>
+                        <div style="font-size:1.1rem;font-weight:700">${fmtLong(selectedIso)}</div>
+                        <div style="font-size:0.8rem;color:var(--slate)">Day ${selDayNum} • ${selType.label}</div>
+                    </div>
+                    <span class="badge ${selData.done ? 'badge-good' : 'badge-warn'}">${selData.done ? '✓ Done' : selComp.pct + '%'}</span>
+                </div>
+                <p style="font-size:0.85rem;color:var(--slate);margin-bottom:12px">${selType.focus}</p>
+                
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
+                    <span class="badge badge-neutral">${selPhase.name}</span>
+                    ${selData.conn ? `<span class="badge ${['green','sparkles'].includes(selData.conn) ? 'badge-good' : 'badge-warn'}">${connMeta(selData.conn).emoji} ${connMeta(selData.conn).label}</span>` : ''}
+                </div>
+                
+                ${isLower && template ? `
+                    <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr;margin-bottom:16px">
+                        <div style="padding:12px;background:#f8fafc;border-radius:12px">
+                            <div style="font-weight:600;font-size:0.8rem;margin-bottom:8px">Pre-workout</div>
+                            <div style="font-size:0.7rem;color:var(--slate)">${[...RESET, ...PRIMER].map(s => '• ' + s.split('—')[0]).join('<br>')}</div>
+                        </div>
+                        <div style="padding:12px;border:1px solid #e2e8f0;border-radius:12px">
+                            <div style="font-weight:600;font-size:0.8rem;margin-bottom:8px">${template.tag}</div>
+                            <div style="font-size:0.7rem;color:var(--slate)">${template.exercises.map(e => '• ' + e.name).join('<br>')}</div>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <button class="btn btn-primary" onclick="openModal('${selectedIso}')">Log / Edit →</button>
+            </div>
+        </div>
+    `;
+}
+
+function renderProgress() {
+    const lastScan = state.scans.length ? state.scans[state.scans.length - 1] : null;
+    const currentR = lastScan?.roundness ?? state.baseline.roundness;
+    const currentP = lastScan?.protrusion ?? state.baseline.protrusion;
+    const proteinDays = Object.values(state.days).filter(d => d.protein);
+    const waterDays = Object.values(state.days).filter(d => d.water);
+    const avgProtein = proteinDays.length ? Math.round(proteinDays.reduce((a, d) => a + d.protein, 0) / proteinDays.length) : 0;
+    const avgWater = waterDays.length ? Math.round(waterDays.reduce((a, d) => a + d.water, 0) / waterDays.length) : 0;
+    
+    return `
+        <div class="card">
+            <div class="card-title">📈 Booty Metrics</div>
+            <div class="chart-container">Chart visualization coming soon</div>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="label">Roundness</div>
+                    <div class="value">${currentR}%</div>
+                    <div class="sub">Baseline: ${state.baseline.roundness}% • Goal: 45-55%</div>
+                    <div class="bar"><div class="bar-fill burgundy" style="width:${currentR}%"></div></div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Protrusion</div>
+                    <div class="value">${currentP}%</div>
+                    <div class="sub">Baseline: ${state.baseline.protrusion}% • Goal: 35-45%</div>
+                    <div class="bar"><div class="bar-fill teal" style="width:${currentP}%"></div></div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Lift</div>
+                    <div class="value">${state.baseline.lift}%</div>
+                    <div class="sub" style="color:#059669">ELITE — Maintain</div>
+                    <div class="bar"><div class="bar-fill green" style="width:${state.baseline.lift}%"></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">➕ Add Zozofit Scan</div>
+            <div class="form-row-3" style="margin-bottom:12px">
+                <input type="date" class="form-input" id="scanDate" value="${isoDate(new Date())}">
+                <input type="number" class="form-input" id="scanR" placeholder="Roundness %">
+                <input type="number" class="form-input" id="scanP" placeholder="Protrusion %">
+            </div>
+            <button class="btn btn-secondary" onclick="addScan()">Add Scan</button>
+            
+            ${state.scans.length ? `
+                <div class="section-title">Scan History</div>
+                <div class="scan-list">
+                    ${state.scans.slice().reverse().map(s => `
+                        <div class="scan-item">
+                            <div><strong>${s.date}</strong> — R: ${s.roundness}% • P: ${s.protrusion}%</div>
+                            <button onclick="deleteScan('${s.date}')">🗑</button>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+        </div>
+        
+        <div class="card">
+            <div class="card-title">🥩 Nutrition Averages</div>
+            <div class="form-row">
+                <div class="metric-card">
+                    <div class="label">Avg Protein</div>
+                    <div class="value">${avgProtein}g</div>
+                    <div class="sub">/ ${state.settings.proteinGoal}g goal</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Avg Water</div>
+                    <div class="value">${avgWater}oz</div>
+                    <div class="sub">/ ${state.settings.waterGoal}oz goal</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderMethod() {
+    return `
+        <div class="method-section">
+            <h3>🎯 The Diagnosis</h3>
+            <p style="font-size:1.1rem;font-weight:700;color:var(--burgundy)">Your butt is UP but not OUT or AROUND.</p>
+            <ul>
+                <li><strong>Lift 83% = ELITE.</strong> Don't chase more lift—maintain it.</li>
+                <li><strong>Roundness 32% = needs work.</strong> Upper/outer glute underdeveloped.</li>
+                <li><strong>Protrusion 25% = needs work.</strong> Flat from side, no backward projection.</li>
+            </ul>
+            <p><strong>The fix:</strong> Fill out SIDEWAYS and BACKWARD. Don't cut.</p>
+        </div>
+        
+        <div class="method-section">
+            <h3>🦴 Posture Fix</h3>
+            <p>Your posture score (87/100) is misleading. Straight ≠ supported. When glutes don't push backward, your lumbar spine does.</p>
+            <div class="info-card burgundy">
+                <div class="title" style="color:var(--burgundy)">Every Rep Cue</div>
+                <div class="text">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong><br><small>This teaches: "Glutes hold me, not my spine."</small></div>
+            </div>
+        </div>
+        
+        <div class="method-section">
+            <h3>🍑 3D Glute Split</h3>
+            ${Object.entries(TEMPLATES).map(([key, t]) => `
+                <div class="card" style="padding:12px;margin-bottom:8px">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                        <strong>${key.replace('lower-', 'Lower ').toUpperCase()}: ${t.tag}</strong>
+                        <span class="badge badge-neutral">${t.target}</span>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--slate);margin-bottom:8px"><strong>Why:</strong> ${t.why}</p>
+                    <div style="font-size:0.75rem;color:var(--slate)">${t.exercises.map(e => e.name).join(' • ')}</div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <div class="method-section">
+            <h3>✨ 10-Week Phases</h3>
+            ${PHASES.map(p => `
+                <div class="card" style="padding:12px;margin-bottom:8px">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <strong>${p.name}</strong>
+                        <span class="badge badge-neutral">Weeks ${p.weeks}</span>
+                    </div>
+                    <p style="font-size:0.8rem;color:var(--slate);margin-top:4px">${p.desc} Expect: ${p.expect}</p>
+                </div>
+            `).join('')}
+        </div>
+        
+        <div class="method-section">
+            <h3>🧠 Connection Key</h3>
+            ${CONNECTION.map(c => `
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">${c.emoji}</span>
+                    <div>
+                        <div style="font-weight:600;font-size:0.875rem">${c.label}</div>
+                        <div style="font-size:0.75rem;color:var(--slate)">${c.hint}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <div class="method-section">
+            <h3>🌸 Cycle Syncing</h3>
+            ${CYCLES.map(c => `
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+                    <span style="font-size:1.5rem">${c.icon}</span>
+                    <div>
+                        <div style="font-weight:600;font-size:0.875rem">${c.label}</div>
+                        <div style="font-size:0.75rem;color:var(--slate)">${c.note}</div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        
+        <div class="method-section">
+            <h3>👤 Your Profile</h3>
+            <ul>
+                <li><strong>Body Type:</strong> Androgenic (ACTN3 sprinter gene = fast-twitch)</li>
+                <li><strong>Training:</strong> Heavy load > volume. 6-10 reps for main lifts.</li>
+                <li><strong>Imbalance:</strong> Right-side weakness from rotated pelvis</li>
+                <li><strong>Underdeveloped:</strong> Glute medius (causes hip dips)</li>
+                <li><strong>Baseline WHR:</strong> 0.76 (excellent foundation)</li>
+            </ul>
+        </div>
+    `;
+}
+
+function renderSettings() {
+    const cycle = cycleMeta(state.settings.cycle);
+    return `
+        <div class="card">
+            <div class="card-title">⚙️ Settings</div>
+            <div class="form-group">
+                <label class="form-label">Cycle Phase</label>
+                <select class="form-input" onchange="updateSetting('cycle', this.value)">
+                    ${CYCLES.map(c => `<option value="${c.v}" ${state.settings.cycle === c.v ? 'selected' : ''}>${c.icon} ${c.label}</option>`).join('')}
+                </select>
+                <div style="font-size:0.75rem;color:var(--slate);margin-top:4px">${cycle.note}</div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Protein Goal (g)</label>
+                    <input type="number" class="form-input" value="${state.settings.proteinGoal}" onchange="updateSetting('proteinGoal', parseInt(this.value))">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Water Goal (oz)</label>
+                    <input type="number" class="form-input" value="${state.settings.waterGoal}" onchange="updateSetting('waterGoal', parseInt(this.value))">
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">💾 Data</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-secondary" style="flex:1" onclick="exportData()">Export Backup</button>
+                <label class="btn btn-secondary" style="flex:1;cursor:pointer">
+                    Import Backup
+                    <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+                </label>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title" style="color:#ef4444">🗑️ Reset</div>
+            <p style="font-size:0.85rem;color:var(--slate);margin-bottom:12px">This will delete all your data. Export a backup first!</p>
+            <button class="btn btn-secondary" style="border:1px solid #fecaca;color:#ef4444" onclick="resetData()">Reset All Data</button>
+        </div>
+    `;
+}
+
+function renderModal() {
+    if (!modalOpen) return '<div class="modal-overlay"></div>';
+    
+    const type = getType(selectedIso);
+    const data = state.days[selectedIso] || {};
+    const isLower = type.type.startsWith('lower-');
+    const cycle = cycleMeta(state.settings.cycle);
+    const dayNum = clamp(dayDiff(START, selectedIso) + 1, 1, 70);
+    const last = getLastValues();
+    
+    return `
+        <div class="modal-overlay active" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <div>
+                        <h2>${fmtLong(selectedIso)}</h2>
+                        <p>Day ${dayNum} • ${type.label}</p>
+                    </div>
+                    <button class="modal-close" onclick="closeModal()">✕</button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Cycle -->
+                    <div class="info-card" style="background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:16px">
+                        <div style="font-size:0.75rem;color:var(--slate)">${cycle.icon} ${cycle.label} Phase</div>
+                        <div style="font-size:0.85rem">${cycle.note}</div>
+                    </div>
+                    
+                    ${isLower ? `
+                        <!-- Pre-workout -->
+                        <div class="section-title">Pre-Workout (5 min)</div>
+                        <div class="checkbox-item ${data.reset ? 'checked' : ''}" onclick="toggleField('${selectedIso}', 'reset')">
+                            <div class="checkbox-box">${data.reset ? '✓' : ''}</div>
+                            <div class="checkbox-label">⚡ Right-Side Reset (3 min)</div>
+                        </div>
+                        <div class="checkbox-item ${data.primer ? 'checked' : ''}" onclick="toggleField('${selectedIso}', 'primer')">
+                            <div class="checkbox-box">${data.primer ? '✓' : ''}</div>
+                            <div class="checkbox-label">🔥 Glute Primer (2 min)</div>
+                        </div>
+                        
+                        <!-- Top Sets -->
+                        <div class="section-title">Top Sets (6-10 reps)</div>
+                        <div class="form-row">
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label">Hip Thrust (lbs)</label>
+                                <input type="number" class="form-input" id="htWt" value="${data.htWt || ''}" placeholder="${last.htWt || 'weight'}">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0">
+                                <label class="form-label">Reps</label>
+                                <input type="number" class="form-input" id="htReps" value="${data.htReps || ''}" placeholder="${last.htReps || '6-10'}">
+                            </div>
+                        </div>
+                        
+                        <!-- Connection -->
+                        <div class="section-title">Connection</div>
+                        <div class="conn-grid">
+                            ${CONNECTION.map(c => `
+                                <button class="conn-btn ${data.conn === c.v ? 'selected' : ''}" onclick="setConn('${selectedIso}', '${c.v}')">
+                                    <span class="emoji">${c.emoji}</span>
+                                    <span class="label">${c.label}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                        ${data.conn ? `<p style="font-size:0.75rem;color:var(--slate);margin-top:8px">${connMeta(data.conn).hint}</p>` : ''}
+                    ` : `
+                        <!-- Tempo -->
+                        <div class="section-title">Tempo Class</div>
+                        <div class="tempo-grid">
+                            ${['Challenge', 'Lower', 'Full Body', 'Upper', 'Cardio', 'Stretch'].map(t => `
+                                <button class="tempo-btn ${data.tempo === t ? 'selected' : ''}" onclick="setTempo('${selectedIso}', '${t}')">${t}</button>
+                            `).join('')}
+                        </div>
+                        <div class="form-group" style="margin-top:12px">
+                            <label class="form-label">Duration (min)</label>
+                            <input type="number" class="form-input" id="tempoDur" value="${data.tempoDur || ''}" placeholder="30">
+                        </div>
+                    `}
+                    
+                    <!-- Nutrition -->
+                    <div class="section-title">Nutrition</div>
+                    <div class="form-group">
+                        <label class="form-label">Protein (g)</label>
+                        <div style="display:flex;gap:6px;margin-bottom:8px">
+                            <button class="quick-btn" onclick="addProtein(30)">+30</button>
+                            <button class="quick-btn" onclick="addProtein(20)">+20</button>
+                            <button class="quick-btn" onclick="addProtein(10)">+10</button>
+                            <button class="quick-btn" onclick="document.getElementById('protein').value=0">Reset</button>
+                        </div>
+                        <input type="number" class="form-input" id="protein" value="${data.protein || ''}" placeholder="${state.settings.proteinGoal}g goal">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Water (oz)</label>
+                        <div style="display:flex;gap:6px;margin-bottom:8px">
+                            <button class="quick-btn" onclick="addWater(20)">+20</button>
+                            <button class="quick-btn" onclick="addWater(10)">+10</button>
+                            <button class="quick-btn" onclick="addWater(5)">+5</button>
+                            <button class="quick-btn" onclick="document.getElementById('water').value=0">Reset</button>
+                        </div>
+                        <input type="number" class="form-input" id="water" value="${data.water || ''}" placeholder="${state.settings.waterGoal}oz goal">
+                    </div>
+                    
+                    <!-- Flexibility -->
+                    <div class="section-title">Splits (inches from floor)</div>
+                    <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
+                        ${[0, 2, 4, 6, 8, 10].map(v => `<button class="quick-btn" onclick="setAllFlex(${v})">${v}"</button>`).join('')}
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label">Front L</label>
+                            <input type="number" class="form-input" id="flexL" value="${data.flexL || ''}" placeholder="${last.flexL || '—'}" step="0.5">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label">Front R</label>
+                            <input type="number" class="form-input" id="flexR" value="${data.flexR || ''}" placeholder="${last.flexR || '—'}" step="0.5">
+                        </div>
+                        <div class="form-group" style="margin-bottom:0">
+                            <label class="form-label">Middle</label>
+                            <input type="number" class="form-input" id="flexM" value="${data.flexM || ''}" placeholder="${last.flexM || '—'}" step="0.5">
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="section-title">Notes</div>
+                    <textarea class="form-input" id="notes" rows="2" placeholder="Form cues, wins, observations...">${data.notes || ''}</textarea>
+                </div>
+                
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="saveModal()">${data.done ? 'Update' : 'Complete'} ✓</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ============ ACTIONS ============
+window.setView = v => { view = v; render(); };
+window.selectDay = iso => { selectedIso = iso; render(); };
+window.openModal = iso => { selectedIso = iso; modalOpen = true; render(); };
+window.closeModal = () => { modalOpen = false; render(); };
+
+window.toggleField = (iso, field) => {
+    const d = state.days[iso] || {};
+    updateDay(iso, { [field]: !d[field] });
+};
+
+window.setConn = (iso, v) => updateDay(iso, { conn: v });
+window.setTempo = (iso, v) => updateDay(iso, { tempo: v });
+
+window.addProtein = v => {
+    const el = document.getElementById('protein');
+    el.value = (parseInt(el.value) || 0) + v;
+};
+
+window.addWater = v => {
+    const el = document.getElementById('water');
+    el.value = (parseInt(el.value) || 0) + v;
+};
+
+window.setAllFlex = v => {
+    document.getElementById('flexL').value = v;
+    document.getElementById('flexR').value = v;
+    document.getElementById('flexM').value = v;
+};
+
+window.saveModal = () => {
+    const type = getType(selectedIso);
+    const isLower = type.type.startsWith('lower-');
+    const patch = {
+        done: true,
+        protein: parseInt(document.getElementById('protein').value) || 0,
+        water: parseInt(document.getElementById('water').value) || 0,
+        flexL: parseFloat(document.getElementById('flexL').value) || null,
+        flexR: parseFloat(document.getElementById('flexR').value) || null,
+        flexM: parseFloat(document.getElementById('flexM').value) || null,
+        notes: document.getElementById('notes').value || '',
+    };
+    if (isLower) {
+        patch.htWt = parseFloat(document.getElementById('htWt').value) || null;
+        patch.htReps = parseInt(document.getElementById('htReps').value) || null;
+    } else {
+        patch.tempoDur = parseInt(document.getElementById('tempoDur').value) || null;
+    }
+    updateDay(selectedIso, patch);
+    closeModal();
+};
+
+window.updateSetting = (key, val) => {
+    state.settings[key] = val;
+    save();
+    render();
+};
+
+window.addScan = () => {
+    const date = document.getElementById('scanDate').value;
+    const roundness = parseFloat(document.getElementById('scanR').value);
+    const protrusion = parseFloat(document.getElementById('scanP').value);
+    if (!date || isNaN(roundness) || isNaN(protrusion)) return alert('Please fill all fields');
+    state.scans = [...state.scans.filter(s => s.date !== date), { date, roundness, protrusion }].sort((a, b) => a.date.localeCompare(b.date));
+    save();
+    document.getElementById('scanR').value = '';
+    document.getElementById('scanP').value = '';
+    render();
+};
+
+window.deleteScan = date => {
+    state.scans = state.scans.filter(s => s.date !== date);
+    save();
+    render();
+};
+
+window.exportData = () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `miami-ready-backup-${isoDate(new Date())}.json`;
+    a.click();
+};
+
+window.importData = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+        try {
+            state = { ...DEFAULT, ...JSON.parse(ev.target.result) };
+            save();
+            render();
+            alert('Data imported!');
+        } catch { alert('Invalid file'); }
+    };
+    reader.readAsText(file);
+};
+
+window.resetData = () => {
+    if (confirm('Are you sure? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        state = { ...DEFAULT };
+        render();
+    }
+};
+
+// ============ INIT ============
+load();
+render();
+window.addEventListener('resize', () => { if (view === 'calendar') render(); });
     </script>
 </body>
 </html>
