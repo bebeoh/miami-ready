@@ -1,1157 +1,1629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miami Ready — 70-Day Glute Transformation</title>
-    <meta name="description" content="Track your 70-day glute transformation. Connection before load.">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --cream: #FAF6F1;
-            --cream-dark: #F0EBE3;
-            --mocha: #8B7355;
-            --burgundy: #722F37;
-            --wine: #4A1C24;
-            --teal: #2D4A47;
-            --teal-light: #4A7C77;
-            --slate: #64748b;
-            --slate-dark: #334155;
-            --white: #ffffff;
-            --shadow: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'DM Sans', system-ui, sans-serif; 
-            background: linear-gradient(to bottom, var(--cream), var(--white));
-            min-height: 100vh;
-            color: var(--slate-dark);
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        /* Header */
-        .header {
-            background: var(--burgundy);
-            color: white;
-            padding: 24px 16px;
-        }
-        .header-inner { max-width: 800px; margin: 0 auto; }
-        .header-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-        .header-brand span { font-size: 1.5rem; }
-        .header-brand small { opacity: 0.8; font-size: 0.75rem; letter-spacing: 0.5px; }
-        .header h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
-        .header p { font-size: 0.875rem; opacity: 0.8; }
-        .header-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        
-        /* Badges */
-        .badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 4px 10px; border-radius: 100px;
-            font-size: 0.75rem; font-weight: 500;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .badge-good { background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: #059669; }
-        .badge-warn { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #d97706; }
-        .badge-neutral { background: var(--cream-dark); border-color: #e2e8f0; color: var(--slate); }
-        .badge-burgundy { background: rgba(114,47,55,0.1); border-color: rgba(114,47,55,0.3); color: var(--burgundy); }
-        .badge-teal { background: rgba(45,74,71,0.1); border-color: rgba(45,74,71,0.3); color: var(--teal); }
-        
-        /* Cards */
-        .card {
-            background: var(--white);
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: var(--shadow);
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        .card-title { font-weight: 600; font-size: 0.875rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        
-        /* Quick Stats Card */
-        .quick-stats { margin: -16px 16px 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); gap: 8px; }
-        .stat-item {
-            padding: 8px; border-radius: 12px; text-align: center;
-            background: var(--cream);
-            transition: all 0.2s;
-        }
-        .stat-item.done { background: rgba(45,74,71,0.1); }
-        .stat-item .icon { font-size: 1.25rem; }
-        .stat-item .label { font-size: 0.65rem; color: var(--slate); margin-top: 2px; }
-        
-        /* Progress Ring */
-        .progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-        .progress-text .pct { font-size: 1.75rem; font-weight: 700; }
-        .progress-text .label { font-size: 0.75rem; color: var(--slate); }
-        .progress-ring { position: relative; width: 56px; height: 56px; }
-        .progress-ring svg { transform: rotate(-90deg); }
-        .progress-ring .bg { fill: none; stroke: #e2e8f0; stroke-width: 6; }
-        .progress-ring .fg { fill: none; stroke: var(--burgundy); stroke-width: 6; stroke-linecap: round; transition: stroke-dasharray 0.3s; }
-        .progress-ring .text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; }
-        
-        /* Tabs */
-        .tabs { 
-            display: flex; gap: 4px; padding: 4px;
-            background: #f1f5f9; border-radius: 12px;
-            margin: 0 16px 16px; max-width: 800px;
-        }
-        @media (min-width: 832px) { .tabs { margin-left: auto; margin-right: auto; } }
-        .tab {
-            flex: 1; padding: 10px 8px; border: none; background: none;
-            font-size: 0.8rem; font-weight: 500; color: var(--slate);
-            border-radius: 8px; cursor: pointer; transition: all 0.2s;
-            font-family: inherit;
-        }
-        .tab.active { background: var(--white); color: var(--slate-dark); box-shadow: var(--shadow); }
-        
-        /* Content */
-        .content { padding: 0 16px 100px; max-width: 800px; margin: 0 auto; }
-        .view { display: none; }
-        .view.active { display: block; }
-        
-        /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 20px; border-radius: 12px; border: none;
-            font-size: 0.875rem; font-weight: 600; cursor: pointer;
-            font-family: inherit; transition: all 0.2s; width: 100%;
-        }
-        .btn-primary { background: var(--burgundy); color: white; }
-        .btn-primary:hover { background: var(--wine); }
-        .btn-secondary { background: #f1f5f9; color: var(--slate-dark); }
-        .btn-secondary:hover { background: #e2e8f0; }
-        .btn-teal { background: var(--teal); color: white; }
-        
-        .quick-btn {
-            padding: 6px 12px; border-radius: 8px; border: none;
-            background: #f1f5f9; color: var(--slate-dark);
-            font-size: 0.75rem; font-weight: 500; cursor: pointer;
-            font-family: inherit; transition: all 0.2s;
-        }
-        .quick-btn:hover { background: #e2e8f0; }
-        .quick-btn:active { background: var(--burgundy); color: white; }
-        
-        /* Info Cards */
-        .info-card {
-            padding: 12px; border-radius: 12px; margin-bottom: 8px;
-        }
-        .info-card.amber { background: #fffbeb; border: 1px solid #fcd34d; }
-        .info-card.teal { background: rgba(45,74,71,0.08); border: 1px solid rgba(45,74,71,0.2); }
-        .info-card.burgundy { background: rgba(114,47,55,0.08); border: 1px solid rgba(114,47,55,0.2); }
-        .info-card .title { font-weight: 600; font-size: 0.875rem; margin-bottom: 4px; }
-        .info-card .text { font-size: 0.8rem; color: var(--slate-dark); }
-        
-        /* Exercise List */
-        .exercise-list { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
-        .exercise-item { 
-            padding: 10px 12px; font-size: 0.8rem; 
-            border-bottom: 1px solid #f1f5f9;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .exercise-item:last-child { border-bottom: none; }
-        .exercise-item .name { font-weight: 500; }
-        .exercise-item .sets { color: var(--slate); font-size: 0.75rem; }
-        
-        /* Timeline */
-        .timeline { max-height: 400px; overflow-y: auto; }
-        .timeline-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 10px 12px; border-radius: 12px; margin-bottom: 4px;
-            background: var(--white); border: 1px solid #e2e8f0;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .timeline-item:hover { border-color: #cbd5e1; }
-        .timeline-item.selected { background: var(--burgundy); color: white; border-color: var(--burgundy); }
-        .timeline-item.selected .sub { color: rgba(255,255,255,0.7); }
-        .timeline-item .main { font-weight: 600; font-size: 0.875rem; }
-        .timeline-item .sub { font-size: 0.75rem; color: var(--slate); margin-left: 8px; }
-        .timeline-item .right { display: flex; align-items: center; gap: 6px; }
-        .timeline-item .check { color: #10b981; }
-        .timeline-item.selected .check { color: #6ee7b7; }
-        
-        /* Form Elements */
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-size: 0.75rem; color: var(--slate); margin-bottom: 6px; font-weight: 500; }
-        .form-input {
-            width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0;
-            border-radius: 10px; font-size: 0.875rem; font-family: inherit;
-            transition: all 0.2s;
-        }
-        .form-input:focus { outline: none; border-color: var(--burgundy); box-shadow: 0 0 0 3px rgba(114,47,55,0.1); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-        
-        /* Checkbox */
-        .checkbox-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px; border-radius: 12px; cursor: pointer;
-            background: var(--white); border: 1px solid #e2e8f0;
-            transition: all 0.2s; margin-bottom: 8px;
-        }
-        .checkbox-item.checked { background: rgba(45,74,71,0.08); border-color: var(--teal); }
-        .checkbox-box {
-            width: 24px; height: 24px; border-radius: 6px;
-            border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; color: white; transition: all 0.2s; flex-shrink: 0;
-        }
-        .checkbox-item.checked .checkbox-box { background: var(--teal); border-color: var(--teal); }
-        .checkbox-label { font-size: 0.875rem; }
-        
-        /* Connection Grid */
-        .conn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .conn-btn {
-            padding: 10px 4px; border-radius: 12px; border: 1px solid #e2e8f0;
-            background: var(--white); cursor: pointer; text-align: center;
-            transition: all 0.2s; font-family: inherit;
-        }
-        .conn-btn:hover { border-color: #cbd5e1; }
-        .conn-btn.selected { border-color: var(--burgundy); background: rgba(114,47,55,0.08); }
-        .conn-btn .emoji { font-size: 1.5rem; display: block; }
-        .conn-btn .label { font-size: 0.65rem; color: var(--slate); margin-top: 2px; }
-        
-        /* Tempo Grid */
-        .tempo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .tempo-btn {
-            padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0;
-            background: var(--white); cursor: pointer; text-align: center;
-            font-size: 0.8rem; font-weight: 500; transition: all 0.2s;
-            font-family: inherit;
-        }
-        .tempo-btn.selected { border-color: var(--burgundy); background: rgba(114,47,55,0.08); }
-        
-        /* Modal */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-            display: none; align-items: flex-end; justify-content: center;
-            z-index: 1000; padding: 0;
-        }
-        .modal-overlay.active { display: flex; }
-        @media (min-width: 640px) {
-            .modal-overlay { align-items: center; padding: 20px; }
-            .modal { border-radius: 20px !important; max-height: 85vh; }
-        }
-        .modal {
-            background: var(--white); border-radius: 20px 20px 0 0;
-            width: 100%; max-width: 500px; max-height: 90vh;
-            overflow-y: auto; position: relative;
-        }
-        .modal-header {
-            position: sticky; top: 0; background: var(--white);
-            padding: 16px; border-bottom: 1px solid #e2e8f0;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 10;
-        }
-        .modal-header h2 { font-size: 1rem; font-weight: 700; }
-        .modal-header p { font-size: 0.8rem; color: var(--slate); }
-        .modal-close {
-            width: 32px; height: 32px; border-radius: 8px; border: none;
-            background: #f1f5f9; cursor: pointer; font-size: 1.25rem;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .modal-body { padding: 16px; }
-        .modal-footer {
-            position: sticky; bottom: 0; background: var(--white);
-            padding: 16px; border-top: 1px solid #e2e8f0;
-        }
-        
-        /* Section divider */
-        .section-title { font-size: 0.8rem; font-weight: 600; margin: 20px 0 12px; color: var(--slate-dark); }
-        
-        /* Chart placeholder */
-        .chart-container { height: 200px; background: #f8fafc; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--slate); font-size: 0.875rem; margin-bottom: 16px; }
-        
-        /* Metric cards */
-        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-        .metric-card { padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; }
-        .metric-card .label { font-size: 0.7rem; color: var(--slate); }
-        .metric-card .value { font-size: 1.5rem; font-weight: 700; margin: 4px 0; }
-        .metric-card .sub { font-size: 0.7rem; color: var(--slate); }
-        .metric-card .bar { height: 6px; background: #e2e8f0; border-radius: 3px; margin-top: 8px; overflow: hidden; }
-        .metric-card .bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
-        .metric-card .bar-fill.burgundy { background: var(--burgundy); }
-        .metric-card .bar-fill.teal { background: var(--teal); }
-        .metric-card .bar-fill.green { background: #10b981; }
-        
-        /* Method sections */
-        .method-section { margin-bottom: 24px; }
-        .method-section h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .method-section p { font-size: 0.85rem; color: var(--slate-dark); line-height: 1.5; margin-bottom: 8px; }
-        .method-section ul { font-size: 0.85rem; color: var(--slate-dark); line-height: 1.6; padding-left: 20px; }
-        
-        /* Neural grid */
-        .neural-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .neural-item { text-align: center; padding: 12px 8px; background: #f8fafc; border-radius: 12px; }
-        .neural-item .emoji { font-size: 1.5rem; }
-        .neural-item .count { font-size: 1.25rem; font-weight: 700; margin: 4px 0; }
-        .neural-item .label { font-size: 0.65rem; color: var(--slate); }
-        
-        /* Scan list */
-        .scan-list { max-height: 200px; overflow-y: auto; }
-        .scan-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px;
-            margin-bottom: 6px; font-size: 0.8rem;
-        }
-        .scan-item button { background: none; border: none; cursor: pointer; color: var(--slate); }
-        .scan-item button:hover { color: #ef4444; }
-        
-        /* Footer */
-        .footer { text-align: center; padding: 32px 16px; font-size: 0.75rem; color: var(--slate); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Miami Ready — 70-Day Transformation</title>
+  <meta name="description" content="Your 70-day glute transformation journey. Connection before load." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+
+  <!-- Fonts to match your vision board vibe (editorial serif + clean sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Vision-board palette (warm daylight + deep teal labels) */
+      --champagne:#F6EEE6;
+      --cream:#F5EDE4;
+      --linen:#FBF8F4;
+      --sand:#E8DED2;
+      --mocha:#A08B7A;
+      --mocha2:#7A6B5D;
+
+      --deep-teal:#1F2F2D;       /* label background vibe */
+      --deep-teal-2:#223734;
+      --burgundy:#722F37;
+      --wine:#3A161D;
+      --gold:#B8976A;
+
+      --ink:#1A1614;
+      --ink2:#2C2C2C;
+      --white:#FFFFFF;
+
+      --shadow-soft: 0 8px 28px rgba(26, 22, 20, 0.10);
+      --shadow-deep: 0 14px 48px rgba(26, 22, 20, 0.18);
+      --ring: 0 0 0 4px rgba(31,47,45,0.16);
+
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+
+      --grad-page: radial-gradient(1200px 700px at 20% 0%, rgba(114,47,55,0.10), transparent 55%),
+                   radial-gradient(900px 600px at 90% 20%, rgba(31,47,45,0.12), transparent 55%),
+                   linear-gradient(180deg, var(--champagne) 0%, var(--sand) 100%);
+
+      /* IMPORTANT:
+         Put your vision board image in the same folder as this HTML and name it:
+         vision-board.png
+      */
+      --vision-img: url('vision-board.png');
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{
+      font-family:'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--grad-page);
+      min-height:100vh;
+      color:var(--ink2);
+      -webkit-font-smoothing:antialiased;
+    }
+    .serif{ font-family:'Cormorant Garamond', Georgia, serif; }
+
+    /* ====== HERO (vision board look) ====== */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding: 28px 18px 20px;
+      color: var(--linen);
+      background: linear-gradient(180deg, rgba(26,22,20,0.85) 0%, rgba(26,22,20,0.55) 55%, rgba(26,22,20,0.22) 100%);
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+      box-shadow: var(--shadow-deep);
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-20px;
+      background-image: var(--vision-img);
+      background-size: cover;
+      background-position: center;
+      filter: blur(16px) saturate(1.05);
+      transform: scale(1.12);
+      opacity: 0.42;
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(900px 420px at 20% 0%, rgba(114,47,55,0.35), transparent 60%),
+                  radial-gradient(900px 520px at 90% 20%, rgba(31,47,45,0.32), transparent 60%),
+                  linear-gradient(180deg, rgba(26,22,20,0.75), rgba(26,22,20,0.10));
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      max-width: 720px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+    .eyebrow{
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(246,238,230,0.75);
+      margin-bottom: 8px;
+    }
+    .hero h1{
+      font-weight: 500;
+      letter-spacing: 2px;
+      font-size: 2.55rem;
+      line-height: 1;
+      color: var(--linen);
+      margin-bottom: 8px;
+    }
+    .hero-sub{
+      font-size: 0.92rem;
+      color: rgba(246,238,230,0.78);
+      margin-bottom: 14px;
+    }
+
+    /* Vision-board label chips */
+    .chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 14px;
+      border-radius: 8px;     /* vision board has squarer pill */
+      background: rgba(31,47,45,0.92);
+      color: var(--linen);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(10px);
+    }
+    .chip.soft{ background: rgba(255,255,255,0.10); }
+    .chip.gold{ background: rgba(184,151,106,0.92); color: var(--ink); border-color: rgba(255,255,255,0.18); }
+    .chip.burg{ background: rgba(114,47,55,0.90); }
+    .chip .dot{ width:8px; height:8px; border-radius:50%; background: rgba(255,255,255,0.6); }
+
+    /* ====== LAYOUT ====== */
+    .wrap{ padding: 14px 16px 90px; max-width: 720px; margin: 0 auto; }
+    .card{
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      margin-bottom: 14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card.dark{
+      background: rgba(26,22,20,0.90);
+      border-color: rgba(255,255,255,0.10);
+      color: var(--linen);
+    }
+    .card-title{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 650;
+      margin-bottom: 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(122,107,93,0.35), transparent);
+      margin: 18px 0;
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap: 8px;
+      padding: 10px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      margin: 14px auto;
+      max-width: 720px;
+      position: sticky;
+      top: 10px;
+      z-index: 5;
+    }
+    .tab{
+      flex:1;
+      border:none;
+      border-radius: 14px;
+      padding: 12px 8px;
+      background: transparent;
+      cursor:pointer;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      color: rgba(122,107,93,0.95);
+      transition: all .18s ease;
+    }
+    .tab:hover{ transform: translateY(-1px); }
+    .tab.active{
+      background: rgba(31,47,45,0.96);
+      color: var(--linen);
+      box-shadow: 0 10px 22px rgba(31,47,45,0.20);
+    }
+
+    /* Buttons */
+    .btn{
+      width:100%;
+      border:none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      cursor:pointer;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      font-size: 0.9rem;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      transition: all .18s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(31,47,45,0.98), rgba(34,55,52,0.92));
+      color: var(--linen);
+      box-shadow: 0 14px 30px rgba(31,47,45,0.22);
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,0.8);
+      border: 2px solid rgba(31,47,45,0.18);
+      color: var(--ink2);
+    }
+    .btn.warn{
+      background: linear-gradient(135deg, rgba(184,151,106,0.96), rgba(212,188,154,0.90));
+      color: var(--ink);
+      box-shadow: 0 14px 30px rgba(184,151,106,0.20);
+    }
+
+    /* Progress header */
+    .progress-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .pct{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 3.1rem;
+      font-weight: 520;
+      line-height: 1;
+    }
+    .subcap{
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      color: rgba(122,107,93,0.95);
+      font-weight: 800;
+      margin-top: 6px;
+    }
+    .ring{
+      width: 84px; height: 84px;
+      position:relative;
+      flex-shrink:0;
+    }
+    .ring svg{ transform: rotate(-90deg); }
+    .ring .bg{ fill:none; stroke: rgba(232,222,210,0.9); stroke-width: 7; }
+    .ring .fg{ fill:none; stroke: rgba(31,47,45,0.95); stroke-width: 7; stroke-linecap: round; }
+    .ring .inner{
+      position:absolute;
+      inset: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.82);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+    }
+    .ring .inner .num{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+    .ring .inner .txt{
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(122,107,93,0.95);
+      font-weight: 900;
+    }
+
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(6, minmax(70px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    @media (max-width: 560px){
+      .stats{ grid-template-columns: repeat(3, minmax(70px, 1fr)); }
+    }
+    .stat{
+      border-radius: 18px;
+      padding: 12px 10px;
+      text-align:center;
+      background: rgba(246,238,230,0.85);
+      border: 2px solid rgba(31,47,45,0.06);
+      transition: all .18s ease;
+    }
+    .stat.done{
+      background: rgba(31,47,45,0.95);
+      color: var(--linen);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: 0 10px 22px rgba(31,47,45,0.18);
+    }
+    .stat .icon{ font-size: 1.35rem; margin-bottom: 5px; }
+    .stat .label{
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 900;
+      opacity: 0.95;
+    }
+
+    /* Info blocks */
+    .info{
+      border-radius: var(--radius-lg);
+      padding: 16px 16px;
+      border: 1px solid rgba(255,255,255,0.55);
+      margin-top: 12px;
+      background: rgba(255,255,255,0.76);
+      backdrop-filter: blur(10px);
+    }
+    .info .title{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.02rem;
+      margin-bottom: 6px;
+    }
+    .info .text{ font-size: 0.9rem; line-height: 1.55; color: rgba(44,44,44,0.92); }
+    .info.accent{
+      background: linear-gradient(135deg, rgba(31,47,45,0.10), rgba(184,151,106,0.10));
+      border-color: rgba(31,47,45,0.12);
+    }
+    .info.warn{
+      background: linear-gradient(135deg, rgba(184,151,106,0.18), rgba(255,255,255,0.72));
+      border-color: rgba(184,151,106,0.25);
+    }
+
+    /* Lists */
+    .list{
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(251,248,244,0.85);
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(232,222,210,0.8);
+    }
+    .row:last-child{ border-bottom:none; }
+    .row .name{ font-weight: 800; font-size: 0.92rem; }
+    .row .meta{ color: rgba(122,107,93,0.95); font-size: 0.82rem; font-weight:700; }
+
+    /* Timeline */
+    .timeline{ max-height: 460px; overflow-y:auto; padding-right: 6px; }
+    .titem{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      margin-bottom: 8px;
+      cursor:pointer;
+      background: rgba(251,248,244,0.82);
+      border: 2px solid rgba(31,47,45,0.06);
+      transition: all .18s ease;
+    }
+    .titem:hover{ transform: translateY(-1px); border-color: rgba(31,47,45,0.16); }
+    .titem.selected{
+      background: rgba(31,47,45,0.95);
+      color: var(--linen);
+      border-color: rgba(31,47,45,0.95);
+      box-shadow: 0 14px 28px rgba(31,47,45,0.20);
+    }
+    .titem .sub{ font-size: 0.75rem; color: rgba(122,107,93,0.95); font-weight:800; margin-left: 8px; }
+    .titem.selected .sub{ color: rgba(246,238,230,0.68); }
+
+    /* Forms */
+    .label{
+      display:block;
+      margin-bottom: 8px;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 900;
+      color: rgba(122,107,93,0.95);
+    }
+    .input, select, textarea{
+      width:100%;
+      border-radius: 14px;
+      padding: 14px 14px;
+      border: 2px solid rgba(31,47,45,0.10);
+      background: rgba(251,248,244,0.9);
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline:none;
+      transition: all .16s ease;
+    }
+    .input:focus, select:focus, textarea:focus{
+      border-color: rgba(31,47,45,0.35);
+      box-shadow: var(--ring);
+      background: rgba(255,255,255,0.90);
+    }
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    /* Check items */
+    .check{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 2px solid rgba(31,47,45,0.06);
+      background: rgba(251,248,244,0.85);
+      cursor:pointer;
+      transition: all .16s ease;
+      margin-bottom: 10px;
+    }
+    .check:hover{ border-color: rgba(31,47,45,0.14); }
+    .check.on{
+      background: rgba(31,47,45,0.08);
+      border-color: rgba(31,47,45,0.22);
+    }
+    .box{
+      width: 30px; height: 30px;
+      border-radius: 10px;
+      border: 2px solid rgba(31,47,45,0.20);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      color: var(--linen);
+      background: transparent;
+      flex-shrink:0;
+    }
+    .check.on .box{
+      background: rgba(31,47,45,0.95);
+      border-color: rgba(31,47,45,0.95);
+    }
+    .check .txt{ font-weight: 800; }
+
+    /* Modal */
+    .overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      background: rgba(26,22,20,0.65);
+      backdrop-filter: blur(10px);
+      z-index: 30;
+      padding: 0;
+    }
+    .overlay.on{ display:flex; }
+    .modal{
+      width:100%;
+      max-width: 560px;
+      background: rgba(255,255,255,0.90);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+      box-shadow: var(--shadow-deep);
+      overflow:hidden;
+      max-height: 92vh;
+    }
+    @media (min-width: 720px){
+      .overlay{ align-items:center; padding: 18px; }
+      .modal{ border-radius: 26px; }
+    }
+    .mhead{
+      padding: 18px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+      background: rgba(255,255,255,0.92);
+      border-bottom: 1px solid rgba(232,222,210,0.85);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+    .mhead h2{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 750;
+    }
+    .mhead p{ font-size: 0.82rem; color: rgba(122,107,93,0.95); font-weight: 800; margin-top: 2px; }
+    .close{
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(31,47,45,0.14);
+      background: rgba(251,248,244,0.9);
+      cursor:pointer;
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+    .mbody{ padding: 18px; overflow-y:auto; }
+    .mfoot{
+      padding: 16px 18px;
+      border-top: 1px solid rgba(232,222,210,0.85);
+      background: rgba(255,255,255,0.92);
+      position: sticky;
+      bottom: 0;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+
+    .section{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 750;
+      margin: 18px 0 10px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      color: rgba(44,44,44,0.95);
+    }
+    .section::after{
+      content:"";
+      flex: 1;
+      height: 1px;
+      background: rgba(232,222,210,0.95);
+    }
+
+    .mini{
+      font-size: 0.78rem;
+      color: rgba(122,107,93,0.95);
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .footer{
+      text-align:center;
+      padding: 30px 16px 54px;
+      color: rgba(122,107,93,0.95);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .brand{
+      font-family:'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: rgba(31,47,45,0.95);
+      margin-bottom: 2px;
+    }
+  </style>
 </head>
+
 <body>
-    <div id="app"></div>
-    
-    <script>
-// ============ CONSTANTS ============
-const STORAGE_KEY = 'miami-ready-v3';
+  <div id="app"></div>
+
+  <script>
+/* =========================
+   CONSTANTS
+========================= */
+const STORAGE_KEY = 'miami-ready-vision-v1';
 const START = new Date('2026-01-11T00:00:00');
-const END = new Date('2026-03-21T23:59:59');
+const END   = new Date('2026-03-21T23:59:59');
+
+/**
+ * Teachings integrated (the stuff you pasted):
+ * 1) Cardio 3x/week for bloodflow (tracked weekly)
+ * 2) Burn set BEFORE each working set (tracked per lower day)
+ * 3) Single-leg RDL burn sets on rest days (tracked any day)
+ * 4) Glute band: knees out / abduction (tracked per lower day)
+ * 5) One burnout set of banded glute bridges (tracked per lower day)
+ * 6) Posterior pelvic tilt cue + knees out cue (tracked per lower day)
+ * 7) Patience: neural pathway counts + connection score gate before adding load (already integrated)
+ */
+const TEACHINGS = {
+  cardioTargetPerWeek: 3,
+  burnSetRule: 'Always do a no-weight burn set before the weighted set. Teach the brain.',
+  restDayRdlRule: 'On non-lower days: 2 burn sets each leg of single-leg RDL.',
+  bandRule: 'Bands + knees-out abduction = top shelf (glute medius).',
+  tiltRule: 'Exhale → posterior tilt (“drink water”) → squeeze → 2s hold.',
+};
 
 const WEEKLY = [
-    { dow: 6, type: 'tempo', label: 'Tempo', focus: 'Any Tempo Studio class', icon: '🧘' },
-    { dow: 0, type: 'tempo-scan', label: 'Tempo + Scan', focus: 'Tempo class + Zozofit body scan', icon: '📊' },
-    { dow: 1, type: 'lower-a', label: 'Lower A', focus: 'Shelf + Side — Upper glute max + medius', icon: '🍑' },
-    { dow: 2, type: 'tempo', label: 'Tempo', focus: 'Upper body or cardio', icon: '💪' },
-    { dow: 3, type: 'lower-b', label: 'Lower B', focus: 'Underbutt — Lower glute max + ham tie-in', icon: '🔥' },
-    { dow: 4, type: 'tempo', label: 'Tempo', focus: 'Upper body or recovery', icon: '🧘' },
-    { dow: 5, type: 'lower-c', label: 'Lower C', focus: 'Side Dips — Medius + minimus', icon: '✨' },
+  { dow: 6, type: 'tempo',      label: 'Tempo',        focus: 'Tempo class (optional bloodflow cardio)', icon:'🧘' },
+  { dow: 0, type: 'tempo-scan', label: 'Tempo + Scan', focus: 'Tempo + Zozofit scan', icon:'📊' },
+  { dow: 1, type: 'lower-a',    label: 'Lower A',      focus: 'Shelf + Side — Upper glute max + medius', icon:'🍑' },
+  { dow: 2, type: 'tempo',      label: 'Tempo',        focus: 'Upper body or cardio', icon:'💪' },
+  { dow: 3, type: 'lower-b',    label: 'Lower B',      focus: 'Underbutt — Lower glute max + ham tie-in', icon:'🔥' },
+  { dow: 4, type: 'tempo',      label: 'Tempo',        focus: 'Upper body or recovery', icon:'🧘' },
+  { dow: 5, type: 'lower-c',    label: 'Lower C',      focus: 'Side Dips — Medius + minimus', icon:'✨' },
 ];
 
 const TEMPLATES = {
-    'lower-a': {
-        tag: 'Shelf + Side', target: 'Upper glute max + medius',
-        why: 'Pulls pelvis back into position. Creates the shelf.',
-        exercises: [
-            { name: 'Barbell Hip Thrust', sets: '4×6-10', note: 'Heavy' },
-            { name: 'Barbell RDL', sets: '3×8-10' },
-            { name: 'Back Extensions (glute bias)', sets: '3×12-15', note: 'Pad LOW' },
-            { name: 'Banded Lateral Step-Ups', sets: '3×10/side' },
-            { name: 'Heavy Banded Abduction', sets: '3×15-20' },
-        ],
-    },
-    'lower-b': {
-        tag: 'Underbutt', target: 'Lower glute max + ham tie-in',
-        why: 'Creates depth and hang. Fills the fold.',
-        exercises: [
-            { name: 'B-Stance Hip Thrust', sets: '4×8-10/side', note: 'Heavy' },
-            { name: 'B-Stance RDL', sets: '3×10/side' },
-            { name: 'Elevated Step-Ups', sets: '3×10/side', note: 'Lean forward' },
-            { name: 'Hyperextensions (glute bias)', sets: '3×12-15', note: 'Pad LOW' },
-            { name: 'Yoga Ball Hamstring Curls', sets: '3×12-15' },
-        ],
-    },
-    'lower-c': {
-        tag: 'Side Dips', target: 'Medius + minimus',
-        why: 'Stabilizes SI joint. Fills hip dips.',
-        exercises: [
-            { name: 'Single-Leg Hip Thrust', sets: '3×10/side' },
-            { name: 'Cossack Squats', sets: '3×8/side' },
-            { name: 'Curtsy Lunges', sets: '3×10/side' },
-            { name: 'Side-Lying Leg Raises', sets: '3×15/side', note: 'Ankle weights' },
-            { name: 'Banded Glute Bridge Pulses', sets: '3×20' },
-        ],
-    },
+  'lower-a': {
+    tag:'Shelf + Side', target:'Upper glute max + medius',
+    why:'Build shelf + side roundness (glute medius + upper fibers).',
+    exercises:[
+      { name:'Barbell Hip Thrust', sets:'4×6-10', note:'Heavy' },
+      { name:'Barbell RDL', sets:'3×8-10' },
+      { name:'Back Extensions (glute bias)', sets:'3×12-15', note:'Pad LOW' },
+      { name:'Banded Lateral Step-Ups', sets:'3×10/side' },
+      { name:'Heavy Banded Abduction', sets:'3×15-20' },
+    ],
+  },
+  'lower-b': {
+    tag:'Underbutt', target:'Lower glute max + ham tie-in',
+    why:'Depth + hang (fills the fold).',
+    exercises:[
+      { name:'B-Stance Hip Thrust', sets:'4×8-10/side', note:'Heavy' },
+      { name:'B-Stance RDL', sets:'3×10/side' },
+      { name:'Elevated Step-Ups', sets:'3×10/side', note:'Lean forward' },
+      { name:'Hyperextensions (glute bias)', sets:'3×12-15', note:'Pad LOW' },
+      { name:'Yoga Ball Hamstring Curls', sets:'3×12-15' },
+    ],
+  },
+  'lower-c': {
+    tag:'Side Dips', target:'Medius + minimus',
+    why:'Stabilize + fill hip dips.',
+    exercises:[
+      { name:'Single-Leg Hip Thrust', sets:'3×10/side' },
+      { name:'Cossack Squats', sets:'3×8/side' },
+      { name:'Curtsy Lunges', sets:'3×10/side' },
+      { name:'Side-Lying Leg Raises', sets:'3×15/side', note:'Ankle weights' },
+      { name:'Banded Glute Bridge Pulses', sets:'3×20' },
+    ],
+  },
 };
 
-const RESET = ['Right hip flexor stretch — 60s', 'Right single-leg glute bridge hold — 45s', 'Right side-lying leg raises — 20 slow', 'Dead bug — 60s'];
-const PRIMER = ['Frog pumps — 60s (fast pulses)', 'Banded standing abductions — 60s'];
+const RESET  = ['Right hip flexor stretch — 60s','Right single-leg glute bridge hold — 45s','Right side-lying leg raises — 20 slow','Dead bug — 60s'];
+const PRIMER = ['Frog pumps — 60s (fast pulses)','Banded standing abductions — 60s'];
 
 const CONNECTION = [
-    { v: 'red', emoji: '😐', label: 'Not yet', hint: 'Quads doing the work. Go lighter.' },
-    { v: 'yellow', emoji: '🤔', label: 'Getting there', hint: 'Some glutes. Hold or reduce.' },
-    { v: 'green', emoji: '😊', label: 'Feeling it', hint: 'Add weight if follicular/ovulatory.' },
-    { v: 'sparkles', emoji: '🔥', label: 'Locked in', hint: 'Progress confidently.' },
+  { v:'red',      emoji:'😐', label:'Not yet',      hint:'Quads stealing. Go lighter + do burn sets.' },
+  { v:'yellow',   emoji:'🤔', label:'Getting there', hint:'Some glutes. Hold load. Better cues.' },
+  { v:'green',    emoji:'😊', label:'Feeling it',    hint:'Now add weight (esp follicular/ovulatory).' },
+  { v:'sparkles', emoji:'🔥', label:'Locked in',     hint:'Progress confidently. Earn PRs.' },
 ];
 
 const CYCLES = [
-    { v: 'menstrual', icon: '🌸', label: 'Menstrual', note: 'Go lighter if needed.' },
-    { v: 'follicular', icon: '🌱', label: 'Follicular', note: 'Energy rising. Push intensity.' },
-    { v: 'ovulatory', icon: '☀️', label: 'Ovulatory', note: 'Peak power. Hit PRs.' },
-    { v: 'luteal', icon: '🍂', label: 'Luteal', note: 'Maintain, don\'t push.' },
+  { v:'menstrual',  icon:'🌸', label:'Menstrual',  note:'Go lighter if needed. Keep connection.' },
+  { v:'follicular', icon:'🌱', label:'Follicular', note:'Energy rising. Push intensity when connected.' },
+  { v:'ovulatory',  icon:'☀️', label:'Ovulatory',  note:'Peak power. PR window (only if 🔥 or 😊).' },
+  { v:'luteal',     icon:'🍂', label:'Luteal',     note:'Maintain. Don’t chase PRs. Keep form.' },
 ];
 
 const PHASES = [
-    { name: 'CONNECT', weeks: '1-3', desc: 'Light load, perfect form.', expect: '😐→🤔' },
-    { name: 'BUILD', weeks: '4-7', desc: 'Heavy when 😊. Fast-twitch responds to load.', expect: '🤔→😊' },
-    { name: 'PEAK', weeks: '8-10', desc: 'Intensity peak. Push limits.', expect: '😊→🔥' },
+  { name:'CONNECT', weeks:'1-3', expect:'😐→🤔',
+    tagline:'Find the glutes. Then load.',
+    desc:'You’re building neural pathways so your glutes actually fire on command.',
+    rules:[
+      'Light–moderate load. If unsure → lighter.',
+      'Burn set BEFORE working set (every main lift).',
+      'Exhale → posterior tilt → squeeze → 2s hold.',
+      'Bands + knees out for hip thrust/bridges.',
+    ],
+    endWhen:'When 🤔 is consistent across Lower days.',
+    rule:'If you can’t feel glutes, they’re not growing.',
+  },
+  { name:'BUILD', weeks:'4-7', expect:'🤔→😊',
+    tagline:'Now grow muscle (hypertrophy).',
+    desc:'Progressive overload only when connection is solid.',
+    rules:[
+      'Add weight only when 😊 or 🔥.',
+      'If you drop to 🤔, hold or reduce.',
+      'Track hip thrust top set. Progress weekly.',
+      'Keep burn sets + cues. No ego reps.',
+    ],
+    endWhen:'When 😊 is default and 🔥 shows up sometimes.',
+    rule:'Connection earns load. Always.',
+  },
+  { name:'PEAK', weeks:'8-10', expect:'😊→🔥',
+    tagline:'Peak intensity. Sculpt 3D projection.',
+    desc:'You push hard but stay clean. PRs only when 🔥.',
+    rules:[
+      'PR only when 🔥.',
+      'True failure on last set (only if form stays clean).',
+      `Hit cardio ${TEACHINGS.cardioTargetPerWeek}×/week for bloodflow.`,
+      'Sleep + protein are non-negotiable.',
+    ],
+    endWhen:'March 21, 2026.',
+    rule:'Clean reps. Deep squeeze. Big growth.',
+  },
 ];
 
 const DEFAULT = {
-    settings: { proteinGoal: 130, waterGoal: 100, cycle: 'follicular' },
-    baseline: { roundness: 32, lift: 83, protrusion: 25 },
-    days: {},
-    scans: [],
+  settings: { proteinGoal: 130, waterGoal: 100, cycle: 'follicular' },
+  baseline: { roundness: 32, lift: 83, protrusion: 25 },
+  days: {},
+  scans: [],
 };
 
-// ============ HELPERS ============
+/* =========================
+   HELPERS
+========================= */
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-const isoDate = d => { const x = new Date(d); x.setHours(0,0,0,0); return x.toISOString().slice(0,10); };
-const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
-const dayDiff = (a, b) => Math.round((new Date(b).setHours(0,0,0,0) - new Date(a).setHours(0,0,0,0)) / 86400000);
-const fmtShort = d => new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(new Date(d));
-const fmtLong = d => new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'long', day: 'numeric' }).format(new Date(d));
-const getType = d => WEEKLY.find(w => w.dow === new Date(d).getDay()) || WEEKLY[0];
-const getPhase = dayNum => dayNum <= 21 ? PHASES[0] : dayNum <= 49 ? PHASES[1] : PHASES[2];
-const connMeta = v => CONNECTION.find(c => c.v === v) || CONNECTION[0];
-const cycleMeta = v => CYCLES.find(c => c.v === v) || CYCLES[1];
+const isoDate = d => { const x=new Date(d); x.setHours(0,0,0,0); return x.toISOString().slice(0,10); };
+const addDays = (d,n)=>{ const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+const dayDiff = (a,b)=> Math.round((new Date(b).setHours(0,0,0,0)-new Date(a).setHours(0,0,0,0))/86400000);
+const fmtShort = d => new Intl.DateTimeFormat(undefined,{month:'short',day:'numeric'}).format(new Date(d));
+const fmtLong  = d => new Intl.DateTimeFormat(undefined,{weekday:'short',month:'long',day:'numeric'}).format(new Date(d));
+const getType  = d => WEEKLY.find(w=>w.dow===new Date(d).getDay()) || WEEKLY[0];
+const getPhase = dayNum => dayNum<=21 ? PHASES[0] : dayNum<=49 ? PHASES[1] : PHASES[2];
+const connMeta = v => CONNECTION.find(c=>c.v===v) || CONNECTION[0];
+const cycleMeta= v => CYCLES.find(c=>c.v===v) || CYCLES[1];
 
-// ============ STATE ============
+function weekStartISO(iso){
+  const d = new Date(iso);
+  const day = d.getDay(); // 0 Sun
+  const start = new Date(d);
+  start.setDate(start.getDate() - day); // Sunday
+  return isoDate(start);
+}
+function isWithin70(iso){
+  const dn = dayDiff(START, iso) + 1;
+  return dn >= 1 && dn <= 70;
+}
+function getAllDays(){
+  const days=[];
+  for(let i=0;i<70;i++){
+    const d = addDays(START,i);
+    days.push({ date:d, iso: isoDate(d), dayNum:i+1 });
+  }
+  return days;
+}
+
+/* =========================
+   STATE
+========================= */
 let state = { ...DEFAULT };
 let view = 'today';
 let selectedIso = isoDate(new Date());
 let modalOpen = false;
 
-function load() {
-    try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) state = { ...DEFAULT, ...JSON.parse(raw) };
-    } catch {}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) state = { ...DEFAULT, ...JSON.parse(raw) };
+  }catch{}
+}
+function save(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch{ alert('Could not save data (storage issue).'); }
+}
+function updateDay(iso, patch){
+  state.days[iso] = { ...state.days[iso], ...patch };
+  save(); render();
 }
 
-function save() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+/* =========================
+   COMPUTED
+========================= */
+function weeklyCardioCount(iso){
+  // “bloodflow cardio” is tracked on any day via d.cardio === true
+  const start = weekStartISO(iso);
+  const startD = new Date(start);
+  let count = 0;
+  for(let i=0;i<7;i++){
+    const dayISO = isoDate(addDays(startD,i));
+    const d = state.days[dayISO];
+    if(d?.cardio) count++;
+  }
+  return count;
 }
 
-function updateDay(iso, patch) {
-    state.days[iso] = { ...state.days[iso], ...patch };
-    save();
-    render();
+function getCompletion(iso){
+  const d = state.days[iso] || {};
+  const type = getType(iso);
+  const isLower = type.type.startsWith('lower-');
+
+  // “teachings” completion items (only counted when relevant)
+  const items = {
+    workout: !!d.done,
+    protein: (d.protein||0) >= state.settings.proteinGoal,
+    water: (d.water||0) >= state.settings.waterGoal,
+    flex: !!(d.flexL || d.flexR || d.flexM),
+  };
+
+  if(isLower){
+    items.reset = !!d.reset;
+    items.primer = !!d.primer;
+
+    // Teachings integration:
+    items.burn = !!d.burn;          // burn sets before working sets
+    items.band = !!d.band;          // glute band / knees out
+    items.bridgeBurnout = !!d.bridgeBurnout; // banded bridge burnout set
+    items.cues = !!d.cues;          // posterior tilt + knees out cues locked
+  }else{
+    // on non-lower days, track the single-leg RDL burn sets rule
+    items.rdlBurn = !!d.rdlBurn;
+    // also track bloodflow cardio (optional but encouraged)
+    items.cardio = !!d.cardio;
+  }
+
+  const total = Object.keys(items).length;
+  const done  = Object.values(items).filter(Boolean).length;
+  return { pct: Math.round((done/total)*100), items, isLower };
 }
 
-// ============ COMPUTED ============
-function getAllDays() {
-    const days = [];
-    for (let i = 0; i < 70; i++) {
-        const d = addDays(START, i);
-        days.push({ date: d, iso: isoDate(d), dayNum: i + 1 });
-    }
-    return days;
+function getConnCounts(){
+  const counts = { red:0, yellow:0, green:0, sparkles:0 };
+  Object.entries(state.days).forEach(([iso,d])=>{
+    if(d.conn && getType(iso).type.startsWith('lower-')) counts[d.conn] = (counts[d.conn]||0) + 1;
+  });
+  return counts;
 }
 
-function getCompletion(iso) {
-    const d = state.days[iso] || {};
-    const type = getType(iso);
-    const isLower = type.type.startsWith('lower-');
-    const items = {
-        workout: !!d.done,
-        protein: (d.protein || 0) >= state.settings.proteinGoal,
-        water: (d.water || 0) >= state.settings.waterGoal,
-        flex: !!(d.flexL || d.flexR || d.flexM),
-    };
-    if (isLower) {
-        items.reset = !!d.reset;
-        items.primer = !!d.primer;
-    }
-    const total = Object.keys(items).length;
-    const done = Object.values(items).filter(Boolean).length;
-    return { pct: Math.round((done / total) * 100), items, isLower };
+function getLastValues(){
+  const sorted = Object.entries(state.days).sort((a,b)=>b[0].localeCompare(a[0]));
+  const pick = (key)=> sorted.find(([k,v])=>v[key])?.[1]?.[key] ?? '';
+  return {
+    protein: pick('protein'),
+    water: pick('water'),
+    flexL: pick('flexL'),
+    flexR: pick('flexR'),
+    flexM: pick('flexM'),
+    htWt:  pick('htWt'),
+    htReps:pick('htReps'),
+  };
 }
 
-function getConnCounts() {
-    const counts = { red: 0, yellow: 0, green: 0, sparkles: 0 };
-    Object.entries(state.days).forEach(([iso, d]) => {
-        if (d.conn && getType(iso).type.startsWith('lower-')) counts[d.conn]++;
-    });
-    return counts;
+function projectionScore(){
+  // Simple “3D” index (you can refine later):
+  // roundness + protrusion weighted, lift is “maintain”
+  const lastScan = state.scans.length ? state.scans[state.scans.length-1] : null;
+  const r = lastScan?.roundness ?? state.baseline.roundness;
+  const p = lastScan?.protrusion ?? state.baseline.protrusion;
+  // map into 0-100
+  return clamp(Math.round((r*0.55) + (p*0.45)), 0, 100);
 }
 
-function getLastValues() {
-    const sorted = Object.entries(state.days).sort((a, b) => b[0].localeCompare(a[0]));
-    return {
-        protein: sorted.find(([k, v]) => v.protein)?.[1]?.protein || '',
-        water: sorted.find(([k, v]) => v.water)?.[1]?.water || '',
-        flexL: sorted.find(([k, v]) => v.flexL)?.[1]?.flexL || '',
-        flexR: sorted.find(([k, v]) => v.flexR)?.[1]?.flexR || '',
-        flexM: sorted.find(([k, v]) => v.flexM)?.[1]?.flexM || '',
-        htWt: sorted.find(([k, v]) => v.htWt)?.[1]?.htWt || '',
-        htReps: sorted.find(([k, v]) => v.htReps)?.[1]?.htReps || '',
-    };
+/* =========================
+   RENDER
+========================= */
+function render(){
+  const todayISO = isoDate(new Date());
+  const currentDayNum = clamp(dayDiff(START, todayISO)+1, 1, 70);
+  const phase = getPhase(currentDayNum);
+  const cycle = cycleMeta(state.settings.cycle);
+
+  const completedDays = Object.values(state.days).filter(d=>d.done).length;
+  const progPct = Math.round((currentDayNum/70)*100);
+  const circumference = 2*Math.PI*33;
+  const todayType = getType(todayISO);
+  const todayComp = getCompletion(todayISO);
+
+  const daysToGoal = clamp(dayDiff(todayISO, isoDate(END)), 0, 9999);
+  const cardioThisWeek = weeklyCardioCount(todayISO);
+
+  document.getElementById('app').innerHTML = `
+    <div class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">2026 Vision · Body + Life</div>
+        <h1 class="serif">MIAMI READY</h1>
+        <div class="hero-sub">
+          Jan 11 → Mar 21, 2026 · Day ${currentDayNum}/70 · <strong>${daysToGoal}</strong> days to 3D projection
+        </div>
+        <div class="chip-row">
+          <span class="chip soft"><span class="dot"></span>${cycle.icon} ${cycle.label}</span>
+          <span class="chip"><span class="dot"></span>PHASE: ${phase.name}</span>
+          <span class="chip burg"><span class="dot"></span>LOGGED: ${completedDays}</span>
+          <span class="chip gold"><span class="dot"></span>CARDIO: ${cardioThisWeek}/${TEACHINGS.cardioTargetPerWeek} this week</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab ${view==='today'?'active':''}" onclick="setView('today')">Today</button>
+      <button class="tab ${view==='calendar'?'active':''}" onclick="setView('calendar')">Calendar</button>
+      <button class="tab ${view==='progress'?'active':''}" onclick="setView('progress')">Progress</button>
+      <button class="tab ${view==='method'?'active':''}" onclick="setView('method')">Method</button>
+      <button class="tab ${view==='settings'?'active':''}" onclick="setView('settings')">Settings</button>
+    </div>
+
+    <div class="wrap">
+      ${renderTopCard(todayISO, todayType, todayComp, progPct, circumference)}
+      ${renderView()}
+      <div class="footer">
+        <div class="brand">2026 Vision Board Body</div>
+        <div>Data saves locally · Goal: visible 3D glute growth by Mar 21, 2026</div>
+      </div>
+    </div>
+
+    ${renderModal()}
+  `;
 }
 
-// ============ RENDER ============
-function render() {
-    const today = isoDate(new Date());
-    const currentDayNum = clamp(dayDiff(START, today) + 1, 1, 70);
-    const todayType = getType(today);
-    const todayData = state.days[today] || {};
-    const todayComp = getCompletion(today);
-    const cycle = cycleMeta(state.settings.cycle);
-    const phase = getPhase(currentDayNum);
-    const completedDays = Object.values(state.days).filter(d => d.done).length;
-    const connCounts = getConnCounts();
-    const progPct = Math.round((currentDayNum / 70) * 100);
-    const circumference = 2 * Math.PI * 22;
-    
-    const app = document.getElementById('app');
-    app.innerHTML = `
-        <!-- Header -->
-        <div class="header">
-            <div class="header-inner">
-                <div class="header-brand"><span>🍑</span><small>MIAMI READY</small></div>
-                <h1>70-Day Glute Transformation</h1>
-                <p>Jan 11 → Mar 21, 2026 • Day ${currentDayNum}/70</p>
-                <div class="header-badges">
-                    <span class="badge">${cycle.icon} ${cycle.label}</span>
-                    <span class="badge">✨ ${phase.name}</span>
-                    <span class="badge">✓ ${completedDays} logged</span>
-                </div>
+function renderTopCard(todayISO, todayType, todayComp, progPct, circumference){
+  const pctColor = todayComp.pct===100 ? 'rgba(31,47,45,0.98)'
+                   : todayComp.pct>=60 ? 'rgba(184,151,106,0.98)'
+                   : 'rgba(122,107,93,0.98)';
+
+  const stats = todayComp.items;
+  const statKeys = Object.keys(stats);
+
+  const labelMap = {
+    reset:'Reset', primer:'Primer', burn:'Burn', band:'Band', bridgeBurnout:'Bridges', cues:'Cues',
+    workout:'Workout', protein:'Protein', water:'Water', flex:'Stretch',
+    rdlBurn:'SL RDL', cardio:'Cardio',
+  };
+  const iconMap = {
+    reset:'⚡', primer:'🔥', burn:'🧠', band:'🩹', bridgeBurnout:'🍑', cues:'✅',
+    workout: todayType.icon, protein:'🥩', water:'💧', flex:'🧘',
+    rdlBurn:'🦵', cardio:'🏃',
+  };
+
+  return `
+    <div class="card">
+      <div class="progress-row">
+        <div>
+          <div class="pct" style="color:${pctColor}">${todayComp.pct}%</div>
+          <div class="subcap">Today’s Alignment</div>
+        </div>
+
+        <div class="ring" aria-label="program progress">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle class="bg" cx="42" cy="42" r="33"></circle>
+            <circle class="fg" cx="42" cy="42" r="33"
+              stroke-dasharray="${(progPct/100)*circumference} ${circumference}">
+            </circle>
+          </svg>
+          <div class="inner">
+            <div class="num">${progPct}%</div>
+            <div class="txt">Program</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        ${statKeys.map(k=>{
+          const done = !!stats[k];
+          return `
+            <div class="stat ${done?'done':''}">
+              <div class="icon">${done?'✓':iconMap[k]||'•'}</div>
+              <div class="label">${labelMap[k]||k}</div>
             </div>
-        </div>
-        
-        <!-- Quick Stats -->
-        <div class="quick-stats">
-            <div class="card">
-                <div class="progress-row">
-                    <div class="progress-text">
-                        <div class="pct" style="color: ${todayComp.pct === 100 ? '#059669' : todayComp.pct >= 50 ? '#d97706' : '#64748b'}">${todayComp.pct}%</div>
-                        <div class="label">Today's Progress</div>
-                    </div>
-                    <div class="progress-ring">
-                        <svg width="56" height="56" viewBox="0 0 56 56">
-                            <circle class="bg" cx="28" cy="28" r="22" />
-                            <circle class="fg" cx="28" cy="28" r="22" stroke-dasharray="${(progPct / 100) * circumference} ${circumference}" />
-                        </svg>
-                        <div class="text"><span>${progPct}%</span><span style="font-size:0.6rem;color:#64748b">Program</span></div>
-                    </div>
-                </div>
-                <div class="stats-grid">
-                    ${todayComp.isLower ? `
-                        <div class="stat-item ${todayComp.items.reset ? 'done' : ''}"><div class="icon">${todayComp.items.reset ? '✓' : '⚡'}</div><div class="label">Reset</div></div>
-                        <div class="stat-item ${todayComp.items.primer ? 'done' : ''}"><div class="icon">${todayComp.items.primer ? '✓' : '🔥'}</div><div class="label">Primer</div></div>
-                    ` : ''}
-                    <div class="stat-item ${todayComp.items.workout ? 'done' : ''}"><div class="icon">${todayComp.items.workout ? '✓' : todayType.icon}</div><div class="label">Workout</div></div>
-                    <div class="stat-item ${todayComp.items.protein ? 'done' : ''}"><div class="icon">${todayComp.items.protein ? '✓' : '🥩'}</div><div class="label">Protein</div></div>
-                    <div class="stat-item ${todayComp.items.water ? 'done' : ''}"><div class="icon">${todayComp.items.water ? '✓' : '💧'}</div><div class="label">Water</div></div>
-                    <div class="stat-item ${todayComp.items.flex ? 'done' : ''}"><div class="icon">${todayComp.items.flex ? '✓' : '🧘'}</div><div class="label">Stretch</div></div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab ${view === 'today' ? 'active' : ''}" onclick="setView('today')">Today</button>
-            <button class="tab ${view === 'calendar' ? 'active' : ''}" onclick="setView('calendar')">Calendar</button>
-            <button class="tab ${view === 'progress' ? 'active' : ''}" onclick="setView('progress')">Progress</button>
-            <button class="tab ${view === 'method' ? 'active' : ''}" onclick="setView('method')">Method</button>
-            <button class="tab ${view === 'settings' ? 'active' : ''}" onclick="setView('settings')">Settings</button>
-        </div>
-        
-        <!-- Content -->
-        <div class="content">
-            ${renderView()}
-        </div>
-        
-        <!-- Modal -->
-        ${renderModal()}
-        
-        <div class="footer">🍑 Miami Ready • March 21, 2026 • Data saves to localStorage</div>
-    `;
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
 }
 
-function renderView() {
-    if (view === 'today') return renderToday();
-    if (view === 'calendar') return renderCalendar();
-    if (view === 'progress') return renderProgress();
-    if (view === 'method') return renderMethod();
-    if (view === 'settings') return renderSettings();
-    return '';
+function renderView(){
+  if(view==='today') return renderToday();
+  if(view==='calendar') return renderCalendar();
+  if(view==='progress') return renderProgress();
+  if(view==='method') return renderMethod();
+  if(view==='settings') return renderSettings();
+  return '';
 }
 
-function renderToday() {
-    const today = isoDate(new Date());
-    const type = getType(today);
-    const data = state.days[today] || {};
-    const isLower = type.type.startsWith('lower-');
-    const template = TEMPLATES[type.type];
-    const connCounts = getConnCounts();
-    
-    return `
-        <div class="card">
-            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-                <div>
-                    <div style="font-size:1.1rem;font-weight:700">${fmtLong(today)}</div>
-                    <div style="font-size:0.8rem;color:var(--slate)">Day ${clamp(dayDiff(START, today) + 1, 1, 70)} • ${type.label}</div>
-                </div>
-                <span class="badge ${data.done ? 'badge-good' : 'badge-warn'}">${data.done ? '✓ Done' : 'Not logged'}</span>
-            </div>
-            <p style="font-size:0.85rem;color:var(--slate);margin-bottom:16px">${type.focus}</p>
-            
-            ${isLower ? `
-                <div class="info-card amber">
-                    <div class="title">⚡ Right-Side Reset (3 min)</div>
-                    <div class="text">${RESET.map(s => '• ' + s).join('<br>')}</div>
-                </div>
-                <div class="info-card teal">
-                    <div class="title">🔥 Glute Primer (2 min)</div>
-                    <div class="text">${PRIMER.map(s => '• ' + s).join('<br>')}</div>
-                </div>
-                <div class="info-card burgundy">
-                    <div class="title" style="color:var(--burgundy)">🧠 Every Rep Cue</div>
-                    <div class="text">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong></div>
-                </div>
-                
-                <div style="margin-top:12px">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                        <span style="font-weight:600;font-size:0.875rem">Today's Work</span>
-                        <span class="badge badge-burgundy">${template.tag}</span>
-                    </div>
-                    <div class="exercise-list">
-                        ${template.exercises.map(ex => `
-                            <div class="exercise-item">
-                                <span class="name">${ex.name}</span>
-                                <span class="sets">${ex.sets}${ex.note ? ' • ' + ex.note : ''}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-            
-            <button class="btn btn-primary" style="margin-top:16px" onclick="openModal('${today}')">${data.done ? 'Edit Log' : 'Log Today'} →</button>
-        </div>
-        
-        <div class="card">
-            <div class="card-title">🧠 Neural Connection</div>
-            <div class="neural-grid">
-                ${CONNECTION.map(c => `
-                    <div class="neural-item">
-                        <div class="emoji">${c.emoji}</div>
-                        <div class="count">${connCounts[c.v]}</div>
-                        <div class="label">${c.label}</div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
+function renderToday(){
+  const today = isoDate(new Date());
+  const type = getType(today);
+  const data = state.days[today] || {};
+  const isLower = type.type.startsWith('lower-');
+  const template = TEMPLATES[type.type];
+  const connCounts = getConnCounts();
 
-function renderCalendar() {
-    const allDays = getAllDays();
-    const selType = getType(selectedIso);
-    const selData = state.days[selectedIso] || {};
-    const selComp = getCompletion(selectedIso);
-    const selDayNum = clamp(dayDiff(START, selectedIso) + 1, 1, 70);
-    const selPhase = getPhase(selDayNum);
-    const isLower = selType.type.startsWith('lower-');
-    const template = TEMPLATES[selType.type];
-    
-    return `
-        <div style="display:grid;gap:16px;grid-template-columns:1fr;${window.innerWidth >= 768 ? 'grid-template-columns:280px 1fr' : ''}">
-            <div class="card" style="margin-bottom:0">
-                <div class="card-title">📅 70-Day Timeline</div>
-                <div class="timeline">
-                    ${allDays.map(({ iso, dayNum }) => {
-                        const type = getType(iso);
-                        const log = state.days[iso];
-                        const comp = getCompletion(iso);
-                        const conn = log?.conn ? connMeta(log.conn) : null;
-                        return `
-                            <div class="timeline-item ${iso === selectedIso ? 'selected' : ''}" onclick="selectDay('${iso}')">
-                                <div>
-                                    <span class="main">${fmtShort(iso)}</span>
-                                    <span class="sub">${type.label}</span>
-                                </div>
-                                <div class="right">
-                                    ${conn ? `<span>${conn.emoji}</span>` : ''}
-                                    ${log?.done ? '<span class="check">✓</span>' : ''}
-                                    ${!log?.done && comp.pct > 0 ? `<span style="font-size:0.7rem;opacity:0.6">${comp.pct}%</span>` : ''}
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-            
-            <div class="card" style="margin-bottom:0">
-                <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-                    <div>
-                        <div style="font-size:1.1rem;font-weight:700">${fmtLong(selectedIso)}</div>
-                        <div style="font-size:0.8rem;color:var(--slate)">Day ${selDayNum} • ${selType.label}</div>
-                    </div>
-                    <span class="badge ${selData.done ? 'badge-good' : 'badge-warn'}">${selData.done ? '✓ Done' : selComp.pct + '%'}</span>
-                </div>
-                <p style="font-size:0.85rem;color:var(--slate);margin-bottom:12px">${selType.focus}</p>
-                
-                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px">
-                    <span class="badge badge-neutral">${selPhase.name}</span>
-                    ${selData.conn ? `<span class="badge ${['green','sparkles'].includes(selData.conn) ? 'badge-good' : 'badge-warn'}">${connMeta(selData.conn).emoji} ${connMeta(selData.conn).label}</span>` : ''}
-                </div>
-                
-                ${isLower && template ? `
-                    <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr;margin-bottom:16px">
-                        <div style="padding:12px;background:#f8fafc;border-radius:12px">
-                            <div style="font-weight:600;font-size:0.8rem;margin-bottom:8px">Pre-workout</div>
-                            <div style="font-size:0.7rem;color:var(--slate)">${[...RESET, ...PRIMER].map(s => '• ' + s.split('—')[0]).join('<br>')}</div>
-                        </div>
-                        <div style="padding:12px;border:1px solid #e2e8f0;border-radius:12px">
-                            <div style="font-weight:600;font-size:0.8rem;margin-bottom:8px">${template.tag}</div>
-                            <div style="font-size:0.7rem;color:var(--slate)">${template.exercises.map(e => '• ' + e.name).join('<br>')}</div>
-                        </div>
-                    </div>
-                ` : ''}
-                
-                <button class="btn btn-primary" onclick="openModal('${selectedIso}')">Log / Edit →</button>
-            </div>
-        </div>
-    `;
-}
+  const cardioThisWeek = weeklyCardioCount(today);
 
-function renderProgress() {
-    const lastScan = state.scans.length ? state.scans[state.scans.length - 1] : null;
-    const currentR = lastScan?.roundness ?? state.baseline.roundness;
-    const currentP = lastScan?.protrusion ?? state.baseline.protrusion;
-    const proteinDays = Object.values(state.days).filter(d => d.protein);
-    const waterDays = Object.values(state.days).filter(d => d.water);
-    const avgProtein = proteinDays.length ? Math.round(proteinDays.reduce((a, d) => a + d.protein, 0) / proteinDays.length) : 0;
-    const avgWater = waterDays.length ? Math.round(waterDays.reduce((a, d) => a + d.water, 0) / waterDays.length) : 0;
-    
-    return `
-        <div class="card">
-            <div class="card-title">📈 Booty Metrics</div>
-            <div class="chart-container">Chart visualization coming soon</div>
-            <div class="metric-grid">
-                <div class="metric-card">
-                    <div class="label">Roundness</div>
-                    <div class="value">${currentR}%</div>
-                    <div class="sub">Baseline: ${state.baseline.roundness}% • Goal: 45-55%</div>
-                    <div class="bar"><div class="bar-fill burgundy" style="width:${currentR}%"></div></div>
-                </div>
-                <div class="metric-card">
-                    <div class="label">Protrusion</div>
-                    <div class="value">${currentP}%</div>
-                    <div class="sub">Baseline: ${state.baseline.protrusion}% • Goal: 35-45%</div>
-                    <div class="bar"><div class="bar-fill teal" style="width:${currentP}%"></div></div>
-                </div>
-                <div class="metric-card">
-                    <div class="label">Lift</div>
-                    <div class="value">${state.baseline.lift}%</div>
-                    <div class="sub" style="color:#059669">ELITE — Maintain</div>
-                    <div class="bar"><div class="bar-fill green" style="width:${state.baseline.lift}%"></div></div>
-                </div>
-            </div>
+  return `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+        <div>
+          <div class="serif" style="font-size:1.6rem;font-weight:800">${fmtLong(today)}</div>
+          <div class="mini">Day ${clamp(dayDiff(START,today)+1,1,70)} · ${type.label} · ${type.focus}</div>
         </div>
-        
-        <div class="card">
-            <div class="card-title">➕ Add Zozofit Scan</div>
-            <div class="form-row-3" style="margin-bottom:12px">
-                <input type="date" class="form-input" id="scanDate" value="${isoDate(new Date())}">
-                <input type="number" class="form-input" id="scanR" placeholder="Roundness %">
-                <input type="number" class="form-input" id="scanP" placeholder="Protrusion %">
-            </div>
-            <button class="btn btn-secondary" onclick="addScan()">Add Scan</button>
-            
-            ${state.scans.length ? `
-                <div class="section-title">Scan History</div>
-                <div class="scan-list">
-                    ${state.scans.slice().reverse().map(s => `
-                        <div class="scan-item">
-                            <div><strong>${s.date}</strong> — R: ${s.roundness}% • P: ${s.protrusion}%</div>
-                            <button onclick="deleteScan('${s.date}')">🗑</button>
-                        </div>
-                    `).join('')}
-                </div>
-            ` : ''}
-        </div>
-        
-        <div class="card">
-            <div class="card-title">🥩 Nutrition Averages</div>
-            <div class="form-row">
-                <div class="metric-card">
-                    <div class="label">Avg Protein</div>
-                    <div class="value">${avgProtein}g</div>
-                    <div class="sub">/ ${state.settings.proteinGoal}g goal</div>
-                </div>
-                <div class="metric-card">
-                    <div class="label">Avg Water</div>
-                    <div class="value">${avgWater}oz</div>
-                    <div class="sub">/ ${state.settings.waterGoal}oz goal</div>
-                </div>
-            </div>
-        </div>
-    `;
-}
+        <span class="chip ${data.done ? '':'gold'}">${data.done?'Logged':'Log it today'}</span>
+      </div>
 
-function renderMethod() {
-    return `
-        <div class="method-section">
-            <h3>🎯 The Diagnosis</h3>
-            <p style="font-size:1.1rem;font-weight:700;color:var(--burgundy)">Your butt is UP but not OUT or AROUND.</p>
-            <ul>
-                <li><strong>Lift 83% = ELITE.</strong> Don't chase more lift—maintain it.</li>
-                <li><strong>Roundness 32% = needs work.</strong> Upper/outer glute underdeveloped.</li>
-                <li><strong>Protrusion 25% = needs work.</strong> Flat from side, no backward projection.</li>
-            </ul>
-            <p><strong>The fix:</strong> Fill out SIDEWAYS and BACKWARD. Don't cut.</p>
+      ${!isLower ? `
+        <div class="info warn">
+          <div class="title">🏃 Bloodflow rule (teachings)</div>
+          <div class="text">Get <strong>${TEACHINGS.cardioTargetPerWeek} cardio sessions/week</strong> so your body circulates blood to your glutes better. You’re at <strong>${cardioThisWeek}/${TEACHINGS.cardioTargetPerWeek}</strong> this week.</div>
         </div>
-        
-        <div class="method-section">
-            <h3>🦴 Posture Fix</h3>
-            <p>Your posture score (87/100) is misleading. Straight ≠ supported. When glutes don't push backward, your lumbar spine does.</p>
-            <div class="info-card burgundy">
-                <div class="title" style="color:var(--burgundy)">Every Rep Cue</div>
-                <div class="text">Exhale → posterior tilt → squeeze → <strong>hold 2 sec</strong><br><small>This teaches: "Glutes hold me, not my spine."</small></div>
-            </div>
+
+        <div class="info accent">
+          <div class="title">🦵 Rest-day activation (teachings)</div>
+          <div class="text"><strong>Single-leg RDL burn sets</strong> (2 sets each leg) on non-lower days to keep neural pathways “on.” Track it below when you do it.</div>
         </div>
-        
-        <div class="method-section">
-            <h3>🍑 3D Glute Split</h3>
-            ${Object.entries(TEMPLATES).map(([key, t]) => `
-                <div class="card" style="padding:12px;margin-bottom:8px">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-                        <strong>${key.replace('lower-', 'Lower ').toUpperCase()}: ${t.tag}</strong>
-                        <span class="badge badge-neutral">${t.target}</span>
-                    </div>
-                    <p style="font-size:0.8rem;color:var(--slate);margin-bottom:8px"><strong>Why:</strong> ${t.why}</p>
-                    <div style="font-size:0.75rem;color:var(--slate)">${t.exercises.map(e => e.name).join(' • ')}</div>
-                </div>
+      ` : `
+        <div class="info accent">
+          <div class="title">🧠 Activation protocol (teachings)</div>
+          <div class="text">
+            <strong>Burn set → Working set</strong> (no weight first).<br/>
+            <strong>Bands + knees out</strong> (abduction = shelf).<br/>
+            <strong>Exhale → posterior tilt → squeeze → 2s hold.</strong>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="title">⚡ Right-Side Reset</div>
+          <div class="text">${RESET.join(' · ')}</div>
+        </div>
+
+        <div class="info">
+          <div class="title">🔥 Glute Primer</div>
+          <div class="text">${PRIMER.join(' · ')}</div>
+        </div>
+
+        ${template ? `
+          <div class="divider"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="serif" style="font-size:1.2rem;font-weight:800">Today’s Work</div>
+            <span class="chip">${template.tag}</span>
+          </div>
+          <div class="list">
+            ${template.exercises.map(ex=>`
+              <div class="row">
+                <div class="name">${ex.name}</div>
+                <div class="meta">${ex.sets}${ex.note?' · '+ex.note:''}</div>
+              </div>
             `).join('')}
-        </div>
-        
-        <div class="method-section">
-            <h3>✨ 10-Week Phases</h3>
-            ${PHASES.map(p => `
-                <div class="card" style="padding:12px;margin-bottom:8px">
-                    <div style="display:flex;justify-content:space-between;align-items:center">
-                        <strong>${p.name}</strong>
-                        <span class="badge badge-neutral">Weeks ${p.weeks}</span>
-                    </div>
-                    <p style="font-size:0.8rem;color:var(--slate);margin-top:4px">${p.desc} Expect: ${p.expect}</p>
-                </div>
-            `).join('')}
-        </div>
-        
-        <div class="method-section">
-            <h3>🧠 Connection Key</h3>
-            ${CONNECTION.map(c => `
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                    <span style="font-size:1.5rem">${c.emoji}</span>
-                    <div>
-                        <div style="font-weight:600;font-size:0.875rem">${c.label}</div>
-                        <div style="font-size:0.75rem;color:var(--slate)">${c.hint}</div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <div class="method-section">
-            <h3>🌸 Cycle Syncing</h3>
-            ${CYCLES.map(c => `
-                <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-                    <span style="font-size:1.5rem">${c.icon}</span>
-                    <div>
-                        <div style="font-weight:600;font-size:0.875rem">${c.label}</div>
-                        <div style="font-size:0.75rem;color:var(--slate)">${c.note}</div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-        
-        <div class="method-section">
-            <h3>👤 Your Profile</h3>
-            <ul>
-                <li><strong>Body Type:</strong> Androgenic (ACTN3 sprinter gene = fast-twitch)</li>
-                <li><strong>Training:</strong> Heavy load > volume. 6-10 reps for main lifts.</li>
-                <li><strong>Imbalance:</strong> Right-side weakness from rotated pelvis</li>
-                <li><strong>Underdeveloped:</strong> Glute medius (causes hip dips)</li>
-                <li><strong>Baseline WHR:</strong> 0.76 (excellent foundation)</li>
-            </ul>
-        </div>
-    `;
+          </div>
+        `:''}
+      `}
+
+      <div style="margin-top:14px;">
+        <button class="btn primary" onclick="openModal('${today}')">${data.done ? 'Edit Log' : 'Log Today'} →</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧠 Neural Connection</div>
+      <div class="mini" style="margin-bottom:12px;">You earn load by connection. The goal is to live in 😊 / 🔥 by March 21.</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+        ${CONNECTION.map(c=>`
+          <div class="stat" style="padding:14px 10px;">
+            <div class="icon" style="font-size:1.7rem">${c.emoji}</div>
+            <div class="serif" style="font-size:1.5rem;font-weight:800">${connCounts[c.v]||0}</div>
+            <div class="label">${c.label}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
 }
 
-function renderSettings() {
-    const cycle = cycleMeta(state.settings.cycle);
-    return `
-        <div class="card">
-            <div class="card-title">⚙️ Settings</div>
-            <div class="form-group">
-                <label class="form-label">Cycle Phase</label>
-                <select class="form-input" onchange="updateSetting('cycle', this.value)">
-                    ${CYCLES.map(c => `<option value="${c.v}" ${state.settings.cycle === c.v ? 'selected' : ''}>${c.icon} ${c.label}</option>`).join('')}
-                </select>
-                <div style="font-size:0.75rem;color:var(--slate);margin-top:4px">${cycle.note}</div>
+function renderCalendar(){
+  const allDays = getAllDays();
+  const selType = getType(selectedIso);
+  const selData = state.days[selectedIso] || {};
+  const selComp = getCompletion(selectedIso);
+  const selDayNum = clamp(dayDiff(START, selectedIso)+1,1,70);
+
+  return `
+    <div class="card">
+      <div class="card-title">📅 Timeline</div>
+      <div class="timeline">
+        ${allDays.map(({iso,dayNum})=>{
+          const type = getType(iso);
+          const log  = state.days[iso];
+          const comp = getCompletion(iso);
+          const conn = log?.conn ? connMeta(log.conn) : null;
+
+          return `
+            <div class="titem ${iso===selectedIso?'selected':''}" onclick="selectDay('${iso}')">
+              <div>
+                <div style="font-weight:900">${fmtShort(iso)} <span class="sub">${type.label}</span></div>
+                <div class="mini" style="opacity:${iso===selectedIso?0.75:0.95}">Day ${dayNum} · ${type.focus}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                ${conn ? `<div style="font-size:1.2rem">${conn.emoji}</div>`:''}
+                ${log?.done ? `<div style="font-weight:900">✓</div>` : comp.pct>0 ? `<div class="mini">${comp.pct}%</div>` : ``}
+              </div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Protein Goal (g)</label>
-                    <input type="number" class="form-input" value="${state.settings.proteinGoal}" onchange="updateSetting('proteinGoal', parseInt(this.value))">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Water Goal (oz)</label>
-                    <input type="number" class="form-input" value="${state.settings.waterGoal}" onchange="updateSetting('waterGoal', parseInt(this.value))">
-                </div>
-            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+        <div>
+          <div class="serif" style="font-size:1.45rem;font-weight:900">${fmtLong(selectedIso)}</div>
+          <div class="mini">Day ${selDayNum} · ${selType.label}</div>
         </div>
-        
-        <div class="card">
-            <div class="card-title">💾 Data</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <button class="btn btn-secondary" style="flex:1" onclick="exportData()">Export Backup</button>
-                <label class="btn btn-secondary" style="flex:1;cursor:pointer">
-                    Import Backup
-                    <input type="file" accept=".json" style="display:none" onchange="importData(event)">
-                </label>
-            </div>
-        </div>
-        
-        <div class="card">
-            <div class="card-title" style="color:#ef4444">🗑️ Reset</div>
-            <p style="font-size:0.85rem;color:var(--slate);margin-bottom:12px">This will delete all your data. Export a backup first!</p>
-            <button class="btn btn-secondary" style="border:1px solid #fecaca;color:#ef4444" onclick="resetData()">Reset All Data</button>
-        </div>
-    `;
+        <span class="chip ${selData.done?'':'gold'}">${selData.done?'Logged': selComp.pct+'%'}</span>
+      </div>
+
+      <div style="margin-top:12px;">
+        <button class="btn primary" onclick="openModal('${selectedIso}')">Log / Edit →</button>
+      </div>
+    </div>
+  `;
 }
 
-function renderModal() {
-    if (!modalOpen) return '<div class="modal-overlay"></div>';
-    
-    const type = getType(selectedIso);
-    const data = state.days[selectedIso] || {};
-    const isLower = type.type.startsWith('lower-');
-    const cycle = cycleMeta(state.settings.cycle);
-    const dayNum = clamp(dayDiff(START, selectedIso) + 1, 1, 70);
-    const last = getLastValues();
-    
-    return `
-        <div class="modal-overlay active" onclick="closeModal()">
-            <div class="modal" onclick="event.stopPropagation()">
-                <div class="modal-header">
-                    <div>
-                        <h2>${fmtLong(selectedIso)}</h2>
-                        <p>Day ${dayNum} • ${type.label}</p>
-                    </div>
-                    <button class="modal-close" onclick="closeModal()">✕</button>
-                </div>
-                
-                <div class="modal-body">
-                    <!-- Cycle -->
-                    <div class="info-card" style="background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:16px">
-                        <div style="font-size:0.75rem;color:var(--slate)">${cycle.icon} ${cycle.label} Phase</div>
-                        <div style="font-size:0.85rem">${cycle.note}</div>
-                    </div>
-                    
-                    ${isLower ? `
-                        <!-- Pre-workout -->
-                        <div class="section-title">Pre-Workout (5 min)</div>
-                        <div class="checkbox-item ${data.reset ? 'checked' : ''}" onclick="toggleField('${selectedIso}', 'reset')">
-                            <div class="checkbox-box">${data.reset ? '✓' : ''}</div>
-                            <div class="checkbox-label">⚡ Right-Side Reset (3 min)</div>
-                        </div>
-                        <div class="checkbox-item ${data.primer ? 'checked' : ''}" onclick="toggleField('${selectedIso}', 'primer')">
-                            <div class="checkbox-box">${data.primer ? '✓' : ''}</div>
-                            <div class="checkbox-label">🔥 Glute Primer (2 min)</div>
-                        </div>
-                        
-                        <!-- Top Sets -->
-                        <div class="section-title">Top Sets (6-10 reps)</div>
-                        <div class="form-row">
-                            <div class="form-group" style="margin-bottom:0">
-                                <label class="form-label">Hip Thrust (lbs)</label>
-                                <input type="number" class="form-input" id="htWt" value="${data.htWt || ''}" placeholder="${last.htWt || 'weight'}">
-                            </div>
-                            <div class="form-group" style="margin-bottom:0">
-                                <label class="form-label">Reps</label>
-                                <input type="number" class="form-input" id="htReps" value="${data.htReps || ''}" placeholder="${last.htReps || '6-10'}">
-                            </div>
-                        </div>
-                        
-                        <!-- Connection -->
-                        <div class="section-title">Connection</div>
-                        <div class="conn-grid">
-                            ${CONNECTION.map(c => `
-                                <button class="conn-btn ${data.conn === c.v ? 'selected' : ''}" onclick="setConn('${selectedIso}', '${c.v}')">
-                                    <span class="emoji">${c.emoji}</span>
-                                    <span class="label">${c.label}</span>
-                                </button>
-                            `).join('')}
-                        </div>
-                        ${data.conn ? `<p style="font-size:0.75rem;color:var(--slate);margin-top:8px">${connMeta(data.conn).hint}</p>` : ''}
-                    ` : `
-                        <!-- Tempo -->
-                        <div class="section-title">Tempo Class</div>
-                        <div class="tempo-grid">
-                            ${['Challenge', 'Lower', 'Full Body', 'Upper', 'Cardio', 'Stretch'].map(t => `
-                                <button class="tempo-btn ${data.tempo === t ? 'selected' : ''}" onclick="setTempo('${selectedIso}', '${t}')">${t}</button>
-                            `).join('')}
-                        </div>
-                        <div class="form-group" style="margin-top:12px">
-                            <label class="form-label">Duration (min)</label>
-                            <input type="number" class="form-input" id="tempoDur" value="${data.tempoDur || ''}" placeholder="30">
-                        </div>
-                    `}
-                    
-                    <!-- Nutrition -->
-                    <div class="section-title">Nutrition</div>
-                    <div class="form-group">
-                        <label class="form-label">Protein (g)</label>
-                        <div style="display:flex;gap:6px;margin-bottom:8px">
-                            <button class="quick-btn" onclick="addProtein(30)">+30</button>
-                            <button class="quick-btn" onclick="addProtein(20)">+20</button>
-                            <button class="quick-btn" onclick="addProtein(10)">+10</button>
-                            <button class="quick-btn" onclick="document.getElementById('protein').value=0">Reset</button>
-                        </div>
-                        <input type="number" class="form-input" id="protein" value="${data.protein || ''}" placeholder="${state.settings.proteinGoal}g goal">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Water (oz)</label>
-                        <div style="display:flex;gap:6px;margin-bottom:8px">
-                            <button class="quick-btn" onclick="addWater(20)">+20</button>
-                            <button class="quick-btn" onclick="addWater(10)">+10</button>
-                            <button class="quick-btn" onclick="addWater(5)">+5</button>
-                            <button class="quick-btn" onclick="document.getElementById('water').value=0">Reset</button>
-                        </div>
-                        <input type="number" class="form-input" id="water" value="${data.water || ''}" placeholder="${state.settings.waterGoal}oz goal">
-                    </div>
-                    
-                    <!-- Flexibility -->
-                    <div class="section-title">Splits (inches from floor)</div>
-                    <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">
-                        ${[0, 2, 4, 6, 8, 10].map(v => `<button class="quick-btn" onclick="setAllFlex(${v})">${v}"</button>`).join('')}
-                    </div>
-                    <div class="form-row-3">
-                        <div class="form-group" style="margin-bottom:0">
-                            <label class="form-label">Front L</label>
-                            <input type="number" class="form-input" id="flexL" value="${data.flexL || ''}" placeholder="${last.flexL || '—'}" step="0.5">
-                        </div>
-                        <div class="form-group" style="margin-bottom:0">
-                            <label class="form-label">Front R</label>
-                            <input type="number" class="form-input" id="flexR" value="${data.flexR || ''}" placeholder="${last.flexR || '—'}" step="0.5">
-                        </div>
-                        <div class="form-group" style="margin-bottom:0">
-                            <label class="form-label">Middle</label>
-                            <input type="number" class="form-input" id="flexM" value="${data.flexM || ''}" placeholder="${last.flexM || '—'}" step="0.5">
-                        </div>
-                    </div>
-                    
-                    <!-- Notes -->
-                    <div class="section-title">Notes</div>
-                    <textarea class="form-input" id="notes" rows="2" placeholder="Form cues, wins, observations...">${data.notes || ''}</textarea>
-                </div>
-                
-                <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="saveModal()">${data.done ? 'Update' : 'Complete'} ✓</button>
-                </div>
-            </div>
+function renderProgress(){
+  const lastScan = state.scans.length ? state.scans[state.scans.length-1] : null;
+  const r = lastScan?.roundness ?? state.baseline.roundness;
+  const p = lastScan?.protrusion ?? state.baseline.protrusion;
+  const l = lastScan?.lift ?? state.baseline.lift;
+  const score = projectionScore();
+
+  return `
+    <div class="card">
+      <div class="card-title">📈 3D Glute Growth</div>
+      <div class="mini" style="margin-bottom:12px;">We’re tracking what creates the “OUT + AROUND” look: roundness + protrusion.</div>
+
+      <div class="grid3">
+        <div>
+          <div class="label">Roundness</div>
+          <div class="serif" style="font-size:2.4rem;font-weight:900">${r}%</div>
+          <div class="mini">Goal: 45–55%</div>
         </div>
-    `;
+        <div>
+          <div class="label">Protrusion</div>
+          <div class="serif" style="font-size:2.4rem;font-weight:900">${p}%</div>
+          <div class="mini">Goal: 35–45%</div>
+        </div>
+        <div>
+          <div class="label">3D Projection</div>
+          <div class="serif" style="font-size:2.4rem;font-weight:900">${score}</div>
+          <div class="mini">Simple index (upgrade later)</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card dark" style="margin-bottom:0;">
+        <div class="card-title" style="color:var(--linen);margin-bottom:10px;">The rule</div>
+        <div class="mini" style="color:rgba(246,238,230,0.80)">
+          <strong>Connection earns load.</strong><br/>
+          Burn set → working set, bands + knees out, posterior tilt + squeeze. Cardio ${TEACHINGS.cardioTargetPerWeek}×/week.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">➕ Add Zozofit Scan</div>
+      <div class="grid3" style="margin-bottom:12px;">
+        <input type="date" class="input" id="scanDate" value="${isoDate(new Date())}">
+        <input type="number" class="input" id="scanR" placeholder="Roundness">
+        <input type="number" class="input" id="scanP" placeholder="Protrusion">
+      </div>
+      <button class="btn secondary" onclick="addScan()">Add Scan</button>
+
+      ${state.scans.length ? `
+        <div class="divider"></div>
+        <div class="list">
+          ${state.scans.slice().reverse().map(s=>`
+            <div class="row">
+              <div><strong>${s.date}</strong> <span class="mini">· R ${s.roundness}% · P ${s.protrusion}%</span></div>
+              <button style="border:none;background:transparent;cursor:pointer;font-size:1.1rem" onclick="deleteScan('${s.date}')">🗑</button>
+            </div>
+          `).join('')}
+        </div>
+      `:''}
+    </div>
+  `;
 }
 
-// ============ ACTIONS ============
-window.setView = v => { view = v; render(); };
-window.selectDay = iso => { selectedIso = iso; render(); };
-window.openModal = iso => { selectedIso = iso; modalOpen = true; render(); };
-window.closeModal = () => { modalOpen = false; render(); };
+function renderMethod(){
+  const today = isoDate(new Date());
+  const dayNum = clamp(dayDiff(START,today)+1,1,70);
+  const phase = getPhase(dayNum);
+
+  return `
+    <div class="card dark">
+      <div class="eyebrow" style="margin-bottom:8px;">Your 2026 method</div>
+      <div class="serif" style="font-size:1.8rem;font-weight:800;margin-bottom:10px;color:var(--linen);">
+        3D glute growth by March 21, 2026
+      </div>
+      <div class="mini" style="color:rgba(246,238,230,0.78);line-height:1.6;">
+        <strong>Cardio ${TEACHINGS.cardioTargetPerWeek}×/week</strong> for bloodflow.<br/>
+        <strong>Burn sets</strong> before working sets to teach your brain.<br/>
+        <strong>Rest-day single-leg RDL burn sets</strong> keep pathways active.<br/>
+        <strong>Bands + knees out</strong> = shelf (glute medius).<br/>
+        <strong>Posterior tilt</strong> + 2s hold = maximum squeeze.
+      </div>
+      <div style="margin-top:12px;">
+        <span class="chip gold"><span class="dot"></span>YOU ARE IN: ${phase.name}</span>
+      </div>
+    </div>
+
+    ${PHASES.map(p=>`
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;">
+          <div class="serif" style="font-size:1.55rem;font-weight:900">${p.name}</div>
+          <span class="chip soft">Weeks ${p.weeks} · ${p.expect}</span>
+        </div>
+        <div class="mini" style="margin-bottom:10px;"><strong>${p.tagline}</strong></div>
+        <div class="mini" style="margin-bottom:12px;line-height:1.6;">${p.desc}</div>
+        <div class="divider"></div>
+        <div class="mini" style="font-weight:900;margin-bottom:8px;text-transform:uppercase;letter-spacing:1.2px;">Rules</div>
+        <ul style="padding-left:18px;line-height:1.7;">
+          ${p.rules.map(r=>`<li class="mini">${r}</li>`).join('')}
+        </ul>
+        <div class="divider"></div>
+        <div class="mini"><strong>End when:</strong> ${p.endWhen}</div>
+        <div class="mini" style="margin-top:6px;"><strong>Rule:</strong> ${p.rule}</div>
+      </div>
+    `).join('')}
+
+    <div class="card">
+      <div class="card-title">🧠 Connection Key</div>
+      ${CONNECTION.map(c=>`
+        <div class="row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="font-size:1.7rem">${c.emoji}</div>
+            <div>
+              <div style="font-weight:900">${c.label}</div>
+              <div class="mini">${c.hint}</div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌸 Cycle Sync</div>
+      ${CYCLES.map(c=>`
+        <div class="row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="font-size:1.55rem">${c.icon}</div>
+            <div>
+              <div style="font-weight:900">${c.label}</div>
+              <div class="mini">${c.note}</div>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderSettings(){
+  const lastSync = localStorage.getItem('miami-cloud-last-sync');
+  const cloudUrl = localStorage.getItem('miami-cloud-url') || '';
+  const cloudKey = localStorage.getItem('miami-cloud-key') || '';
+
+  return `
+    <div class="card">
+      <div class="card-title">⚙️ Settings</div>
+
+      <div style="margin-bottom:14px;">
+        <label class="label">Cycle Phase</label>
+        <select class="input" onchange="updateSetting('cycle', this.value)">
+          ${CYCLES.map(c=>`<option value="${c.v}" ${state.settings.cycle===c.v?'selected':''}>${c.icon} ${c.label}</option>`).join('')}
+        </select>
+      </div>
+
+      <div class="grid2">
+        <div>
+          <label class="label">Protein Goal (g)</label>
+          <input type="number" class="input" value="${state.settings.proteinGoal}" onchange="updateSetting('proteinGoal', parseInt(this.value||0))">
+        </div>
+        <div>
+          <label class="label">Water Goal (oz)</label>
+          <input type="number" class="input" value="${state.settings.waterGoal}" onchange="updateSetting('waterGoal', parseInt(this.value||0))">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💾 Backup</div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn secondary" style="flex:1" onclick="exportData()">Export</button>
+        <label class="btn secondary" style="flex:1;cursor:pointer;">
+          Import
+          <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">☁️ Cloud Sync</div>
+      <div class="mini" style="margin-bottom:10px;">Optional: sync to JSONbin.io (free). Same behavior as your original app.</div>
+
+      <div style="margin-bottom:12px;">
+        <label class="label">Bin ID</label>
+        <input class="input" id="cloudBinId" value="${cloudUrl.includes('jsonbin') ? (cloudUrl.split('/b/')[1]?.split('/')[0] || '') : ''}" placeholder="65a1b2c3...">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label class="label">API Key</label>
+        <input class="input" type="password" id="cloudApiKey" value="${cloudKey}" placeholder="$2a$10$...">
+      </div>
+
+      ${lastSync ? `<div class="mini" style="margin-bottom:12px;color:rgba(31,47,45,0.95)">✓ Last sync: ${new Date(lastSync).toLocaleString()}</div>` : ''}
+
+      <div style="display:flex;gap:10px;">
+        <button class="btn primary" style="flex:1" onclick="doCloudSave()">Push</button>
+        <button class="btn secondary" style="flex:1" onclick="doCloudLoad()">Pull</button>
+      </div>
+    </div>
+
+    <div class="card" style="border:2px solid rgba(114,47,55,0.25)">
+      <div class="card-title" style="color:rgba(114,47,55,0.95)">🗑 Reset</div>
+      <div class="mini" style="margin-bottom:12px;">Deletes everything. Export first.</div>
+      <button class="btn warn" onclick="resetData()">Reset All Data</button>
+    </div>
+  `;
+}
+
+/* =========================
+   MODAL
+========================= */
+function renderModal(){
+  if(!modalOpen) return `<div class="overlay"></div>`;
+
+  const type = getType(selectedIso);
+  const data = state.days[selectedIso] || {};
+  const isLower = type.type.startsWith('lower-');
+  const dayNum = clamp(dayDiff(START, selectedIso)+1,1,70);
+  const cycle = cycleMeta(state.settings.cycle);
+  const last = getLastValues();
+  const cardioThisWeek = weeklyCardioCount(selectedIso);
+
+  return `
+    <div class="overlay on" onclick="closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="mhead">
+          <div>
+            <h2>${fmtLong(selectedIso)}</h2>
+            <p>Day ${dayNum} · ${type.label}</p>
+          </div>
+          <button class="close" onclick="closeModal()">✕</button>
+        </div>
+
+        <div class="mbody">
+          <div class="info accent" style="margin-top:0;">
+            <div class="title">${cycle.icon} ${cycle.label}</div>
+            <div class="text">${cycle.note}</div>
+          </div>
+
+          ${isLower ? `
+            <div class="section">Teachings Checklist</div>
+
+            <div class="check ${data.burn?'on':''}" onclick="toggleField('${selectedIso}','burn')">
+              <div class="box">${data.burn?'✓':''}</div>
+              <div class="txt">🧠 Burn sets before working sets</div>
+            </div>
+
+            <div class="check ${data.band?'on':''}" onclick="toggleField('${selectedIso}','band')">
+              <div class="box">${data.band?'✓':''}</div>
+              <div class="txt">🩹 Glute band + knees out (abduction)</div>
+            </div>
+
+            <div class="check ${data.bridgeBurnout?'on':''}" onclick="toggleField('${selectedIso}','bridgeBurnout')">
+              <div class="box">${data.bridgeBurnout?'✓':''}</div>
+              <div class="txt">🍑 Banded glute bridge burnout set</div>
+            </div>
+
+            <div class="check ${data.cues?'on':''}" onclick="toggleField('${selectedIso}','cues')">
+              <div class="box">${data.cues?'✓':''}</div>
+              <div class="txt">✅ Posterior tilt + 2s squeeze + knees out</div>
+            </div>
+
+            <div class="section">Pre-Workout</div>
+            <div class="check ${data.reset?'on':''}" onclick="toggleField('${selectedIso}','reset')">
+              <div class="box">${data.reset?'✓':''}</div>
+              <div class="txt">⚡ Right-side reset (3 min)</div>
+            </div>
+            <div class="check ${data.primer?'on':''}" onclick="toggleField('${selectedIso}','primer')">
+              <div class="box">${data.primer?'✓':''}</div>
+              <div class="txt">🔥 Glute primer (2 min)</div>
+            </div>
+
+            <div class="section">Top Sets</div>
+            <div class="grid2">
+              <div>
+                <label class="label">Hip Thrust (lbs)</label>
+                <input type="number" class="input" id="htWt" value="${data.htWt||''}" placeholder="${last.htWt||'—'}">
+              </div>
+              <div>
+                <label class="label">Reps</label>
+                <input type="number" class="input" id="htReps" value="${data.htReps||''}" placeholder="${last.htReps||'6-10'}">
+              </div>
+            </div>
+
+            <div class="section">Connection</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+              ${CONNECTION.map(c=>`
+                <button class="btn ${data.conn===c.v?'primary':'secondary'}" style="padding:12px;border-radius:16px;" onclick="setConn('${selectedIso}','${c.v}')">
+                  <span style="font-size:1.25rem">${c.emoji}</span>
+                  <span style="font-size:0.72rem;font-weight:900;letter-spacing:1px;text-transform:uppercase">${c.label}</span>
+                </button>
+              `).join('')}
+            </div>
+            ${data.conn ? `<div class="mini" style="margin-top:10px;">${connMeta(data.conn).hint}</div>` : ''}
+
+          ` : `
+            <div class="section">Bloodflow (teachings)</div>
+
+            <div class="check ${data.cardio?'on':''}" onclick="toggleField('${selectedIso}','cardio')">
+              <div class="box">${data.cardio?'✓':''}</div>
+              <div class="txt">🏃 Cardio session (counts toward ${TEACHINGS.cardioTargetPerWeek}/week)</div>
+            </div>
+            <div class="mini" style="margin-bottom:10px;">You’re at <strong>${cardioThisWeek}/${TEACHINGS.cardioTargetPerWeek}</strong> this week.</div>
+
+            <div class="check ${data.rdlBurn?'on':''}" onclick="toggleField('${selectedIso}','rdlBurn')">
+              <div class="box">${data.rdlBurn?'✓':''}</div>
+              <div class="txt">🦵 Single-leg RDL burn sets (2× each leg)</div>
+            </div>
+
+            <div class="section">Tempo Class</div>
+            <div class="grid3" style="margin-bottom:10px;">
+              ${['Challenge','Lower','Full Body','Upper','Cardio','Stretch'].map(t=>`
+                <button class="btn ${data.tempo===t?'primary':'secondary'}" style="padding:12px;border-radius:16px;" onclick="setTempo('${selectedIso}','${t}')">
+                  ${t}
+                </button>
+              `).join('')}
+            </div>
+            <div>
+              <label class="label">Duration (min)</label>
+              <input type="number" class="input" id="tempoDur" value="${data.tempoDur||''}" placeholder="30">
+            </div>
+          `}
+
+          <div class="section">Nutrition</div>
+          <div style="margin-bottom:12px;">
+            <label class="label">Protein (g)</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addProtein(30)">+30</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addProtein(20)">+20</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addProtein(10)">+10</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="document.getElementById('protein').value=0">Reset</button>
+            </div>
+            <input type="number" class="input" id="protein" value="${data.protein||''}" placeholder="${state.settings.proteinGoal}g goal">
+          </div>
+
+          <div style="margin-bottom:12px;">
+            <label class="label">Water (oz)</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addWater(20)">+20</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addWater(10)">+10</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="addWater(5)">+5</button>
+              <button class="btn secondary" style="width:auto;padding:10px 12px" onclick="document.getElementById('water').value=0">Reset</button>
+            </div>
+            <input type="number" class="input" id="water" value="${data.water||''}" placeholder="${state.settings.waterGoal}oz goal">
+          </div>
+
+          <div class="section">Flexibility</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+            ${[0,2,4,6,8,10].map(v=>`<button class="btn secondary" style="width:auto;padding:10px 12px" onclick="setAllFlex(${v})">${v}"</button>`).join('')}
+          </div>
+          <div class="grid3">
+            <div>
+              <label class="label">Front L</label>
+              <input type="number" step="0.5" class="input" id="flexL" value="${data.flexL||''}" placeholder="${last.flexL||'—'}">
+            </div>
+            <div>
+              <label class="label">Front R</label>
+              <input type="number" step="0.5" class="input" id="flexR" value="${data.flexR||''}" placeholder="${last.flexR||'—'}">
+            </div>
+            <div>
+              <label class="label">Middle</label>
+              <input type="number" step="0.5" class="input" id="flexM" value="${data.flexM||''}" placeholder="${last.flexM||'—'}">
+            </div>
+          </div>
+
+          <div class="section">Notes</div>
+          <textarea class="input" id="notes" rows="2" placeholder="Form cues, wins, observations..." style="resize:none">${data.notes||''}</textarea>
+        </div>
+
+        <div class="mfoot">
+          <button class="btn primary" onclick="saveModal()">${data.done ? 'Update' : 'Complete'} ✓</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+window.setView = v => { view=v; render(); };
+window.selectDay = iso => { selectedIso=iso; render(); };
+window.openModal = iso => { selectedIso=iso; modalOpen=true; render(); };
+window.closeModal = () => { modalOpen=false; render(); };
 
 window.toggleField = (iso, field) => {
-    const d = state.days[iso] || {};
-    updateDay(iso, { [field]: !d[field] });
+  const d = state.days[iso] || {};
+  updateDay(iso, { [field]: !d[field] });
 };
+window.setConn = (iso,v) => updateDay(iso,{ conn:v });
+window.setTempo = (iso,v) => updateDay(iso,{ tempo:v });
 
-window.setConn = (iso, v) => updateDay(iso, { conn: v });
-window.setTempo = (iso, v) => updateDay(iso, { tempo: v });
-
-window.addProtein = v => {
-    const el = document.getElementById('protein');
-    el.value = (parseInt(el.value) || 0) + v;
-};
-
-window.addWater = v => {
-    const el = document.getElementById('water');
-    el.value = (parseInt(el.value) || 0) + v;
-};
-
-window.setAllFlex = v => {
-    document.getElementById('flexL').value = v;
-    document.getElementById('flexR').value = v;
-    document.getElementById('flexM').value = v;
-};
+window.addProtein = v => { const el=document.getElementById('protein'); el.value = (parseInt(el.value)||0)+v; };
+window.addWater   = v => { const el=document.getElementById('water'); el.value = (parseInt(el.value)||0)+v; };
+window.setAllFlex = v => { document.getElementById('flexL').value=v; document.getElementById('flexR').value=v; document.getElementById('flexM').value=v; };
 
 window.saveModal = () => {
-    const type = getType(selectedIso);
-    const isLower = type.type.startsWith('lower-');
-    const patch = {
-        done: true,
-        protein: parseInt(document.getElementById('protein').value) || 0,
-        water: parseInt(document.getElementById('water').value) || 0,
-        flexL: parseFloat(document.getElementById('flexL').value) || null,
-        flexR: parseFloat(document.getElementById('flexR').value) || null,
-        flexM: parseFloat(document.getElementById('flexM').value) || null,
-        notes: document.getElementById('notes').value || '',
-    };
-    if (isLower) {
-        patch.htWt = parseFloat(document.getElementById('htWt').value) || null;
-        patch.htReps = parseInt(document.getElementById('htReps').value) || null;
-    } else {
-        patch.tempoDur = parseInt(document.getElementById('tempoDur').value) || null;
-    }
-    updateDay(selectedIso, patch);
-    closeModal();
+  const type = getType(selectedIso);
+  const isLower = type.type.startsWith('lower-');
+
+  const patch = {
+    done: true,
+    protein: parseInt(document.getElementById('protein')?.value||0) || 0,
+    water:   parseInt(document.getElementById('water')?.value||0) || 0,
+    flexL:   parseFloat(document.getElementById('flexL')?.value) || null,
+    flexR:   parseFloat(document.getElementById('flexR')?.value) || null,
+    flexM:   parseFloat(document.getElementById('flexM')?.value) || null,
+    notes:   document.getElementById('notes')?.value || ''
+  };
+
+  if(isLower){
+    patch.htWt   = parseFloat(document.getElementById('htWt')?.value) || null;
+    patch.htReps = parseInt(document.getElementById('htReps')?.value||0) || null;
+  }else{
+    patch.tempoDur = parseInt(document.getElementById('tempoDur')?.value||0) || null;
+  }
+
+  updateDay(selectedIso, patch);
+  closeModal();
 };
 
-window.updateSetting = (key, val) => {
-    state.settings[key] = val;
-    save();
-    render();
-};
+window.updateSetting = (key,val) => { state.settings[key]=val; save(); render(); };
 
 window.addScan = () => {
-    const date = document.getElementById('scanDate').value;
-    const roundness = parseFloat(document.getElementById('scanR').value);
-    const protrusion = parseFloat(document.getElementById('scanP').value);
-    if (!date || isNaN(roundness) || isNaN(protrusion)) return alert('Please fill all fields');
-    state.scans = [...state.scans.filter(s => s.date !== date), { date, roundness, protrusion }].sort((a, b) => a.date.localeCompare(b.date));
-    save();
-    document.getElementById('scanR').value = '';
-    document.getElementById('scanP').value = '';
-    render();
+  const date = document.getElementById('scanDate').value;
+  const r = parseFloat(document.getElementById('scanR').value);
+  const p = parseFloat(document.getElementById('scanP').value);
+  if(!date || isNaN(r) || isNaN(p)) return alert('Fill all scan fields.');
+  state.scans = [...state.scans.filter(s=>s.date!==date), { date, roundness:r, protrusion:p }]
+    .sort((a,b)=>a.date.localeCompare(b.date));
+  save();
+  document.getElementById('scanR').value='';
+  document.getElementById('scanP').value='';
+  render();
 };
-
-window.deleteScan = date => {
-    state.scans = state.scans.filter(s => s.date !== date);
-    save();
-    render();
-};
+window.deleteScan = date => { state.scans = state.scans.filter(s=>s.date!==date); save(); render(); };
 
 window.exportData = () => {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `miami-ready-backup-${isoDate(new Date())}.json`;
-    a.click();
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+  const a=document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `miami-ready-${isoDate(new Date())}.json`;
+  a.click();
 };
-
 window.importData = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-        try {
-            state = { ...DEFAULT, ...JSON.parse(ev.target.result) };
-            save();
-            render();
-            alert('Data imported!');
-        } catch { alert('Invalid file'); }
-    };
-    reader.readAsText(file);
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      state = { ...DEFAULT, ...JSON.parse(ev.target.result) };
+      save(); render();
+      alert('Imported!');
+    }catch{ alert('Invalid file.'); }
+  };
+  reader.readAsText(file);
 };
-
 window.resetData = () => {
-    if (confirm('Are you sure? This cannot be undone.')) {
-        localStorage.removeItem(STORAGE_KEY);
-        state = { ...DEFAULT };
-        render();
-    }
+  if(confirm('Delete everything?')){
+    localStorage.removeItem(STORAGE_KEY);
+    state = { ...DEFAULT };
+    render();
+  }
 };
 
-// ============ INIT ============
+/* Cloud Sync (same as your original logic) */
+async function cloudSave(url, apiKey){
+  if(!url) return { success:false, error:'No URL' };
+  try{
+    const r = await fetch(url, {
+      method:'PUT',
+      headers:{ 'Content-Type':'application/json', ...(apiKey?{'X-Master-Key':apiKey}:{}) },
+      body: JSON.stringify(state)
+    });
+    if(r.ok){
+      localStorage.setItem('miami-cloud-url', url);
+      if(apiKey) localStorage.setItem('miami-cloud-key', apiKey);
+      localStorage.setItem('miami-cloud-last-sync', new Date().toISOString());
+      return { success:true };
+    }
+    return { success:false, error:'Server error' };
+  }catch(e){ return { success:false, error:e.message }; }
+}
+async function cloudLoad(url, apiKey){
+  if(!url) return { success:false, error:'No URL' };
+  try{
+    const r = await fetch(url, { headers: apiKey ? { 'X-Master-Key': apiKey } : {} });
+    if(r.ok){
+      const d = await r.json();
+      state = { ...DEFAULT, ...(d.record || d) };
+      save();
+      return { success:true };
+    }
+    return { success:false, error:'Server error' };
+  }catch(e){ return { success:false, error:e.message }; }
+}
+
+window.doCloudSave = async () => {
+  const binId = document.getElementById('cloudBinId').value.trim();
+  const apiKey = document.getElementById('cloudApiKey').value.trim();
+  if(!binId || !apiKey) return alert('Enter Bin ID and API Key');
+  const r = await cloudSave(`https://api.jsonbin.io/v3/b/${binId}`, apiKey);
+  alert(r.success ? '✓ Synced!' : 'Failed: ' + r.error);
+  render();
+};
+window.doCloudLoad = async () => {
+  const binId = document.getElementById('cloudBinId').value.trim()
+    || localStorage.getItem('miami-cloud-url')?.split('/b/')[1]?.split('/')[0];
+  const apiKey = document.getElementById('cloudApiKey').value.trim()
+    || localStorage.getItem('miami-cloud-key');
+  if(!binId || !apiKey) return alert('Enter Bin ID and API Key');
+  if(!confirm('Replace local data?')) return;
+  const r = await cloudLoad(`https://api.jsonbin.io/v3/b/${binId}/latest`, apiKey);
+  alert(r.success ? '✓ Loaded!' : 'Failed: ' + r.error);
+  render();
+};
+
+/* =========================
+   INIT
+========================= */
 load();
 render();
-window.addEventListener('resize', () => { if (view === 'calendar') render(); });
-    </script>
+  </script>
 </body>
 </html>
