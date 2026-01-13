@@ -192,6 +192,8 @@
         .check-row.checked .check-box{background:var(--teal);border-color:var(--teal)}
         .check-text{font-size:.85rem;color:var(--cream-muted)}
         .check-row.checked .check-text{color:var(--cream)}
+        .period-btn{background:var(--bg-card);border:1px solid rgba(212,168,154,.3);color:#d4a89a;padding:10px 20px;border-radius:20px;font-size:.75rem;cursor:pointer;font-family:var(--font)}
+        .period-btn:active{background:rgba(212,168,154,.15)}
         .btn-streak-modal{width:100%;padding:12px;border-radius:24px;background:var(--bg);border:2px solid var(--gold-dim);color:var(--gold);font-size:.85rem;cursor:pointer;margin-top:8px}
         
         .calendar-view{padding:20px}
@@ -299,14 +301,14 @@
     <input type="file" id="importFile" accept=".json" style="display:none">
     <script>
 const START=new Date(2026,0,11),STORAGE='miamiV14',BACKUPS=['miamiV14_bk1','miamiV14_bk2','miamiV14_bk3'];
-const DEFAULTS={cycleStart:'2026-01-12',cycleLength:28,menstrualDays:5,proteinGoal:130,waterGoal:100};
+const DEFAULTS={cycleStart:'2026-01-13',cycleLength:28,menstrualDays:5,proteinGoal:130,waterGoal:100};
 
 // Training phases - adjusted for fast-twitch
 const PHASES=[
-    {num:1,name:'Fix Signal',days:[1,14],reps:'Hold to fail',sets:'3-4',note:'Bodyweight. Slow. Connection before load.'},
-    {num:2,name:'Build',days:[15,37],reps:'6-10',sets:'4',note:'Heavy. Add weight when 🟢. Your fast-twitch responds to load.'},
-    {num:3,name:'Sculpt',days:[38,56],reps:'8-12',sets:'4',note:'Moderate load. 1¼ reps. Slow eccentric.'},
-    {num:4,name:'Peak',days:[57,70],reps:'10-15',sets:'3-4',note:'Pump focus. Holds. Finishers.'}
+    {num:1,name:'Fix Signal',days:[1,21],reps:'Hold to fail',sets:'3-4',note:'Bodyweight. Slow. Connection before load.'},
+    {num:2,name:'Build',days:[22,42],reps:'6-10',sets:'4',note:'Heavy. Add weight when 😊. Your fast-twitch responds to load.'},
+    {num:3,name:'Sculpt',days:[43,58],reps:'8-12',sets:'4',note:'Moderate load. 1¼ reps. Slow eccentric.'},
+    {num:4,name:'Peak',days:[59,70],reps:'10-15',sets:'3-4',note:'Pump focus. Holds. Finishers.'}
 ];
 
 // Cycle phases
@@ -471,6 +473,8 @@ function rToday(){
     </div>
     <div class="day-type"><div class="day-type-icon">${tmpl.icon}</div><div class="day-type-name">${tmpl.name}</div><div class="day-type-target">${tmpl.target}</div></div>
     <div class="rule-card"><div class="rule-label">${cycle.name} Rule</div><div class="rule-text">${cycle.rule}</div></div>
+    
+    <div style="text-align:center;margin:0 20px 14px"><button class="period-btn" onclick="periodStarted()">🩸 Period Started Today</button></div>
     
     ${type.startsWith('lower')?`
     <div class="reset-card" onclick="this.classList.toggle('open')">
@@ -809,6 +813,14 @@ function setProteinVal(v){document.getElementById('protein').value=v}
 function addWater(v){const el=document.getElementById('water');el.value=(parseInt(el.value)||0)+v}
 function setWaterVal(v){document.getElementById('water').value=v}
 function setAllFlex(v){document.getElementById('flexL').value=v;document.getElementById('flexR').value=v;document.getElementById('flexM').value=v}
+
+function periodStarted(){
+    const today=new Date();
+    state.data.settings.cycleStart=today.toISOString().slice(0,10);
+    save();
+    toast('Cycle updated');
+    render();
+}
 
 function saveDay(){
     const n=state.selDay||state.data.today,d=state.data.days[n-1],type=getType(n);
