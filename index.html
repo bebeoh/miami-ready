@@ -568,13 +568,13 @@ const START = new Date(2026, 0, 11);
 const END = new Date(2026, 2, 21);
 
 const SCHEDULE = [
-    { d: 0, type: 'tempo', label: 'Tempo + Scan', short: 'SCAN' },
-    { d: 1, type: 'lower', label: 'Lower A', short: 'A', focus: 'Shelf + Side', target: 'Upper glute max + medius' },
-    { d: 2, type: 'tempo', label: 'Tempo', short: 'T' },
-    { d: 3, type: 'lower', label: 'Lower B', short: 'B', focus: 'Underbutt', target: 'Lower glute max + ham tie-in' },
-    { d: 4, type: 'tempo', label: 'Tempo', short: 'T' },
-    { d: 5, type: 'lower', label: 'Lower C', short: 'C', focus: 'Side Dips', target: 'Medius + minimus' },
-    { d: 6, type: 'tempo', label: 'Tempo', short: 'T' },
+    { d: 0, type: 'tempo', label: 'Tempo + Scan', short: 'SCAN', focus: 'Scan Day', tempoFocus: 'Light stretch + Zozofit scan' },
+    { d: 1, type: 'lower', label: 'Lower C', short: 'C', focus: 'Side-Glute + Stability', target: 'Fix imbalances + hip dips' },
+    { d: 2, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Upper Body', tempoFocus: 'X-Frame: Shoulders + Lats' },
+    { d: 3, type: 'lower', label: 'Lower B', short: 'B', focus: 'Under-Butt', target: 'Lower glute max + ham tie-in' },
+    { d: 4, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Active Recovery', tempoFocus: 'Incline walk + Foam roll' },
+    { d: 5, type: 'lower', label: 'Lower A', short: 'A', focus: 'Shelf + Side', target: 'Upper glute max + medius' },
+    { d: 6, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Upper + Mobility', tempoFocus: 'X-Frame + Rigel stretcher' },
 ];
 
 const PHASES = [
@@ -694,20 +694,19 @@ const CONN = [
     { id: 'fire', emoji: '🔥', label: 'Locked in' },
 ];
 
-const TEMPO_TYPES = ['Cardio', 'Stretch', 'Yoga', 'Upper', 'Glute-Friendly'];
+const TEMPO_TYPES = ['Upper', 'Cardio', 'Stretch', 'Foam Roll', 'Incline Walk'];
 
 const TEMPO_RECS = {
-    0: { rec: 'Stretch', reason: 'Scan day — light movement + Zozofit' },  // Sunday
-    1: { rec: null, reason: 'Lower A day' },  // Monday - Lower
-    2: { rec: 'Cardio', reason: 'Blood flow to glutes', alt: 'Stretch' },  // Tuesday
-    3: { rec: null, reason: 'Lower B day' },  // Wednesday - Lower
-    4: { rec: 'Yoga', reason: 'Mobility + recovery', alt: 'Upper' },  // Thursday
-    5: { rec: null, reason: 'Lower C day' },  // Friday - Lower
-    6: { rec: 'Glute-Friendly', reason: 'Light pump', alt: 'Stretch' },  // Saturday
+    0: { rec: 'Stretch', reason: 'Scan day — light movement + Zozofit', protocol: ['Light stretch 10-15 min', 'Zozofit body scan', 'Progress photos'] },
+    1: { rec: null, reason: 'Lower C day' },
+    2: { rec: 'Upper', reason: 'X-Frame: Build shoulders + lats', protocol: ['Lateral raises 3×15', 'Face pulls 3×15', 'Lat pulldown 3×12', 'Rear delt flys 3×15'] },
+    3: { rec: null, reason: 'Lower B day' },
+    4: { rec: 'Foam Roll', reason: 'Anti-softness: Blood flow + lymphatic', protocol: ['Foam roll glutes 5 min', 'Foam roll hips/IT band 5 min', 'Foam roll quads/hamstrings 5 min', 'Hip flexor stretch 2 min/side', 'Rigel stretcher 10 min'] },
+    5: { rec: null, reason: 'Lower A day' },
+    6: { rec: 'Upper', reason: 'X-Frame + Mobility', protocol: ['Upper body Tempo class', 'Rigel stretcher 10 min', 'Hip flexor stretch 2 min/side'] },
 };
 
-// For Lower days, recommend short stretch/mobility on Tempo
-const LOWER_DAY_TEMPO = { rec: 'Stretch', reason: '10-15 min mobility after your workout' };
+const LOWER_DAY_TEMPO = { rec: 'Stretch', reason: '10-15 min mobility after workout', protocol: ['Light stretch only', 'No additional glute work'] };
 
 const CYCLE_PHASES = {
     menstrual: { name: 'Menstrual', start: 1, end: 5, instruction: 'Light weight, perfect reps, FEEL the glutes', htNote: 'Light — feel every rep' },
@@ -931,7 +930,7 @@ function renderDashboard() {
             </div>
         </div>
         
-        <div class="stats-row">
+        <div class="stats-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
             <div class="stat-box">
                 <div class="value teal">${stats.pct}%</div>
                 <div class="label">Program</div>
@@ -942,7 +941,11 @@ function renderDashboard() {
             </div>
             <div class="stat-box">
                 <div class="value" style="color:var(--purple)">${tempoStats.streak}</div>
-                <div class="label">Tempo Streak</div>
+                <div class="label">Tempo</div>
+            </div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--teal)">${Object.values(state.days).filter(d => d.casein).length}</div>
+                <div class="label">Casein</div>
             </div>
         </div>
         
@@ -1071,37 +1074,28 @@ function renderDashboard() {
                 ` : `
                     ${(() => {
                         const rec = getTempoRec(selectedDate);
+                        const sched = getSched(selectedDate);
                         return `
                             <div class="workout-protocols">
                                 <div class="protocol" style="background:var(--purple-dim)">
-                                    <div class="title" style="color:var(--purple)">💡 Today's Recommendation</div>
+                                    <div class="title" style="color:var(--purple)">💡 ${sched.focus || 'Today'}</div>
                                     <div class="content">
                                         <div style="font-size:18px;font-weight:700;margin-bottom:4px">${rec.rec}</div>
                                         <div style="color:var(--text-3)">${rec.reason}</div>
                                     </div>
                                 </div>
+                                ${rec.protocol ? `
+                                    <div class="protocol">
+                                        <div class="title">📋 Protocol</div>
+                                        <div class="content">
+                                            ${rec.protocol.map(p => `<div style="margin:6px 0;padding-left:12px;border-left:2px solid var(--teal)">✓ ${p}</div>`).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
                                 <div class="protocol">
-                                    <div class="title">🎯 Tempo Options</div>
-                                    <div class="content" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-                                        ${TEMPO_TYPES.map(t => `
-                                            <span style="padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;
-                                                ${t === rec.rec ? 'background:var(--purple);color:var(--bg)' : 'background:var(--bg-card-2);color:var(--text-2)'}">
-                                                ${t}${t === rec.rec ? ' ✓' : ''}
-                                            </span>
-                                        `).join('')}
-                                    </div>
+                                    <div class="title">🚫 Glute Recovery</div>
+                                    <div class="content">No additional glute work. Your glutes are growing from Mon/Wed/Fri.</div>
                                 </div>
-                                ${isLower(selectedDate) ? `
-                                    <div class="protocol">
-                                        <div class="title">⚠️ Lower Day</div>
-                                        <div class="content">You have glute work today. Keep Tempo light — stretch or mobility only.</div>
-                                    </div>
-                                ` : `
-                                    <div class="protocol">
-                                        <div class="title">🚫 Glute Recovery</div>
-                                        <div class="content">No additional glute work. Your glutes are growing from Mon/Wed/Fri.</div>
-                                    </div>
-                                `}
                             </div>
                         `;
                     })()}
@@ -1494,6 +1488,19 @@ function renderModal() {
                     </div>
                     
                     <div class="form-group">
+                        <label class="form-label">Pre-Sleep Protein</label>
+                        <div style="display:flex;gap:8px;align-items:center;padding:12px;background:var(--bg-card-2);border-radius:12px;cursor:pointer" onclick="toggleCasein()">
+                            <div id="caseinCheck" style="width:24px;height:24px;border-radius:6px;border:2px solid ${data.casein ? 'var(--teal)' : 'var(--border)'};background:${data.casein ? 'var(--teal)' : 'transparent'};display:flex;align-items:center;justify-content:center;color:white;font-size:14px">
+                                ${data.casein ? '✓' : ''}
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Casein before bed</div>
+                                <div style="font-size:12px;color:var(--text-3)">Protects lean muscle during sleep</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
                         <label class="form-label">Notes</label>
                         <textarea class="form-input" id="mNotes" rows="2" style="resize:none">${data.notes || ''}</textarea>
                     </div>
@@ -1514,6 +1521,7 @@ window.openLog = d => {
     const data = state.days[d] || {};
     tempTempoType = data.tempoType || null;
     tempTempo = data.tempo || null;
+    tempCasein = data.casein || null;
     render(); 
 };
 window.closeModal = () => { modal = null; render(); };
@@ -1553,6 +1561,16 @@ window.toggleTempo = () => {
     check.innerHTML = tempTempo ? '✓' : '';
 };
 
+let tempCasein = null;
+window.toggleCasein = () => {
+    const check = document.getElementById('caseinCheck');
+    const isChecked = check.style.background.includes('teal');
+    tempCasein = !isChecked;
+    check.style.border = `2px solid ${tempCasein ? 'var(--teal)' : 'var(--border)'}`;
+    check.style.background = tempCasein ? 'var(--teal)' : 'transparent';
+    check.innerHTML = tempCasein ? '✓' : '';
+};
+
 window.addVal = (id, amt) => {
     const el = document.getElementById(id);
     el.value = (+el.value || 0) + amt;
@@ -1577,6 +1595,13 @@ window.saveLog = () => {
         patch.tempo = data.tempo;
     }
     
+    // Casein tracking (for all days)
+    if (tempCasein !== null) {
+        patch.casein = tempCasein;
+    } else if (data.casein !== undefined) {
+        patch.casein = data.casein;
+    }
+    
     if (lower) {
         patch.mainWt = +document.getElementById('mainWt').value || null;
         patch.mainReps = +document.getElementById('mainReps').value || null;
@@ -1592,6 +1617,7 @@ window.saveLog = () => {
     tempHadLower = null;
     tempTempoType = null;
     tempTempo = null;
+    tempCasein = null;
     closeModal();
 };
 
