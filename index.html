@@ -739,12 +739,11 @@ function getCyclePhase(periodStart) {
 }
 
 const DEFAULT = {
-    settings: { protein: 130, water: 100, challengeGoal: 13, periodStart: '2026-01-13' },
+    settings: { protein: 130, water: 100, periodStart: '2026-01-13' },
     baseline: { roundness: 32, protrusion: 25, lift: 83 },
     days: {},
     scans: [],
-    challengeDone: 4,  // January starting point
-    splits: { frontL: null, frontR: null, middle: null },  // Track flexibility
+    splits: { frontL: null, frontR: null, middle: null },
 };
 
 // ===== STATE =====
@@ -903,9 +902,9 @@ function renderDashboard() {
                 <div class="value teal">${stats.pct}%</div>
                 <div class="label">Program</div>
             </div>
-            <div class="stat-box" onclick="openChallengeModal()" style="cursor:pointer">
-                <div class="value gold">${state.challengeDone}/${state.settings.challengeGoal}</div>
-                <div class="label">Challenge</div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--rose)">${currentCycle.name}</div>
+                <div class="label">Day ${currentCycle.day || 1}</div>
             </div>
             <div class="stat-box">
                 <div class="value" style="color:var(--purple)">${tempoStats.streak}</div>
@@ -1246,20 +1245,6 @@ function renderSettings() {
             </div>
             
             <div class="settings-card">
-                <h3>Tempo Challenge</h3>
-                <div class="form-group">
-                    <label class="form-label">Monthly Challenge Goal</label>
-                    <input type="number" class="form-input" value="${state.settings.challengeGoal}" 
-                        onchange="updateSetting('challengeGoal', +this.value)">
-                </div>
-                <div class="form-group" style="margin-bottom:0">
-                    <label class="form-label">Challenges Completed</label>
-                    <input type="number" class="form-input" value="${state.challengeDone}" 
-                        onchange="state.challengeDone = +this.value; save(); render();">
-                </div>
-            </div>
-            
-            <div class="settings-card">
                 <h3>Cycle Syncing</h3>
                 <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Auto-calculates your phase based on period start</p>
                 <div class="form-group">
@@ -1485,15 +1470,6 @@ window.openLog = d => {
     render(); 
 };
 window.closeModal = () => { modal = null; render(); };
-
-window.openChallengeModal = () => {
-    const newVal = prompt(`Update challenge progress (current: ${state.challengeDone}/${state.settings.challengeGoal})`, state.challengeDone);
-    if (newVal !== null && !isNaN(+newVal)) {
-        state.challengeDone = +newVal;
-        save();
-        render();
-    }
-};
 
 window.selectConn = id => {
     document.querySelectorAll('.conn-opt').forEach(el => el.classList.remove('active'));
