@@ -580,28 +580,28 @@ const PHASES = [
         name: 'CONNECT', 
         weeks: [1,2,3], 
         color: 'purple',
-        goal: 'Find the glutes',
-        instruction: 'LIGHT weight. Perfect form. Feel every rep.',
-        htNote: 'Light — find connection',
-        rule: 'If you can\'t feel it, it\'s not growing'
+        goal: 'Build the neural pathway',
+        instruction: 'LIGHT weight only. If you can\'t squeeze and hold 2s, it\'s too heavy.',
+        htNote: 'Light — connection > load',
+        rule: 'Your brain must find the glutes before they can grow'
     },
     { 
         name: 'BUILD', 
         weeks: [4,5,6,7], 
         color: 'teal',
-        goal: 'Grow muscle',
-        instruction: 'Add weight ONLY when 😊 or 🔥. Hold if 🤔.',
-        htNote: 'Moderate — add if connected',
-        rule: 'Connection earns load'
+        goal: 'Progressive overload',
+        instruction: 'Add weight ONLY when logging 😊 or 🔥. Stay same if 🤔. Drop if 😐.',
+        htNote: 'Moderate — earn the weight',
+        rule: 'Connection unlocks load. No connection = no growth.'
     },
     { 
         name: 'PEAK', 
         weeks: [8,9,10], 
         color: 'gold',
-        goal: 'Max intensity',
-        instruction: 'Push PRs when 🔥. True failure on last sets.',
-        htNote: 'Heavy — push PRs',
-        rule: 'You earned this'
+        goal: 'Maximum intensity',
+        instruction: 'Push PRs when 🔥. True failure on last rep. This is where it happens.',
+        htNote: 'Heavy — chase PRs',
+        rule: 'You built the connection. Now use it.'
     },
 ];
 
@@ -612,31 +612,71 @@ function getPhase(d) {
 }
 
 const EXERCISES = {
-    'Lower A': [
-        { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true },
-        { name: 'Barbell RDL', sets: '3×8-10' },
-        { name: 'Back Extensions', sets: '3×12-15', note: 'Pad LOW' },
-        { name: 'Banded Lateral Step-Ups', sets: '3×10/side' },
-        { name: 'Heavy Banded Abduction', sets: '3×15-20' },
-    ],
-    'Lower B': [
-        { name: 'B-Stance Hip Thrust', sets: '4×8-10/side', isMain: true },
-        { name: 'B-Stance RDL', sets: '3×10/side' },
-        { name: 'Elevated Step-Ups', sets: '3×10/side', note: 'Lean fwd' },
-        { name: 'Hyperextensions', sets: '3×12-15', note: 'Pad LOW' },
-        { name: 'Yoga Ball Ham Curls', sets: '3×12-15' },
-    ],
-    'Lower C': [
-        { name: 'Single-Leg Hip Thrust', sets: '3×10/side', isMain: true },
-        { name: 'Cossack Squats', sets: '3×8/side' },
-        { name: 'Curtsy Lunges', sets: '3×10/side' },
-        { name: 'Side-Lying Leg Raises', sets: '3×15/side', note: 'Ankle wts' },
-        { name: 'Banded Bridge Pulses', sets: '3×20' },
-    ],
+    'Lower A': {
+        target: 'SHELF — Upper glute max + medius → Roundness',
+        exercises: [
+            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, 
+              cue: 'Knee over ankle at top · Band around knees, push OUT · Hold last rep to failure' },
+            { name: 'Cable Kickback (30° angle)', sets: '3×12/side',
+              cue: 'Angled out targets upper glutes + medius better' },
+            { name: 'Seated Abduction', sets: '3×15-20',
+              cue: 'Lean FORWARD · Push with KNEES not feet' },
+            { name: 'Back Extension', sets: '3×12-15',
+              cue: 'Pad LOW · Toes out · Squeeze at top' },
+        ],
+    },
+    'Lower B': {
+        target: 'UNDERBUTT — Lower glute max + ham tie-in → Protrusion',
+        exercises: [
+            { name: 'Bulgarian Split Squat', sets: '4×8-10/side', isMain: true,
+              cue: 'Knee over ankle · Step FURTHER from bench · Lean slightly forward' },
+            { name: 'RDL', sets: '3×8-10',
+              cue: 'Hip HINGE not lift · Bar close to legs · Feel stretch' },
+            { name: 'Step-Ups', sets: '3×10/side',
+              cue: 'Lean forward · Drive through heel' },
+            { name: 'Lying Hamstring Curl', sets: '3×12-15',
+              cue: 'Control the negative' },
+        ],
+    },
+    'Lower C': {
+        target: 'SIDE DIPS — Medius + minimus → Hip dip fill',
+        exercises: [
+            { name: 'B-Stance Hip Thrust', sets: '4×8-10/side', isMain: true,
+              cue: 'Unilateral = fixes imbalance · Band around knees' },
+            { name: 'Curtsy Lunge', sets: '3×10/side',
+              cue: 'Crossover motion = medius activation' },
+            { name: 'Side-Lying Leg Raises', sets: '3×15/side',
+              cue: 'Ankle weights · Slow and controlled · Slight forward angle' },
+            { name: 'Cossack Squat', sets: '3×8/side',
+              cue: 'Deep lateral stretch' },
+            { name: 'Banded Bridge Burnout', sets: '1×max',
+              cue: 'Finisher — chase the pump' },
+        ],
+    },
 };
 
-const RESET = ['Right hip flexor stretch — 60s', 'Right SL glute bridge hold — 45s', 'Right side-lying raises — 20', 'Dead bug — 60s'];
-const PRIMER = ['Frog pumps — 60s', 'Banded standing abductions — 60s'];
+const RESET = [
+    { name: 'Right hip flexor stretch', time: '60s', why: 'Release tight flexor' },
+    { name: 'Right single-leg glute bridge hold', time: '45s', why: 'Activate weak side' },
+    { name: 'Right side-lying leg raises', time: '20 reps', why: 'Wake up medius' },
+    { name: 'Dead bug', time: '60s', why: 'Stabilize pelvis' },
+];
+
+const PRIMER = [
+    { name: 'Frog pumps', time: '60s fast', why: 'Blood flow + activation' },
+    { name: 'Banded standing abductions', time: '60s', why: 'Pre-fatigue medius' },
+];
+
+const ACTIVATION = {
+    title: 'Every Rep Cue',
+    steps: [
+        'BURN SET first (no weight, 15-20 reps) — find the muscle',
+        'Exhale → Posterior pelvic tilt',
+        'Squeeze glutes → 2 second HOLD at top',
+        'Knees OUT against band',
+        'Last rep of each set: HOLD until failure',
+    ]
+};
 
 const CONN = [
     { id: 'red', emoji: '😐', label: 'Not yet' },
@@ -842,23 +882,40 @@ function renderDashboard() {
                 ${lower ? `
                     <div class="workout-protocols">
                         <div class="protocol">
-                            <div class="title">⚡ Reset + Primer</div>
-                            <div class="content">${RESET.join(' · ')}<br>${PRIMER.join(' · ')}</div>
+                            <div class="title">⚡ Right-Side Reset</div>
+                            <div class="content">
+                                ${RESET.map(r => `<div style="margin:4px 0"><strong>${r.name}</strong> — ${r.time}</div>`).join('')}
+                            </div>
                         </div>
                         <div class="protocol">
-                            <div class="title">🧠 Every Rep Cue</div>
-                            <div class="content">Burn set first (no weight) → Exhale → Posterior tilt → Squeeze → 2s hold → Knees out</div>
+                            <div class="title">🔥 Glute Primer</div>
+                            <div class="content">
+                                ${PRIMER.map(p => `<div style="margin:4px 0"><strong>${p.name}</strong> — ${p.time}</div>`).join('')}
+                            </div>
+                        </div>
+                        <div class="protocol" style="background:var(--gold-dim)">
+                            <div class="title" style="color:var(--gold)">🧠 ${ACTIVATION.title}</div>
+                            <div class="content">
+                                ${ACTIVATION.steps.map((s, i) => `<div style="margin:4px 0">${i+1}. ${s}</div>`).join('')}
+                            </div>
                         </div>
                     </div>
                     
                     <div class="workout-exercises">
-                        ${EXERCISES[selSched.label]?.map(ex => {
+                        <div style="padding:12px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--teal);font-weight:600">
+                            ${EXERCISES[selSched.label]?.target || ''}
+                        </div>
+                        ${EXERCISES[selSched.label]?.exercises.map(ex => {
                             const phase = getPhase(selectedDate);
-                            const note = ex.isMain ? phase.htNote : ex.note;
                             return `
-                                <div class="exercise-row">
-                                    <span class="name">${ex.name}</span>
-                                    <span class="sets">${ex.sets}${note ? `<span class="note">${note}</span>` : ''}</span>
+                                <div style="padding:14px 0;border-bottom:1px solid var(--border)">
+                                    <div style="display:flex;justify-content:space-between;align-items:center">
+                                        <span style="font-weight:600;font-size:14px">${ex.name}</span>
+                                        <span style="color:var(--text-2);font-size:13px">${ex.sets}</span>
+                                    </div>
+                                    <div style="font-size:12px;color:${ex.isMain ? 'var(--gold)' : 'var(--text-3)'};margin-top:4px">
+                                        ${ex.isMain ? '★ ' + phase.htNote + ' · ' : ''}${ex.cue}
+                                    </div>
                                 </div>
                             `;
                         }).join('') || ''}
