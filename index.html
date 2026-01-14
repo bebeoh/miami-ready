@@ -579,31 +579,34 @@ const SCHEDULE = [
 
 const PHASES = [
     { 
-        name: 'CONNECT', 
+        name: 'SYNC', 
         weeks: [1,2,3], 
         color: 'purple',
-        goal: 'Build the neural pathway',
-        instruction: 'LIGHT weight only. If you can\'t squeeze and hold 2s, it\'s too heavy.',
-        htNote: 'Light — connection > load',
-        rule: 'Your brain must find the glutes before they can grow'
+        goal: 'Sync & Stabilize — Fix pelvic twist + SI joint',
+        instruction: 'Light weight. Unilateral focus. Daily posture reset.',
+        htNote: 'Light — stabilize first',
+        rule: 'Target posture score: 87 → 92',
+        postureFocus: 'Daily 8-min reset before workouts'
     },
     { 
-        name: 'BUILD', 
+        name: 'ALIGN', 
         weeks: [4,5,6,7], 
         color: 'teal',
-        goal: 'Progressive overload',
-        instruction: 'Add weight ONLY when logging 😊 or 🔥. Stay same if 🤔. Drop if 😐.',
-        htNote: 'Moderate — earn the weight',
-        rule: 'Connection unlocks load. No connection = no growth.'
+        goal: 'Alignment & Lift — Neutral pelvis + X-Frame',
+        instruction: 'Add weight when connected. Slow negatives on ham curls.',
+        htNote: 'Moderate — build alignment',
+        rule: 'Target posture score: 92 → 96',
+        postureFocus: '3-sec negatives, bi-weekly scans'
     },
     { 
         name: 'PEAK', 
         weeks: [8,9,10], 
         color: 'gold',
-        goal: 'Maximum intensity',
-        instruction: 'Push PRs when 🔥. True failure on last rep. This is where it happens.',
+        goal: 'Peak 100 — Maximum lift + protrusion',
+        instruction: 'SI healed, pelvis neutral. Push PRs.',
         htNote: 'Heavy — chase PRs',
-        rule: 'You built the connection. Now use it.'
+        rule: 'Target posture score: 96 → 100',
+        postureFocus: 'Load progression, daily Floor I-Y-Ws'
     },
 ];
 
@@ -665,10 +668,11 @@ const EXERCISES = {
 };
 
 const RESET = [
-    { name: 'Right hip flexor stretch', time: '60s', why: 'Release tight flexor' },
-    { name: 'Right single-leg glute bridge hold', time: '45s', why: 'Activate weak side' },
-    { name: 'Right side-lying leg raises', time: '20 reps', why: 'Wake up medius' },
-    { name: 'Dead bug', time: '60s', why: 'Stabilize pelvis' },
+    { name: 'Broomstick Reset', time: '2 min', why: 'Spinal alignment' },
+    { name: 'Cat-Cow', time: '1 min', why: 'Pelvic mobility' },
+    { name: 'Dead Bugs', time: '2 min', why: 'Core stability + pelvis' },
+    { name: 'Floor I-Y-W Raises', time: '2 min', why: 'Upper back alignment' },
+    { name: 'Right hip flexor stretch', time: '1 min', why: 'Release tight flexor' },
 ];
 
 const PRIMER = [
@@ -694,19 +698,19 @@ const CONN = [
     { id: 'fire', emoji: '🔥', label: 'Locked in' },
 ];
 
-const TEMPO_TYPES = ['Upper', 'Cardio', 'Stretch', 'Foam Roll', 'Incline Walk'];
+const TEMPO_TYPES = ['Upper', 'Walk', 'Stretch', 'Foam Roll'];
 
 const TEMPO_RECS = {
-    0: { rec: 'Stretch', reason: 'Scan day — light movement + Zozofit', protocol: ['Light stretch 10-15 min', 'Zozofit body scan', 'Progress photos'] },
-    1: { rec: null, reason: 'Lower C day' },
+    0: { rec: 'Stretch', reason: 'Scan day — Zozofit + track progress', protocol: ['Light stretch 10-15 min', 'Zozofit body scan', 'Progress photos'] },
+    1: { rec: null, reason: 'Lower C day — Fix Pelvic Twist' },
     2: { rec: 'Upper', reason: 'X-Frame: Build shoulders + lats', protocol: ['Lateral raises 3×15', 'Face pulls 3×15', 'Lat pulldown 3×12', 'Rear delt flys 3×15'] },
-    3: { rec: null, reason: 'Lower B day' },
-    4: { rec: 'Foam Roll', reason: 'Anti-softness: Blood flow + lymphatic', protocol: ['Foam roll glutes 5 min', 'Foam roll hips/IT band 5 min', 'Foam roll quads/hamstrings 5 min', 'Hip flexor stretch 2 min/side', 'Rigel stretcher 10 min'] },
-    5: { rec: null, reason: 'Lower A day' },
-    6: { rec: 'Upper', reason: 'X-Frame + Mobility', protocol: ['Upper body Tempo class', 'Rigel stretcher 10 min', 'Hip flexor stretch 2 min/side'] },
+    3: { rec: null, reason: 'Lower B day — Target Softness (slow negatives)' },
+    4: { rec: 'Walk', reason: 'SI Joint Healing: Incline walk + foam roll', protocol: ['Incline walk 20 min', 'Foam roll glutes 5 min', 'Foam roll hips/IT band 5 min', 'Hip flexor stretch 2 min/side'] },
+    5: { rec: null, reason: 'Lower A day — Maximize Protrusion' },
+    6: { rec: 'Upper', reason: 'Align head/shoulders + mobility', protocol: ['Upper body Tempo class', 'Rigel stretcher 10 min', 'Floor I-Y-W raises 2 min'] },
 };
 
-const LOWER_DAY_TEMPO = { rec: 'Stretch', reason: '10-15 min mobility after workout', protocol: ['Light stretch only', 'No additional glute work'] };
+const LOWER_DAY_TEMPO = { rec: 'Posture Reset', reason: '8-min circuit before workout', protocol: ['Broomstick Reset 2 min', 'Cat-Cow 1 min', 'Dead Bugs 2 min', 'Floor I-Y-W Raises 2 min', 'Hip flexor stretch 1 min'] };
 
 const CYCLE_PHASES = {
     menstrual: { name: 'Menstrual', start: 1, end: 5, instruction: 'Light weight, perfect reps, FEEL the glutes', htNote: 'Light — feel every rep' },
@@ -776,7 +780,7 @@ function getWeightRec(cycle, lastWeight) {
 }
 
 const DEFAULT = {
-    settings: { protein: 130, water: 100, periodStart: '2026-01-13' },
+    settings: { protein: 130, water: 100, periodStart: '2026-01-14' },
     baseline: { roundness: 32, protrusion: 25, lift: 83 },
     days: {},
     scans: [],
@@ -1014,11 +1018,7 @@ function renderDashboard() {
                 ${lower ? `
                     <div class="workout-protocols">
                         <div class="protocol">
-                            <div class="title">🎒 Equipment</div>
-                            <div class="content" style="font-size:13px">${EXERCISES[selSched.label]?.equipment || ''}</div>
-                        </div>
-                        <div class="protocol">
-                            <div class="title">⚡ Right-Side Reset</div>
+                            <div class="title">⚡ 8-Min Posture Reset (Do First)</div>
                             <div class="content">
                                 ${RESET.map(r => `<div style="margin:4px 0"><strong>${r.name}</strong> — ${r.time}</div>`).join('')}
                             </div>
