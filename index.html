@@ -23,6 +23,8 @@
     --rose-dim: rgba(245, 101, 101, 0.15);
     --purple: #A78BFA;
     --purple-dim: rgba(167, 139, 250, 0.15);
+    --rose: #FB7185;
+    --rose-dim: rgba(251, 113, 133, 0.15);
     --blue: #60A5FA;
     
     --text: #FFFFFF;
@@ -613,45 +615,52 @@ function getPhase(d) {
 
 const EXERCISES = {
     'Lower A': {
-        target: 'SHELF — Upper glute max + medius → Roundness',
+        name: 'Shelf + Side',
+        target: 'Upper glute max + medius',
+        equipment: 'Tempo barbell + squat pad + bench',
         exercises: [
             { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, 
-              cue: 'Knee over ankle at top · Band around knees, push OUT · Hold last rep to failure' },
-            { name: 'Cable Kickback (30° angle)', sets: '3×12/side',
-              cue: 'Angled out targets upper glutes + medius better' },
-            { name: 'Seated Abduction', sets: '3×15-20',
-              cue: 'Lean FORWARD · Push with KNEES not feet' },
-            { name: 'Back Extension', sets: '3×12-15',
-              cue: 'Pad LOW · Toes out · Squeeze at top' },
+              cue: '2-second squeeze at top' },
+            { name: 'Back Extension OR Glute Bridge Hold', sets: '3×30-45 sec',
+              cue: 'Finer Form — squeeze and hold' },
+            { name: 'Heavy Band Seated Abduction', sets: '4×15-20',
+              cue: 'Blogilates band — push with knees' },
+            { name: 'Lateral Step-Ups', sets: '3×10 each',
+              cue: 'Bench height' },
         ],
+        finisher: 'Frog pumps ×40 + Band abduction ×1 min',
     },
     'Lower B': {
-        target: 'UNDERBUTT — Lower glute max + ham tie-in → Protrusion',
+        name: 'Under-Butt',
+        target: 'Lower glute max + ham tie-in',
+        equipment: 'Tempo barbell + bench + Finer Form + yoga ball',
         exercises: [
-            { name: 'Bulgarian Split Squat', sets: '4×8-10/side', isMain: true,
-              cue: 'Knee over ankle · Step FURTHER from bench · Lean slightly forward' },
-            { name: 'RDL', sets: '3×8-10',
-              cue: 'Hip HINGE not lift · Bar close to legs · Feel stretch' },
-            { name: 'Step-Ups', sets: '3×10/side',
-              cue: 'Lean forward · Drive through heel' },
-            { name: 'Lying Hamstring Curl', sets: '3×12-15',
+            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true,
+              cue: 'Tempo barbell — hip hinge, bar close' },
+            { name: 'High Step-Ups', sets: '3×10 each',
+              cue: 'Bench — drive through heel' },
+            { name: 'Hyperextensions', sets: '3×12',
+              cue: 'Finer Form — pad low, squeeze at top' },
+            { name: 'Yoga Ball Ham Curls', sets: '3×12',
               cue: 'Control the negative' },
         ],
+        finisher: 'Ankle-weight kickbacks 2×15 each',
     },
     'Lower C': {
-        target: 'SIDE DIPS — Medius + minimus → Hip dip fill',
+        name: 'Side-Glute + Stability',
+        target: 'Hip dips + SI joint',
+        equipment: 'Bench + ankle weights + heavy band',
         exercises: [
-            { name: 'B-Stance Hip Thrust', sets: '4×8-10/side', isMain: true,
-              cue: 'Unilateral = fixes imbalance · Band around knees' },
-            { name: 'Curtsy Lunge', sets: '3×10/side',
-              cue: 'Crossover motion = medius activation' },
-            { name: 'Side-Lying Leg Raises', sets: '3×15/side',
-              cue: 'Ankle weights · Slow and controlled · Slight forward angle' },
-            { name: 'Cossack Squat', sets: '3×8/side',
+            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true,
+              cue: 'Bench — unilateral fixes imbalance' },
+            { name: 'Cossack Squats', sets: '3×10 each',
               cue: 'Deep lateral stretch' },
-            { name: 'Banded Bridge Burnout', sets: '1×max',
-              cue: 'Finisher — chase the pump' },
+            { name: 'Side-Lying Leg Raises', sets: '3×20',
+              cue: 'Ankle weights — slow and controlled' },
+            { name: 'Band Walks', sets: '3×30 steps',
+              cue: 'Heavy band — stay low' },
         ],
+        finisher: 'Standing abduction hold 45s each + Bridge pulses 2 min',
     },
 };
 
@@ -668,14 +677,14 @@ const PRIMER = [
 ];
 
 const ACTIVATION = {
-    title: 'Every Rep Cue',
+    title: 'The Neural Rule (Every Rep)',
     steps: [
-        'BURN SET first (no weight, 15-20 reps) — find the muscle',
-        'Exhale → Posterior pelvic tilt',
-        'Squeeze glutes → 2 second HOLD at top',
-        'Knees OUT against band',
-        'Last rep of each set: HOLD until failure',
-    ]
+        'Exhale',
+        'Posterior pelvic tilt',
+        'Squeeze glutes',
+        'HOLD 2 seconds',
+    ],
+    why: 'You are training your nervous system to let your glutes hold your pelvis instead of your spine. This is why your shelf appears and your SI pain fades.'
 };
 
 const CONN = [
@@ -685,11 +694,57 @@ const CONN = [
     { id: 'fire', emoji: '🔥', label: 'Locked in' },
 ];
 
+const TEMPO_TYPES = ['Cardio', 'Stretch', 'Yoga', 'Upper', 'Glute-Friendly'];
+
+const TEMPO_RECS = {
+    0: { rec: 'Stretch', reason: 'Scan day — light movement + Zozofit' },  // Sunday
+    1: { rec: null, reason: 'Lower A day' },  // Monday - Lower
+    2: { rec: 'Cardio', reason: 'Blood flow to glutes', alt: 'Stretch' },  // Tuesday
+    3: { rec: null, reason: 'Lower B day' },  // Wednesday - Lower
+    4: { rec: 'Yoga', reason: 'Mobility + recovery', alt: 'Upper' },  // Thursday
+    5: { rec: null, reason: 'Lower C day' },  // Friday - Lower
+    6: { rec: 'Glute-Friendly', reason: 'Light pump', alt: 'Stretch' },  // Saturday
+};
+
+// For Lower days, recommend short stretch/mobility on Tempo
+const LOWER_DAY_TEMPO = { rec: 'Stretch', reason: '10-15 min mobility after your workout' };
+
+const CYCLE_PHASES = {
+    menstrual: { name: 'Menstrual', start: 1, end: 5, instruction: 'Light weight, perfect reps, FEEL the glutes', htNote: 'Light — feel every rep' },
+    follicular: { name: 'Follicular', start: 6, end: 14, instruction: 'Start adding load', htNote: 'Moderate — add weight' },
+    ovulatory: { name: 'Ovulatory', start: 15, end: 17, instruction: 'GO FOR PRs', htNote: 'Heavy — PR time' },
+    luteal: { name: 'Luteal', start: 18, end: 28, instruction: 'Keep weight, add abduction + slow reps', htNote: 'Steady — slow negatives' },
+};
+
+function getCycleDay(periodStart) {
+    if (!periodStart) return null;
+    const start = new Date(periodStart);
+    const today = new Date();
+    const diffTime = today - start;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // Day 1 is start day
+    // Cycle repeats every 28 days
+    return ((diffDays - 1) % 28) + 1;
+}
+
+function getCyclePhase(periodStart) {
+    const day = getCycleDay(periodStart);
+    if (!day) return CYCLE_PHASES.menstrual; // Default
+    
+    for (const [key, phase] of Object.entries(CYCLE_PHASES)) {
+        if (day >= phase.start && day <= phase.end) {
+            return { ...phase, day, key };
+        }
+    }
+    return { ...CYCLE_PHASES.menstrual, day, key: 'menstrual' };
+}
+
 const DEFAULT = {
-    settings: { protein: 130, water: 100 },
+    settings: { protein: 130, water: 100, challengeGoal: 13, periodStart: '2026-01-13' },
     baseline: { roundness: 32, protrusion: 25, lift: 83 },
     days: {},
     scans: [],
+    challengeDone: 4,  // January starting point
+    splits: { frontL: null, frontR: null, middle: null },  // Track flexibility
 };
 
 // ===== STATE =====
@@ -764,6 +819,38 @@ function getLatestScan() {
     return state.scans.length ? state.scans[state.scans.length - 1] : null;
 }
 
+function getTempoStats() {
+    const days = get70Days();
+    const today = new Date();
+    let streak = 0;
+    let total = 0;
+    
+    // Count total Tempo sessions
+    days.forEach(d => {
+        if (d <= today && state.days[iso(d)]?.tempo) total++;
+    });
+    
+    // Calculate current streak (consecutive days with tempo)
+    for (let i = days.length - 1; i >= 0; i--) {
+        const d = days[i];
+        if (d > today) continue;
+        if (state.days[iso(d)]?.tempo) {
+            streak++;
+        } else if (d < today) {
+            break; // Streak broken
+        }
+    }
+    
+    return { streak, total };
+}
+
+function getTempoRec(d) {
+    const dow = d.getDay();
+    const lower = isLower(d);
+    if (lower) return LOWER_DAY_TEMPO;
+    return TEMPO_RECS[dow] || { rec: 'Upper', reason: 'Active recovery' };
+}
+
 // ===== RENDER =====
 function render() {
     document.getElementById('app').innerHTML = `
@@ -785,30 +872,17 @@ function renderDashboard() {
     const lower = isLower(selectedDate);
     const connCounts = getConnCounts();
     const currentPhase = getPhase(today);
+    const currentCycle = getCyclePhase(state.settings.periodStart);
+    const tempoStats = getTempoStats();
     
     return `
         <div class="header">
             <div>
                 <h1>Miami Ready 🍑</h1>
-                <div class="header-sub">Day ${stats.current} of 70 · <span style="color:var(--${currentPhase.color})">${currentPhase.name}</span> Phase</div>
+                <div class="header-sub">Day ${stats.current} of 70 · <span style="color:var(--rose)">${currentCycle.name}</span> Day ${currentCycle.day || 1}</div>
             </div>
             <div class="header-right">
                 <button class="icon-btn" onclick="setView('settings')">⚙️</button>
-            </div>
-        </div>
-        
-        <div class="stats-row">
-            <div class="stat-box">
-                <div class="value teal">${stats.pct}%</div>
-                <div class="label">Complete</div>
-            </div>
-            <div class="stat-box">
-                <div class="value" style="color:var(--${currentPhase.color})">${currentPhase.name}</div>
-                <div class="label">Phase</div>
-            </div>
-            <div class="stat-box">
-                <div class="value">${70 - stats.current}</div>
-                <div class="label">Days Left</div>
             </div>
         </div>
         
@@ -821,6 +895,21 @@ function renderDashboard() {
                     <div class="countdown-label">days to Miami</div>
                     <div class="destination">🌴 March 21, 2026</div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="value teal">${stats.pct}%</div>
+                <div class="label">Program</div>
+            </div>
+            <div class="stat-box" onclick="openChallengeModal()" style="cursor:pointer">
+                <div class="value gold">${state.challengeDone}/${state.settings.challengeGoal}</div>
+                <div class="label">Challenge</div>
+            </div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--purple)">${tempoStats.streak}</div>
+                <div class="label">Tempo Streak</div>
             </div>
         </div>
         
@@ -859,21 +948,24 @@ function renderDashboard() {
                 
                 ${(() => {
                     const phase = getPhase(selectedDate);
+                    const cycle = getCyclePhase(state.settings.periodStart);
                     return `
                         <div style="padding:12px 16px;background:var(--${phase.color}-dim);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
                             <div>
-                                <div style="font-size:12px;font-weight:800;color:var(--${phase.color});text-transform:uppercase;letter-spacing:0.5px">Phase: ${phase.name}</div>
+                                <div style="font-size:12px;font-weight:800;color:var(--${phase.color});text-transform:uppercase;letter-spacing:0.5px">${phase.name} · Week ${Math.ceil(dayNum(selectedDate) / 7)}</div>
                                 <div style="font-size:13px;color:var(--text-2);margin-top:2px">${phase.goal}</div>
                             </div>
-                            <div style="text-align:right">
-                                <div style="font-size:11px;color:var(--text-3)">Week ${Math.ceil(dayNum(selectedDate) / 7)}</div>
-                            </div>
+                            ${lower ? `
+                                <div style="text-align:right;padding:6px 10px;background:var(--rose-dim);border-radius:8px">
+                                    <div style="font-size:11px;color:var(--rose);font-weight:700">${cycle.name}</div>
+                                    <div style="font-size:10px;color:var(--text-3)">Day ${cycle.day || 1}</div>
+                                </div>
+                            ` : ''}
                         </div>
                         
                         ${lower ? `
                             <div style="padding:12px 16px;background:var(--bg-card-2);border-bottom:1px solid var(--border)">
-                                <div style="font-size:13px;color:var(--${phase.color});font-weight:700">${phase.instruction}</div>
-                                <div style="font-size:12px;color:var(--text-3);margin-top:4px">${phase.rule}</div>
+                                <div style="font-size:13px;color:var(--gold);font-weight:700">🩸 ${cycle.instruction}</div>
                             </div>
                         ` : ''}
                     `;
@@ -881,6 +973,10 @@ function renderDashboard() {
                 
                 ${lower ? `
                     <div class="workout-protocols">
+                        <div class="protocol">
+                            <div class="title">🎒 Equipment</div>
+                            <div class="content" style="font-size:13px">${EXERCISES[selSched.label]?.equipment || ''}</div>
+                        </div>
                         <div class="protocol">
                             <div class="title">⚡ Right-Side Reset</div>
                             <div class="content">
@@ -896,37 +992,73 @@ function renderDashboard() {
                         <div class="protocol" style="background:var(--gold-dim)">
                             <div class="title" style="color:var(--gold)">🧠 ${ACTIVATION.title}</div>
                             <div class="content">
-                                ${ACTIVATION.steps.map((s, i) => `<div style="margin:4px 0">${i+1}. ${s}</div>`).join('')}
+                                ${ACTIVATION.steps.map((s, i) => `<div style="margin:4px 0;font-size:15px;font-weight:${i === 3 ? '700' : '400'}">${i+1}. ${s}</div>`).join('')}
+                                <div style="margin-top:8px;font-size:12px;color:var(--text-3);line-height:1.4">${ACTIVATION.why}</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="workout-exercises">
-                        <div style="padding:12px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--teal);font-weight:600">
-                            ${EXERCISES[selSched.label]?.target || ''}
+                        <div style="padding:12px 16px;background:var(--bg-card-2);border-bottom:1px solid var(--border)">
+                            <div style="font-size:14px;font-weight:700;color:var(--teal)">${EXERCISES[selSched.label]?.name}</div>
+                            <div style="font-size:12px;color:var(--text-2)">${EXERCISES[selSched.label]?.target}</div>
                         </div>
-                        ${EXERCISES[selSched.label]?.exercises.map(ex => {
-                            const phase = getPhase(selectedDate);
+                        ${EXERCISES[selSched.label]?.exercises.map((ex, i) => {
+                            const cycle = getCyclePhase(state.settings.periodStart);
                             return `
-                                <div style="padding:14px 0;border-bottom:1px solid var(--border)">
+                                <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
-                                        <span style="font-weight:600;font-size:14px">${ex.name}</span>
+                                        <span style="font-weight:600;font-size:14px">${i+1}. ${ex.name}</span>
                                         <span style="color:var(--text-2);font-size:13px">${ex.sets}</span>
                                     </div>
                                     <div style="font-size:12px;color:${ex.isMain ? 'var(--gold)' : 'var(--text-3)'};margin-top:4px">
-                                        ${ex.isMain ? '★ ' + phase.htNote + ' · ' : ''}${ex.cue}
+                                        ${ex.isMain ? '★ ' + cycle.htNote + ' · ' : ''}${ex.cue}
                                     </div>
                                 </div>
                             `;
                         }).join('') || ''}
-                    </div>
-                ` : `
-                    <div class="workout-protocols">
-                        <div class="protocol">
-                            <div class="title">🧘 Recovery Day</div>
-                            <div class="content">Upper body, cardio, or stretch. <strong>No additional glute work</strong> — your glutes are growing from Monday/Wednesday/Friday. Let them recover.</div>
+                        <div style="padding:14px 16px;background:var(--rose-dim);border-radius:0 0 16px 16px">
+                            <div style="font-size:12px;font-weight:700;color:var(--rose);margin-bottom:4px">🔥 FINISHER</div>
+                            <div style="font-size:13px;color:var(--text)">${EXERCISES[selSched.label]?.finisher || ''}</div>
                         </div>
                     </div>
+                ` : `
+                    ${(() => {
+                        const rec = getTempoRec(selectedDate);
+                        return `
+                            <div class="workout-protocols">
+                                <div class="protocol" style="background:var(--purple-dim)">
+                                    <div class="title" style="color:var(--purple)">💡 Today's Recommendation</div>
+                                    <div class="content">
+                                        <div style="font-size:18px;font-weight:700;margin-bottom:4px">${rec.rec}</div>
+                                        <div style="color:var(--text-3)">${rec.reason}</div>
+                                    </div>
+                                </div>
+                                <div class="protocol">
+                                    <div class="title">🎯 Tempo Options</div>
+                                    <div class="content" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                                        ${TEMPO_TYPES.map(t => `
+                                            <span style="padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;
+                                                ${t === rec.rec ? 'background:var(--purple);color:var(--bg)' : 'background:var(--bg-card-2);color:var(--text-2)'}">
+                                                ${t}${t === rec.rec ? ' ✓' : ''}
+                                            </span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                ${isLower(selectedDate) ? `
+                                    <div class="protocol">
+                                        <div class="title">⚠️ Lower Day</div>
+                                        <div class="content">You have glute work today. Keep Tempo light — stretch or mobility only.</div>
+                                    </div>
+                                ` : `
+                                    <div class="protocol">
+                                        <div class="title">🚫 Glute Recovery</div>
+                                        <div class="content">No additional glute work. Your glutes are growing from Mon/Wed/Fri.</div>
+                                    </div>
+                                `}
+                            </div>
+                        `;
+                    })()}
                 `}
                 
                 <div class="workout-footer">
@@ -940,9 +1072,9 @@ function renderDashboard() {
         <div class="section">
             <div class="section-title">Neural Connection</div>
             <div class="chart-card">
-                <div style="margin-bottom:12px;padding:10px 12px;background:var(--${currentPhase.color}-dim);border-radius:10px">
-                    <div style="font-size:12px;color:var(--${currentPhase.color});font-weight:700">
-                        ${currentPhase.name} Target: ${currentPhase.name === 'CONNECT' ? '😐 → 🤔' : currentPhase.name === 'BUILD' ? '🤔 → 😊' : '😊 → 🔥'}
+                <div style="margin-bottom:12px;padding:10px 12px;background:var(--gold-dim);border-radius:10px">
+                    <div style="font-size:12px;color:var(--gold);font-weight:700">
+                        If you can't feel it, it's not growing
                     </div>
                 </div>
                 <div class="conn-dist">
@@ -1114,6 +1246,73 @@ function renderSettings() {
             </div>
             
             <div class="settings-card">
+                <h3>Tempo Challenge</h3>
+                <div class="form-group">
+                    <label class="form-label">Monthly Challenge Goal</label>
+                    <input type="number" class="form-input" value="${state.settings.challengeGoal}" 
+                        onchange="updateSetting('challengeGoal', +this.value)">
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Challenges Completed</label>
+                    <input type="number" class="form-input" value="${state.challengeDone}" 
+                        onchange="state.challengeDone = +this.value; save(); render();">
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>Cycle Syncing</h3>
+                <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Auto-calculates your phase based on period start</p>
+                <div class="form-group">
+                    <label class="form-label">Period Start Date</label>
+                    <input type="date" class="form-input" value="${state.settings.periodStart || ''}" 
+                        onchange="state.settings.periodStart = this.value; save(); render();">
+                </div>
+                ${(() => {
+                    const cycle = getCyclePhase(state.settings.periodStart);
+                    return `
+                        <div style="padding:16px;background:var(--bg-card-2);border-radius:12px;margin-top:8px">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                                <span style="font-size:18px;font-weight:700;color:var(--teal)">${cycle.name}</span>
+                                <span style="font-size:14px;color:var(--text-2)">Day ${cycle.day || 1}</span>
+                            </div>
+                            <div style="font-size:13px;color:var(--gold);font-weight:600">${cycle.instruction}</div>
+                            <div style="display:flex;gap:4px;margin-top:12px">
+                                ${Object.entries(CYCLE_PHASES).map(([key, phase]) => `
+                                    <div style="flex:1;height:6px;border-radius:3px;background:${cycle.key === key ? 'var(--teal)' : 'var(--bg-hover)'}"></div>
+                                `).join('')}
+                            </div>
+                            <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--text-3)">
+                                <span>Menstrual</span>
+                                <span>Follicular</span>
+                                <span>Ovulatory</span>
+                                <span>Luteal</span>
+                            </div>
+                        </div>
+                    `;
+                })()}
+            </div>
+            
+            <div class="settings-card">
+                <h3>Splits Progress</h3>
+                <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Track flexibility — lower inches = more glute room</p>
+                <div class="form-group">
+                    <label class="form-label">Front Left (inches from floor)</label>
+                    <input type="number" class="form-input" value="${state.splits?.frontL || ''}" 
+                        onchange="state.splits.frontL = +this.value; save();">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Front Right (inches)</label>
+                    <input type="number" class="form-input" value="${state.splits?.frontR || ''}" 
+                        onchange="state.splits.frontR = +this.value; save();">
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Middle (inches)</label>
+                    <input type="number" class="form-input" value="${state.splits?.middle || ''}" 
+                        onchange="state.splits.middle = +this.value; save();">
+                </div>
+            </div>
+            
+            <div class="settings-card">
                 <h3>Backup</h3>
                 <div style="display:flex;gap:12px;margin-top:8px">
                     <button class="btn btn-secondary" style="flex:1" onclick="exportData()">Export</button>
@@ -1230,6 +1429,19 @@ function renderModal() {
                     `}
                     
                     <div class="form-group">
+                        <label class="form-label">Tempo Studio</label>
+                        <div style="display:flex;gap:8px;align-items:center;padding:12px;background:var(--bg-card-2);border-radius:12px;cursor:pointer" onclick="toggleTempo()">
+                            <div id="tempoCheck" style="width:24px;height:24px;border-radius:6px;border:2px solid ${data.tempo ? 'var(--purple)' : 'var(--border)'};background:${data.tempo ? 'var(--purple)' : 'transparent'};display:flex;align-items:center;justify-content:center;color:white;font-size:14px">
+                                ${data.tempo ? '✓' : ''}
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Used Tempo today</div>
+                                <div style="font-size:12px;color:var(--text-3)">Keep your streak going!</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
                         <label class="form-label">Protein (g)</label>
                         <input type="number" class="form-input" id="mProtein" value="${data.protein || ''}">
                         <div class="quick-btns">
@@ -1269,9 +1481,19 @@ window.openLog = d => {
     modal = d; 
     const data = state.days[d] || {};
     tempTempoType = data.tempoType || null;
+    tempTempo = data.tempo || null;
     render(); 
 };
 window.closeModal = () => { modal = null; render(); };
+
+window.openChallengeModal = () => {
+    const newVal = prompt(`Update challenge progress (current: ${state.challengeDone}/${state.settings.challengeGoal})`, state.challengeDone);
+    if (newVal !== null && !isNaN(+newVal)) {
+        state.challengeDone = +newVal;
+        save();
+        render();
+    }
+};
 
 window.selectConn = id => {
     document.querySelectorAll('.conn-opt').forEach(el => el.classList.remove('active'));
@@ -1280,6 +1502,7 @@ window.selectConn = id => {
 
 let tempHadLower = null;
 let tempTempoType = null;
+let tempTempo = null;
 
 window.setHadLower = val => {
     tempHadLower = val;
@@ -1298,6 +1521,15 @@ window.selectTempoType = type => {
     event.currentTarget.style.borderColor = 'var(--teal)';
 };
 
+window.toggleTempo = () => {
+    const check = document.getElementById('tempoCheck');
+    const isChecked = check.style.background.includes('purple');
+    tempTempo = !isChecked;
+    check.style.border = `2px solid ${tempTempo ? 'var(--purple)' : 'var(--border)'}`;
+    check.style.background = tempTempo ? 'var(--purple)' : 'transparent';
+    check.innerHTML = tempTempo ? '✓' : '';
+};
+
 window.addVal = (id, amt) => {
     const el = document.getElementById(id);
     el.value = (+el.value || 0) + amt;
@@ -1306,6 +1538,7 @@ window.addVal = (id, amt) => {
 window.saveLog = () => {
     const d = parseIso(modal);
     const lower = isLower(d);
+    const data = state.days[modal] || {};
     
     const patch = {
         workout: true,
@@ -1313,6 +1546,13 @@ window.saveLog = () => {
         water: +document.getElementById('mWater').value || 0,
         notes: document.getElementById('mNotes').value,
     };
+    
+    // Tempo tracking (for all days)
+    if (tempTempo !== null) {
+        patch.tempo = tempTempo;
+    } else if (data.tempo !== undefined) {
+        patch.tempo = data.tempo;
+    }
     
     if (lower) {
         patch.htWt = +document.getElementById('htWt').value || null;
@@ -1328,6 +1568,7 @@ window.saveLog = () => {
     save();
     tempHadLower = null;
     tempTempoType = null;
+    tempTempo = null;
     closeModal();
 };
 
