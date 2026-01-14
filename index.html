@@ -738,6 +738,40 @@ function getCyclePhase(periodStart) {
     return { ...CYCLE_PHASES.menstrual, day, key: 'menstrual' };
 }
 
+function getLastWeight(workoutLabel) {
+    const days = get70Days();
+    const today = new Date();
+    
+    // Find most recent logged day with this workout type that has weight
+    for (let i = days.length - 1; i >= 0; i--) {
+        const d = days[i];
+        if (d >= today) continue;
+        const data = state.days[iso(d)];
+        if (!data) continue;
+        
+        const sched = getSched(d);
+        if (sched.label === workoutLabel && (data.mainWt || data.htWt)) {
+            return { weight: data.mainWt || data.htWt, reps: data.mainReps || data.htReps, date: d };
+        }
+    }
+    return null;
+}
+
+function getWeightRec(cycle, lastWeight) {
+    if (!lastWeight) return { action: 'Start light', note: 'Find your baseline' };
+    
+    const phase = cycle.key;
+    if (phase === 'menstrual') {
+        return { action: `${lastWeight}lbs or lighter`, note: 'Focus on feeling it' };
+    } else if (phase === 'follicular') {
+        return { action: `${lastWeight}lbs → ${lastWeight + 5}lbs`, note: 'Add if connected' };
+    } else if (phase === 'ovulatory') {
+        return { action: `${lastWeight + 5}-${lastWeight + 10}lbs`, note: 'PR window — go for it' };
+    } else {
+        return { action: `${lastWeight}lbs`, note: 'Maintain, slow negatives' };
+    }
+}
+
 const DEFAULT = {
     settings: { protein: 130, water: 100, periodStart: '2026-01-13' },
     baseline: { roundness: 32, protrusion: 25, lift: 83 },
@@ -798,10 +832,10 @@ function getConnCounts() {
 
 function getHtProgress() {
     const entries = Object.entries(state.days)
-        .filter(([k, v]) => v.htWt && isLower(parseIso(k)))
+        .filter(([k, v]) => (v.mainWt || v.htWt) && isLower(parseIso(k)))
         .sort((a, b) => a[0].localeCompare(b[0]))
         .slice(-10);
-    return entries.map(([k, v]) => ({ date: k, weight: v.htWt }));
+    return entries.map(([k, v]) => ({ date: k, weight: v.mainWt || v.htWt }));
 }
 
 function getProgramStats() {
@@ -1004,15 +1038,28 @@ function renderDashboard() {
                         </div>
                         ${EXERCISES[selSched.label]?.exercises.map((ex, i) => {
                             const cycle = getCyclePhase(state.settings.periodStart);
+                            const lastWt = ex.isMain ? getLastWeight(selSched.label) : null;
+                            const wtRec = ex.isMain ? getWeightRec(cycle, lastWt?.weight) : null;
                             return `
                                 <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
                                     <div style="display:flex;justify-content:space-between;align-items:center">
                                         <span style="font-weight:600;font-size:14px">${i+1}. ${ex.name}</span>
                                         <span style="color:var(--text-2);font-size:13px">${ex.sets}</span>
                                     </div>
-                                    <div style="font-size:12px;color:${ex.isMain ? 'var(--gold)' : 'var(--text-3)'};margin-top:4px">
-                                        ${ex.isMain ? '★ ' + cycle.htNote + ' · ' : ''}${ex.cue}
+                                    <div style="font-size:12px;color:var(--text-3);margin-top:4px">
+                                        ${ex.cue}
                                     </div>
+                                    ${ex.isMain ? `
+                                        <div style="margin-top:10px;padding:10px 12px;background:var(--gold-dim);border-radius:8px">
+                                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                                <div>
+                                                    <div style="font-size:11px;color:var(--text-3)">Last: ${lastWt ? lastWt.weight + 'lbs × ' + (lastWt.reps || '?') : 'None'}</div>
+                                                    <div style="font-size:14px;font-weight:700;color:var(--gold);margin-top:2px">Today: ${wtRec.action}</div>
+                                                </div>
+                                                <div style="font-size:11px;color:var(--text-2);text-align:right;max-width:100px">${wtRec.note}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
                                 </div>
                             `;
                         }).join('') || ''}
@@ -1089,7 +1136,7 @@ function renderDashboard() {
         </div>
         
         <div class="section">
-            <div class="section-title">Hip Thrust Progress</div>
+            <div class="section-title">Main Lift Progress</div>
             <div class="chart-card">
                 ${renderSparkline()}
             </div>
@@ -1378,10 +1425,10 @@ function renderModal() {
                     
                     ${lower ? `
                         <div class="form-group">
-                            <label class="form-label">Hip Thrust Top Set</label>
+                            <label class="form-label">${EXERCISES[sched.label]?.exercises.find(e => e.isMain)?.name || 'Main Lift'} — Top Set</label>
                             <div class="form-row">
-                                <input type="number" class="form-input" id="htWt" value="${data.htWt || ''}" placeholder="lbs">
-                                <input type="number" class="form-input" id="htReps" value="${data.htReps || ''}" placeholder="reps">
+                                <input type="number" class="form-input" id="mainWt" value="${data.mainWt || data.htWt || ''}" placeholder="lbs">
+                                <input type="number" class="form-input" id="mainReps" value="${data.mainReps || data.htReps || ''}" placeholder="reps">
                             </div>
                         </div>
                         
@@ -1531,8 +1578,8 @@ window.saveLog = () => {
     }
     
     if (lower) {
-        patch.htWt = +document.getElementById('htWt').value || null;
-        patch.htReps = +document.getElementById('htReps').value || null;
+        patch.mainWt = +document.getElementById('mainWt').value || null;
+        patch.mainReps = +document.getElementById('mainReps').value || null;
         const active = document.querySelector('.conn-opt.active');
         if (active) patch.conn = active.dataset.conn;
     } else {
