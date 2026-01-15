@@ -2123,3 +2123,95 @@ input {
     padding-top: 12px;
     border-top: 1px solid rgba(167, 139, 250, 0.3);
 }
+
+/* ===== VIDEO BUTTONS ===== */
+.btn-video {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--bg);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.btn-video:hover {
+    background: var(--teal);
+    transform: scale(1.1);
+}
+
+.btn-video-large {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--teal);
+    color: var(--bg);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-video-large:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* ===== REVIEW MODE ===== */
+.review-banner {
+    background: var(--purple-dim);
+    color: var(--purple);
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.workout-logged-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* ===== WARMUP ITEM WITH VIDEO ===== */
+.warmup-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-card-2);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.warmup-item .warmup-name {
+    flex: 1;
+}
+
+.warmup-item .warmup-time {
+    color: var(--text-3);
+    font-size: 13px;
+}

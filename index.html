@@ -89,9 +89,14 @@
                     </template>
 
                     <template x-if="todayData.workout">
-                        <div class="workout-complete-badge">
-                            <span>✓</span> Logged
-                            <button class="btn-text-small" @click="openQuickLog()">Edit</button>
+                        <div class="workout-logged-section">
+                            <div class="workout-complete-badge">
+                                <span>✓</span> Logged
+                                <button class="btn-text-small" @click="openQuickLog()">Edit</button>
+                            </div>
+                            <button class="btn-secondary btn-review" @click="startWorkout(true)">
+                                <span>🔄</span> Review Workout
+                            </button>
                         </div>
                     </template>
                 </div>
@@ -205,9 +210,17 @@
                 <!-- Workout Header -->
                 <header class="workout-header">
                     <button class="btn-back" @click="exitWorkout()">← Exit</button>
-                    <span class="workout-title" x-text="todaySchedule.label"></span>
+                    <span class="workout-title">
+                        <span x-show="reviewMode">📖 </span>
+                        <span x-text="todaySchedule.label"></span>
+                    </span>
                     <span class="workout-step" x-text="`${workoutStep + 1}/${workoutSteps.length}`"></span>
                 </header>
+
+                <!-- Review Mode Banner -->
+                <div class="review-banner" x-show="reviewMode">
+                    Review Mode — browse exercises without logging
+                </div>
 
                 <!-- Progress Bar -->
                 <div class="workout-progress">
@@ -224,12 +237,15 @@
 
                             <div class="warmup-checklist">
                                 <template x-for="(item, idx) in currentWorkoutStep.items" :key="idx">
-                                    <div class="warmup-item" :class="{ done: warmupChecks[idx] }" @click="toggleWarmup(idx)">
-                                        <div class="warmup-check">
+                                    <div class="warmup-item" :class="{ done: warmupChecks[idx] }">
+                                        <div class="warmup-check" @click="toggleWarmup(idx)">
                                             <span x-show="warmupChecks[idx]">✓</span>
                                         </div>
-                                        <span class="warmup-name" x-text="item.name"></span>
+                                        <span class="warmup-name" @click="toggleWarmup(idx)" x-text="item.name"></span>
                                         <span class="warmup-time" x-text="item.time"></span>
+                                        <button class="btn-video" @click.stop="openVideo(item.video)" x-show="item.video" title="Watch video">
+                                            ▶
+                                        </button>
                                     </div>
                                 </template>
                             </div>
@@ -237,7 +253,7 @@
                             <div class="step-actions">
                                 <button class="btn-secondary" @click="skipStep()">Skip Warm-up</button>
                                 <button class="btn-primary" @click="nextStep()"
-                                    :disabled="!warmupChecks.every(c => c)">
+                                    :disabled="!reviewMode && !warmupChecks.every(c => c)">
                                     Continue →
                                 </button>
                             </div>
@@ -247,7 +263,12 @@
                     <!-- Exercise Step -->
                     <template x-if="currentWorkoutStep?.type === 'exercise'">
                         <div class="step-exercise">
-                            <div class="exercise-number" x-text="`Exercise ${currentWorkoutStep.number}`"></div>
+                            <div class="exercise-header">
+                                <div class="exercise-number" x-text="`Exercise ${currentWorkoutStep.number}`"></div>
+                                <button class="btn-video-large" @click="openVideo(currentWorkoutStep.video)" x-show="currentWorkoutStep.video" title="Watch form video">
+                                    ▶ Watch Form
+                                </button>
+                            </div>
                             <h2 x-text="currentWorkoutStep.name"></h2>
                             <p class="exercise-sets" x-text="currentWorkoutStep.sets"></p>
 
@@ -269,8 +290,8 @@
                                 </div>
                             </template>
 
-                            <!-- Set Logger (for main lift) -->
-                            <template x-if="currentWorkoutStep.isMain">
+                            <!-- Set Logger (for main lift, hidden in review mode) -->
+                            <template x-if="currentWorkoutStep.isMain && !reviewMode">
                                 <div class="set-logger">
                                     <h4>Log Your Sets</h4>
                                     <template x-for="(set, idx) in exerciseSets" :key="idx">
@@ -290,9 +311,9 @@
                             </template>
 
                             <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()">Skip</button>
+                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
                                 <button class="btn-primary" @click="nextStep()">
-                                    <span x-text="workoutStep < workoutSteps.length - 1 ? 'Next Exercise →' : 'Finish Workout'"></span>
+                                    <span x-text="workoutStep < workoutSteps.length - 1 ? 'Next →' : (reviewMode ? 'Done' : 'Finish Workout')"></span>
                                 </button>
                             </div>
                         </div>
@@ -306,8 +327,8 @@
                             <p class="finisher-content" x-text="currentWorkoutStep.content"></p>
 
                             <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()">Skip</button>
-                                <button class="btn-primary" @click="nextStep()">Complete →</button>
+                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
+                                <button class="btn-primary" @click="nextStep()" x-text="reviewMode ? 'Done' : 'Complete →'"></button>
                             </div>
                         </div>
                     </template>

@@ -24,9 +24,9 @@ const PHASES = [
 
 // Equipment per workout
 const EQUIPMENT = {
-    'Lower A': ['Barbell + bench', 'Finer Form (back extension)', 'Resistance band', 'Step platform'],
-    'Lower B': ['Tempo barbell', 'Bench', 'Finer Form', 'Yoga ball', 'Ankle weights'],
-    'Lower C': ['Bench', 'Resistance band', 'Bodyweight'],
+    'Lower A': ['Barbell', 'Finer Form bench', 'Finer Form back extension', 'Resistance band', 'Step platform'],
+    'Lower B': ['Tempo barbell', 'Finer Form bench', 'Finer Form back extension', 'Yoga ball', 'Ankle weights'],
+    'Lower C': ['Finer Form bench', 'Resistance band'],
 };
 
 // Right-Side Reset (for imbalance correction)
@@ -59,51 +59,51 @@ const EXERCISES = {
     'Lower A': {
         name: 'Shelf + Side',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min' },
-            { name: 'Cat-Cow', time: '1 min' },
-            { name: 'Dead Bugs', time: '2 min' },
-            { name: 'Floor I-Y-W', time: '2 min' },
-            { name: 'Hip Flexor Stretch', time: '1 min' },
+            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
+            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, cue: '2-second squeeze at top' },
-            { name: 'Back Extension Hold', sets: '3×30-45s', cue: 'Squeeze and hold at top' },
-            { name: 'Seated Band Abduction', sets: '4×15-20', cue: 'Push knees out against band' },
-            { name: 'Lateral Step-Ups', sets: '3×10 each', cue: 'Drive through heel' },
+            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, cue: '2-second squeeze at top', video: 'LM8XHLYJoYs' },
+            { name: 'Back Extension Hold', sets: '3×30-45s', cue: 'Squeeze and hold at top', video: 'ph3pddpKzzw' },
+            { name: 'Seated Band Abduction', sets: '4×15-20', cue: 'Push knees out against band', video: 'FEszLuJhBzg' },
+            { name: 'Lateral Step-Ups', sets: '3×10 each', cue: 'Drive through heel', video: '5qTuGzPph5g' },
         ],
         finisher: 'Frog pumps ×40 + Band abduction hold ×1 min',
     },
     'Lower B': {
         name: 'Under-Butt',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min' },
-            { name: 'Cat-Cow', time: '1 min' },
-            { name: 'Dead Bugs', time: '2 min' },
-            { name: 'Floor I-Y-W', time: '2 min' },
-            { name: 'Hip Flexor Stretch', time: '1 min' },
+            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
+            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true, cue: 'Hip hinge, bar close to legs' },
-            { name: 'High Step-Ups', sets: '3×10 each', cue: 'Full extension at top' },
-            { name: 'Hyperextensions', sets: '3×12', cue: 'Squeeze glutes at top' },
-            { name: 'Yoga Ball Ham Curls', sets: '3×12', cue: 'Control the negative' },
+            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true, cue: 'Hip hinge, bar close to legs', video: 'MrW6JpeRc8Q' },
+            { name: 'High Step-Ups', sets: '3×10 each', cue: 'Full extension at top', video: 'dQhU3lyTbLE' },
+            { name: 'Hyperextensions', sets: '3×12', cue: 'Squeeze glutes at top', video: 'ph3pddpKzzw' },
+            { name: 'Yoga Ball Ham Curls', sets: '3×12', cue: 'Control the negative', video: 'dlZtTymz1x4' },
         ],
         finisher: 'Ankle-weight kickbacks 2×15 each side',
     },
     'Lower C': {
         name: 'Side-Glute + Stability',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min' },
-            { name: 'Cat-Cow', time: '1 min' },
-            { name: 'Dead Bugs', time: '2 min' },
-            { name: 'Floor I-Y-W', time: '2 min' },
-            { name: 'Hip Flexor Stretch', time: '1 min' },
+            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
+            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true, cue: 'Fix imbalances' },
-            { name: 'Cossack Squats', sets: '3×10 each', cue: 'Deep lateral stretch' },
-            { name: 'Side-Lying Leg Raises', sets: '3×20', cue: 'Slow and controlled' },
-            { name: 'Band Walks', sets: '3×30 steps', cue: 'Stay low, tension constant' },
+            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true, cue: 'Fix imbalances', video: 'AVT-iJhwLEQ' },
+            { name: 'Cossack Squats', sets: '3×10 each', cue: 'Deep lateral stretch', video: 'tpczTeSkHz0' },
+            { name: 'Side-Lying Leg Raises', sets: '3×20', cue: 'Slow and controlled', video: 'jgh6sGwtTwk' },
+            { name: 'Band Walks', sets: '3×30 steps', cue: 'Stay low, tension constant', video: 'z8Ntz0GODQI' },
         ],
         finisher: 'Standing abduction hold 45s each + Bridge pulses 2 min',
     },
@@ -146,6 +146,7 @@ function app() {
 
         // Workout mode
         workoutMode: false,
+        reviewMode: false,
         workoutStep: 0,
         workoutSteps: [],
         warmupChecks: [],
@@ -486,7 +487,7 @@ function app() {
         },
 
         // ===== WORKOUT MODE =====
-        startWorkout() {
+        startWorkout(reviewMode = false) {
             const label = this.todaySchedule.label;
             const workout = EXERCISES[label];
 
@@ -496,6 +497,7 @@ function app() {
                 return;
             }
 
+            this.reviewMode = reviewMode;
             this.workoutSteps = [];
 
             // Add warmup
@@ -531,6 +533,10 @@ function app() {
             this.workoutMode = true;
         },
 
+        openVideo(videoId) {
+            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+        },
+
         toggleWarmup(idx) {
             this.warmupChecks[idx] = !this.warmupChecks[idx];
         },
@@ -564,17 +570,35 @@ function app() {
         },
 
         skipStep() {
-            this.nextStep();
+            // In review mode, go back instead of skip
+            if (this.reviewMode && this.workoutStep > 0) {
+                this.workoutStep--;
+            } else {
+                this.nextStep();
+            }
         },
 
         exitWorkout() {
-            if (confirm('Exit workout? Progress will be lost.')) {
+            if (this.reviewMode) {
+                // In review mode, just exit without confirmation
+                this.workoutMode = false;
+                this.reviewMode = false;
+                this.workoutStep = 0;
+            } else if (confirm('Exit workout? Progress will be lost.')) {
                 this.workoutMode = false;
                 this.workoutStep = 0;
             }
         },
 
         completeWorkout() {
+            // In review mode, just exit without saving or celebration
+            if (this.reviewMode) {
+                this.workoutMode = false;
+                this.reviewMode = false;
+                this.workoutStep = 0;
+                return;
+            }
+
             // Check for PR
             const last = this.lastWeight;
             this.isPR = last && this.topSet.weight > last.weight;
