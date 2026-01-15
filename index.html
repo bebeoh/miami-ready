@@ -311,7 +311,14 @@
 
                 <!-- Week View -->
                 <div class="week-view">
-                    <h3>This Week</h3>
+                    <div class="week-nav-header">
+                        <button class="week-nav-btn" @click="prevWeek()" :disabled="!canGoPrevWeek">‹</button>
+                        <div class="week-nav-label">
+                            <span x-text="weekLabel"></span>
+                            <button class="btn-today" @click="goToCurrentWeek()" x-show="viewingWeekOffset !== 0">Today</button>
+                        </div>
+                        <button class="week-nav-btn" @click="nextWeek()" :disabled="!canGoNextWeek">›</button>
+                    </div>
                     <div class="week-grid">
                         <template x-for="day in weekDates" :key="day.iso">
                             <div class="week-day"
@@ -476,6 +483,29 @@
                             <input type="file" accept=".json" @change="importData($event)" hidden>
                         </label>
                     </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Cloud Sync</h3>
+                    <p class="setting-desc">Sync across devices with JSONbin.io (free)</p>
+                    <div class="setting-row">
+                        <label>Bin ID</label>
+                        <input type="text" x-model="cloudBinId" placeholder="Your bin ID">
+                    </div>
+                    <div class="setting-row">
+                        <label>API Key</label>
+                        <input type="password" x-model="cloudApiKey" placeholder="Your master key">
+                    </div>
+                    <div class="setting-buttons">
+                        <button class="btn-secondary" @click="saveCloudCredentials(cloudBinId, cloudApiKey)">Save Keys</button>
+                    </div>
+                    <div class="setting-buttons" style="margin-top: 8px;">
+                        <button class="btn-secondary" @click="cloudPush()">Push to Cloud</button>
+                        <button class="btn-secondary" @click="cloudPull()">Pull from Cloud</button>
+                    </div>
+                    <p class="setting-hint" x-show="getCloudCredentials().binId">
+                        Keys saved locally
+                    </p>
                 </div>
 
                 <div class="settings-section danger">

@@ -1212,6 +1212,66 @@ input {
     margin-bottom: 12px;
 }
 
+.week-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.week-nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.week-nav-btn:hover:not(:disabled) {
+    background: var(--bg-hover);
+}
+
+.week-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.week-nav-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.week-nav-label span {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.btn-today {
+    padding: 4px 12px;
+    background: var(--teal);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.btn-today:hover {
+    filter: brightness(1.1);
+}
+
 .week-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -1571,6 +1631,12 @@ input {
     font-size: 13px;
     color: var(--text-3);
     margin: -8px 0 16px;
+}
+
+.setting-hint {
+    font-size: 12px;
+    color: var(--teal);
+    margin-top: 8px;
 }
 
 .cycle-preview {
