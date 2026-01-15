@@ -154,6 +154,7 @@ function app() {
         // Workout mode
         workoutMode: false,
         reviewMode: false,
+        reviewingDate: null,
         workoutStep: 0,
         workoutSteps: [],
         warmupChecks: [],
@@ -494,17 +495,25 @@ function app() {
         },
 
         // ===== WORKOUT MODE =====
-        startWorkout(reviewMode = false) {
-            const label = this.todaySchedule.label;
+        startWorkout(reviewMode = false, forDate = null) {
+            // Use provided date or default to today
+            const targetDate = forDate || this.todayISO;
+            const schedule = this.getSchedule(targetDate);
+            const label = schedule.label;
             const workout = EXERCISES[label];
 
             if (!workout) {
-                // Tempo day - just open quick log
+                // Tempo day - no workout to review
+                if (reviewMode) {
+                    alert('No workout exercises for this day (tempo/recovery day)');
+                    return;
+                }
                 this.openQuickLog();
                 return;
             }
 
             this.reviewMode = reviewMode;
+            this.reviewingDate = targetDate;
             this.workoutSteps = [];
 
             // Add warmup

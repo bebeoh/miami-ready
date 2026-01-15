@@ -686,6 +686,11 @@
                     </div>
 
                     <footer class="modal-footer">
+                        <template x-if="isLowerDay(selectedDate)">
+                            <button class="btn-secondary" @click="showQuickLog = false; startWorkout(true, selectedDate)">
+                                Review Workout
+                            </button>
+                        </template>
                         <button class="btn-primary" @click="saveQuickLog()">Save</button>
                     </footer>
                 </div>
