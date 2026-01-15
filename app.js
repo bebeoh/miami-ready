@@ -446,6 +446,25 @@ function app() {
             return this.getSchedule(d).type === 'lower';
         },
 
+        // Find the most recent lower body day from a given date
+        getLastLowerDay(fromDate = null) {
+            const start = fromDate ? this.parseIso(fromDate) : new Date();
+            for (let i = 1; i <= 7; i++) {
+                const d = new Date(start);
+                d.setDate(d.getDate() - i);
+                if (d < CONFIG.START_DATE) return null;
+                const iso = this.iso(d);
+                if (this.isLowerDay(iso)) {
+                    return {
+                        iso,
+                        label: this.getSchedule(iso).label,
+                        date: d
+                    };
+                }
+            }
+            return null;
+        },
+
         formatDate(d, style) {
             const date = typeof d === 'string' ? this.parseIso(d) : d;
             if (style === 'long') {

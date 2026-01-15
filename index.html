@@ -686,9 +686,16 @@
                     </div>
 
                     <footer class="modal-footer">
+                        <!-- Review this day's workout (lower body days) -->
                         <template x-if="isLowerDay(selectedDate)">
                             <button class="btn-secondary" @click="showQuickLog = false; startWorkout(true, selectedDate)">
-                                Review Workout
+                                Review <span x-text="getSchedule(selectedDate).label"></span>
+                            </button>
+                        </template>
+                        <!-- Review last workout (tempo/recovery days) -->
+                        <template x-if="!isLowerDay(selectedDate) && getLastLowerDay(selectedDate)">
+                            <button class="btn-secondary" @click="showQuickLog = false; startWorkout(true, getLastLowerDay(selectedDate).iso)">
+                                Review <span x-text="getLastLowerDay(selectedDate).label"></span>
                             </button>
                         </template>
                         <button class="btn-primary" @click="saveQuickLog()">Save</button>
