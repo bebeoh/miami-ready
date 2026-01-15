@@ -328,7 +328,29 @@
 
                             <div class="step-actions">
                                 <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
-                                <button class="btn-primary" @click="nextStep()" x-text="reviewMode ? 'Done' : 'Complete →'"></button>
+                                <button class="btn-primary" @click="nextStep()">Next →</button>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Posture Check Step (alignment reset) -->
+                    <template x-if="currentWorkoutStep?.type === 'posture'">
+                        <div class="step-posture">
+                            <div class="posture-icon">🧍</div>
+                            <h2 x-text="currentWorkoutStep.title"></h2>
+                            <div class="posture-duration" x-text="currentWorkoutStep.duration"></div>
+                            <p class="posture-instruction" x-text="currentWorkoutStep.instruction"></p>
+
+                            <div class="posture-checklist">
+                                <div class="posture-point">✓ Heels against wall</div>
+                                <div class="posture-point">✓ Glutes against wall</div>
+                                <div class="posture-point">✓ Shoulders against wall</div>
+                                <div class="posture-point">✓ Head against wall</div>
+                            </div>
+
+                            <div class="step-actions">
+                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
+                                <button class="btn-primary" @click="nextStep()" x-text="reviewMode ? 'Done' : 'Complete Workout →'"></button>
                             </div>
                         </div>
                     </template>

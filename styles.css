@@ -2215,3 +2215,52 @@ input {
     color: var(--text-3);
     font-size: 13px;
 }
+
+/* ===== POSTURE CHECK STEP ===== */
+.step-posture {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.posture-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.step-posture h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.posture-duration {
+    font-size: 18px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.posture-instruction {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto 24px;
+}
+
+.posture-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 200px;
+    margin: 0 auto 24px;
+}
+
+.posture-point {
+    font-size: 14px;
+    color: var(--text);
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--bg-card-2);
+    border-radius: var(--radius-xs);
+}

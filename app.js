@@ -59,54 +59,61 @@ const EXERCISES = {
     'Lower A': {
         name: 'Shelf + Side',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Broomstick Reset', time: '2 min', video: '38S_O339ksc' },
             { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
-            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
-            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Dead Bugs', time: '2 min', video: '4XLEnwUr1gk' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'kE_uYpT35I8' },
             { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, cue: '2-second squeeze at top', video: 'LM8XHLYJoYs' },
-            { name: 'Back Extension Hold', sets: '3×30-45s', cue: 'Squeeze and hold at top', video: 'ph3pddpKzzw' },
-            { name: 'Seated Band Abduction', sets: '4×15-20', cue: 'Push knees out against band', video: 'FEszLuJhBzg' },
-            { name: 'Lateral Step-Ups', sets: '3×10 each', cue: 'Drive through heel', video: '5qTuGzPph5g' },
+            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, cue: 'Chin tucked, ribs down', video: 'LM8XHLYJoYs' },
+            { name: 'Back Extension Hold', sets: '3×30-45s', cue: 'Chin tucked, neutral spine', video: 'ph3pddpKzzw' },
+            { name: 'Seated Band Abduction', sets: '4×15-20', cue: 'Leaning forward vs upright', video: 'FEszLuJhBzg' },
+            { name: 'Lateral Step-Ups', sets: '3×10 each', cue: 'Push hips back', video: '5qTuGzPph5g' },
         ],
         finisher: 'Frog pumps ×40 + Band abduction hold ×1 min',
     },
     'Lower B': {
         name: 'Under-Butt',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Broomstick Reset', time: '2 min', video: '38S_O339ksc' },
             { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
-            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
-            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Dead Bugs', time: '2 min', video: '4XLEnwUr1gk' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'kE_uYpT35I8' },
             { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true, cue: 'Hip hinge, bar close to legs', video: 'MrW6JpeRc8Q' },
-            { name: 'High Step-Ups', sets: '3×10 each', cue: 'Full extension at top', video: 'dQhU3lyTbLE' },
-            { name: 'Hyperextensions', sets: '3×12', cue: 'Squeeze glutes at top', video: 'ph3pddpKzzw' },
-            { name: 'Yoga Ball Ham Curls', sets: '3×12', cue: 'Control the negative', video: 'dlZtTymz1x4' },
+            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true, cue: 'Shaving your legs with the bar', video: 'MrW6JpeRc8Q' },
+            { name: 'High Step-Ups', sets: '3×10 each', cue: 'Slow 3-sec descent', video: '2G8L6l2-Y9Q' },
+            { name: 'Hyperextensions', sets: '3×12', cue: 'Round the upper back (glute focus)', video: '5_9n0O6H3l4' },
+            { name: 'Yoga Ball Ham Curls', sets: '3×12', cue: 'Keep hips high', video: 'dlZtTymz1x4' },
         ],
         finisher: 'Ankle-weight kickbacks 2×15 each side',
     },
     'Lower C': {
         name: 'Side-Glute + Stability',
         warmup: [
-            { name: 'Broomstick Reset', time: '2 min', video: 'dQw4w9WgXcQ' },
+            { name: 'Broomstick Reset', time: '2 min', video: '38S_O339ksc' },
             { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' },
-            { name: 'Dead Bugs', time: '2 min', video: 'I5xbsA71v1A' },
-            { name: 'Floor I-Y-W', time: '2 min', video: 'yT1c5R0Y3jI' },
+            { name: 'Dead Bugs', time: '2 min', video: '4XLEnwUr1gk' },
+            { name: 'Floor I-Y-W', time: '2 min', video: 'kE_uYpT35I8' },
             { name: 'Hip Flexor Stretch', time: '1 min', video: 'YQmpO9VT2X4' },
         ],
         exercises: [
-            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true, cue: 'Fix imbalances', video: 'AVT-iJhwLEQ' },
-            { name: 'Cossack Squats', sets: '3×10 each', cue: 'Deep lateral stretch', video: 'tpczTeSkHz0' },
-            { name: 'Side-Lying Leg Raises', sets: '3×20', cue: 'Slow and controlled', video: 'jgh6sGwtTwk' },
-            { name: 'Band Walks', sets: '3×30 steps', cue: 'Stay low, tension constant', video: 'z8Ntz0GODQI' },
+            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true, cue: 'Stop the pelvic twist', video: 'AVT-iJhwLEQ' },
+            { name: 'Cossack Squats', sets: '3×10 each', cue: 'Heel stays down', video: 'tpczTeSkHz0' },
+            { name: 'Side-Lying Leg Raises', sets: '3×20', cue: 'Toe pointed slightly down', video: 'jgh6sGwtTwk' },
+            { name: 'Band Walks', sets: '3×30 steps', cue: 'Knees pushed OUT', video: 'z8Ntz0GODQI' },
         ],
         finisher: 'Standing abduction hold 45s each + Bridge pulses 2 min',
     },
+};
+
+// Posture Check - end of every workout
+const POSTURE_CHECK = {
+    title: 'Wall Posture Check',
+    duration: '30 seconds',
+    instruction: 'Stand against a wall: heels, glutes, shoulders, and head touching. This "reprints" the 100/100 alignment into your nervous system after the muscles are pumped.',
 };
 
 const CYCLE_PHASES = {
@@ -520,6 +527,12 @@ function app() {
             this.workoutSteps.push({
                 type: 'finisher',
                 content: workout.finisher,
+            });
+
+            // Add posture check (alignment reset)
+            this.workoutSteps.push({
+                type: 'posture',
+                ...POSTURE_CHECK,
             });
 
             this.workoutStep = 0;
