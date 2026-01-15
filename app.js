@@ -17,10 +17,43 @@ const SCHEDULE = [
 ];
 
 const PHASES = [
-    { name: 'SYNC', weeks: [1,2,3], color: 'purple', goal: 'Sync & Stabilize — Fix pelvic alignment' },
-    { name: 'ALIGN', weeks: [4,5,6,7], color: 'teal', goal: 'Alignment & Lift — Build the foundation' },
-    { name: 'PEAK', weeks: [8,9,10], color: 'gold', goal: 'Peak Performance — Maximum results' },
+    { name: 'CONNECT', weeks: [1,2,3], color: 'purple', goal: 'Build the neural pathway', focus: 'Light weight, perfect reps, FEEL the glutes' },
+    { name: 'BUILD', weeks: [4,5,6,7], color: 'teal', goal: 'Add load progressively', focus: 'Keep connection, add weight when ready' },
+    { name: 'PEAK', weeks: [8,9,10], color: 'gold', goal: 'Maximum activation', focus: 'Push for PRs, maintain mind-muscle link' },
 ];
+
+// Equipment per workout
+const EQUIPMENT = {
+    'Lower A': ['Barbell + bench', 'Finer Form (back extension)', 'Resistance band', 'Step platform'],
+    'Lower B': ['Tempo barbell', 'Bench', 'Finer Form', 'Yoga ball', 'Ankle weights'],
+    'Lower C': ['Bench', 'Resistance band', 'Bodyweight'],
+};
+
+// Right-Side Reset (for imbalance correction)
+const RIGHT_SIDE_RESET = [
+    { name: 'Right hip flexor stretch', time: '60s' },
+    { name: 'Right single-leg glute bridge hold', time: '45s' },
+    { name: 'Right side-lying leg raises', reps: '20 reps' },
+    { name: 'Dead bug', time: '60s' },
+];
+
+// Glute Primer (activation before workout)
+const GLUTE_PRIMER = [
+    { name: 'Frog pumps', time: '60s fast' },
+    { name: 'Banded standing abductions', time: '60s' },
+];
+
+// The Neural Rule - the WHY behind every rep
+const NEURAL_RULE = {
+    title: 'The Neural Rule (Every Rep)',
+    steps: [
+        'Exhale',
+        'Posterior pelvic tilt',
+        'Squeeze glutes',
+        'HOLD 2 seconds'
+    ],
+    why: 'You are training your nervous system to let your glutes hold your pelvis instead of your spine. This is why your shelf appears and your SI pain fades.'
+};
 
 const EXERCISES = {
     'Lower A': {
@@ -77,10 +110,10 @@ const EXERCISES = {
 };
 
 const CYCLE_PHASES = {
-    menstrual: { name: 'Menstrual', start: 1, end: 5, instruction: 'Light weight, focus on feeling it' },
-    follicular: { name: 'Follicular', start: 6, end: 14, instruction: 'Add weight when connected' },
-    ovulatory: { name: 'Ovulatory', start: 15, end: 17, instruction: 'PR window — go heavy!' },
-    luteal: { name: 'Luteal', start: 18, end: 28, instruction: 'Maintain weight, slow negatives' },
+    menstrual: { name: 'Menstrual', start: 1, end: 5, emoji: '🩸', instruction: 'Light weight, perfect reps, FEEL the glutes' },
+    follicular: { name: 'Follicular', start: 6, end: 14, emoji: '🌱', instruction: 'Energy rising — add weight when connected' },
+    ovulatory: { name: 'Ovulatory', start: 15, end: 17, emoji: '⚡', instruction: 'PR window — strength peaks, go heavy!' },
+    luteal: { name: 'Luteal', start: 18, end: 28, emoji: '🌙', instruction: 'Maintain weight, slow negatives, extra rest' },
 };
 
 const CONNECTIONS = [
@@ -215,6 +248,23 @@ function app() {
                 }
             }
             return { ...CYCLE_PHASES.menstrual, key: 'menstrual' };
+        },
+
+        // Educational content getters
+        get todayEquipment() {
+            return EQUIPMENT[this.todaySchedule.label] || [];
+        },
+
+        get rightSideReset() {
+            return RIGHT_SIDE_RESET;
+        },
+
+        get glutePrimer() {
+            return GLUTE_PRIMER;
+        },
+
+        get neuralRule() {
+            return NEURAL_RULE;
         },
 
         get streak() {
@@ -577,6 +627,9 @@ function app() {
                 weight: existing.mainWt || null,
                 reps: existing.mainReps || null,
                 connection: existing.conn || null,
+                protein: existing.protein || 0,
+                water: existing.water || 0,
+                casein: existing.casein || false,
             };
             this.showQuickLog = true;
         },
@@ -587,6 +640,9 @@ function app() {
             if (this.quickLogData.weight) data.mainWt = this.quickLogData.weight;
             if (this.quickLogData.reps) data.mainReps = this.quickLogData.reps;
             if (this.quickLogData.connection) data.conn = this.quickLogData.connection;
+            data.protein = this.quickLogData.protein || 0;
+            data.water = this.quickLogData.water || 0;
+            data.casein = this.quickLogData.casein || false;
             this.days[this.selectedDate] = data;
             this.save();
             this.showQuickLog = false;
@@ -600,6 +656,9 @@ function app() {
                 weight: existing.mainWt || null,
                 reps: existing.mainReps || null,
                 connection: existing.conn || null,
+                protein: existing.protein || 0,
+                water: existing.water || 0,
+                casein: existing.casein || false,
             };
             this.showQuickLog = true;
         },

@@ -18,16 +18,29 @@
         <!-- ==================== TODAY VIEW ==================== -->
         <template x-if="view === 'today' && !workoutMode">
             <div class="view-today" x-transition>
-                <!-- Header -->
+                <!-- Header with Phase Context -->
                 <header class="header">
                     <div>
-                        <h1>Miami Ready</h1>
-                        <p class="header-sub" x-text="`Day ${currentDay} of 70`"></p>
+                        <div class="phase-header">
+                            <span class="phase-name-badge" :class="currentPhase?.color" x-text="currentPhase?.name"></span>
+                            <span class="phase-week">· Week <span x-text="currentWeek"></span></span>
+                        </div>
+                        <p class="phase-goal" x-text="currentPhase?.goal"></p>
                     </div>
                     <button class="icon-btn" @click="view = 'settings'">
                         <span>⚙️</span>
                     </button>
                 </header>
+
+                <!-- Cycle Tip (enhanced with emoji and day) -->
+                <div class="cycle-tip-enhanced" x-show="cyclePhase">
+                    <span class="cycle-emoji" x-text="cyclePhase?.emoji"></span>
+                    <div class="cycle-info">
+                        <span class="cycle-name" x-text="cyclePhase?.name"></span>
+                        <span class="cycle-day-num">Day <span x-text="cycleDay"></span></span>
+                    </div>
+                    <p class="cycle-instruction" x-text="cyclePhase?.instruction"></p>
+                </div>
 
                 <!-- Vision Board / Motivation -->
                 <div class="vision-card" @click="showVisionModal = true">
@@ -42,8 +55,18 @@
                         </div>
                     </div>
                     <div class="vision-streak">
-                        <span x-text="`${streak} day streak`"></span>
-                        <span x-text="`${Math.round((currentDay/70)*100)}% complete`"></span>
+                        <span x-text="`Day ${currentDay} · ${streak} day streak`"></span>
+                        <span x-text="`${Math.round((currentDay/70)*100)}%`"></span>
+                    </div>
+                </div>
+
+                <!-- Equipment List (for lower body days) -->
+                <div class="equipment-card" x-show="todayEquipment.length > 0">
+                    <h4>🎒 Equipment</h4>
+                    <div class="equipment-list">
+                        <template x-for="item in todayEquipment" :key="item">
+                            <span class="equipment-item" x-text="item"></span>
+                        </template>
                     </div>
                 </div>
 
@@ -71,6 +94,51 @@
                             <button class="btn-text-small" @click="openQuickLog()">Edit</button>
                         </div>
                     </template>
+                </div>
+
+                <!-- Right-Side Reset (for lower body days) -->
+                <div class="prep-section" x-show="todaySchedule.type === 'lower'" x-data="{ open: false }">
+                    <button class="prep-header" @click="open = !open">
+                        <span>⚡ Right-Side Reset</span>
+                        <span class="prep-toggle" x-text="open ? '−' : '+'"></span>
+                    </button>
+                    <div class="prep-content" x-show="open" x-transition>
+                        <p class="prep-why">Fix right-side dominance before lifting</p>
+                        <template x-for="item in rightSideReset" :key="item.name">
+                            <div class="prep-item">
+                                <span class="prep-name" x-text="item.name"></span>
+                                <span class="prep-time" x-text="item.time || item.reps"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Glute Primer (for lower body days) -->
+                <div class="prep-section" x-show="todaySchedule.type === 'lower'" x-data="{ open: false }">
+                    <button class="prep-header" @click="open = !open">
+                        <span>🔥 Glute Primer</span>
+                        <span class="prep-toggle" x-text="open ? '−' : '+'"></span>
+                    </button>
+                    <div class="prep-content" x-show="open" x-transition>
+                        <p class="prep-why">Wake up the glutes before heavy work</p>
+                        <template x-for="item in glutePrimer" :key="item.name">
+                            <div class="prep-item">
+                                <span class="prep-name" x-text="item.name"></span>
+                                <span class="prep-time" x-text="item.time"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Neural Rule (the WHY) -->
+                <div class="neural-rule-card" x-show="todaySchedule.type === 'lower'">
+                    <h4>🧠 <span x-text="neuralRule.title"></span></h4>
+                    <ol class="neural-steps">
+                        <template x-for="(step, idx) in neuralRule.steps" :key="idx">
+                            <li x-text="step"></li>
+                        </template>
+                    </ol>
+                    <p class="neural-why" x-text="neuralRule.why"></p>
                 </div>
 
                 <!-- Daily Checklist -->
@@ -127,12 +195,6 @@
                             <span class="check-sub">Before bed protein</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Cycle Tip -->
-                <div class="cycle-tip" x-show="cyclePhase">
-                    <span class="cycle-badge" x-text="cyclePhase?.name"></span>
-                    <span class="cycle-instruction" x-text="cyclePhase?.instruction"></span>
                 </div>
             </div>
         </template>
@@ -559,6 +621,25 @@
                                 </div>
                             </div>
                         </template>
+
+                        <!-- Daily items for any day -->
+                        <div class="form-group">
+                            <label>Protein (g)</label>
+                            <input type="number" x-model.number="quickLogData.protein" placeholder="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Water (oz)</label>
+                            <input type="number" x-model.number="quickLogData.water" placeholder="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Casein before bed?</label>
+                            <div class="toggle-buttons">
+                                <button :class="{ active: quickLogData.casein === true }" @click="quickLogData.casein = true">Yes</button>
+                                <button :class="{ active: quickLogData.casein === false }" @click="quickLogData.casein = false">No</button>
+                            </div>
+                        </div>
                     </div>
 
                     <footer class="modal-footer">
