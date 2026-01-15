@@ -47,12 +47,12 @@ const GLUTE_PRIMER = [
 const NEURAL_RULE = {
     title: 'The Neural Rule (Every Rep)',
     steps: [
-        'Exhale',
-        'Posterior pelvic tilt',
-        'Squeeze glutes',
+        'Exhale (Ribs down)',
+        'The Tuck (Tailbone to knees—flatten your lower back)',
+        'Squeeze Glutes (Cramp them at the top)',
         'HOLD 2 seconds'
     ],
-    why: 'You are training your nervous system to let your glutes hold your pelvis instead of your spine. This is why your shelf appears and your SI pain fades.'
+    why: 'You are training your nervous system to let your glutes hold your pelvis instead of your spine. This "tuck" creates the Glute Lock that fixes your Lift score and makes your SI pain fade.'
 };
 
 const EXERCISES = {
