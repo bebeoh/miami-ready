@@ -3,95 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miami Ready: Architect Edition</title>
+    <title>Miami Ready</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body x-data="app()" x-init="init()">
-
-    <div class="app" :class="{ 'workout-active': workoutMode, 'stability-alert': currentPainLevel > 3 }">
+    <div class="app" :class="{ 'stability-alert': currentPainLevel > 3 }">
         
-        <template x-if="view === 'today' && !workoutMode">
-            <div class="view-today" x-transition>
-                
-                <header class="architect-header">
-                    <div class="status-group">
-                        <span class="status-label" x-text="physiqueStatus"></span>
-                        <h1 x-text="todaySchedule.label"></h1>
-                    </div>
-                    <div class="countdown-circle">
-                        <span class="days-left" x-text="70 - currentDay"></span>
-                        <span class="unit">DAYS</span>
-                    </div>
-                </header>
-
-                <section class="control-panel">
-                    <div class="pain-slider-card">
-                        <div class="card-header">
-                            <span>Right Back Stability</span>
-                            <span class="pain-value" x-text="currentPainLevel + '/10'"></span>
-                        </div>
-                        <input type="range" min="0" max="10" x-model="currentPainLevel" @change="handleBackPain($el.value)">
-                        <p x-show="currentPainLevel > 3" class="warning-text">⚠️ Stability Mode: Spine-Sparing Exercises Swapped</p>
-                    </div>
-                    
-                    <button @click="showSwapModal = true" class="btn-pivot">🔄 Pivot for StretchLab/Rest</button>
-                </section>
-
-                <section class="metrics-grid">
-                    <div class="metric-card"><span class="m-label">Roundness</span><span class="m-value" x-text="latestScan.roundness + '%'"></span></div>
-                    <div class="metric-card"><span class="m-label">Protrusion</span><span class="m-value" x-text="latestScan.protrusion + '%'"></span></div>
-                    <div class="metric-card"><span class="m-label">Lift</span><span class="m-value" x-text="latestScan.lift + '%'"></span></div>
-                </section>
-
-                <div class="action-area">
-                    <button class="btn-primary" @click="startWorkout()">
-                        <span x-text="todaySchedule.type === 'tempo' ? 'Start Recovery' : 'Start Sculpting'"></span>
-                    </button>
+        <div x-show="view === 'today' && !workoutMode">
+            <header class="architect-header">
+                <div>
+                    <span class="status-label" x-text="physiqueStatus"></span>
+                    <h1 x-text="todaySchedule.label"></h1>
                 </div>
-            </div>
-        </template>
+                <div class="countdown-circle">
+                    <span class="days-left" x-text="70 - currentDay"></span>
+                    <span class="unit">DAYS</span>
+                </div>
+            </header>
 
-        <template x-if="workoutMode">
-            <div class="workout-screen">
-                <header class="workout-header">
+            <div class="control-panel">
+                <div class="pain-slider-card">
+                    <div style="display:flex; justify-content:space-between">
+                        <span>Back Pain</span>
+                        <span x-text="currentPainLevel + '/10'"></span>
+                    </div>
+                    <input type="range" min="0" max="10" x-model="currentPainLevel" @input="handleBackPain($el.value)">
+                </div>
+                <button @click="showSwapModal = true" class="btn-pivot">🔄 Swap for StretchLab</button>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card"><span>Roundness</span><h3 x-text="latestScan.roundness + '%'"></h3></div>
+                <div class="metric-card"><span>Protrusion</span><h3 x-text="latestScan.protrusion + '%'"></h3></div>
+                <div class="metric-card"><span>Lift</span><h3 x-text="latestScan.lift + '%'"></h3></div>
+            </div>
+
+            <button class="btn-primary" style="margin: 20px; width: calc(100% - 40px);" @click="startWorkout()">
+                START SESSION
+            </button>
+        </div>
+
+        <div x-show="workoutMode" class="workout-screen">
+            <div style="padding: 20px">
+                <div style="display:flex; justify-content:space-between">
                     <h2 x-text="activeWorkout.name"></h2>
-                    <button @click="workoutMode = false" class="btn-close">✕ Exit</button>
-                </header>
-
-                <div class="exercise-list">
-                    <template x-for="ex in activeWorkout.exercises">
-                        <div class="exercise-card">
-                            <h3 x-text="ex.name"></h3>
-                            <p class="sets" x-text="ex.sets"></p>
-                            <p class="cue" x-text="ex.cue"></p>
-                            <a :href="'https://www.youtube.com/watch?v=' + ex.video" target="_blank" class="btn-video">📺 Watch Tutorial</a>
-                        </div>
-                    </template>
+                    <button @click="workoutMode = false" class="btn-close">✕</button>
                 </div>
-                
-                <button class="btn-primary complete-btn" @click="workoutMode = false; confetti();">Finish Session</button>
-            </div>
-        </template>
-
-        <template x-if="showSwapModal">
-            <div class="modal-overlay" @click.self="showSwapModal = false">
-                <div class="modal-content">
-                    <h3>Shift Focus</h3>
-                    <div class="swap-options">
-                        <button @click="pivotDay('tempo')" class="btn-opt">StretchLab / Recovery</button>
-                        <button @click="pivotDay('lower')" class="btn-opt">Stability (Lower C)</button>
-                    </div>
-                    <button @click="showSwapModal = false" class="btn-close-modal">Cancel</button>
-                </div>
-            </div>
-        </template>
-
-        <nav class="bottom-nav" x-show="!workoutMode">
-            <button class="nav-item active">🏠</button>
-        </nav>
-    </div>
-    <script src="app.js"></script>
-</body>
-</html>
+                <template x-for="ex in activeWorkout.exercises">
+                    <div class="exercise-card" style="background:#1C1C1F; padding:15px; border-radius:12px; margin-top:15px">
+                        <h4 x-text="ex.name" style="margin:0"></h4>
+                        <p x-text="ex.sets" style="color:#3ECFB2; font-weight:bold"></p>
+                        <p x-text="ex.cue" style="font-size:13px; color:#A1A1AA"></p>
+                        <a :href="'https://www.youtube.com/watch?v=' + ex.video" target="_blank" style="color:#F5C563; font-size:12px">Watch Tutorial</a>
