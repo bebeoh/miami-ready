@@ -1,9 +1,8 @@
-// ===== CONFIGURATION & TARGETS =====
 const CONFIG = {
-    STORE_KEY: 'miami-v7-architect',
+    STORE_KEY: 'miami-architect-v8',
     START_DATE: new Date(2026, 0, 11),
     END_DATE: new Date(2026, 2, 21),
-    TARGETS: { roundness: 50, protrusion: 45 }, // Natural BBL Goals
+    TARGETS: { roundness: 50, protrusion: 45, lift: 90 },
 };
 
 const SCHEDULE = [
@@ -17,82 +16,100 @@ const SCHEDULE = [
 ];
 
 const EXERCISES = {
-    'Lower A': {
-        name: 'Shelf + Side (Protrusion Focus)',
-        backPainSubstitute: 'Lower C (Stability Focus)',
-        warmup: [
-            { name: '90/90 Hip Switch', time: '2 min', cue: 'Unstick hip capsule', video: 'rmNf1BgigDk' },
-            { name: 'Cat-Cow', time: '1 min', video: 'kqnua4rHVVA' }
-        ],
+    'lower': {
+        name: 'Lower Body Sculpt',
         exercises: [
-            { name: 'Barbell Hip Thrust', sets: '4×8', cue: 'The Neural Rule: Exhale, Tuck, Squeeze, HOLD.', target: 'Protrusion', video: 'LM8XHLYJoYs' },
-            { name: 'Seated Band Abduction', sets: '4×20', cue: 'Lean forward to hit high side-glute.', target: 'Roundness', video: 'o7e6Jlj-hj8' }
+            { name: 'Barbell Hip Thrust', sets: '4×8', cue: 'Exhale, Tuck, Squeeze, HOLD.', video: 'LM8XHLYJoYs' },
+            { name: 'B-Stance RDL', sets: '3×10', cue: 'Close the car door with your glutes.', video: 'wp1r0s2Vdkk' }
         ]
     },
-    // ... Lower B and C follow similar structured patterns
+    'tempo': {
+        name: 'Recovery & Mobility',
+        exercises: [{ name: 'StretchLab Session / Foam Roll', sets: '30 min', cue: 'Focus on hip flexors.', video: 'rmNf1BgigDk' }]
+    },
+    'upper': {
+        name: 'Upper Body X-Frame',
+        exercises: [{ name: 'Lateral Raises', sets: '4×15', cue: 'Pour the water out of the pitchers.', video: '3VcKaXpzqRo' }]
+    }
 };
 
 function app() {
     return {
         view: 'today',
-        days: {},
-        scans: [],
-        swaps: {}, // Logic for Pivot Days (e.g., StretchLab)
-        currentPainLevel: 0,
+        workoutMode: false,
         showSwapModal: false,
-        
+        currentPainLevel: 0,
+        scans: [],
+        swaps: {},
+        baseline: { roundness: 32, protrusion: 25, lift: 83 },
+
         init() {
             this.load();
-            // Initializing baseline from your ZOZOFIT scan
-            this.baseline = { roundness: 32, protrusion: 25, lift: 83 };
         },
 
-        // ===== THE ARCHITECT ENGINE =====
+        // Helper for Dates
+        get todayISO() {
+            return new Date().toISOString().split('T')[0];
+        },
+
+        get currentDay() {
+            const diff = new Date() - CONFIG.START_DATE;
+            return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+        },
+
+        // Logic for current schedule including PIVOTS
         get todaySchedule() {
             const iso = this.todayISO;
-            // Check for manual Pivot/Swap first
             if (this.swaps[iso]) {
                 return SCHEDULE.find(s => s.type === this.swaps[iso]);
             }
-            // Fallback to default DOW schedule
             return SCHEDULE.find(s => s.d === new Date().getDay());
         },
 
+        get latestScan() {
+            return this.scans[this.scans.length - 1] || this.baseline;
+        },
+
         get physiqueStatus() {
-            const latest = this.scans[this.scans.length - 1] || this.baseline;
-            if (latest.protrusion < 30) return "Priority: Protrusion (Building the Shelf)";
+            if (this.latestScan.protrusion < 30) return "Priority: Protrusion (Shelf)";
             return "Balanced Growth Mode";
         },
 
-        // ===== STABILITY & PAIN LOGIC =====
+        // Actions
+        startWorkout() {
+            this.workoutMode = true;
+            // Additional logic to load specific exercises
+            this.activeWorkout = EXERCISES[this.todaySchedule.type];
+        },
+
         handleBackPain(level) {
             this.currentPainLevel = level;
             if (level > 3) {
-                alert("Stability Mode Active: High-impact spine loading disabled.");
-                // Automatically pivots today's session to Lower C (Stability)
-                this.swaps[this.todayISO] = 'lower'; 
-                this.save();
+                this.pivotDay('lower'); // Force switch to Stability day
+                alert("Back Pain Detected: Switching to Stability Session.");
             }
         },
 
-        // ===== THE PIVOT (For StretchLab/Schedule changes) =====
-        pivotDay(targetType) {
-            this.swaps[this.todayISO] = targetType;
-            this.save();
+        pivotDay(type) {
+            this.swaps[this.todayISO] = type;
             this.showSwapModal = false;
-        },
-
-        // ===== ZOZOFIT SYNC =====
-        addZozoScan(round, prot, lift) {
-            this.scans.push({
-                date: this.todayISO,
-                roundness: round,
-                protrusion: prot,
-                lift: lift
-            });
             this.save();
         },
 
-        // ... Persistence methods (load/save) remain same as original
+        // Data Persistence
+        save() {
+            const data = { scans: this.scans, swaps: this.swaps, currentPainLevel: this.currentPainLevel };
+            localStorage.setItem(CONFIG.STORE_KEY, JSON.stringify(data));
+        },
+
+        load() {
+            const stored = localStorage.getItem(CONFIG.STORE_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                this.scans = parsed.scans || [];
+                this.swaps = parsed.swaps || {};
+                this.currentPainLevel = parsed.currentPainLevel || 0;
+            }
+        }
     }
 }
