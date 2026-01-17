@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miami Ready</title>
+    <title>Miami Ready: Architect Edition</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -12,787 +12,79 @@
 </head>
 <body x-data="app()" x-init="init()">
 
-    <!-- Main App Container -->
-    <div class="app" :class="{ 'workout-active': workoutMode }">
-
-        <!-- ==================== TODAY VIEW ==================== -->
+    <div class="app" :class="{ 'workout-active': workoutMode, 'stability-alert': currentPainLevel > 3 }">
+        
         <template x-if="view === 'today' && !workoutMode">
             <div class="view-today" x-transition>
-                <!-- Header with Phase Context -->
-                <header class="header">
-                    <div>
-                        <div class="phase-header">
-                            <span class="phase-name-badge" :class="currentPhase?.color" x-text="currentPhase?.name"></span>
-                            <span class="phase-week">· Week <span x-text="currentWeek"></span></span>
-                        </div>
-                        <p class="phase-goal" x-text="currentPhase?.goal"></p>
+                
+                <header class="architect-header">
+                    <div class="status-group">
+                        <span class="status-label" x-text="physiqueStatus"></span>
+                        <h1 x-text="todaySchedule.label"></h1>
                     </div>
-                    <button class="icon-btn" @click="view = 'settings'">
-                        <span>⚙️</span>
+                    <div class="countdown-circle">
+                        <span class="days-left" x-text="70 - currentDay"></span>
+                        <span class="unit">DAYS</span>
+                    </div>
+                </header>
+
+                <section class="control-panel">
+                    <div class="pain-slider-card">
+                        <div class="card-header">
+                            <span>Back Stability</span>
+                            <span class="pain-value" x-text="currentPainLevel + '/10'"></span>
+                        </div>
+                        <input type="range" min="0" max="10" x-model="currentPainLevel" @change="handleBackPain($el.value)">
+                        <p x-show="currentPainLevel > 3" class="warning-text">⚠️ Stability Mode: Exercises Swapped</p>
+                    </div>
+                    
+                    <button @click="showSwapModal = true" class="btn-pivot">
+                        <span>🔄 Pivot Schedule</span>
                     </button>
-                </header>
+                </section>
 
-                <!-- Cycle Tip (enhanced with emoji and day) -->
-                <div class="cycle-tip-enhanced" x-show="cyclePhase">
-                    <span class="cycle-emoji" x-text="cyclePhase?.emoji"></span>
-                    <div class="cycle-info">
-                        <span class="cycle-name" x-text="cyclePhase?.name"></span>
-                        <span class="cycle-day-num">Day <span x-text="cycleDay"></span></span>
+                <section class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="m-label">Roundness</span>
+                        <span class="m-value" x-text="(latestScan?.roundness || baseline.roundness) + '%'"></span>
                     </div>
-                    <p class="cycle-instruction" x-text="cyclePhase?.instruction"></p>
-                </div>
-
-                <!-- Vision Board / Motivation -->
-                <div class="vision-card" @click="showVisionModal = true">
-                    <div class="vision-bg"></div>
-                    <div class="vision-content">
-                        <img src="goal.png" class="vision-img" alt="Goal inspiration"
-                            onerror="this.style.display='none'">
-                        <div class="vision-text">
-                            <div class="vision-countdown" x-text="70 - currentDay"></div>
-                            <div class="vision-label">days to Miami</div>
-                            <div class="vision-date">March 21, 2026</div>
-                        </div>
+                    <div class="metric-card">
+                        <span class="m-label">Protrusion</span>
+                        <span class="m-value" x-text="(latestScan?.protrusion || baseline.protrusion) + '%'"></span>
                     </div>
-                    <div class="vision-streak">
-                        <span x-text="`Day ${currentDay} · ${streak} day streak`"></span>
-                        <span x-text="`${Math.round((currentDay/70)*100)}%`"></span>
+                    <div class="metric-card">
+                        <span class="m-label">Lift Score</span>
+                        <span class="m-value" x-text="(latestScan?.lift || baseline.lift) + '%'"></span>
                     </div>
-                </div>
+                </section>
 
-                <!-- Equipment List (for lower body days) -->
-                <div class="equipment-card" x-show="todayEquipment.length > 0">
-                    <h4>🎒 Equipment</h4>
-                    <div class="equipment-list">
-                        <template x-for="item in todayEquipment" :key="item">
-                            <span class="equipment-item" x-text="item"></span>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Today's Workout Card -->
-                <div class="today-workout-card">
-                    <div class="workout-type-badge" :class="todaySchedule.type" x-text="todaySchedule.type"></div>
-                    <h2 x-text="todaySchedule.label"></h2>
-                    <p class="workout-focus" x-text="todaySchedule.focus"></p>
-
-                    <template x-if="!todayData.workout">
-                        <div class="workout-actions">
-                            <button class="btn-primary btn-large" @click="startWorkout()">
-                                <span class="btn-icon">▶</span>
-                                Start Workout
-                            </button>
-                            <button class="btn-text" @click="openQuickLog()">
-                                Already done? Quick log
-                            </button>
-                        </div>
-                    </template>
-
-                    <template x-if="todayData.workout">
-                        <div class="workout-logged-section">
-                            <div class="workout-complete-badge">
-                                <span>✓</span> Logged
-                                <button class="btn-text-small" @click="openQuickLog()">Edit</button>
-                            </div>
-                            <button class="btn-secondary btn-review" @click="startWorkout(true)">
-                                <span>🔄</span> Review Workout
-                            </button>
-                        </div>
-                    </template>
-                </div>
-
-                <!-- Right-Side Reset (for lower body days) -->
-                <div class="prep-section" x-show="todaySchedule.type === 'lower'" x-data="{ open: false }">
-                    <button class="prep-header" @click="open = !open">
-                        <span>⚡ Right-Side Reset</span>
-                        <span class="prep-toggle" x-text="open ? '−' : '+'"></span>
+                <div class="action-area">
+                    <button class="btn-primary" @click="startWorkout()">
+                        <span x-text="todaySchedule.type === 'tempo' ? 'Log Recovery' : 'Start Sculpting'"></span>
                     </button>
-                    <div class="prep-content" x-show="open" x-transition>
-                        <p class="prep-why">Fix right-side dominance before lifting</p>
-                        <template x-for="item in rightSideReset" :key="item.name">
-                            <div class="prep-item">
-                                <span class="prep-name" x-text="item.name"></span>
-                                <span class="prep-time" x-text="item.time || item.reps"></span>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Glute Primer (for lower body days) -->
-                <div class="prep-section" x-show="todaySchedule.type === 'lower'" x-data="{ open: false }">
-                    <button class="prep-header" @click="open = !open">
-                        <span>🔥 Glute Primer</span>
-                        <span class="prep-toggle" x-text="open ? '−' : '+'"></span>
-                    </button>
-                    <div class="prep-content" x-show="open" x-transition>
-                        <p class="prep-why">Wake up the glutes before heavy work</p>
-                        <template x-for="item in glutePrimer" :key="item.name">
-                            <div class="prep-item">
-                                <span class="prep-name" x-text="item.name"></span>
-                                <span class="prep-time" x-text="item.time"></span>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Neural Rule (the WHY) -->
-                <div class="neural-rule-card" x-show="todaySchedule.type === 'lower'">
-                    <h4>🧠 <span x-text="neuralRule.title"></span></h4>
-                    <ol class="neural-steps">
-                        <template x-for="(step, idx) in neuralRule.steps" :key="idx">
-                            <li x-text="step"></li>
-                        </template>
-                    </ol>
-                    <p class="neural-why" x-text="neuralRule.why"></p>
-                </div>
-
-                <!-- Daily Checklist -->
-                <div class="daily-checklist">
-                    <h3>Daily Checklist</h3>
-
-                    <div class="checklist-item" :class="{ done: todayData.workout }">
-                        <div class="check-circle" :class="{ checked: todayData.workout }">
-                            <span x-show="todayData.workout">✓</span>
-                        </div>
-                        <div class="check-content">
-                            <span class="check-label">Workout</span>
-                            <span class="check-sub" x-text="todaySchedule.label"></span>
-                        </div>
-                        <button class="check-action" @click="todayData.workout ? openQuickLog() : startWorkout()"
-                            x-text="todayData.workout ? 'Edit' : 'Log'"></button>
-                    </div>
-
-                    <div class="checklist-item" :class="{ done: (todayData.protein || 0) >= settings.protein }">
-                        <div class="check-circle" :class="{ checked: (todayData.protein || 0) >= settings.protein }">
-                            <span x-show="(todayData.protein || 0) >= settings.protein">✓</span>
-                        </div>
-                        <div class="check-content">
-                            <span class="check-label">Protein</span>
-                            <span class="check-sub" x-text="`${todayData.protein || 0}/${settings.protein}g`"></span>
-                        </div>
-                        <div class="quick-add-btns">
-                            <button @click="addProtein(30)">+30</button>
-                            <button @click="addProtein(20)">+20</button>
-                        </div>
-                    </div>
-
-                    <div class="checklist-item" :class="{ done: (todayData.water || 0) >= settings.water }">
-                        <div class="check-circle" :class="{ checked: (todayData.water || 0) >= settings.water }">
-                            <span x-show="(todayData.water || 0) >= settings.water">✓</span>
-                        </div>
-                        <div class="check-content">
-                            <span class="check-label">Water</span>
-                            <span class="check-sub" x-text="`${todayData.water || 0}/${settings.water}oz`"></span>
-                        </div>
-                        <div class="quick-add-btns">
-                            <button @click="addWater(20)">+20</button>
-                            <button @click="addWater(10)">+10</button>
-                        </div>
-                    </div>
-
-                    <div class="checklist-item" :class="{ done: todayData.casein }">
-                        <div class="check-circle clickable" :class="{ checked: todayData.casein }"
-                            @click="toggleCasein()">
-                            <span x-show="todayData.casein">✓</span>
-                        </div>
-                        <div class="check-content" @click="toggleCasein()">
-                            <span class="check-label">Casein</span>
-                            <span class="check-sub">Before bed protein</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </template>
 
-        <!-- ==================== GUIDED WORKOUT MODE ==================== -->
-        <template x-if="workoutMode">
-            <div class="workout-mode" x-transition>
-                <!-- Workout Header -->
-                <header class="workout-header">
-                    <button class="btn-back" @click="exitWorkout()">← Exit</button>
-                    <span class="workout-title">
-                        <span x-show="reviewMode">📖 </span>
-                        <span x-text="todaySchedule.label"></span>
-                    </span>
-                    <span class="workout-step" x-text="`${workoutStep + 1}/${workoutSteps.length}`"></span>
-                </header>
-
-                <!-- Review Mode Banner -->
-                <div class="review-banner" x-show="reviewMode">
-                    Review Mode — browse exercises without logging
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="workout-progress">
-                    <div class="progress-fill" :style="`width: ${((workoutStep + 1) / workoutSteps.length) * 100}%`"></div>
-                </div>
-
-                <!-- Step Content -->
-                <div class="workout-step-content">
-                    <!-- Warm-up Step -->
-                    <template x-if="currentWorkoutStep?.type === 'warmup'">
-                        <div class="step-warmup">
-                            <h2>Warm-Up</h2>
-                            <p class="step-subtitle" x-text="currentWorkoutStep.name"></p>
-
-                            <div class="warmup-checklist">
-                                <template x-for="(item, idx) in currentWorkoutStep.items" :key="idx">
-                                    <div class="warmup-item" :class="{ done: warmupChecks[idx] }">
-                                        <div class="warmup-check" @click="toggleWarmup(idx)">
-                                            <span x-show="warmupChecks[idx]">✓</span>
-                                        </div>
-                                        <span class="warmup-name" @click="toggleWarmup(idx)" x-text="item.name"></span>
-                                        <span class="warmup-time" x-text="item.time"></span>
-                                        <button class="btn-video" @click.stop="openVideo(item.video)" x-show="item.video" title="Watch video">
-                                            ▶
-                                        </button>
-                                    </div>
-                                </template>
-                            </div>
-
-                            <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()">Skip Warm-up</button>
-                                <button class="btn-primary" @click="nextStep()"
-                                    :disabled="!reviewMode && !warmupChecks.every(c => c)">
-                                    Continue →
-                                </button>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Exercise Step -->
-                    <template x-if="currentWorkoutStep?.type === 'exercise'">
-                        <div class="step-exercise">
-                            <div class="exercise-header">
-                                <div class="exercise-number" x-text="`Exercise ${currentWorkoutStep.number}`"></div>
-                                <button class="btn-video-large" @click="openVideo(currentWorkoutStep.video)" x-show="currentWorkoutStep.video" title="Watch form video">
-                                    ▶ Watch Form
-                                </button>
-                            </div>
-                            <h2 x-text="currentWorkoutStep.name"></h2>
-                            <p class="exercise-sets" x-text="currentWorkoutStep.sets"></p>
-
-                            <div class="exercise-cue">
-                                <span>💡</span>
-                                <span x-text="currentWorkoutStep.cue"></span>
-                            </div>
-
-                            <template x-if="currentWorkoutStep.isMain">
-                                <div class="weight-recommendation">
-                                    <div class="last-weight">
-                                        <span class="label">Last time:</span>
-                                        <span x-text="lastWeight ? `${lastWeight.weight} lbs × ${lastWeight.reps}` : 'First time'"></span>
-                                    </div>
-                                    <div class="today-weight">
-                                        <span class="label">Today:</span>
-                                        <span class="recommendation" x-text="weightRec?.action || 'Start light'"></span>
-                                    </div>
-                                </div>
-                            </template>
-
-                            <!-- Set Logger (for main lift, hidden in review mode) -->
-                            <template x-if="currentWorkoutStep.isMain && !reviewMode">
-                                <div class="set-logger">
-                                    <h4>Log Your Sets</h4>
-                                    <template x-for="(set, idx) in exerciseSets" :key="idx">
-                                        <div class="set-row" :class="{ logged: set.logged }">
-                                            <span class="set-num" x-text="`Set ${idx + 1}`"></span>
-                                            <input type="number" placeholder="lbs" x-model.number="set.weight"
-                                                :disabled="set.logged" class="input-weight">
-                                            <span class="set-x">×</span>
-                                            <input type="number" placeholder="reps" x-model.number="set.reps"
-                                                :disabled="set.logged" class="input-reps">
-                                            <button class="btn-log-set" @click="logSet(idx)"
-                                                x-show="!set.logged" :disabled="!set.weight || !set.reps">✓</button>
-                                            <span class="set-done" x-show="set.logged">✓</span>
-                                        </div>
-                                    </template>
-                                </div>
-                            </template>
-
-                            <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
-                                <button class="btn-primary" @click="nextStep()">
-                                    <span x-text="workoutStep < workoutSteps.length - 1 ? 'Next →' : (reviewMode ? 'Done' : 'Finish Workout')"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Finisher Step -->
-                    <template x-if="currentWorkoutStep?.type === 'finisher'">
-                        <div class="step-finisher">
-                            <div class="finisher-icon">🔥</div>
-                            <h2>Finisher</h2>
-                            <p class="finisher-content" x-text="currentWorkoutStep.content"></p>
-
-                            <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
-                                <button class="btn-primary" @click="nextStep()">Next →</button>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Posture Check Step (alignment reset) -->
-                    <template x-if="currentWorkoutStep?.type === 'posture'">
-                        <div class="step-posture">
-                            <div class="posture-icon">🧍</div>
-                            <h2 x-text="currentWorkoutStep.title"></h2>
-                            <div class="posture-duration" x-text="currentWorkoutStep.duration"></div>
-                            <p class="posture-instruction" x-text="currentWorkoutStep.instruction"></p>
-
-                            <div class="posture-checklist">
-                                <div class="posture-point">✓ Heels against wall</div>
-                                <div class="posture-point">✓ Glutes against wall</div>
-                                <div class="posture-point">✓ Shoulders against wall</div>
-                                <div class="posture-point">✓ Head against wall</div>
-                            </div>
-
-                            <div class="step-actions">
-                                <button class="btn-secondary" @click="skipStep()" x-text="reviewMode ? 'Back' : 'Skip'"></button>
-                                <button class="btn-primary" @click="nextStep()" x-text="reviewMode ? 'Done' : 'Complete Workout →'"></button>
-                            </div>
-                        </div>
-                    </template>
+        <template x-if="showSwapModal">
+            <div class="modal-overlay" @click.self="showSwapModal = false">
+                <div class="modal-content">
+                    <h3>Switch Today's Focus</h3>
+                    <p>Changing your schedule for real-life adjustments (like StretchLab).</p>
+                    <div class="swap-options">
+                        <button @click="pivotDay('tempo')" class="btn-opt">Recovery / StretchLab</button>
+                        <button @click="pivotDay('lower')" class="btn-opt">Stability (Lower C)</button>
+                        <button @click="pivotDay('upper')" class="btn-opt">Upper Body</button>
+                    </div>
+                    <button @click="showSwapModal = false" class="btn-close">Cancel</button>
                 </div>
             </div>
         </template>
 
-        <!-- ==================== COMPLETION CELEBRATION ==================== -->
-        <template x-if="showCelebration">
-            <div class="celebration-overlay" x-transition>
-                <div class="celebration-card">
-                    <div class="celebration-emoji">🎉</div>
-                    <h2>Workout Complete!</h2>
-                    <p class="celebration-workout" x-text="todaySchedule.label"></p>
-
-                    <template x-if="topSet.weight">
-                        <div class="celebration-pr" :class="{ 'is-pr': isPR }">
-                            <span class="pr-label" x-text="isPR ? '🏆 NEW PR!' : 'Top Set'"></span>
-                            <span class="pr-value" x-text="`${topSet.weight} lbs × ${topSet.reps}`"></span>
-                        </div>
-                    </template>
-
-                    <div class="connection-picker">
-                        <h4>How connected did you feel?</h4>
-                        <div class="connection-options">
-                            <template x-for="conn in connections" :key="conn.id">
-                                <button class="conn-btn" :class="{ active: selectedConnection === conn.id }"
-                                    @click="selectedConnection = conn.id">
-                                    <span class="conn-emoji" x-text="conn.emoji"></span>
-                                    <span class="conn-label" x-text="conn.label"></span>
-                                </button>
-                            </template>
-                        </div>
-                    </div>
-
-                    <button class="btn-primary btn-large" @click="finishCelebration()">
-                        Done
-                    </button>
-
-                    <p class="celebration-countdown" x-text="`${70 - currentDay} days to Miami 🌴`"></p>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== PLAN VIEW ==================== -->
-        <template x-if="view === 'plan' && !workoutMode">
-            <div class="view-plan" x-transition>
-                <header class="header">
-                    <div>
-                        <h1>Plan</h1>
-                        <p class="header-sub" x-text="`Week ${currentWeek} of 10`"></p>
-                    </div>
-                </header>
-
-                <!-- Phase Card -->
-                <div class="phase-card" :class="currentPhase?.color">
-                    <span class="phase-name" x-text="currentPhase?.name"></span>
-                    <p class="phase-goal" x-text="currentPhase?.goal"></p>
-                    <div class="phase-progress">
-                        <div class="phase-fill" :style="`width: ${phaseProgress}%`"></div>
-                    </div>
-                </div>
-
-                <!-- Week View -->
-                <div class="week-view">
-                    <div class="week-nav-header">
-                        <button class="week-nav-btn" @click="prevWeek()" :disabled="!canGoPrevWeek">‹</button>
-                        <div class="week-nav-label">
-                            <span x-text="weekLabel"></span>
-                            <button class="btn-today" @click="goToCurrentWeek()" x-show="viewingWeekOffset !== 0">Today</button>
-                        </div>
-                        <button class="week-nav-btn" @click="nextWeek()" :disabled="!canGoNextWeek">›</button>
-                    </div>
-                    <div class="week-grid">
-                        <template x-for="day in weekDates" :key="day.iso">
-                            <div class="week-day"
-                                :class="{ today: day.isToday, logged: days[day.iso]?.workout }"
-                                @click="viewDay(day.iso)">
-                                <span class="dow" x-text="day.dow"></span>
-                                <span class="date" x-text="day.date"></span>
-                                <span class="type-dot" :class="day.schedule.type"></span>
-                                <span class="check" x-show="days[day.iso]?.workout">✓</span>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- 70-Day Heatmap -->
-                <div class="heatmap-section">
-                    <h3>70-Day Overview</h3>
-                    <div class="heatmap">
-                        <template x-for="day in allDays" :key="day.iso">
-                            <div class="heatmap-cell"
-                                :class="{
-                                    logged: days[day.iso]?.workout,
-                                    today: day.isToday,
-                                    future: day.isFuture
-                                }"
-                                @click="viewDay(day.iso)">
-                            </div>
-                        </template>
-                    </div>
-                    <div class="heatmap-legend">
-                        <span><i class="dot logged"></i> Logged</span>
-                        <span><i class="dot"></i> Upcoming</span>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== PROGRESS VIEW ==================== -->
-        <template x-if="view === 'progress' && !workoutMode">
-            <div class="view-progress" x-transition>
-                <header class="header">
-                    <h1>Progress</h1>
-                </header>
-
-                <!-- Stats Grid -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-icon">🔥</span>
-                        <span class="stat-value" x-text="streak"></span>
-                        <span class="stat-label">Day Streak</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-icon">💪</span>
-                        <span class="stat-value" x-text="totalWorkouts"></span>
-                        <span class="stat-label">Workouts</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-icon">🥛</span>
-                        <span class="stat-value" x-text="caseinNights"></span>
-                        <span class="stat-label">Casein Nights</span>
-                    </div>
-                </div>
-
-                <!-- Lift Progress -->
-                <div class="progress-card">
-                    <h3>Lift Progress</h3>
-                    <div class="lift-chart">
-                        <template x-if="liftHistory.length >= 2">
-                            <div class="sparkline">
-                                <template x-for="(point, idx) in liftHistory" :key="idx">
-                                    <div class="bar" :style="`height: ${(point.weight / maxLift) * 100}%`">
-                                        <span class="tooltip" x-text="`${point.weight} lbs`"></span>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
-                        <template x-if="liftHistory.length < 2">
-                            <p class="empty-state">Log more workouts to see progress</p>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Connection Distribution -->
-                <div class="progress-card">
-                    <h3>Mind-Muscle Connection</h3>
-                    <div class="connection-dist">
-                        <template x-for="conn in connections" :key="conn.id">
-                            <div class="conn-stat">
-                                <span class="emoji" x-text="conn.emoji"></span>
-                                <span class="count" x-text="connectionCounts[conn.id] || 0"></span>
-                            </div>
-                        </template>
-                    </div>
-                    <p class="connection-summary" x-show="totalLowerSessions > 0">
-                        <span x-text="`${connectionPercent}%`"></span> feeling it or better
-                    </p>
-                </div>
-
-                <!-- Body Measurements -->
-                <div class="progress-card">
-                    <h3>Body Measurements</h3>
-                    <template x-if="latestScan">
-                        <div class="measurements">
-                            <div class="measurement">
-                                <span class="label">Roundness</span>
-                                <span class="value" x-text="`${latestScan.roundness}%`"></span>
-                                <span class="change" :class="roundnessChange > 0 ? 'up' : 'down'"
-                                    x-show="roundnessChange !== 0" x-text="`${roundnessChange > 0 ? '+' : ''}${roundnessChange}%`"></span>
-                            </div>
-                            <div class="measurement">
-                                <span class="label">Protrusion</span>
-                                <span class="value" x-text="`${latestScan.protrusion}%`"></span>
-                                <span class="change" :class="protrusionChange > 0 ? 'up' : 'down'"
-                                    x-show="protrusionChange !== 0" x-text="`${protrusionChange > 0 ? '+' : ''}${protrusionChange}%`"></span>
-                            </div>
-                        </div>
-                    </template>
-                    <button class="btn-secondary" @click="showScanModal = true">+ Add Scan</button>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== SETTINGS VIEW ==================== -->
-        <template x-if="view === 'settings' && !workoutMode">
-            <div class="view-settings" x-transition>
-                <header class="header">
-                    <button class="btn-back" @click="view = 'today'">← Back</button>
-                    <h1>Settings</h1>
-                </header>
-
-                <div class="settings-section">
-                    <h3>Daily Goals</h3>
-                    <div class="setting-row">
-                        <label>Protein (g)</label>
-                        <input type="number" x-model.number="settings.protein" @change="saveSettings()">
-                    </div>
-                    <div class="setting-row">
-                        <label>Water (oz)</label>
-                        <input type="number" x-model.number="settings.water" @change="saveSettings()">
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Cycle Sync</h3>
-                    <p class="setting-desc">Auto-adjusts workout intensity recommendations</p>
-                    <div class="setting-row">
-                        <label>Period Start</label>
-                        <input type="date" x-model="settings.periodStart" @change="saveSettings()">
-                    </div>
-                    <div class="cycle-preview" x-show="cyclePhase">
-                        <span class="cycle-name" x-text="cyclePhase?.name"></span>
-                        <span class="cycle-day" x-text="`Day ${cycleDay}`"></span>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Data</h3>
-                    <div class="setting-buttons">
-                        <button class="btn-secondary" @click="exportData()">Export</button>
-                        <label class="btn-secondary">
-                            Import
-                            <input type="file" accept=".json" @change="importData($event)" hidden>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="settings-section">
-                    <h3>Cloud Sync</h3>
-                    <p class="setting-desc">Sync across devices with JSONbin.io (free)</p>
-                    <div class="setting-row">
-                        <label>Bin ID</label>
-                        <input type="text" x-model="cloudBinId" placeholder="Your bin ID">
-                    </div>
-                    <div class="setting-row">
-                        <label>API Key</label>
-                        <input type="password" x-model="cloudApiKey" placeholder="Your master key">
-                    </div>
-                    <div class="setting-buttons">
-                        <button class="btn-secondary" @click="saveCloudCredentials(cloudBinId, cloudApiKey)">Save Keys</button>
-                    </div>
-                    <div class="setting-buttons" style="margin-top: 8px;">
-                        <button class="btn-secondary" @click="cloudPush()">Push to Cloud</button>
-                        <button class="btn-secondary" @click="cloudPull()">Pull from Cloud</button>
-                    </div>
-                    <p class="setting-hint" x-show="getCloudCredentials().binId">
-                        Keys saved locally
-                    </p>
-                </div>
-
-                <div class="settings-section danger">
-                    <h3>Reset</h3>
-                    <button class="btn-danger" @click="resetAll()">Delete All Data</button>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== QUICK LOG MODAL ==================== -->
-        <template x-if="showQuickLog">
-            <div class="modal-overlay" @click.self="showQuickLog = false" x-transition>
-                <div class="modal quick-log-modal">
-                    <header class="modal-header">
-                        <h2>Quick Log</h2>
-                        <button class="btn-close" @click="showQuickLog = false">×</button>
-                    </header>
-
-                    <div class="modal-body">
-                        <p class="modal-date" x-text="formatDate(selectedDate, 'long')"></p>
-
-                        <div class="form-group">
-                            <label>Completed?</label>
-                            <div class="toggle-buttons">
-                                <button :class="{ active: quickLogData.workout }" @click="quickLogData.workout = true">Yes</button>
-                                <button :class="{ active: quickLogData.workout === false }" @click="quickLogData.workout = false">Partial</button>
-                            </div>
-                        </div>
-
-                        <template x-if="isLowerDay(selectedDate)">
-                            <div>
-                                <div class="form-group">
-                                    <label>Top Set</label>
-                                    <div class="input-row">
-                                        <input type="number" placeholder="lbs" x-model.number="quickLogData.weight">
-                                        <span>×</span>
-                                        <input type="number" placeholder="reps" x-model.number="quickLogData.reps">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Connection</label>
-                                    <div class="connection-options compact">
-                                        <template x-for="conn in connections" :key="conn.id">
-                                            <button class="conn-btn" :class="{ active: quickLogData.connection === conn.id }"
-                                                @click="quickLogData.connection = conn.id">
-                                                <span x-text="conn.emoji"></span>
-                                            </button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- Daily items for any day -->
-                        <div class="form-group">
-                            <label>Protein (g)</label>
-                            <input type="number" x-model.number="quickLogData.protein" placeholder="0">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Water (oz)</label>
-                            <input type="number" x-model.number="quickLogData.water" placeholder="0">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Casein before bed?</label>
-                            <div class="toggle-buttons">
-                                <button :class="{ active: quickLogData.casein === true }" @click="quickLogData.casein = true">Yes</button>
-                                <button :class="{ active: quickLogData.casein === false }" @click="quickLogData.casein = false">No</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <footer class="modal-footer">
-                        <!-- Review this day's workout (lower body days) -->
-                        <template x-if="isLowerDay(selectedDate)">
-                            <button class="btn-secondary" @click="showQuickLog = false; startWorkout(true, selectedDate)">
-                                Review <span x-text="getSchedule(selectedDate).label"></span>
-                            </button>
-                        </template>
-                        <!-- Review last workout (tempo/recovery days) -->
-                        <template x-if="!isLowerDay(selectedDate) && getLastLowerDay(selectedDate)">
-                            <button class="btn-secondary" @click="showQuickLog = false; startWorkout(true, getLastLowerDay(selectedDate).iso)">
-                                Review <span x-text="getLastLowerDay(selectedDate).label"></span>
-                            </button>
-                        </template>
-                        <button class="btn-primary" @click="saveQuickLog()">Save</button>
-                    </footer>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== SCAN MODAL ==================== -->
-        <template x-if="showScanModal">
-            <div class="modal-overlay" @click.self="showScanModal = false" x-transition>
-                <div class="modal">
-                    <header class="modal-header">
-                        <h2>Add Scan</h2>
-                        <button class="btn-close" @click="showScanModal = false">×</button>
-                    </header>
-
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input type="date" x-model="scanData.date">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Roundness %</label>
-                                <input type="number" x-model.number="scanData.roundness">
-                            </div>
-                            <div class="form-group">
-                                <label>Protrusion %</label>
-                                <input type="number" x-model.number="scanData.protrusion">
-                            </div>
-                        </div>
-                    </div>
-
-                    <footer class="modal-footer">
-                        <button class="btn-primary" @click="addScan()">Add Scan</button>
-                    </footer>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== VISION MODAL ==================== -->
-        <template x-if="showVisionModal">
-            <div class="modal-overlay vision-modal-overlay" @click.self="showVisionModal = false" x-transition>
-                <div class="vision-modal">
-                    <button class="vision-close" @click="showVisionModal = false">×</button>
-
-                    <!-- Image Gallery -->
-                    <div class="vision-gallery">
-                        <button class="gallery-nav prev" @click="prevVisionImage()" x-show="visionImages.length > 1">
-                            ‹
-                        </button>
-
-                        <div class="gallery-image-container">
-                            <img :src="currentVisionImage.src" class="vision-full-img" alt="Goal inspiration"
-                                onerror="this.src='vision_condensed.png'">
-                            <p class="image-caption" x-text="currentVisionImage.caption" x-show="currentVisionImage.caption"></p>
-                        </div>
-
-                        <button class="gallery-nav next" @click="nextVisionImage()" x-show="visionImages.length > 1">
-                            ›
-                        </button>
-                    </div>
-
-                    <!-- Gallery Dots -->
-                    <div class="gallery-dots" x-show="visionImages.length > 1">
-                        <template x-for="(img, idx) in visionImages" :key="idx">
-                            <button class="dot" :class="{ active: idx === currentVisionIndex }"
-                                @click="currentVisionIndex = idx"></button>
-                        </template>
-                    </div>
-
-                    <div class="vision-modal-footer">
-                        <div class="vision-modal-countdown">
-                            <span class="big" x-text="70 - currentDay"></span>
-                            <span class="small">days to Miami</span>
-                        </div>
-                        <p class="vision-quote">"The body achieves what the mind believes"</p>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- ==================== BOTTOM NAVIGATION ==================== -->
-        <nav class="bottom-nav" x-show="!workoutMode && !showCelebration">
-            <button class="nav-item" :class="{ active: view === 'today' }" @click="view = 'today'">
-                <span class="nav-icon">🏠</span>
-                <span class="nav-label">Today</span>
-            </button>
-            <button class="nav-item" :class="{ active: view === 'plan' }" @click="view = 'plan'">
-                <span class="nav-icon">📅</span>
-                <span class="nav-label">Plan</span>
-            </button>
-            <button class="nav-item" :class="{ active: view === 'progress' }" @click="view = 'progress'">
-                <span class="nav-icon">📊</span>
-                <span class="nav-label">Progress</span>
-            </button>
+        <nav class="bottom-nav" x-show="!workoutMode">
+            <button class="nav-item" :class="{ active: view === 'today' }" @click="view = 'today'">🏠</button>
+            <button class="nav-item" :class="{ active: view === 'plan' }" @click="view = 'plan'">📅</button>
+            <button class="nav-item" :class="{ active: view === 'progress' }" @click="view = 'progress'">📊</button>
         </nav>
     </div>
 
