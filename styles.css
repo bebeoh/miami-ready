@@ -2,11 +2,18 @@
 :root {
     --bg: #0A0A0B;
     --bg-card: #151517;
+    --bg-card-2: #1C1C1F;
+    --bg-hover: #252528;
     --teal: #3ECFB2;
+    --teal-dim: rgba(62, 207, 178, 0.15);
     --gold: #F5C563;
     --rose: #FB7185;
     --text: #FFFFFF;
+    --text-2: #A1A1AA;
+    --text-3: #71717A;
+    --border: #27272A;
     --radius: 20px;
+    --radius-sm: 12px;
 }
 
 body {
@@ -14,6 +21,7 @@ body {
     color: var(--text);
     font-family: 'Inter', sans-serif;
     margin: 0;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Stability Alert State */
@@ -105,7 +113,7 @@ body {
 .m-label { font-size: 10px; color: var(--text-2); display: block; margin-bottom: 5px; }
 .m-value { font-size: 18px; font-weight: 700; color: var(--gold); }
 
-/* Modal Styles */
+/* Workout & Modal Styles */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -124,13 +132,6 @@ body {
     text-align: center;
 }
 
-.swap-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px 0;
-}
-
 .btn-opt {
     background: var(--bg-hover);
     border: none;
@@ -138,16 +139,26 @@ body {
     padding: 15px;
     border-radius: 12px;
     font-weight: 500;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .btn-primary {
     background: var(--teal);
     color: var(--bg);
-    width: 100%;
     padding: 18px;
     border-radius: var(--radius);
     font-weight: 800;
     font-size: 16px;
     border: none;
     box-shadow: 0 10px 20px var(--teal-dim);
+    cursor: pointer;
+}
+
+.workout-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 100;
+    overflow-y: auto;
 }
