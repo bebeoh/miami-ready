@@ -4,56 +4,1972 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Miami Ready</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍑</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --bg: #0A0A0B;
+    --bg-card: #151517;
+    --bg-card-2: #1C1C1F;
+    --bg-hover: #222225;
+    --vision-bg: url('vision-board-booty.png');
+    --goal-img: url('goal.png');
+    
+    --teal: #3ECFB2;
+    --teal-dim: rgba(62, 207, 178, 0.15);
+    --gold: #F5C563;
+    --gold-dim: rgba(245, 197, 99, 0.15);
+    --rose: #F56565;
+    --rose-dim: rgba(245, 101, 101, 0.15);
+    --purple: #A78BFA;
+    --purple-dim: rgba(167, 139, 250, 0.15);
+    --rose: #FB7185;
+    --rose-dim: rgba(251, 113, 133, 0.15);
+    --blue: #60A5FA;
+    
+    --text: #FFFFFF;
+    --text-2: #A1A1AA;
+    --text-3: #52525B;
+    
+    --border: #27272A;
+    --radius: 16px;
+    --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); }
+body { min-height: 100vh; padding-bottom: 100px; }
+
+.app { max-width: 500px; margin: 0 auto; }
+
+/* Pain Card */
+.pain-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+.pain-card.alert {
+    border-color: var(--rose);
+    box-shadow: 0 0 20px rgba(251, 113, 133, 0.2);
+}
+.pain-slider {
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--bg-hover);
+}
+.pain-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--teal);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+}
+
+/* Swap Options */
+.swap-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-card-2);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+.swap-option:hover {
+    background: var(--bg-hover);
+    border-color: var(--teal);
+}
+
+/* Hero Vision Section */
+.hero-vision {
+    position: relative;
+    height: 180px;
+    margin: 0 20px 20px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+}
+.hero-vision .bg {
+    position: absolute;
+    inset: 0;
+    background-image: var(--vision-bg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.4);
+    transform: scale(1.1);
+}
+.hero-vision .content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+}
+.hero-vision .goal-img {
+    width: 100px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+.hero-vision .text {
+    flex: 1;
+}
+.hero-vision .countdown {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-vision .countdown-label {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-top: 4px;
+}
+.hero-vision .destination {
+    font-size: 13px;
+    color: var(--gold);
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+/* Header */
+.header {
+    padding: 20px 20px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1 { font-size: 24px; font-weight: 800; }
+.header-sub { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.header-right { display: flex; gap: 8px; }
+.icon-btn {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Big Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px;
+    margin-bottom: 24px;
+}
+.stat-box {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+}
+.stat-box .value {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+}
+.stat-box .value.teal { color: var(--teal); }
+.stat-box .value.gold { color: var(--gold); }
+.stat-box .value.rose { color: var(--rose); }
+.stat-box .label {
+    font-size: 11px;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+}
+
+/* Week Planner */
+.section { padding: 0 20px; margin-bottom: 24px; }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.section-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-2);
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+}
+.week-day {
+    background: var(--bg-card);
+    border-radius: var(--radius-sm);
+    padding: 10px 4px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.15s;
+}
+.week-day:hover { background: var(--bg-hover); }
+.week-day.today { border-color: var(--text); }
+.week-day.selected { border-color: var(--teal); background: var(--teal-dim); }
+.week-day .dow { font-size: 10px; color: var(--text-3); font-weight: 700; }
+.week-day .date { font-size: 16px; font-weight: 700; margin: 4px 0; }
+.week-day .type { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+.week-day .type.lower { color: var(--teal); }
+.week-day .type.tempo { color: var(--gold); }
+.week-day.logged .date { color: var(--teal); }
+.week-day .check { font-size: 10px; color: var(--teal); margin-top: 2px; }
+
+/* Workout Preview Card */
+.workout-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.workout-header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+}
+.workout-header h3 { font-size: 18px; font-weight: 700; }
+.workout-header .sub { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.workout-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.workout-badge.lower { background: var(--teal-dim); color: var(--teal); }
+.workout-badge.tempo { background: var(--gold-dim); color: var(--gold); }
+
+.workout-protocols {
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.protocol {
+    background: var(--bg-card-2);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+}
+.protocol .title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.protocol .content { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+.workout-exercises {
+    padding: 8px 16px 16px;
+}
+.exercise-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+.exercise-row:last-child { border-bottom: none; }
+.exercise-row .name { font-size: 14px; font-weight: 600; }
+.exercise-row .sets { font-size: 13px; color: var(--text-2); }
+.exercise-row .note { font-size: 11px; color: var(--gold); margin-left: 8px; }
+
+.workout-footer {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+}
+.log-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--teal);
+    color: var(--bg);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.log-btn:hover { filter: brightness(1.1); }
+.log-btn.logged { background: var(--bg-card-2); color: var(--teal); }
+
+/* Progress Charts */
+.chart-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px;
+}
+.chart-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.chart-card .trend {
+    font-size: 12px;
+    color: var(--teal);
+    margin-left: auto;
+}
+
+/* Sparkline */
+.sparkline {
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+.sparkline .bar {
+    flex: 1;
+    background: var(--teal-dim);
+    border-radius: 4px 4px 0 0;
+    min-height: 4px;
+    transition: all 0.2s;
+    position: relative;
+}
+.sparkline .bar:hover { background: var(--teal); }
+.sparkline .bar .tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: var(--bg);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-bottom: 4px;
+}
+.sparkline .bar:hover .tooltip { display: block; }
+
+/* Connection Distribution */
+.conn-dist {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+.conn-dist .level {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    background: var(--bg-card-2);
+    border-radius: var(--radius-sm);
+}
+.conn-dist .emoji { font-size: 24px; }
+.conn-dist .count { font-size: 20px; font-weight: 800; margin-top: 4px; }
+.conn-dist .label { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+
+/* 70-Day Heatmap */
+.heatmap {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 3px;
+}
+.heatmap .cell {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    background: var(--bg-card-2);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+}
+.heatmap .cell:hover { transform: scale(1.2); z-index: 1; }
+.heatmap .cell.logged { background: var(--teal); }
+.heatmap .cell.partial { background: var(--gold-dim); border: 1px solid var(--gold); }
+.heatmap .cell.today { box-shadow: 0 0 0 2px var(--text); }
+.heatmap .cell.future { opacity: 0.3; }
+
+.heatmap-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--text-3);
+}
+.heatmap-legend span { display: flex; align-items: center; gap: 6px; }
+.heatmap-legend .dot { width: 10px; height: 10px; border-radius: 3px; }
+
+/* Booty Metrics */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+.metric-box {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+}
+.metric-box .icon { font-size: 28px; margin-bottom: 8px; }
+.metric-box .value { font-size: 28px; font-weight: 800; }
+.metric-box .label { font-size: 11px; color: var(--text-2); margin-top: 4px; }
+.metric-box .goal { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.metric-box .change { font-size: 12px; margin-top: 6px; }
+.metric-box .change.up { color: var(--teal); }
+.metric-box .change.down { color: var(--rose); }
+
+/* Bottom Nav */
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+}
+.nav-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    color: var(--text-3);
+    transition: all 0.15s;
+}
+.nav-item:hover { color: var(--text-2); }
+.nav-item.active { color: var(--teal); background: var(--teal-dim); }
+.nav-item .icon { font-size: 22px; }
+.nav-item .label { font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 200;
+}
+.modal-overlay.open { display: flex; }
+@media (min-width: 600px) {
+    .modal-overlay { align-items: center; padding: 24px; }
+    .modal { border-radius: var(--radius) !important; }
+}
+.modal {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-header h2 { font-size: 18px; font-weight: 800; }
+.modal-close {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--bg-card-2);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--text);
+}
+.modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+.modal-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+
+/* Form Elements */
+.form-group { margin-bottom: 20px; }
+.form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 8px;
+}
+.form-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-card-2);
+    color: var(--text);
+    font-size: 16px;
+    font-family: inherit;
+}
+.form-input:focus { outline: none; border-color: var(--teal); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn-primary { background: var(--teal); color: var(--bg); }
+.btn-secondary { background: var(--bg-card-2); color: var(--text); }
+
+.conn-select {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+.conn-opt {
+    padding: 12px 8px;
+    background: var(--bg-card-2);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.conn-opt:hover { background: var(--bg-hover); }
+.conn-opt.active { border-color: var(--teal); background: var(--teal-dim); }
+.conn-opt .emoji { font-size: 24px; }
+.conn-opt .label { font-size: 10px; color: var(--text-2); margin-top: 4px; }
+
+/* Quick Add Buttons */
+.quick-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+.quick-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--bg-card-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.quick-btn:hover { background: var(--bg-hover); border-color: var(--teal); }
+
+/* Settings */
+.settings-section { margin-bottom: 24px; }
+.settings-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 12px;
+}
+.settings-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    </style>
 </head>
-<body x-data="app()" x-init="init()">
-    <div class="app" :class="{ 'stability-alert': currentPainLevel > 3 }">
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// ===== CONFIG =====
+const STORE = 'miami-v5';
+const START = new Date(2026, 0, 11);
+const END = new Date(2026, 2, 21);
+
+const SCHEDULE = [
+    { d: 0, type: 'tempo', label: 'Tempo + Scan', short: 'SCAN', focus: 'Scan Day', tempoFocus: 'Light stretch + Zozofit scan' },
+    { d: 1, type: 'lower', label: 'Lower C', short: 'C', focus: 'Side-Glute + Stability', target: 'Fix imbalances + hip dips' },
+    { d: 2, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Upper Body', tempoFocus: 'X-Frame: Shoulders + Lats' },
+    { d: 3, type: 'lower', label: 'Lower B', short: 'B', focus: 'Under-Butt', target: 'Lower glute max + ham tie-in' },
+    { d: 4, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Active Recovery', tempoFocus: 'Incline walk + Foam roll' },
+    { d: 5, type: 'lower', label: 'Lower A', short: 'A', focus: 'Shelf + Side', target: 'Upper glute max + medius' },
+    { d: 6, type: 'tempo', label: 'Tempo', short: 'T', focus: 'Upper + Mobility', tempoFocus: 'X-Frame + Rigel stretcher' },
+];
+
+const PHASES = [
+    { 
+        name: 'SYNC', 
+        weeks: [1,2,3], 
+        color: 'purple',
+        goal: 'Sync & Stabilize — Fix pelvic twist + SI joint',
+        instruction: 'Light weight. Unilateral focus. Daily posture reset.',
+        htNote: 'Light — stabilize first',
+        rule: 'Target posture score: 87 → 92',
+        postureFocus: 'Daily 8-min reset before workouts'
+    },
+    { 
+        name: 'ALIGN', 
+        weeks: [4,5,6,7], 
+        color: 'teal',
+        goal: 'Alignment & Lift — Neutral pelvis + X-Frame',
+        instruction: 'Add weight when connected. Slow negatives on ham curls.',
+        htNote: 'Moderate — build alignment',
+        rule: 'Target posture score: 92 → 96',
+        postureFocus: '3-sec negatives, bi-weekly scans'
+    },
+    { 
+        name: 'PEAK', 
+        weeks: [8,9,10], 
+        color: 'gold',
+        goal: 'Peak 100 — Maximum lift + protrusion',
+        instruction: 'SI healed, pelvis neutral. Push PRs.',
+        htNote: 'Heavy — chase PRs',
+        rule: 'Target posture score: 96 → 100',
+        postureFocus: 'Load progression, daily Floor I-Y-Ws'
+    },
+];
+
+function getPhase(d) {
+    const dn = dayNum(d);
+    const week = Math.ceil(dn / 7);
+    return PHASES.find(p => p.weeks.includes(week)) || PHASES[0];
+}
+
+const EXERCISES = {
+    'Lower A': {
+        name: 'Shelf + Side',
+        target: 'Upper glute max + medius',
+        equipment: 'Tempo barbell + squat pad + bench',
+        exercises: [
+            { name: 'Barbell Hip Thrust', sets: '4×6-10', isMain: true, 
+              cue: '2-second squeeze at top', video: 'https://www.youtube.com/watch?v=SEdqd1n0cvg' },
+            { name: 'Back Extension OR Glute Bridge Hold', sets: '3×30-45 sec',
+              cue: 'Finer Form — squeeze and hold', video: 'https://www.youtube.com/watch?v=ph3pddpKzzw' },
+            { name: 'Heavy Band Seated Abduction', sets: '4×15-20',
+              cue: 'Blogilates band — push with knees', video: 'https://www.youtube.com/watch?v=FgHNhT2Ljkg' },
+            { name: 'Lateral Step-Ups', sets: '3×10 each',
+              cue: 'Bench height', video: 'https://www.youtube.com/watch?v=dQqApCGd5Ss' },
+        ],
+        finisher: 'Frog pumps ×40 + Band abduction ×1 min',
+    },
+    'Lower B': {
+        name: 'Under-Butt',
+        target: 'Lower glute max + ham tie-in',
+        equipment: 'Tempo barbell + bench + Finer Form + yoga ball',
+        exercises: [
+            { name: 'B-Stance RDL', sets: '4×8 each', isMain: true,
+              cue: 'Tempo barbell — hip hinge, bar close', video: 'https://www.youtube.com/watch?v=MxrRjsoVR8c' },
+            { name: 'High Step-Ups', sets: '3×10 each',
+              cue: 'Bench — drive through heel', video: 'https://www.youtube.com/watch?v=dQqApCGd5Ss' },
+            { name: 'Hyperextensions', sets: '3×12',
+              cue: 'Finer Form — pad low, squeeze at top', video: 'https://www.youtube.com/watch?v=ph3pddpKzzw' },
+            { name: 'Yoga Ball Ham Curls', sets: '3×12',
+              cue: 'Control the negative (3 sec down)', video: 'https://www.youtube.com/watch?v=dlBKpLwH95A' },
+        ],
+        finisher: 'Ankle-weight kickbacks 2×15 each',
+    },
+    'Lower C': {
+        name: 'Side-Glute + Stability',
+        target: 'Hip dips + SI joint',
+        equipment: 'Bench + ankle weights + heavy band',
+        exercises: [
+            { name: 'Single-Leg Hip Thrust', sets: '3×8 each', isMain: true,
+              cue: 'Bench — unilateral fixes imbalance', video: 'https://www.youtube.com/watch?v=AVKvMsYiyTo' },
+            { name: 'Cossack Squats', sets: '3×10 each',
+              cue: 'Deep lateral stretch', video: 'https://www.youtube.com/watch?v=tpczTeSkHz0' },
+            { name: 'Side-Lying Leg Raises', sets: '3×20',
+              cue: 'Ankle weights — slow and controlled', video: 'https://www.youtube.com/watch?v=jgh6sGwtTwk' },
+            { name: 'Band Walks', sets: '3×30 steps',
+              cue: 'Heavy band — stay low', video: 'https://www.youtube.com/watch?v=z9qiw9ePqVU' },
+        ],
+        finisher: 'Standing abduction hold 45s each + Bridge pulses 2 min',
+    },
+    'Stability': {
+        name: 'Spine-Sparing Stability',
+        target: 'SI joint protection + glute activation',
+        equipment: 'Band + ankle weights + dumbbell',
+        exercises: [
+            { name: 'Suitcase Carry', sets: '3×40 steps/side', isMain: true,
+              cue: 'Shoulder packed, ribs down, core braced', video: 'https://www.youtube.com/watch?v=DfiHq0P4DQk' },
+            { name: 'Banded Clamshells', sets: '3×20/side',
+              cue: 'Pelvis stable, no rocking', video: 'https://www.youtube.com/watch?v=cP-4zoRpOOs' },
+            { name: 'Dead Bug', sets: '3×10/side',
+              cue: 'Low back pressed to floor', video: 'https://www.youtube.com/watch?v=I5xbsA71v1A' },
+            { name: 'Bird Dog', sets: '3×10/side',
+              cue: 'Neutral spine, no rotation', video: 'https://www.youtube.com/watch?v=wiFNA3sqjCA' },
+            { name: 'Glute Bridge Hold', sets: '3×30 sec',
+              cue: 'Posterior tilt, no hyperextension', video: 'https://www.youtube.com/watch?v=OUgsJ8-Vi0E' },
+        ],
+        finisher: 'Side-lying leg raises 2×15 each (slow)',
+    },
+};
+
+const RESET = [
+    { name: 'Broomstick Reset', time: '2 min', why: 'Spinal alignment' },
+    { name: 'Cat-Cow', time: '1 min', why: 'Pelvic mobility' },
+    { name: 'Dead Bugs', time: '2 min', why: 'Core stability + pelvis' },
+    { name: 'Floor I-Y-W Raises', time: '2 min', why: 'Upper back alignment' },
+    { name: 'Right hip flexor stretch', time: '1 min', why: 'Release tight flexor' },
+];
+
+const PRIMER = [
+    { name: 'Frog pumps', time: '60s fast', why: 'Blood flow + activation' },
+    { name: 'Banded standing abductions', time: '60s', why: 'Pre-fatigue medius' },
+];
+
+const ACTIVATION = {
+    title: 'The Neural Rule (Every Rep)',
+    steps: [
+        'Exhale',
+        'Posterior pelvic tilt',
+        'Squeeze glutes',
+        'HOLD 2 seconds',
+    ],
+    why: 'You are training your nervous system to let your glutes hold your pelvis instead of your spine. This is why your shelf appears and your SI pain fades.'
+};
+
+const CONN = [
+    { id: 'red', emoji: '😐', label: 'Not yet' },
+    { id: 'yellow', emoji: '🤔', label: 'Getting there' },
+    { id: 'green', emoji: '😊', label: 'Feeling it' },
+    { id: 'fire', emoji: '🔥', label: 'Locked in' },
+];
+
+const TEMPO_TYPES = ['Upper', 'Walk', 'Stretch', 'Foam Roll'];
+
+const TEMPO_RECS = {
+    0: { rec: 'Stretch', reason: 'Scan day — Zozofit + track progress', protocol: ['Light stretch 10-15 min', 'Zozofit body scan', 'Progress photos'] },
+    1: { rec: null, reason: 'Lower C day — Fix Pelvic Twist' },
+    2: { rec: 'Upper', reason: 'X-Frame: Build shoulders + lats', protocol: ['Lateral raises 3×15', 'Face pulls 3×15', 'Lat pulldown 3×12', 'Rear delt flys 3×15'] },
+    3: { rec: null, reason: 'Lower B day — Target Softness (slow negatives)' },
+    4: { rec: 'Walk', reason: 'SI Joint Healing: Incline walk + foam roll', protocol: ['Incline walk 20 min', 'Foam roll glutes 5 min', 'Foam roll hips/IT band 5 min', 'Hip flexor stretch 2 min/side'] },
+    5: { rec: null, reason: 'Lower A day — Maximize Protrusion' },
+    6: { rec: 'Upper', reason: 'Align head/shoulders + mobility', protocol: ['Upper body Tempo class', 'Rigel stretcher 10 min', 'Floor I-Y-W raises 2 min'] },
+};
+
+const LOWER_DAY_TEMPO = { rec: 'Posture Reset', reason: '8-min circuit before workout', protocol: ['Broomstick Reset 2 min', 'Cat-Cow 1 min', 'Dead Bugs 2 min', 'Floor I-Y-W Raises 2 min', 'Hip flexor stretch 1 min'] };
+
+const CYCLE_PHASES = {
+    menstrual: { name: 'Menstrual', start: 1, end: 5, instruction: 'Light weight, perfect reps, FEEL the glutes', htNote: 'Light — feel every rep' },
+    follicular: { name: 'Follicular', start: 6, end: 14, instruction: 'Start adding load', htNote: 'Moderate — add weight' },
+    ovulatory: { name: 'Ovulatory', start: 15, end: 17, instruction: 'GO FOR PRs', htNote: 'Heavy — PR time' },
+    luteal: { name: 'Luteal', start: 18, end: 28, instruction: 'Keep weight, add abduction + slow reps', htNote: 'Steady — slow negatives' },
+};
+
+function getCycleDay(periodStart) {
+    if (!periodStart) return null;
+    // Parse as local date to avoid timezone issues
+    const [y, m, d] = periodStart.split('-').map(Number);
+    const start = new Date(y, m - 1, d);
+    const today = new Date();
+    // Reset today to midnight for accurate day calculation
+    today.setHours(0, 0, 0, 0);
+    const diffTime = today - start;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1; // Day 1 is start day
+    // Cycle repeats every 28 days
+    return ((diffDays - 1) % 28) + 1;
+}
+
+function getCyclePhase(periodStart) {
+    const day = getCycleDay(periodStart);
+    if (!day) return CYCLE_PHASES.menstrual; // Default
+    
+    for (const [key, phase] of Object.entries(CYCLE_PHASES)) {
+        if (day >= phase.start && day <= phase.end) {
+            return { ...phase, day, key };
+        }
+    }
+    return { ...CYCLE_PHASES.menstrual, day, key: 'menstrual' };
+}
+
+function getLastWeight(workoutLabel) {
+    const days = get70Days();
+    const today = new Date();
+    
+    // Find most recent logged day with this workout type that has weight
+    for (let i = days.length - 1; i >= 0; i--) {
+        const d = days[i];
+        if (d >= today) continue;
+        const data = state.days[iso(d)];
+        if (!data) continue;
         
-        <div x-show="view === 'today' && !workoutMode">
-            <header class="architect-header">
-                <div>
-                    <span class="status-label" x-text="physiqueStatus"></span>
-                    <h1 x-text="todaySchedule.label"></h1>
-                </div>
-                <div class="countdown-circle">
-                    <span class="days-left" x-text="70 - currentDay"></span>
-                    <span class="unit">DAYS</span>
-                </div>
-            </header>
+        const sched = getSched(d);
+        if (sched.label === workoutLabel && (data.mainWt || data.htWt)) {
+            return { weight: data.mainWt || data.htWt, reps: data.mainReps || data.htReps, date: d };
+        }
+    }
+    return null;
+}
 
-            <div class="control-panel">
-                <div class="pain-slider-card">
-                    <div style="display:flex; justify-content:space-between">
-                        <span>Back Pain</span>
-                        <span x-text="currentPainLevel + '/10'"></span>
-                    </div>
-                    <input type="range" min="0" max="10" x-model="currentPainLevel" @input="handleBackPain($el.value)">
-                </div>
-                <button @click="showSwapModal = true" class="btn-pivot">🔄 Swap for StretchLab</button>
+function getWeightRec(cycle, lastWeight) {
+    if (!lastWeight) return { action: 'Start light', note: 'Find your baseline' };
+    
+    const phase = cycle.key;
+    if (phase === 'menstrual') {
+        return { action: `${lastWeight}lbs or lighter`, note: 'Focus on feeling it' };
+    } else if (phase === 'follicular') {
+        return { action: `${lastWeight}lbs → ${lastWeight + 5}lbs`, note: 'Add if connected' };
+    } else if (phase === 'ovulatory') {
+        return { action: `${lastWeight + 5}-${lastWeight + 10}lbs`, note: 'PR window — go for it' };
+    } else {
+        return { action: `${lastWeight}lbs`, note: 'Maintain, slow negatives' };
+    }
+}
+
+const DEFAULT = {
+    settings: { protein: 130, water: 100, periodStart: '2026-01-13' },
+    baseline: { roundness: 32, protrusion: 25, lift: 83 },
+    days: {},
+    scans: [],
+    splits: { frontL: null, frontR: null, middle: null },
+    swaps: {},  // { '2026-01-16': 'stretchlab' } — persists workout swaps
+};
+
+const SWAP_OPTIONS = [
+    { id: 'stretchlab', name: 'StretchLab/Recovery', icon: '🧘', type: 'recovery' },
+    { id: 'lowerC', name: 'Lower C (Stability)', icon: '🛡️', type: 'lower' },
+    { id: 'walk', name: 'Incline Walk + Foam Roll', icon: '🚶', type: 'recovery' },
+    { id: 'rest', name: 'Full Rest', icon: '😴', type: 'rest' },
+];
+
+const STABILITY_CUES = {
+    warning: '⚠️ STABILITY MODE: Core braced, ribs down, avoid end-range extension',
+    exercises: {
+        'Suitcase Carry': { sets: '3×40 steps/side', cue: 'Shoulder packed, ribs down', video: 'https://www.youtube.com/watch?v=DfiHq0P4DQk' },
+        'Banded Clamshells': { sets: '3×20/side', cue: 'Pelvis stable, no rocking', video: 'https://www.youtube.com/watch?v=cP-4zoRpOOs' },
+        'Dead Bug': { sets: '3×10/side', cue: 'Low back pressed to floor', video: 'https://www.youtube.com/watch?v=I5xbsA71v1A' },
+        'Bird Dog': { sets: '3×10/side', cue: 'Neutral spine, no rotation', video: 'https://www.youtube.com/watch?v=wiFNA3sqjCA' },
+        'Glute Bridge Hold': { sets: '3×30 sec', cue: 'Posterior tilt, no hyperextension', video: 'https://www.youtube.com/watch?v=OUgsJ8-Vi0E' },
+        'Side-Lying Leg Raise': { sets: '3×15/side', cue: 'Slow, controlled, no momentum', video: 'https://www.youtube.com/watch?v=jgh6sGwtTwk' },
+    }
+};
+
+// ===== STATE =====
+let state = { ...DEFAULT };
+let view = 'dashboard';
+let selectedDate = new Date();
+let modal = null;
+
+// ===== UTILS =====
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const parseIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const dayNum = d => Math.floor((d - START) / 86400000) + 1;
+const getSched = d => SCHEDULE.find(s => s.d === d.getDay());
+const isLower = d => getSched(d).type === 'lower';
+const fmtDate = (d, style) => d.toLocaleDateString('en-US', style === 'long' ? { weekday: 'long', month: 'long', day: 'numeric' } : { month: 'short', day: 'numeric' });
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+function getWeekDates(d) {
+    const start = new Date(d);
+    start.setDate(start.getDate() - start.getDay());
+    return Array.from({ length: 7 }, (_, i) => {
+        const day = new Date(start);
+        day.setDate(day.getDate() + i);
+        return day;
+    });
+}
+
+function get70Days() {
+    return Array.from({ length: 70 }, (_, i) => {
+        const d = new Date(START);
+        d.setDate(d.getDate() + i);
+        return d;
+    });
+}
+
+// ===== STORAGE =====
+function load() {
+    try { const r = localStorage.getItem(STORE); if (r) state = { ...DEFAULT, ...JSON.parse(r) }; } catch {}
+}
+function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch {}
+}
+
+// ===== COMPUTED =====
+function getConnCounts() {
+    const c = { red: 0, yellow: 0, green: 0, fire: 0 };
+    Object.entries(state.days).forEach(([k, v]) => {
+        if (v.conn && isLower(parseIso(k))) c[v.conn]++;
+    });
+    return c;
+}
+
+function getHtProgress() {
+    const entries = Object.entries(state.days)
+        .filter(([k, v]) => (v.mainWt || v.htWt) && isLower(parseIso(k)))
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .slice(-10);
+    return entries.map(([k, v]) => ({ date: k, weight: v.mainWt || v.htWt }));
+}
+
+function getProgramStats() {
+    const today = new Date();
+    const current = clamp(dayNum(today), 1, 70);
+    const logged = Object.values(state.days).filter(d => d.workout).length;
+    const lowerDays = Object.entries(state.days).filter(([k]) => isLower(parseIso(k)));
+    const avgConn = lowerDays.length > 0 ? 
+        lowerDays.filter(([,v]) => v.conn === 'green' || v.conn === 'fire').length / lowerDays.length * 100 : 0;
+    return { current, logged, pct: Math.round((current / 70) * 100), avgConn: Math.round(avgConn) };
+}
+
+function getLatestScan() {
+    return state.scans.length ? state.scans[state.scans.length - 1] : null;
+}
+
+function getTempoStats() {
+    const days = get70Days();
+    const today = new Date();
+    let streak = 0;
+    let total = 0;
+    
+    // Count total Tempo sessions
+    days.forEach(d => {
+        if (d <= today && state.days[iso(d)]?.tempo) total++;
+    });
+    
+    // Calculate current streak (consecutive days with tempo)
+    for (let i = days.length - 1; i >= 0; i--) {
+        const d = days[i];
+        if (d > today) continue;
+        if (state.days[iso(d)]?.tempo) {
+            streak++;
+        } else if (d < today) {
+            break; // Streak broken
+        }
+    }
+    
+    return { streak, total };
+}
+
+function getTempoRec(d) {
+    const dow = d.getDay();
+    const lower = isLower(d);
+    if (lower) return LOWER_DAY_TEMPO;
+    return TEMPO_RECS[dow] || { rec: 'Upper', reason: 'Active recovery' };
+}
+
+// ===== RENDER =====
+function render() {
+    document.getElementById('app').innerHTML = `
+        ${view === 'dashboard' ? renderDashboard() : ''}
+        ${view === 'progress' ? renderProgress() : ''}
+        ${view === 'settings' ? renderSettings() : ''}
+        ${renderNav()}
+        ${renderModal()}
+    `;
+}
+
+function renderDashboard() {
+    const today = new Date();
+    const todayISO = iso(today);
+    const stats = getProgramStats();
+    const weekDates = getWeekDates(selectedDate);
+    const selSched = getSched(selectedDate);
+    const selData = state.days[iso(selectedDate)] || {};
+    const lower = isLower(selectedDate);
+    const connCounts = getConnCounts();
+    const currentPhase = getPhase(today);
+    const currentCycle = getCyclePhase(state.settings.periodStart);
+    const tempoStats = getTempoStats();
+    
+    return `
+        <div class="header">
+            <div>
+                <h1>Miami Ready 🍑</h1>
+                <div class="header-sub">Day ${stats.current} of 70 · <span style="color:var(--rose)">${currentCycle.name}</span> Day ${currentCycle.day || 1}</div>
             </div>
-
-            <div class="metrics-grid">
-                <div class="metric-card"><span>Roundness</span><h3 x-text="latestScan.roundness + '%'"></h3></div>
-                <div class="metric-card"><span>Protrusion</span><h3 x-text="latestScan.protrusion + '%'"></h3></div>
-                <div class="metric-card"><span>Lift</span><h3 x-text="latestScan.lift + '%'"></h3></div>
+            <div class="header-right">
+                <button class="icon-btn" onclick="setView('settings')">⚙️</button>
             </div>
-
-            <button class="btn-primary" style="margin: 20px; width: calc(100% - 40px);" @click="startWorkout()">
-                START SESSION
-            </button>
         </div>
-
-        <div x-show="workoutMode" class="workout-screen">
-            <div style="padding: 20px">
-                <div style="display:flex; justify-content:space-between">
-                    <h2 x-text="activeWorkout.name"></h2>
-                    <button @click="workoutMode = false" class="btn-close">✕</button>
+        
+        <div class="hero-vision">
+            <div class="bg"></div>
+            <div class="content">
+                <img src="goal.png" class="goal-img" alt="Goal" onerror="this.style.display='none'">
+                <div class="text">
+                    <div class="countdown">${70 - stats.current}</div>
+                    <div class="countdown-label">days to Miami</div>
+                    <div class="destination">🌴 March 21, 2026</div>
                 </div>
-                <template x-for="ex in activeWorkout.exercises">
-                    <div class="exercise-card" style="background:#1C1C1F; padding:15px; border-radius:12px; margin-top:15px">
-                        <h4 x-text="ex.name" style="margin:0"></h4>
-                        <p x-text="ex.sets" style="color:#3ECFB2; font-weight:bold"></p>
-                        <p x-text="ex.cue" style="font-size:13px; color:#A1A1AA"></p>
-                        <a :href="'https://www.youtube.com/watch?v=' + ex.video" target="_blank" style="color:#F5C563; font-size:12px">Watch Tutorial</a>
+            </div>
+        </div>
+        
+        <div class="stats-row" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div class="stat-box">
+                <div class="value teal">${stats.pct}%</div>
+                <div class="label">Program</div>
+            </div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--rose)">${currentCycle.name}</div>
+                <div class="label">Day ${currentCycle.day || 1}</div>
+            </div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--purple)">${tempoStats.streak}</div>
+                <div class="label">Tempo</div>
+            </div>
+            <div class="stat-box">
+                <div class="value" style="color:var(--teal)">${Object.values(state.days).filter(d => d.casein).length}</div>
+                <div class="label">Casein</div>
+            </div>
+        </div>
+        
+        ${(() => {
+            const todayPain = state.days[todayISO]?.backPain || 0;
+            const hasSwap = state.swaps && state.swaps[iso(selectedDate)];
+            return `
+                <div class="section">
+                    <div class="pain-card ${todayPain > 3 ? 'alert' : ''}">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                            <div>
+                                <div style="font-weight:700">Back Pain Check</div>
+                                <div style="font-size:12px;color:var(--text-3)">How's your SI joint today?</div>
+                            </div>
+                            <div style="font-size:24px;font-weight:700;color:${todayPain > 3 ? 'var(--rose)' : todayPain > 0 ? 'var(--gold)' : 'var(--teal)'}">${todayPain}/10</div>
+                        </div>
+                        <input type="range" min="0" max="10" value="${todayPain}" 
+                            class="pain-slider" 
+                            oninput="updatePain(this.value)"
+                            style="width:100%;accent-color:${todayPain > 3 ? 'var(--rose)' : 'var(--teal)'}">
+                        ${todayPain > 3 ? `
+                            <div style="margin-top:12px;padding:12px;background:var(--rose-dim);border-radius:10px;border:1px solid var(--rose)">
+                                <div style="font-size:13px;color:var(--rose);font-weight:700">⚠️ STABILITY MODE RECOMMENDED</div>
+                                <div style="font-size:12px;color:var(--text-2);margin-top:4px">Heavy lifts may aggravate your SI joint. Consider swapping to Lower C (Stability) or StretchLab.</div>
+                                <button class="btn btn-primary" style="margin-top:10px;width:100%;background:var(--rose);border-color:var(--rose)" onclick="openSwapModal()">
+                                    Swap Today's Workout
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${hasSwap ? `
+                        <div style="margin-top:12px;padding:12px;background:var(--purple-dim);border-radius:12px;display:flex;justify-content:space-between;align-items:center">
+                            <div>
+                                <div style="font-size:12px;color:var(--purple)">TODAY SWAPPED TO:</div>
+                                <div style="font-weight:700">${SWAP_OPTIONS.find(s => s.id === hasSwap)?.name || hasSwap}</div>
+                            </div>
+                            <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="clearSwap('${iso(selectedDate)}')">Undo</button>
+                        </div>
+                    ` : lower ? `
+                        <button class="btn btn-secondary" style="width:100%;margin-top:12px" onclick="openSwapModal()">
+                            🔄 Pivot Today's Workout
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+        })()}
+        
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">This Week</span>
+                <span style="font-size:12px;color:var(--text-3)">${fmtDate(weekDates[0])} - ${fmtDate(weekDates[6])}</span>
+            </div>
+            
+            <div class="week-grid">
+                ${weekDates.map(d => {
+                    const sched = getSched(d);
+                    const data = state.days[iso(d)];
+                    const isToday = iso(d) === todayISO;
+                    const isSel = iso(d) === iso(selectedDate);
+                    return `
+                        <div class="week-day ${isToday ? 'today' : ''} ${isSel ? 'selected' : ''} ${data?.workout ? 'logged' : ''}"
+                             onclick="selectDay('${iso(d)}')">
+                            <div class="dow">${['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()]}</div>
+                            <div class="date">${d.getDate()}</div>
+                            <div class="type ${sched.type}">${sched.short}</div>
+                            ${data?.workout ? '<div class="check">✓</div>' : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            
+            <div class="workout-card">
+                <div class="workout-header">
+                    <div>
+                        <h3>${selSched.label}</h3>
+                        <div class="sub">${fmtDate(selectedDate, 'long')}</div>
+                    </div>
+                    <span class="workout-badge ${selSched.type}">${selSched.focus || selSched.type}</span>
+                </div>
+                
+                ${(() => {
+                    const phase = getPhase(selectedDate);
+                    const cycle = getCyclePhase(state.settings.periodStart);
+                    return `
+                        <div style="padding:12px 16px;background:var(--${phase.color}-dim);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+                            <div>
+                                <div style="font-size:12px;font-weight:800;color:var(--${phase.color});text-transform:uppercase;letter-spacing:0.5px">${phase.name} · Week ${Math.ceil(dayNum(selectedDate) / 7)}</div>
+                                <div style="font-size:13px;color:var(--text-2);margin-top:2px">${phase.goal}</div>
+                            </div>
+                            ${lower ? `
+                                <div style="text-align:right;padding:6px 10px;background:var(--rose-dim);border-radius:8px">
+                                    <div style="font-size:11px;color:var(--rose);font-weight:700">${cycle.name}</div>
+                                    <div style="font-size:10px;color:var(--text-3)">Day ${cycle.day || 1}</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        ${lower ? `
+                            <div style="padding:12px 16px;background:var(--bg-card-2);border-bottom:1px solid var(--border)">
+                                <div style="font-size:13px;color:var(--gold);font-weight:700">🩸 ${cycle.instruction}</div>
+                            </div>
+                        ` : ''}
+                    `;
+                })()}
+                
+                ${lower ? `
+                    <div class="workout-protocols">
+                        <div class="protocol">
+                            <div class="title">⚡ 8-Min Posture Reset (Do First)</div>
+                            <div class="content">
+                                ${RESET.map(r => `<div style="margin:4px 0"><strong>${r.name}</strong> — ${r.time}</div>`).join('')}
+                            </div>
+                        </div>
+                        <div class="protocol">
+                            <div class="title">🔥 Glute Primer</div>
+                            <div class="content">
+                                ${PRIMER.map(p => `<div style="margin:4px 0"><strong>${p.name}</strong> — ${p.time}</div>`).join('')}
+                            </div>
+                        </div>
+                        <div class="protocol" style="background:var(--gold-dim)">
+                            <div class="title" style="color:var(--gold)">🧠 ${ACTIVATION.title}</div>
+                            <div class="content">
+                                ${ACTIVATION.steps.map((s, i) => `<div style="margin:4px 0;font-size:15px;font-weight:${i === 3 ? '700' : '400'}">${i+1}. ${s}</div>`).join('')}
+                                <div style="margin-top:8px;font-size:12px;color:var(--text-3);line-height:1.4">${ACTIVATION.why}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-exercises">
+                        <div style="padding:12px 16px;background:var(--bg-card-2);border-bottom:1px solid var(--border)">
+                            <div style="font-size:14px;font-weight:700;color:var(--teal)">${EXERCISES[selSched.label]?.name}</div>
+                            <div style="font-size:12px;color:var(--text-2)">${EXERCISES[selSched.label]?.target}</div>
+                        </div>
+                        ${EXERCISES[selSched.label]?.exercises.map((ex, i) => {
+                            const cycle = getCyclePhase(state.settings.periodStart);
+                            const lastWt = ex.isMain ? getLastWeight(selSched.label) : null;
+                            const wtRec = ex.isMain ? getWeightRec(cycle, lastWt?.weight) : null;
+                            const backPain = state.days[iso(selectedDate)]?.backPain || 0;
+                            return `
+                                <div style="padding:14px 16px;border-bottom:1px solid var(--border)">
+                                    <div style="display:flex;justify-content:space-between;align-items:center">
+                                        <span style="font-weight:600;font-size:14px">${i+1}. ${ex.name}</span>
+                                        <div style="display:flex;align-items:center;gap:8px">
+                                            <span style="color:var(--text-2);font-size:13px">${ex.sets}</span>
+                                            ${ex.video ? `<a href="${ex.video}" target="_blank" style="color:var(--teal);font-size:12px;text-decoration:none">▶️</a>` : ''}
+                                        </div>
+                                    </div>
+                                    <div style="font-size:12px;color:var(--text-3);margin-top:4px">
+                                        ${backPain > 3 ? '<span style="color:var(--rose)">⚠️ Core braced, ribs down · </span>' : ''}${ex.cue}
+                                    </div>
+                                    ${ex.isMain ? `
+                                        <div style="margin-top:10px;padding:10px 12px;background:var(--gold-dim);border-radius:8px">
+                                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                                <div>
+                                                    <div style="font-size:11px;color:var(--text-3)">Last: ${lastWt ? lastWt.weight + 'lbs × ' + (lastWt.reps || '?') : 'None'}</div>
+                                                    <div style="font-size:14px;font-weight:700;color:var(--gold);margin-top:2px">Today: ${wtRec.action}</div>
+                                                </div>
+                                                <div style="font-size:11px;color:var(--text-2);text-align:right;max-width:100px">${wtRec.note}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('') || ''}
+                        <div style="padding:14px 16px;background:var(--rose-dim);border-radius:0 0 16px 16px">
+                            <div style="font-size:12px;font-weight:700;color:var(--rose);margin-bottom:4px">🔥 FINISHER</div>
+                            <div style="font-size:13px;color:var(--text)">${EXERCISES[selSched.label]?.finisher || ''}</div>
+                        </div>
+                    </div>
+                ` : `
+                    ${(() => {
+                        const rec = getTempoRec(selectedDate);
+                        const sched = getSched(selectedDate);
+                        return `
+                            <div class="workout-protocols">
+                                <div class="protocol" style="background:var(--purple-dim)">
+                                    <div class="title" style="color:var(--purple)">💡 ${sched.focus || 'Today'}</div>
+                                    <div class="content">
+                                        <div style="font-size:18px;font-weight:700;margin-bottom:4px">${rec.rec}</div>
+                                        <div style="color:var(--text-3)">${rec.reason}</div>
+                                    </div>
+                                </div>
+                                ${rec.protocol ? `
+                                    <div class="protocol">
+                                        <div class="title">📋 Protocol</div>
+                                        <div class="content">
+                                            ${rec.protocol.map(p => `<div style="margin:6px 0;padding-left:12px;border-left:2px solid var(--teal)">✓ ${p}</div>`).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                <div class="protocol">
+                                    <div class="title">🚫 Glute Recovery</div>
+                                    <div class="content">No additional glute work. Your glutes are growing from Mon/Wed/Fri.</div>
+                                </div>
+                            </div>
+                        `;
+                    })()}
+                `}
+                
+                <div class="workout-footer">
+                    <button class="log-btn ${selData.workout ? 'logged' : ''}" onclick="openLog('${iso(selectedDate)}')">
+                        ${selData.workout ? '✓ Logged — Edit' : 'Log This Workout'}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Neural Connection</div>
+            <div class="chart-card">
+                <div style="margin-bottom:12px;padding:10px 12px;background:var(--gold-dim);border-radius:10px">
+                    <div style="font-size:12px;color:var(--gold);font-weight:700">
+                        If you can't feel it, it's not growing
+                    </div>
+                </div>
+                <div class="conn-dist">
+                    ${CONN.map(c => `
+                        <div class="level">
+                            <div class="emoji">${c.emoji}</div>
+                            <div class="count">${connCounts[c.id]}</div>
+                            <div class="label">${c.label}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Main Lift Progress</div>
+            <div class="chart-card">
+                ${renderSparkline()}
+            </div>
+        </div>
+    `;
+}
+
+function renderSparkline() {
+    const data = getHtProgress();
+    if (data.length < 2) {
+        return `<div style="text-align:center;padding:20px;color:var(--text-3)">Log more Lower days to see progress</div>`;
+    }
+    const max = Math.max(...data.map(d => d.weight));
+    return `
+        <div class="sparkline">
+            ${data.map(d => `
+                <div class="bar" style="height: ${(d.weight / max) * 100}%">
+                    <span class="tooltip">${d.weight} lbs</span>
+                </div>
+            `).join('')}
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--text-3)">
+            <span>${fmtDate(parseIso(data[0].date))}</span>
+            <span>${fmtDate(parseIso(data[data.length-1].date))}</span>
+        </div>
+    `;
+}
+
+function renderProgress() {
+    const days = get70Days();
+    const today = new Date();
+    const scan = getLatestScan();
+    const r = scan?.roundness ?? state.baseline.roundness;
+    const p = scan?.protrusion ?? state.baseline.protrusion;
+    const connCounts = getConnCounts();
+    
+    const rChange = scan ? r - state.baseline.roundness : 0;
+    const pChange = scan ? p - state.baseline.protrusion : 0;
+    
+    return `
+        <div class="header">
+            <div>
+                <h1>Progress</h1>
+                <div class="header-sub">Track your transformation</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">70-Day Overview</div>
+            <div class="chart-card">
+                <div class="heatmap">
+                    ${days.map(d => {
+                        const data = state.days[iso(d)];
+                        const isToday = iso(d) === iso(today);
+                        const isFuture = d > today;
+                        let cls = 'cell';
+                        if (isFuture) cls += ' future';
+                        else if (data?.workout) cls += ' logged';
+                        if (isToday) cls += ' today';
+                        return `<div class="${cls}" onclick="openLog('${iso(d)}')" title="${fmtDate(d)}"></div>`;
+                    }).join('')}
+                </div>
+                <div class="heatmap-legend">
+                    <span><div class="dot" style="background:var(--teal)"></div> Logged</span>
+                    <span><div class="dot" style="background:var(--bg-card-2)"></div> Not logged</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Booty Metrics</div>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <div class="icon">📐</div>
+                    <div class="value">${r}%</div>
+                    <div class="label">Roundness</div>
+                    <div class="goal">Goal: 45-55%</div>
+                    ${rChange !== 0 ? `<div class="change ${rChange > 0 ? 'up' : 'down'}">${rChange > 0 ? '+' : ''}${rChange}%</div>` : ''}
+                </div>
+                <div class="metric-box">
+                    <div class="icon">📏</div>
+                    <div class="value">${p}%</div>
+                    <div class="label">Protrusion</div>
+                    <div class="goal">Goal: 35-45%</div>
+                    ${pChange !== 0 ? `<div class="change ${pChange > 0 ? 'up' : 'down'}">${pChange > 0 ? '+' : ''}${pChange}%</div>` : ''}
+                </div>
+                <div class="metric-box">
+                    <div class="icon">⬆️</div>
+                    <div class="value">${state.baseline.lift}%</div>
+                    <div class="label">Lift</div>
+                    <div class="goal">Elite ✓</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Add Zozofit Scan</div>
+            <div class="chart-card">
+                <div class="form-group">
+                    <label class="form-label">Date</label>
+                    <input type="date" class="form-input" id="scanDate" value="${iso(today)}">
+                </div>
+                <div class="form-row" style="margin-bottom:16px">
+                    <div class="form-group" style="margin-bottom:0">
+                        <label class="form-label">Roundness %</label>
+                        <input type="number" class="form-input" id="scanR" placeholder="${r}">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0">
+                        <label class="form-label">Protrusion %</label>
+                        <input type="number" class="form-input" id="scanP" placeholder="${p}">
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="addScan()">Add Scan</button>
+                
+                ${state.scans.length > 0 ? `
+                    <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:16px">
+                        <div class="form-label" style="margin-bottom:12px">Scan History</div>
+                        ${state.scans.slice().reverse().slice(0, 5).map(s => `
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+                                <span>${fmtDate(parseIso(s.date))}</span>
+                                <span style="color:var(--text-2)">R: ${s.roundness}% · P: ${s.protrusion}%</span>
+                                <button style="background:none;border:none;cursor:pointer;font-size:16px" onclick="deleteScan('${s.date}')">🗑</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function renderSettings() {
+    return `
+        <div class="header">
+            <div>
+                <h1>Settings</h1>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="settings-card">
+                <h3>Goals</h3>
+                <div class="form-group">
+                    <label class="form-label">Protein Goal (g)</label>
+                    <input type="number" class="form-input" value="${state.settings.protein}" 
+                        onchange="updateSetting('protein', +this.value)">
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Water Goal (oz)</label>
+                    <input type="number" class="form-input" value="${state.settings.water}"
+                        onchange="updateSetting('water', +this.value)">
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>Cycle Syncing</h3>
+                <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Auto-calculates your phase based on period start</p>
+                <div class="form-group">
+                    <label class="form-label">Period Start Date</label>
+                    <input type="date" class="form-input" value="${state.settings.periodStart || ''}" 
+                        onchange="state.settings.periodStart = this.value; save(); render();">
+                </div>
+                ${(() => {
+                    const cycle = getCyclePhase(state.settings.periodStart);
+                    return `
+                        <div style="padding:16px;background:var(--bg-card-2);border-radius:12px;margin-top:8px">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                                <span style="font-size:18px;font-weight:700;color:var(--teal)">${cycle.name}</span>
+                                <span style="font-size:14px;color:var(--text-2)">Day ${cycle.day || 1}</span>
+                            </div>
+                            <div style="font-size:13px;color:var(--gold);font-weight:600">${cycle.instruction}</div>
+                            <div style="display:flex;gap:4px;margin-top:12px">
+                                ${Object.entries(CYCLE_PHASES).map(([key, phase]) => `
+                                    <div style="flex:1;height:6px;border-radius:3px;background:${cycle.key === key ? 'var(--teal)' : 'var(--bg-hover)'}"></div>
+                                `).join('')}
+                            </div>
+                            <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:var(--text-3)">
+                                <span>Menstrual</span>
+                                <span>Follicular</span>
+                                <span>Ovulatory</span>
+                                <span>Luteal</span>
+                            </div>
+                        </div>
+                    `;
+                })()}
+            </div>
+            
+            <div class="settings-card">
+                <h3>Splits Progress</h3>
+                <p style="font-size:12px;color:var(--text-3);margin-bottom:12px">Track flexibility — lower inches = more glute room</p>
+                <div class="form-group">
+                    <label class="form-label">Front Left (inches from floor)</label>
+                    <input type="number" class="form-input" value="${state.splits?.frontL || ''}" 
+                        onchange="state.splits.frontL = +this.value; save();">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Front Right (inches)</label>
+                    <input type="number" class="form-input" value="${state.splits?.frontR || ''}" 
+                        onchange="state.splits.frontR = +this.value; save();">
+                </div>
+                <div class="form-group" style="margin-bottom:0">
+                    <label class="form-label">Middle (inches)</label>
+                    <input type="number" class="form-input" value="${state.splits?.middle || ''}" 
+                        onchange="state.splits.middle = +this.value; save();">
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>Backup</h3>
+                <div style="display:flex;gap:12px;margin-top:8px">
+                    <button class="btn btn-secondary" style="flex:1" onclick="exportData()">Export</button>
+                    <label class="btn btn-secondary" style="flex:1;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                        Import
+                        <input type="file" accept=".json" style="display:none" onchange="importData(event)">
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>Cloud Sync</h3>
+                <p style="font-size:13px;color:var(--text-2);margin:8px 0 16px">JSONbin.io (free)</p>
+                <div class="form-group">
+                    <label class="form-label">Bin ID</label>
+                    <input type="text" class="form-input" id="binId" value="${localStorage.getItem('miami-bin') || ''}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">API Key</label>
+                    <input type="password" class="form-input" id="binKey" value="${localStorage.getItem('miami-key') || ''}">
+                </div>
+                <div style="display:flex;gap:12px">
+                    <button class="btn btn-primary" style="flex:1" onclick="cloudPush()">Push</button>
+                    <button class="btn btn-secondary" style="flex:1" onclick="cloudPull()">Pull</button>
+                </div>
+            </div>
+            
+            <div class="settings-card" style="border:1px solid var(--rose-dim)">
+                <h3 style="color:var(--rose)">Reset</h3>
+                <p style="font-size:13px;color:var(--text-2);margin:8px 0 16px">Delete all data</p>
+                <button class="btn btn-secondary" style="color:var(--rose)" onclick="resetAll()">Reset Everything</button>
+            </div>
+        </div>
+    `;
+}
+
+function renderNav() {
+    return `
+        <nav class="nav">
+            <div class="nav-inner">
+                <button class="nav-item ${view === 'dashboard' ? 'active' : ''}" onclick="setView('dashboard')">
+                    <span class="icon">🏠</span>
+                    <span class="label">Home</span>
+                </button>
+                <button class="nav-item ${view === 'progress' ? 'active' : ''}" onclick="setView('progress')">
+                    <span class="icon">📊</span>
+                    <span class="label">Progress</span>
+                </button>
+                <button class="nav-item ${view === 'settings' ? 'active' : ''}" onclick="setView('settings')">
+                    <span class="icon">⚙️</span>
+                    <span class="label">Settings</span>
+                </button>
+            </div>
+        </nav>
+    `;
+}
+
+function renderModal() {
+    if (!modal) return '<div class="modal-overlay"></div>';
+    
+    // Swap modal
+    if (modal === 'swap') {
+        return `
+            <div class="modal-overlay open" onclick="closeModal()">
+                <div class="modal" onclick="event.stopPropagation()">
+                    <div class="modal-header">
+                        <h2>Pivot Today's Workout</h2>
+                        <button class="modal-close" onclick="closeModal()">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="color:var(--text-2);margin-bottom:16px">Your history will show this as a smart pivot, not a missed day.</p>
+                        ${SWAP_OPTIONS.map(opt => `
+                            <div class="swap-option" onclick="doSwap('${opt.id}')">
+                                <span style="font-size:24px">${opt.icon}</span>
+                                <div style="flex:1">
+                                    <div style="font-weight:600">${opt.name}</div>
+                                    <div style="font-size:12px;color:var(--text-3)">${opt.type === 'recovery' ? 'No weights logged' : opt.type === 'lower' ? 'Spine-sparing stability work' : 'Rest day'}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // StretchLab logging modal
+    if (modal.startsWith && state.swaps && state.swaps[modal] === 'stretchlab') {
+        const data = state.days[modal] || {};
+        return `
+            <div class="modal-overlay open" onclick="closeModal()">
+                <div class="modal" onclick="event.stopPropagation()">
+                    <div class="modal-header">
+                        <h2>StretchLab Session</h2>
+                        <button class="modal-close" onclick="closeModal()">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="form-label">Duration (min)</label>
+                            <input type="number" class="form-input" id="stretchDur" value="${data.stretchDur || 50}" placeholder="50">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Flexologist Notes</label>
+                            <textarea class="form-input" id="stretchNotes" rows="4" placeholder="What did they find? Tight areas, adjustments made...">${data.stretchNotes || ''}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Areas Worked</label>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                ${['Hips', 'SI Joint', 'Hamstrings', 'Quads', 'Lower Back', 'Shoulders'].map(area => `
+                                    <button type="button" class="quick-btn ${(data.stretchAreas || []).includes(area) ? 'active' : ''}"
+                                        onclick="toggleStretchArea('${area}')"
+                                        style="${(data.stretchAreas || []).includes(area) ? 'background:var(--teal);color:var(--bg);border-color:var(--teal)' : ''}">${area}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="saveStretchLog()">Save</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    const d = parseIso(modal);
+    const data = state.days[modal] || {};
+    const sched = getSched(d);
+    const lower = isLower(d);
+    const backPain = data.backPain || 0;
+    
+    return `
+        <div class="modal-overlay open" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>${fmtDate(d, 'long')}</h2>
+                    <button class="modal-close" onclick="closeModal()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-bottom:20px;padding:12px;background:var(--bg-card-2);border-radius:12px">
+                        <div style="font-weight:700">${sched.label}</div>
+                        <div style="font-size:13px;color:var(--text-2)">${sched.focus || sched.type}</div>
+                    </div>
+                    
+                    ${backPain > 3 ? `
+                        <div style="margin-bottom:16px;padding:12px;background:var(--rose-dim);border-radius:10px;border:1px solid var(--rose)">
+                            <div style="font-size:12px;color:var(--rose);font-weight:700">${STABILITY_CUES.warning}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${lower ? `
+                        <div class="form-group">
+                            <label class="form-label">${EXERCISES[sched.label]?.exercises.find(e => e.isMain)?.name || 'Main Lift'} — Top Set</label>
+                            <div class="form-row">
+                                <input type="number" class="form-input" id="mainWt" value="${data.mainWt || data.htWt || ''}" placeholder="lbs">
+                                <input type="number" class="form-input" id="mainReps" value="${data.mainReps || data.htReps || ''}" placeholder="reps">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Connection</label>
+                            <div class="conn-select">
+                                ${CONN.map(c => `
+                                    <div class="conn-opt ${data.conn === c.id ? 'active' : ''}" data-conn="${c.id}" onclick="selectConn('${c.id}')">
+                                        <div class="emoji">${c.emoji}</div>
+                                        <div class="label">${c.label}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : `
+                        <div class="form-group">
+                            <label class="form-label">Class Type</label>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                                ${['Upper', 'Cardio', 'Stretch', 'Full Body'].map(t => `
+                                    <button type="button" class="quick-btn" 
+                                        style="flex:1;min-width:70px;${(tempTempoType || data.tempoType) === t ? 'background:var(--teal);color:var(--bg);border-color:var(--teal)' : ''}"
+                                        onclick="selectTempoType('${t}')">${t}</button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Duration (min)</label>
+                            <input type="number" class="form-input" id="tempoDur" value="${data.tempoDur || ''}" placeholder="30">
+                        </div>
+                    `}
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tempo Studio</label>
+                        <div style="display:flex;gap:8px;align-items:center;padding:12px;background:var(--bg-card-2);border-radius:12px;cursor:pointer" onclick="toggleTempo()">
+                            <div id="tempoCheck" style="width:24px;height:24px;border-radius:6px;border:2px solid ${data.tempo ? 'var(--purple)' : 'var(--border)'};background:${data.tempo ? 'var(--purple)' : 'transparent'};display:flex;align-items:center;justify-content:center;color:white;font-size:14px">
+                                ${data.tempo ? '✓' : ''}
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Used Tempo today</div>
+                                <div style="font-size:12px;color:var(--text-3)">Keep your streak going!</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Protein (g)</label>
+                        <input type="number" class="form-input" id="mProtein" value="${data.protein || ''}">
+                        <div class="quick-btns">
+                            <button class="quick-btn" onclick="addVal('mProtein', 30)">+30</button>
+                            <button class="quick-btn" onclick="addVal('mProtein', 20)">+20</button>
+                            <button class="quick-btn" onclick="addVal('mProtein', 10)">+10</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Water (oz)</label>
+                        <input type="number" class="form-input" id="mWater" value="${data.water || ''}">
+                        <div class="quick-btns">
+                            <button class="quick-btn" onclick="addVal('mWater', 20)">+20</button>
+                            <button class="quick-btn" onclick="addVal('mWater', 10)">+10</button>
+                            <button class="quick-btn" onclick="addVal('mWater', 5)">+5</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Pre-Sleep Protein</label>
+                        <div style="display:flex;gap:8px;align-items:center;padding:12px;background:var(--bg-card-2);border-radius:12px;cursor:pointer" onclick="toggleCasein()">
+                            <div id="caseinCheck" style="width:24px;height:24px;border-radius:6px;border:2px solid ${data.casein ? 'var(--teal)' : 'var(--border)'};background:${data.casein ? 'var(--teal)' : 'transparent'};display:flex;align-items:center;justify-content:center;color:white;font-size:14px">
+                                ${data.casein ? '✓' : ''}
+                            </div>
+                            <div>
+                                <div style="font-weight:600">Casein before bed</div>
+                                <div style="font-size:12px;color:var(--text-3)">Protects lean muscle during sleep</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-input" id="mNotes" rows="2" style="resize:none">${data.notes || ''}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="saveLog()">Save</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// ===== ACTIONS =====
+window.setView = v => { view = v; render(); };
+window.selectDay = d => { selectedDate = parseIso(d); render(); };
+window.openLog = d => { 
+    modal = d; 
+    const data = state.days[d] || {};
+    tempTempoType = data.tempoType || null;
+    tempTempo = data.tempo || null;
+    tempCasein = data.casein || null;
+    render(); 
+};
+window.closeModal = () => { modal = null; render(); };
+
+window.selectConn = id => {
+    document.querySelectorAll('.conn-opt').forEach(el => el.classList.remove('active'));
+    document.querySelector(`[data-conn="${id}"]`).classList.add('active');
+};
+
+window.updatePain = level => {
+    const today = iso(new Date());
+    if (!state.days[today]) state.days[today] = {};
+    state.days[today].backPain = +level;
+    save();
+    render();
+};
+
+window.openSwapModal = () => {
+    modal = 'swap';
+    render();
+};
+
+window.doSwap = swapId => {
+    const today = iso(selectedDate);
+    if (!state.swaps) state.swaps = {};
+    state.swaps[today] = swapId;
+    save();
+    modal = null;
+    render();
+};
+
+window.clearSwap = dateStr => {
+    if (state.swaps && state.swaps[dateStr]) {
+        delete state.swaps[dateStr];
+        save();
+        render();
+    }
+};
+
+let tempStretchAreas = [];
+window.toggleStretchArea = area => {
+    const idx = tempStretchAreas.indexOf(area);
+    if (idx > -1) {
+        tempStretchAreas.splice(idx, 1);
+    } else {
+        tempStretchAreas.push(area);
+    }
+    render();
+};
+
+window.saveStretchLog = () => {
+    const d = modal;
+    if (!state.days[d]) state.days[d] = {};
+    state.days[d].workout = true;
+    state.days[d].stretchDur = +document.getElementById('stretchDur').value || 50;
+    state.days[d].stretchNotes = document.getElementById('stretchNotes').value;
+    state.days[d].stretchAreas = tempStretchAreas;
+    save();
+    tempStretchAreas = [];
+    closeModal();
+};
+
+let tempHadLower = null;
+let tempTempoType = null;
+let tempTempo = null;
+
+window.setHadLower = val => {
+    tempHadLower = val;
+    render();
+};
+
+window.selectTempoType = type => {
+    tempTempoType = type;
+    document.querySelectorAll('[onclick^="selectTempoType"]').forEach(btn => {
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+    });
+    event.currentTarget.style.background = 'var(--teal)';
+    event.currentTarget.style.color = 'var(--bg)';
+    event.currentTarget.style.borderColor = 'var(--teal)';
+};
+
+window.toggleTempo = () => {
+    const check = document.getElementById('tempoCheck');
+    const isChecked = check.style.background.includes('purple');
+    tempTempo = !isChecked;
+    check.style.border = `2px solid ${tempTempo ? 'var(--purple)' : 'var(--border)'}`;
+    check.style.background = tempTempo ? 'var(--purple)' : 'transparent';
+    check.innerHTML = tempTempo ? '✓' : '';
+};
+
+let tempCasein = null;
+window.toggleCasein = () => {
+    const check = document.getElementById('caseinCheck');
+    const isChecked = check.style.background.includes('teal');
+    tempCasein = !isChecked;
+    check.style.border = `2px solid ${tempCasein ? 'var(--teal)' : 'var(--border)'}`;
+    check.style.background = tempCasein ? 'var(--teal)' : 'transparent';
+    check.innerHTML = tempCasein ? '✓' : '';
+};
+
+window.addVal = (id, amt) => {
+    const el = document.getElementById(id);
+    el.value = (+el.value || 0) + amt;
+};
+
+window.saveLog = () => {
+    const d = parseIso(modal);
+    const lower = isLower(d);
+    const data = state.days[modal] || {};
+    
+    const patch = {
+        workout: true,
+        protein: +document.getElementById('mProtein').value || 0,
+        water: +document.getElementById('mWater').value || 0,
+        notes: document.getElementById('mNotes').value,
+    };
+    
+    // Tempo tracking (for all days)
+    if (tempTempo !== null) {
+        patch.tempo = tempTempo;
+    } else if (data.tempo !== undefined) {
+        patch.tempo = data.tempo;
+    }
+    
+    // Casein tracking (for all days)
+    if (tempCasein !== null) {
+        patch.casein = tempCasein;
+    } else if (data.casein !== undefined) {
+        patch.casein = data.casein;
+    }
+    
+    if (lower) {
+        patch.mainWt = +document.getElementById('mainWt').value || null;
+        patch.mainReps = +document.getElementById('mainReps').value || null;
+        const active = document.querySelector('.conn-opt.active');
+        if (active) patch.conn = active.dataset.conn;
+    } else {
+        patch.tempoDur = +document.getElementById('tempoDur').value || null;
+        if (tempTempoType) patch.tempoType = tempTempoType;
+    }
+    
+    state.days[modal] = { ...state.days[modal], ...patch };
+    save();
+    tempHadLower = null;
+    tempTempoType = null;
+    tempTempo = null;
+    tempCasein = null;
+    closeModal();
+};
+
+window.updateSetting = (k, v) => { state.settings[k] = v; save(); };
+
+window.addScan = () => {
+    const date = document.getElementById('scanDate').value;
+    const r = +document.getElementById('scanR').value;
+    const p = +document.getElementById('scanP').value;
+    if (!date || !r || !p) return alert('Fill all fields');
+    state.scans = state.scans.filter(s => s.date !== date);
+    state.scans.push({ date, roundness: r, protrusion: p });
+    state.scans.sort((a, b) => a.date.localeCompare(b.date));
+    save();
+    document.getElementById('scanR').value = '';
+    document.getElementById('scanP').value = '';
+    render();
+};
+
+window.deleteScan = date => {
+    if (confirm('Delete scan?')) {
+        state.scans = state.scans.filter(s => s.date !== date);
+        save(); render();
+    }
+};
+
+window.exportData = () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `miami-${iso(new Date())}.json`;
+    a.click();
+};
+
+window.importData = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+        try {
+            state = { ...DEFAULT, ...JSON.parse(ev.target.result) };
+            save(); render();
+            alert('Imported!');
+        } catch { alert('Invalid file'); }
+    };
+    reader.readAsText(file);
+};
+
+window.resetAll = () => {
+    if (confirm('Delete everything?')) {
+        localStorage.removeItem(STORE);
+        state = { ...DEFAULT };
+        render();
+    }
+};
+
+window.cloudPush = async () => {
+    const bin = document.getElementById('binId').value.trim();
+    const key = document.getElementById('binKey').value.trim();
+    if (!bin || !key) return alert('Enter Bin ID and API Key');
+    try {
+        const r = await fetch(`https://api.jsonbin.io/v3/b/${bin}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': key },
+            body: JSON.stringify(state)
+        });
+        if (r.ok) {
+            localStorage.setItem('miami-bin', bin);
+            localStorage.setItem('miami-key', key);
+            alert('✓ Synced!');
+        } else alert('Failed');
+    } catch (e) { alert('Error: ' + e.message); }
+};
+
+window.cloudPull = async () => {
+    const bin = document.getElementById('binId').value.trim() || localStorage.getItem('miami-bin');
+    const key = document.getElementById('binKey').value.trim() || localStorage.getItem('miami-key');
+    if (!bin || !key) return alert('Enter Bin ID and API Key');
+    if (!confirm('Replace local data?')) return;
+    try {
+        const r = await fetch(`https://api.jsonbin.io/v3/b/${bin}/latest`, { headers: { 'X-Master-Key': key } });
+        if (r.ok) {
+            const data = await r.json();
+            state = { ...DEFAULT, ...(data.record || data) };
+            save(); render();
+            alert('✓ Loaded!');
+        } else alert('Failed');
+    } catch (e) { alert('Error: ' + e.message); }
+};
+
+// ===== INIT =====
+load();
+render();
+</script>
+</body>
+</html>
